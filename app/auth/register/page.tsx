@@ -4,6 +4,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useRegisterMutation } from "@/redux/features/authApiSlice";
 import { toast } from 'react-toastify'
 import { useRouter } from "next/navigation";
+import Spinner from "@/components/common/spinner";
 import { Input, Center, Flex, Button } from "@chakra-ui/react";
 import {
   FormControl,
@@ -80,7 +81,9 @@ export default function Page() {
           variant={"outline"}
         />
         <Center>
-          <Button type={'submit'} mt={'1rem'}>Register</Button>
+          <Button type={'submit'} mt={'1rem'}>
+          {isLoading?(<Spinner/>):(<>Register</>)}  
+          </Button>
         </Center>
       </FormControl>
     </form>
