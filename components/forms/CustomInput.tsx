@@ -1,8 +1,8 @@
 "use client";
 
 import { ChangeEvent } from "react";
-import Link from "next/link";
-import { Input, Center, Flex, Button } from "@chakra-ui/react";
+import NextLink from "next/link";
+import { Input, Center, Flex, Button, Link, Box } from "@chakra-ui/react";
 import {
   FormControl,
   FormLabel,
@@ -17,10 +17,10 @@ interface Props {
   value: string;
   placeholder: string;
   // children: React.ReactNode;
-  // link?: {
-  // 	linkText: string;
-  // 	linkUrl: string;
-  // };
+  link?: {
+    linkText: string;
+    linkUrl: string;
+  };
   required?: boolean;
 }
 
@@ -30,11 +30,16 @@ export default function CustomInput({
   placeholder,
   onChange,
   value,
+  link,
   required = false,
 }: Props) {
   return (
     <>
-      <FormLabel>{labelId}</FormLabel>
+	<Box mt={'0.5rem'}>
+	<Flex justifyContent={'space-between'}>
+    <FormLabel>{labelId}</FormLabel>
+	{link && <Link as={NextLink} href={link.linkUrl}>{link.linkText}</Link>}
+	</Flex>
       <Input
         placeholder={placeholder}
         name={labelId}
@@ -42,8 +47,9 @@ export default function CustomInput({
         value={value}
         onChange={onChange}
         variant={"outline"}
-		required={required}
+        required={required}
       />
+	</Box>
     </>
   );
 }
