@@ -1,4 +1,4 @@
-export default function Navber() {
+export default function Navbar() {
     return(
         <>Navber</>
     )

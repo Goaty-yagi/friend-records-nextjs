@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import { ChakraProviders } from "./providers";
-import Navber from "@/components/common/navber";
+import Navbar from "@/components/common/navbar";
 import Provider from "@/redux/provider";
 import type { Metadata } from "next";
 import Layout from "@/components/common/layout";
@@ -22,7 +22,7 @@ export default function RootLayout({
           <Setup/>
           <ChakraProviders>
             <div style={{width:'100vw'}}>
-              <Navber />
+              <Navbar />
               <Layout >
                 {children}
               </Layout>
