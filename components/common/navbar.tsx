@@ -4,10 +4,13 @@ import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { useLogoutMutation } from "@/redux/features/authApiSlice";
 import { logout as setLogout } from "@/redux/features/authSlice";
 
-import { Image, Flex, Button, chakra, Link } from "@chakra-ui/react";
+import { Image, Flex, Button, chakra, Link, Show } from "@chakra-ui/react";
 import NextLink from "next/link";
 
 import Logo from "@/public/logo.svg";
+import { Menu } from "../menues";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoHomeOutline } from "react-icons/io5"
 
 export default function Navbar() {
   const dispatch = useAppDispatch();
@@ -23,30 +26,30 @@ export default function Navbar() {
       });
   };
   const data = (isAuthenticated: boolean) => {
-    console.log("CHECK", isAuthenticated);
     return [
       {
-        text: "Home",
+        labelText: "Home",
         path: "/",
         isVisible: true,
+        icon:<IoHomeOutline/>
       },
       {
-        text: "Login",
+        labelText: "Login",
         path: "/auth/login",
         isVisible: !isAuthenticated,
       },
       {
-        text: "Register",
+        labelText: "Register",
         path: "/auth/register",
         isVisible: !isAuthenticated,
       },
       {
-        text: "Logout",
+        labelText: "Logout",
         isVisible: isAuthenticated,
         clickEvent: handleLogout,
       },
       {
-        text: "Dashboard",
+        labelText: "Dashboard",
         isVisible: isAuthenticated,
         path: "/dashboard",
       },
@@ -58,30 +61,39 @@ export default function Navbar() {
       <Flex w="100%" px="6" py="5" align="center" justify="space-between">
         <Image src={Logo.src} h="50px" />
         <Flex as="nav">
-          {data(isAuthenticated).map(
-            (item, i) =>
-              item.isVisible && (
-                <Link
-                  as={NextLink}
-                  borderRight={"solid #ffab00"}
-                  _last={{ borderRight: "none" }}
-                  key={i}
-                  href={item.path ? item.path : ""}
-                >
-                  <Button
-                    onClick={item.clickEvent ? item.clickEvent : () => {}}
-                    variant="nav"
-                    borderRadius={"none"}
-                    p={"0 2rem"}
-                    _hover={{ bg: "gray" }}
+          <Show breakpoint="(min-width: 600px)">
+            {data(isAuthenticated).map(
+              (item, i) =>
+                item.isVisible && (
+                  <Link
+                    key={i}
+                    as={NextLink}
+                    borderRight={"solid #ffab00"}
+                    _last={{ borderRight: "none" }}
+                    href={item.path ? item.path : ""}
                   >
-                    {" "}
-                    {item.text}{" "}
-                  </Button>
-                </Link>
-              )
-          )}
+                    <Button
+                      onClick={item.clickEvent ? item.clickEvent : () => {}}
+                      variant="nav"
+                      borderRadius={"none"}
+                      p={"0 1.3rem"}
+                      _hover={{ bg: "gray" }}
+                    >
+                      {" "}
+                      {item.labelText}{" "}
+                    </Button>
+                  </Link>
+                )
+            )}
+          </Show>
         </Flex>
+        <Show breakpoint="(max-width: 599px)">
+          <Menu
+            config={data(isAuthenticated)}
+            iconBtn={<GiHamburgerMenu />}
+            btnText={"menu"}
+          />
+        </Show>
       </Flex>
     </chakra.header>
   );

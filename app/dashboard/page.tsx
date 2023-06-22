@@ -13,7 +13,6 @@ export default function Page() {
       </Flex>
     );
   }
-  console.log("USER", user);
   return (
     <>
       <Layout>
