@@ -10,7 +10,7 @@ export default function LoginForm() {
     {
       labelText: "Email address",
       labelId: "email",
-      placeholder:'Enter Email.',
+      placeholder: "Enter Email.",
       type: "email",
       value: email,
       required: true,
@@ -18,7 +18,7 @@ export default function LoginForm() {
     {
       labelText: "Password",
       labelId: "password",
-      placeholder:'Enter Password.',
+      placeholder: "Enter Password.",
       type: "password",
       value: password,
       link: {

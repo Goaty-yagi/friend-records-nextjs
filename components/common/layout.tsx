@@ -1,4 +1,5 @@
 "use client";
+
 import { Center, Box } from "@chakra-ui/react";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

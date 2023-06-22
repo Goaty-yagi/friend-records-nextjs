@@ -1,7 +1,7 @@
 "use client";
 
 import { PasswordResetConfirmForm } from "@/components/forms";
-import { Heading, Center, Text, Flex, Link } from "@chakra-ui/react";
+import { Heading, Flex } from "@chakra-ui/react";
 
 interface Props {
   params: {

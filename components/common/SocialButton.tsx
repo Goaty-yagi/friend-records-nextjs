@@ -1,4 +1,4 @@
-import { Button, Flex } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 interface Props {
   provider: "google" | "facebook";
   children: React.ReactNode;
@@ -11,8 +11,8 @@ export default function SocialButton({ provider, children, ...rest }: Props) {
     bg: "red.500",
   };
   return (
-      <Button {...variants} {...rest}>
-        {children}
-      </Button>
+    <Button {...variants} {...rest}>
+      {children}
+    </Button>
   );
 }

@@ -1,10 +1,23 @@
 "use client";
-import styled from "@emotion/styled";
 import { ImSpinner3 } from "react-icons/im";
-import { Box, Center } from "@chakra-ui/react";
+import { Center } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
-export default function Spinner() {
+interface Props {
+  size?: string;
+}
+
+export default function Spinner({ size }: Props) {
+  const spinnerSize = () => {
+    switch (size) {
+      case "sm":
+        return { fontSize: "0.8rem" };
+      case "md":
+        return { fontSize: "1.5rem" };
+      case "lg":
+        return { fontSize: "2rem" };
+    }
+  };
 
   return (
     <Center w={"100%"}>
@@ -12,7 +25,7 @@ export default function Spinner() {
         animate={{ rotate: 360 }}
         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
       >
-        <ImSpinner3/>
+        <ImSpinner3 {...(size ? spinnerSize() : "")} />
       </motion.div>
     </Center>
   );

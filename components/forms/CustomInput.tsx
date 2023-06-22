@@ -2,13 +2,8 @@
 
 import { ChangeEvent } from "react";
 import NextLink from "next/link";
-import { Input, Center, Flex, Button, Link, Box } from "@chakra-ui/react";
-import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-} from "@chakra-ui/react";
+import { Input, Flex, Link, Box } from "@chakra-ui/react";
+import { FormLabel } from "@chakra-ui/react";
 
 interface Props {
   labelId: string;
@@ -16,7 +11,6 @@ interface Props {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: string;
   placeholder: string;
-  // children: React.ReactNode;
   link?: {
     linkText: string;
     linkUrl: string;
@@ -35,21 +29,25 @@ export default function CustomInput({
 }: Props) {
   return (
     <>
-	<Box mt={'0.5rem'}>
-	<Flex justifyContent={'space-between'}>
-    <FormLabel>{labelId}</FormLabel>
-	{link && <Link as={NextLink} href={link.linkUrl}>{link.linkText}</Link>}
-	</Flex>
-      <Input
-        placeholder={placeholder}
-        name={labelId}
-        type={type}
-        value={value}
-        onChange={onChange}
-        variant={"outline"}
-        required={required}
-      />
-	</Box>
+      <Box mt={"0.5rem"}>
+        <Flex justifyContent={"space-between"}>
+          <FormLabel>{labelId}</FormLabel>
+          {link && (
+            <Link as={NextLink} href={link.linkUrl}>
+              {link.linkText}
+            </Link>
+          )}
+        </Flex>
+        <Input
+          placeholder={placeholder}
+          name={labelId}
+          type={type}
+          value={value}
+          onChange={onChange}
+          variant={"outline"}
+          required={required}
+        />
+      </Box>
     </>
   );
 }

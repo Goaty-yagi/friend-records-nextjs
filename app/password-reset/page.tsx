@@ -1,12 +1,7 @@
 "use client";
 
 import { PasswordResetForm } from "@/components/forms";
-import type { Metadata } from "next";
-import { Heading, Center, Text, Flex, Link } from "@chakra-ui/react";
-// export const metadata: Metadata = {
-// 	title: 'Full Auth | Password Reset',
-// 	description: 'Full Auth password reset page',
-// };
+import { Heading, Flex } from "@chakra-ui/react";
 
 export default function Page() {
   return (
