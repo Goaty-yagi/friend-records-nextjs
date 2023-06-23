@@ -77,26 +77,26 @@ export default function Navbar() {
                       onClick={item.clickEvent ? item.clickEvent : () => {}}
                       variant="nav"
                       borderRadius={"none"}
+                      leftIcon={item.icon?item.icon:<></>}
                       p={"0 1.3rem"}
                       _hover={{ bg: "gray" }}
                     >
-                      {" "}
-                      {item.labelText}{" "}
+                      {item.labelText}
                     </Button>
                   </Link>
                 )
             )}
           </Show>
           <Show breakpoint="(max-width: 599px)">
-            <Box mr={'0.5rem'}>
               <Menu
                 config={data(isAuthenticated)}
                 iconBtn={<GiHamburgerMenu />}
                 btnText={"menu"}
               />
-            </Box>
           </Show>
+          <Box ml={'0.5rem'}>
           <Theme />
+          </Box>
         </Flex>
       </Flex>
     </chakra.header>

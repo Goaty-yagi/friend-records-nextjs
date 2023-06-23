@@ -2,8 +2,21 @@
 
 import { ChangeEvent } from "react";
 import NextLink from "next/link";
-import { Input, Flex, Link, Box } from "@chakra-ui/react";
+import {
+  Input,
+  InputGroup,
+  InputRightElement,
+  InputLeftElement,
+  Flex,
+  Link,
+  Box,
+  IconButton,
+} from "@chakra-ui/react";
+import { useState } from "react";
 import { FormLabel } from "@chakra-ui/react";
+import { ImEyeBlocked, ImEye } from "react-icons/im";
+import { GoMail } from "react-icons/go";
+import { RiLockPasswordLine, RiUserLine } from "react-icons/ri";
 
 interface Props {
   labelId: string;
@@ -27,6 +40,24 @@ export default function CustomInput({
   link,
   required = false,
 }: Props) {
+  const [showPassword, setShowpassword] = useState(false);
+
+  const isPassword = () => {
+    if (type === "password") {
+      return true;
+    }
+  };
+  function leftElement() {
+    if(labelId==='username') {
+      return (
+      <RiUserLine />
+      )
+    } else if(labelId==='email') {
+      return (<GoMail />)
+    } else if(isPassword()) {
+      return (<RiLockPasswordLine />)
+    }
+  }
   return (
     <>
       <Box mt={"0.5rem"}>
@@ -38,15 +69,32 @@ export default function CustomInput({
             </Link>
           )}
         </Flex>
-        <Input
-          placeholder={placeholder}
-          name={labelId}
-          type={type}
-          value={value}
-          onChange={onChange}
-          variant={"outline"}
-          required={required}
-        />
+        <InputGroup>
+        <InputLeftElement pointerEvents='none'>
+          {leftElement()}
+        </InputLeftElement>
+          <Input
+            placeholder={placeholder}
+            name={labelId}
+            type={isPassword() && showPassword ? "text" : type}
+            value={value}
+            onChange={onChange}
+            variant={"outline"}
+            required={required}
+          />
+          {isPassword() && (
+            <InputRightElement>
+              <IconButton
+                aria-label="hide-or-show-password"
+                onClick={() => setShowpassword(!showPassword)}
+                background={"none"}
+                size="sm"
+                color={"gray.500"}
+                icon={showPassword ? <ImEye /> : <ImEyeBlocked />}
+              />
+            </InputRightElement>
+          )}
+        </InputGroup>
       </Box>
     </>
   );
