@@ -49,7 +49,7 @@ export default function Form({
         ))}
 
         <Center mt={"1rem"}>
-          <Button type="submit" disabled={isLoading}>
+          <Button type="submit" isDisabled={isLoading}>
             {isLoading ? <Spinner /> : `${btnText}`}
           </Button>
         </Center>
