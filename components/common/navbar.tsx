@@ -4,13 +4,14 @@ import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { useLogoutMutation } from "@/redux/features/authApiSlice";
 import { logout as setLogout } from "@/redux/features/authSlice";
 
-import { Image, Flex, Button, chakra, Link, Show } from "@chakra-ui/react";
+import { Image, Flex, Button, chakra, Link, Show, Box } from "@chakra-ui/react";
 import NextLink from "next/link";
 
 import Logo from "@/public/logo.svg";
 import { Menu } from "../menues";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { IoHomeOutline } from "react-icons/io5"
+import { IoHomeOutline } from "react-icons/io5";
+import Theme from "../utils/Theme";
 
 export default function Navbar() {
   const dispatch = useAppDispatch();
@@ -31,7 +32,7 @@ export default function Navbar() {
         labelText: "Home",
         path: "/",
         isVisible: true,
-        icon:<IoHomeOutline/>
+        icon: <IoHomeOutline />,
       },
       {
         labelText: "Login",
@@ -86,14 +87,17 @@ export default function Navbar() {
                 )
             )}
           </Show>
+          <Show breakpoint="(max-width: 599px)">
+            <Box mr={'0.5rem'}>
+              <Menu
+                config={data(isAuthenticated)}
+                iconBtn={<GiHamburgerMenu />}
+                btnText={"menu"}
+              />
+            </Box>
+          </Show>
+          <Theme />
         </Flex>
-        <Show breakpoint="(max-width: 599px)">
-          <Menu
-            config={data(isAuthenticated)}
-            iconBtn={<GiHamburgerMenu />}
-            btnText={"menu"}
-          />
-        </Show>
       </Flex>
     </chakra.header>
   );

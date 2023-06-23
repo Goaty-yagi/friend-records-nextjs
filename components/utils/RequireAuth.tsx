@@ -14,7 +14,7 @@ export default function RequireAuth({ children }: Props) {
   if (isLoading) {
     return (
       <div>
-        <Spinner size={'lg'}/>
+        <Spinner/>
       </div>
     );
   }
