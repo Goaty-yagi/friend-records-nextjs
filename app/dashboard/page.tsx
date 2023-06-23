@@ -1,23 +1,17 @@
-"use client";
+import type { Metadata } from "next";
+import Content from "./content";
+import Layout from "./layout";
 
-import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
-import { Box, Flex, Heading } from "@chakra-ui/react";
-import { Spinner } from "@/components/common";
-import Layout from "./Layout";
+const appName = process.env.APP_NAME;
+export const metadata: Metadata = {
+  title: `${appName} | Dashboard`,
+  description: `${appName} Dashboard page`,
+};
 export default function Page() {
-  const { data: user, isLoading, isFetching } = useRetrieveUserQuery();
-  if (isLoading || isFetching) {
-    return (
-      <Flex>
-        <Spinner />
-      </Flex>
-    );
-  }
   return (
     <>
       <Layout>
-        <Heading>dashboard</Heading>
-        <Box>{user ? user.username : ""}</Box>
+        <Content />
       </Layout>
     </>
   );

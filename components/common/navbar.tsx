@@ -60,7 +60,7 @@ export default function Navbar() {
   return (
     <chakra.header id="header">
       <Flex w="100%" px="6" py="5" align="center" justify="space-between">
-        <Image src={Logo.src} h="50px" />
+        <Image src={Logo.src} alt='logo' h="50px" />
         <Flex as="nav">
           <Show breakpoint="(min-width: 600px)">
             {data(isAuthenticated).map(
