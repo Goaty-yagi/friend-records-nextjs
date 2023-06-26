@@ -4,6 +4,8 @@ import { useAppDispatch } from '@/redux/hooks';
 import { useLoginMutation } from '@/redux/features/authApiSlice';
 import { setAuth } from '@/redux/features/authSlice';
 import { toast } from 'react-toastify';
+import { setIsThrottled, setThrottle } from '@/redux/features/authSlice';
+import { throttleCalculation } from '@/components/utils';
 
 export default function useLogin() {
 	const router = useRouter();
@@ -33,7 +35,17 @@ export default function useLogin() {
 				toast.success('Logged in');
 				router.push('/dashboard');
 			})
-			.catch(() => {
+			.catch((e) => {
+				console.log("ERROR", e.status, e.data)
+				const data = e.data.detail
+				const status = e.status
+				const throttleData = throttleCalculation({ data, status })
+				if (throttleData.isError) {
+					const minutes = throttleData.minutes
+					const seconds = throttleData.seconds
+					dispatch(setIsThrottled())
+					dispatch(setThrottle({minutes, seconds}))
+				}
 				toast.error('Failed to log in');
 			});
 	};

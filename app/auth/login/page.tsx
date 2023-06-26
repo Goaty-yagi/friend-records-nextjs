@@ -5,6 +5,7 @@ import { LoginForm } from "@/components/forms";
 import { SocialButtons } from '@/components/common';
 import type { Metadata } from "next";
 import { Heading, Center, Text, Flex, Link } from "@chakra-ui/react";
+// import { Throttle } from "@/components/utils";
 // export const metadata: Metadata = {
 //   title: "Full Auth | Login",
 //   description: "Full Auth login page",
