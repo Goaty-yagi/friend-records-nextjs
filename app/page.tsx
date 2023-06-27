@@ -1,10 +1,11 @@
 'use client'
 
-import { Text } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
+import Contents from '@/components/home/Contents'
 export default function Home() {
   return (
-    <main>
-      <Text m={'2rem'}>HOME</Text>
-    </main>
+    <Box as='main'>
+      <Contents/>
+    </Box>
   )
 }

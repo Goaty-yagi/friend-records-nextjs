@@ -1,14 +1,16 @@
 "use client";
 
 import { PasswordResetForm } from "@/components/forms";
-import { Heading, Flex } from "@chakra-ui/react";
+import { Heading, Flex, Box } from "@chakra-ui/react";
 
 export default function Page() {
   return (
     <>
-      <Flex flexDirection={"column"}>
-        <Heading textAlign={"center"}>Password Reset</Heading>
-        <PasswordResetForm />
+      <Flex flexDirection={"column"} w={"100%"} alignItems={"center"}>
+        <Box>
+          <Heading mb={'1rem'}>Password Reset</Heading>
+          <PasswordResetForm />
+        </Box>
       </Flex>
     </>
   );
