@@ -1,22 +1,14 @@
 // import { apiSlice } from '../services/apiSlice';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-interface FriendState {
-	isAuthenticated: boolean;
-	isLoading: boolean,
-	isThrottled: boolean,
-	minutes:number,
-	seconds:number
-}
 const initialState = {
 	isLoading: true,
-} as FriendState
+} 
 
 const friendSlice = createSlice({
-	name: 'auth',
+	name: 'friend',
 	initialState,
 	reducers: {
-		
 		finishInitialLoad: state => {
 			state.isLoading = false
 		},

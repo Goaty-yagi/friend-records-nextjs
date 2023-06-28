@@ -39,6 +39,7 @@ export default function Form({
           <CustomInput
             key={input.labelId}
             labelId={input.labelId}
+            labelText={input.labelText}
             placeholder={input.placeholder}
             type={input.type}
             onChange={onChange}

@@ -11,7 +11,6 @@ export default function useLogin() {
 	const router = useRouter();
 	const dispatch = useAppDispatch();
 	const [login, { isLoading }] = useLoginMutation();
-
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',

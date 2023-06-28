@@ -20,6 +20,7 @@ import { RiLockPasswordLine, RiUserLine } from "react-icons/ri";
 
 interface Props {
   labelId: string;
+  labelText: string
   type: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: string;
@@ -33,6 +34,7 @@ interface Props {
 
 export default function CustomInput({
   labelId,
+  labelText,
   type,
   placeholder,
   onChange,
@@ -62,7 +64,7 @@ export default function CustomInput({
     <>
       <Box mt={"0.5rem"}>
         <Flex justifyContent={"space-between"}>
-          <FormLabel>{labelId}</FormLabel>
+          <FormLabel>{labelText}</FormLabel>
           {link && (
             <Link as={NextLink} href={link.linkUrl}>
               {link.linkText}
