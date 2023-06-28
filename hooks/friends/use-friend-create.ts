@@ -14,7 +14,8 @@ export default function useFriendCreate() {
 	const [formData, setFormData] = useState({
 		friendName: '',
 	});
-
+    const [avatar, setAvatar] = useState('')
+    const userId = user?user.UID:''
 	const { friendName } = formData;
 
 	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -24,8 +25,7 @@ export default function useFriendCreate() {
 
 	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-        console.log("FAN", formData)
-		friendCreate({ name:friendName, user:user.UID })
+		friendCreate({ name:friendName, user:userId, avatar:avatar })
 			.unwrap()
 			.then(() => {
 				toast.success('Syccessfully created!');
@@ -39,6 +39,7 @@ export default function useFriendCreate() {
 	return {
 		friendName,
         isLoading,
+        setAvatar,
 		onChange,
 		onSubmit,
 	};
