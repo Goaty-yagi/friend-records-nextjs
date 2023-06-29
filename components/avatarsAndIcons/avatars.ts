@@ -1,5 +1,4 @@
 import Image from "next/legacy/image";
-import { JsxElement } from "typescript";
 
 export const avatarSvgArray = [
   "avatar-man1.svg",
@@ -15,13 +14,18 @@ export const avatarSvgArray = [
 ];
 
 
-const avatars = avatarSvgArray.map((a) => {
+export const avatars = avatarSvgArray.map((a) => {
     const obj = {
       name: a,
       svg: `/svgs/friends/${a}`
     };
     return obj;
 });
+
+interface returnProps{
+  name:string
+  svg:string
+}
 
 export default function getAvaterObj(name:string){
     const avatar = avatars.find((e) => e.name === name);

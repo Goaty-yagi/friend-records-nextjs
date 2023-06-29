@@ -35,7 +35,6 @@ export default function useLogin() {
 				router.push('/dashboard');
 			})
 			.catch((e) => {
-				console.log("ERROR", e.status, e.data)
 				const data = e.data.detail
 				const status = e.status
 				const throttleData = throttleCalculation({ data, status })

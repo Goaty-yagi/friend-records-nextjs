@@ -30,25 +30,25 @@ interface FriendArgs {
 const friendApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
 		friendCreate: builder.mutation<FriendResponse,FriendArgs>({
-			query: ({ name, user }) => ({
+			query: ({ name, user, avatar }) => ({
 				url: '/friend-create/',
 				method: 'POST',
-				body: { name, user },
+				body: { name, user, avatar },
 			}),
 		}),
-		friendList: builder.mutation<FriendResponse[], void>({
+		getFriendList: builder.mutation<FriendResponse[], void>({
 			query: () => ({
 				url: '/user-friend/',
 				method: 'POST',
 			}),
 		}),
-		friendDetail: builder.mutation({
+		getFriendDetail: builder.mutation({
 			query: (id) => ({
 				url: `/friend-detail/${id}`,
 				method: 'GET',
 			}),
 		}),
-		birthdayUpdate: builder.mutation({
+		updateBirthday: builder.mutation({
 			query: ({year, month, day, id}) => ({
 				url: '/logout/',
 				method: 'POST',
@@ -60,7 +60,7 @@ const friendApiSlice = apiSlice.injectEndpoints({
 
 export const {
 	useFriendCreateMutation,
-	useFriendListMutation,
-	useFriendDetailMutation,
-	useBirthdayUpdateMutation,
+	useGetFriendListMutation,
+	useGetFriendDetailMutation,
+	useUpdateBirthdayMutation,
 } = friendApiSlice;

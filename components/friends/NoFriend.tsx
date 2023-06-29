@@ -1,5 +1,5 @@
 import { Text, Box, Image, Flex } from "@chakra-ui/react"
-import FriendCreateButton from "./friendCreateButton"
+import { FriendCreatePopover } from "../popovers"
 export default function NoFriend() {
     return (
         <>
@@ -26,7 +26,7 @@ export default function NoFriend() {
             alt={"asset"}
           />
         </Box>
-        <FriendCreateButton/>
+        <FriendCreatePopover/>
 
         </Flex>
         

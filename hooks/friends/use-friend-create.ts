@@ -3,7 +3,8 @@ import { useRouter } from 'next/navigation';
 import { useFriendCreateMutation } from '@/redux/features/friendApiSlice';
 import { toast } from 'react-toastify';
 import { useRetrieveUserQuery } from '@/redux/features/authApiSlice';
-
+import { unshiftFriend } from '@/redux/features/friendSlice';
+import { useAppDispatch } from '@/redux/hooks';
 // interface Props {
 //     userId: string;
 //   }
@@ -14,7 +15,8 @@ export default function useFriendCreate() {
 	const [formData, setFormData] = useState({
 		friendName: '',
 	});
-    const [avatar, setAvatar] = useState('')
+    const [avatar, setAvatar] = useState('def')
+	const dispatch = useAppDispatch()
     const userId = user?user.UID:''
 	const { friendName } = formData;
 
@@ -27,10 +29,13 @@ export default function useFriendCreate() {
 		event.preventDefault();
 		friendCreate({ name:friendName, user:userId, avatar:avatar })
 			.unwrap()
-			.then(() => {
+			.then((res) => {
+				console.log("FRIEND", typeof res)
+				dispatch(unshiftFriend(res))
 				toast.success('Syccessfully created!');
 			})
 			.catch((e) => {
+				console.log(e)
 				const firstErrorMsg = Object.values(e.data)[0]
 				toast.error('Failed to create a friend' + '\n' + firstErrorMsg);
 			});
@@ -39,6 +44,7 @@ export default function useFriendCreate() {
 	return {
 		friendName,
         isLoading,
+		avatar,
         setAvatar,
 		onChange,
 		onSubmit,

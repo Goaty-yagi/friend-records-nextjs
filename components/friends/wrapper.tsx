@@ -17,9 +17,9 @@ export default function Wrapper({children}:{children:React.ReactNode}) {
   return (
     <Flex
       w={"100%"}
-      h={{ base: "calc(100vh - 44px)", md: "auto" }}
+      // h={{ base: "calc(100vh - 44px)", md: "auto" }}
       minH={"200px"}
-      maxH={{ md: innerHeight }}
+      // maxH={{ md: innerHeight }}
       overflowY={"scroll"}
       p={{ base: "0.3rem", md: "1rem" }}
       alignItems={"center"}

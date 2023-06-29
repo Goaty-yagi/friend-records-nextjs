@@ -1,23 +1,50 @@
-import { FriendList, Wrapper, NoFriend, FriendCreateButton } from "./index";
+import { FriendList, Wrapper, NoFriend } from "./index";
 import { useAppSelector } from "@/redux/hooks";
+import { FriendCreatePopover } from "../popovers";
+import { useGetFriendListMutation } from "@/redux/features/friendApiSlice";
+import { useAppDispatch } from "@/redux/hooks";
+import { setFriends } from "@/redux/features/friendSlice";
+import { Spinner } from "../common";
+import { useEffect } from "react";
+
 
 export default function Layout() {
-  const { isAuthenticated } = useAppSelector((state) => state.auth);
+  const { friendList } = useAppSelector((state) => state.friend);
+  const [getFriendList, { data: isLoading }] = useGetFriendListMutation();
+  const dispatch = useAppDispatch();
 
+  const handleFriendList = () => {
+    getFriendList(undefined)
+      .unwrap()
+      .then((res) => {
+        console.log("res", res);
+        dispatch(setFriends(res));
+      });
+  };
+
+  useEffect(() => {
+    handleFriendList();
+  }, []);
   return (
     <>
-      <Wrapper>
-        {isAuthenticated ? (
+      {/* {isLoading ? (
+        <Spinner />
+      ) : ( */}
+        <Wrapper>
           <>
-            <FriendCreateButton />
-            <FriendList />
+            {friendList.length ? (
+              <>
+                <FriendCreatePopover />
+                <FriendList />
+              </>
+            ) : (
+              <>
+                <NoFriend />
+              </>
+            )}
           </>
-        ) : (
-          <>
-            <NoFriend />
-          </>
-        )}
-      </Wrapper>
+        </Wrapper>
+      {/* )} */}
     </>
   );
 }

@@ -31,69 +31,12 @@ import { FiChevronDown } from "react-icons/fi";
 import { dateConvert } from "@/utils/dates";
 // import { getAvaterObj } from "./iconsSlides/avatars";
 // import MobileList from "./friendLists/mobileList";
-import { wrap } from "popmotion";
-import { useFriendListMutation } from "@/redux/features/friendApiSlice";
-import { useAppDispatch } from "@/redux/hooks";
+import { useGetFriendListMutation } from "@/redux/features/friendApiSlice";
 import DateAlert from "./dateAlert";
 import BirthdayAlert from "./birthdayAlert";
-
-const sortOptionStates = {
-  LOW_AMOUNT: "Low Amount",
-  HIGH_AMOUNT: "High Amount",
-  LATEST: "Latest",
-  OLDEST: "Oldest",
-  Name: "Name A to Z",
-  EVENT: "Event",
-  // BIRTHDAY: "Birthday",
-};
-// function Wrapper({children}:{children:React.ReactNode}) {
-//   const [wrapperHeight, setWrapperHeight] = useState(0);
-//   const [innerHeight, setInnerHeight] = useState(0);
-//   const [friends, setFriends] = useState();
-//   const [friendList, { data: events, isLoading }] = useFriendListMutation();
-//   const dispatch = useAppDispatch();
-//   const ref = useRef();
-//   //   useEffect(() => {
-//   //     if (typeof window !== "undefined") {
-//   //       setWrapperHeight(ref.current.offsetHeight);
-//   //       setInnerHeight(window.innerHeight - 112 - 16); // 112 is navber height
-//   //     }
-//   //   }, [window.innerHeight]);
-//   const handleFriendList = () => {
-//     friendList(undefined)
-//       .unwrap()
-//       .then((res) => {
-//         console.log('RES',res)
-//       });
-//   };
-//   useEffect(() => {
-//     handleFriendList()
-//   }, []);
-
-//   }
-//   return (
-//     <Flex
-//       w={"100%"}
-//       h={{ base: "calc(100vh - 44px)", md: "auto" }}
-//       minH={"200px"}
-//       maxH={{ md: innerHeight }}
-//       overflowY={"scroll"}
-//       p={{ base: "0.3rem", md: "1rem" }}
-//       alignItems={"center"}
-//       flexDirection={"column"}
-//       background={"rgb(255 191 220 / 42%)"}
-//       border={"solid #a4bded"}
-//       ref={ref}
-//     >
-//       {/* {image} */}
-//       <Box mt={"1rem"}>
-//       </Box>
-//       {/* {children} */}
-//     </Flex>
-//   );
-// }
-
-
+import { useAppDispatch } from '@/redux/hooks';
+import { useAppSelector } from "@/redux/hooks";
+import { setFriends, finishInitialLoad } from '@/redux/features/friendSlice';
 
 interface Events {
   name: string;
@@ -117,13 +60,17 @@ interface FriendResponse {
 }
 
 export default function FriendList() {
-  const [friendList, { data: events, isLoading }] = useFriendListMutation();
-  const [friends, setFriends] = useState<FriendResponse[]>([]);
+  const [getFriendList, { data:  isLoading }] = useGetFriendListMutation();
+  // const [friendsArray, setFriendsArray] = useState<FriendResponse[]>([]);
+  const { friendList } = useAppSelector((state) => state.friend);
+  const dispatch = useAppDispatch()
   const handleFriendList = () => {
-    friendList(undefined)
+    console.log("HAANFDLE")
+    getFriendList(undefined)
       .unwrap()
       .then((res) => {
-        setFriends(res);
+        console.log("res",res)
+        dispatch(setFriends(res));
       });
   };
   useEffect(() => {
@@ -162,7 +109,7 @@ export default function FriendList() {
         setSearchFriend={setSearchFriend}
         // context={context}
       /> */}
-      {friends.length && (
+      {friendList.length && (
         <>
           <Flex w={"100%"} mb={"0.5rem"} justifyContent={"flex-end"}>
             {/* <Selector
@@ -171,7 +118,7 @@ export default function FriendList() {
             //   context={context}
             /> */}
           </Flex>
-          {friends.map((f, index) => (
+          {friendList.map((f, index) => (
             <Card w={"100%"} key={index} mb={"0.5rem"} color={"gray"}>
               <Flex
                 fontSize={{ base: "0.7rem", sm: "1rem" }}
