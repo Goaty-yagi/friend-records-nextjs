@@ -11,7 +11,6 @@ import {
   InputGroup,
   InputLeftElement,
   VStack,
-  Image,
 } from "@chakra-ui/react";
 import {
   Menu,
@@ -23,13 +22,13 @@ import {
   MenuOptionGroup,
   MenuDivider,
 } from "@chakra-ui/react";
-
+import Image from "next/legacy/image";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 // import FriendCreate from "./friendCreate";
 import { FaSearchPlus } from "react-icons/fa";
 import { FiChevronDown } from "react-icons/fi";
 import { dateConvert } from "@/utils/dates";
-// import { getAvaterObj } from "./iconsSlides/avatars";
+import { getAvaterObj } from "../avatarsAndIcons";
 // import MobileList from "./friendLists/mobileList";
 import { useGetFriendListMutation } from "@/redux/features/friendApiSlice";
 import DateAlert from "./dateAlert";
@@ -60,22 +59,22 @@ interface FriendResponse {
 }
 
 export default function FriendList() {
-  const [getFriendList, { data:  isLoading }] = useGetFriendListMutation();
+  // const [getFriendList, { data:  isLoading }] = useGetFriendListMutation();
   // const [friendsArray, setFriendsArray] = useState<FriendResponse[]>([]);
   const { friendList } = useAppSelector((state) => state.friend);
-  const dispatch = useAppDispatch()
-  const handleFriendList = () => {
-    console.log("HAANFDLE")
-    getFriendList(undefined)
-      .unwrap()
-      .then((res) => {
-        console.log("res",res)
-        dispatch(setFriends(res));
-      });
-  };
-  useEffect(() => {
-    handleFriendList();
-  }, []);
+  // const dispatch = useAppDispatch()
+  // const handleFriendList = () => {
+  //   console.log("HAANFDLE")
+  //   getFriendList(undefined)
+  //     .unwrap()
+  //     .then((res) => {
+  //       console.log("res",res)
+  //       dispatch(setFriends(res));
+  //     });
+  // };
+  // useEffect(() => {
+  //   handleFriendList();
+  // }, []);
   const avatarProp = {
     border: "solid red",
   };
@@ -143,7 +142,9 @@ export default function FriendList() {
                       borderRadius={"50vh"}
                       bg={"#bebebe4a"}
                     >
-                      {/* {getAvaterObj(f.avatar)().icon} */}
+                      {f.avatar && (
+                        <Image  src={getAvaterObj(f.avatar)}  layout="fill"/>
+                      )}
                       <Box position={"absolute"} w={"150%"} bottom={-4}>
                         <Text
                           lineHeight={"1rem"}

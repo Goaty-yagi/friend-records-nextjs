@@ -29,6 +29,6 @@ interface returnProps{
 
 export default function getAvaterObj(name:string){
     const avatar = avatars.find((e) => e.name === name);
-    return avatar
+    return avatar?avatar.svg:''
 
 }
