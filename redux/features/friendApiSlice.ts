@@ -42,7 +42,7 @@ const friendApiSlice = apiSlice.injectEndpoints({
 				method: 'POST',
 			}),
 		}),
-		getFriendDetail: builder.mutation({
+		getFriendDetail: builder.mutation<FriendResponse,string>({
 			query: (id) => ({
 				url: `/friend-detail/${id}`,
 				method: 'GET',

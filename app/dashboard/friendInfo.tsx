@@ -15,9 +15,15 @@ import { FaPeopleArrows } from "react-icons/fa";
 import { HiUsers } from "react-icons/hi";
 import Theme from "@/components/utils/Theme";
 import Logout from "./logout";
+import { useAppSelector } from "@/redux/hooks";
+import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
+import { getAvaterObj } from "@/components/avatarsAndIcons";
+import { monthColors } from "@/styles/colors";
 
 export default function FriendInfo() {
   const date = new Date(Date.now());
+  const { friendList } = useAppSelector((state) => state.friend);
+  const { data: user } = useRetrieveUserQuery();
   const monthNames = [
     "January",
     "February",
@@ -41,50 +47,53 @@ export default function FriendInfo() {
     {
       icon: <GiPayMoney fontSize={"2rem"} color={"gray"} />,
       header: "I SPENT",
+      text: "$ " + getMonthlyData(MonthlyStates.SPENT).toString()
     },
     {
       icon: <GiReceiveMoney fontSize={"2rem"} color={"gray"} />,
       header: "I RECEIVED",
+      text:"$ " + (getMonthlyData(MonthlyStates.RECEIVED) * -1).toString()
     },
     {
       icon: <FaPeopleArrows fontSize={"2rem"} color={"gray"} />,
       header: "NUMBER OF INTERACTIONS",
+      text: getMonthlyData(MonthlyStates.INTERACTIONS).toString()
     },
   ];
   // useEffect(() => {
   //   if (context.friends) {
   //   }
   // }, []);
-  interface Props {
-    key: string;
-  }
-  //   function getMonthlyData({ key }: Props) {
-  //     console.log(key)
-  //     // if (context.friends) {
-  //     //   let sumOfSpent = 0;
-  //     //   let sumOfReceive = 0;
-  //     //   let sumIntractions = 0;
-  //     //   context.friends.forEach((e) => {
-  //     //     for (let i = 0; i < e.event.length; i++) {
-  //     //       const EDate = new Date(e.event[i].created_on);
-  //     //       if (EDate.getMonth() === date.getMonth()) {
-  //     //         sumOfSpent += e.event[i].money > 0 ? e.event[i].money : 0;
-  //     //         sumOfReceive += e.event[i].money < 0 ? e.event[i].money : 0;
-  //     //         sumIntractions += 1;
-  //     //       }
-  //     //     }
-  //     //   });
-  //     //   switch (key) {
-  //     //     case MonthlyStates.SPENT:
-  //     //       return sumOfSpent;
-  //     //     case MonthlyStates.RECEIVED:
-  //     //       return sumOfReceive;
-  //     //     case MonthlyStates.INTERACTIONS:
-  //     //       return sumIntractions;
-  //     //   }
-  //     // }
-  //     return "";
-  //   }
+  // interface Props {
+  //   key: string;
+  // }
+    function getMonthlyData( key: string ) {
+      //here should be usereducer
+      if (friendList) {
+        let sumOfSpent = 0;
+        let sumOfReceive = 0;
+        let sumIntractions = 0;
+        friendList.forEach((e) => {
+          for (let i = 0; i < e.event.length; i++) {
+            const EDate = new Date(e.event[i].created_on);
+            if (EDate.getMonth() === date.getMonth()) {
+              sumOfSpent += e.event[i].money > 0 ? e.event[i].money : 0;
+              sumOfReceive += e.event[i].money < 0 ? e.event[i].money : 0;
+              sumIntractions += 1;
+            }
+          }
+        });
+        switch (key) {
+          case MonthlyStates.SPENT:
+            return sumOfSpent;
+          case MonthlyStates.RECEIVED:
+            return sumOfReceive;
+          case MonthlyStates.INTERACTIONS:
+            return sumIntractions;
+        }
+      }
+      return 0;
+    }
   return (
     <>
       <Flex
@@ -93,9 +102,9 @@ export default function FriendInfo() {
         alignItems={"center"}
       >
         {/* <EditIcon /> */}
+        {/* {getAvaterObj(user?user.avatar:'')} */}
         <Text color={"gray"} fontFamily={'"Gill Sans", sans-serif'}>
-          {/* {user.username} */}
-          username
+          {user?user.username:''}
         </Text>
         <Flex
           mt={"1rem"}
@@ -109,7 +118,7 @@ export default function FriendInfo() {
           <Text>Monthly Info</Text>
           <Flex
             alignItems={"center"}
-            //   color={monthColors[date.getMonth()]}
+              color={monthColors[date.getMonth()]}
           >
             (<MdCalendarMonth />
             {monthNames[date.getMonth()]})
@@ -123,14 +132,14 @@ export default function FriendInfo() {
         >
           <Stack spacing="4px" m={"0.5rem 0"}>
             {config.map((each, index) => (
-              <CustomField key={index} icon={each.icon} header={each.header} />
+              <CustomField key={index} icon={each.icon} header={each.header} text={each.text} />
             ))}
           </Stack>
           <Box mt={"1rem"}>
             <CustomField
               icon={<HiUsers fontSize={"2rem"} color={"gray"} />}
               header={"NUMBER OF FRIENDS"}
-              //   text={context.friends.length}
+              text={friendList.length.toString()}
             />
           </Box>
         </Stack>

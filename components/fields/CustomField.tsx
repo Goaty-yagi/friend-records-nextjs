@@ -5,16 +5,16 @@ import {
 } from "@chakra-ui/react";
 
 interface Props{
-    icon?: JSX.Element
-    header?:string
-    text?:string
+    icon: JSX.Element
+    header:string
+    text:string
     mr?:string
 }
 
 export default function CustomField({ icon, header, text, mr }:Props) {
     return (
       <>
-        <Flex key={header} w={"100%"}>
+        <Flex key={header} w={"100%"} alignItems={'center'}>
           <Flex
             alignItems={"center"}
             justifyContent={"center"}
@@ -25,7 +25,7 @@ export default function CustomField({ icon, header, text, mr }:Props) {
           <Stack w={"100%"} spacing="-8px">
             <Box fontWeight={"bold"}>{header}</Box>
             <Box height={"20px"}>
-              <Box w={"40%"} color={"gray"} position={"absolute"}>
+              <Box w={"100%"} color={"gray"} top={-1}  position={"relative"}>
                 {text}
               </Box>
             </Box>
