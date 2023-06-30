@@ -4,10 +4,11 @@ import { Form } from "@/components/forms";
 import { SvgSlider } from "../avatarsAndIcons";
 import { eventIcons } from "../avatarsAndIcons/icons";
 import { Box } from "@chakra-ui/react";
-import { useContext, FormEvent } from "react";
+import { useContext, FormEvent, useState, forwardRef, RefObject, RefAttributes } from "react";
 import { PopoverCloseContext } from "@/contexts";
 import useEventCreate from "@/hooks/events/use-event-create";
 import { SlideNumInput } from "@/components/forms";
+import { Dispatch, SetStateAction, ForwardedRef } from "react";
 import {
   NumberInput,
   NumberInputField,
@@ -19,10 +20,28 @@ import {
   SliderFilledTrack,
   SliderThumb,
   Flex,
+  RadioGroup,
+  Radio,
+  Stack
 } from "@chakra-ui/react";
 // interface Props {
 //   userId: string;
 // }
+export const WhoRadio = forwardRef<HTMLInputElement>((props, ref) => {
+  // const [val, setVal] = useState(typeof defaultVal!=='undefined'?defaultVal:'0') // 0 means +, 1 means -
+  function setValue(e:any) {
+   
+  
+  }
+  return (
+    <RadioGroup mt={'0.5rem'} onChange={setValue} ref={ref}>
+      <Stack direction='row'>
+        <Radio value={'0'}>You Paid</Radio>
+        <Radio value={'1'}>They Paid</Radio>
+      </Stack>
+    </RadioGroup>
+  )
+})
 
 export default function EventCreateForm() {
   const format = (val: number) => `$ ` + val;
