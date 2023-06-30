@@ -12,14 +12,14 @@ import { PopoverCloseContext } from "@/contexts";
 // }
 
 export default function FriendCreateForm() {
-  const { friendName, isLoading,avatar, setAvatar, onChange, onSubmit } =
+  const { friendName, isLoading, avatar, setAvatar, onChange, onSubmit } =
     useFriendCreate();
-  const onClose = useContext(PopoverCloseContext)
+  const onClose = useContext(PopoverCloseContext);
 
   function customOnsubmit(event: FormEvent<HTMLFormElement>) {
-    onSubmit(event)
-    console.log('CREATE',onClose())
-    onClose()
+    onSubmit(event);
+    console.log("CREATE", onClose());
+    onClose();
   }
   const config = [
     {
@@ -34,7 +34,7 @@ export default function FriendCreateForm() {
 
   return (
     <>
-      <Box mt={'0.9rem'}>
+      <Box mt={"0.9rem"}>
         <SvgSlider selected={avatar} svgArray={avatars} setFun={setAvatar} />
         <Form
           config={config}

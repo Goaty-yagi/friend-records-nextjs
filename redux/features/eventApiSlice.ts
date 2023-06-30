@@ -10,16 +10,18 @@ interface Events {
 
 interface EventArgs {
 	name:string
-	friend:string
+	friend:string|any
+    money:number
+    icon:string
 }
 
 const eventApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
 		eventCreate: builder.mutation<Events,EventArgs>({
-			query: ({ name, friend }) => ({
+			query: ({ name, friend, money, icon }) => ({
 				url: '/event-create/',
 				method: 'POST',
-				body: { name, friend },
+				body: { name, friend, money, icon },
 			}),
 		}),
 		getEventList: builder.mutation<Events[], string>({

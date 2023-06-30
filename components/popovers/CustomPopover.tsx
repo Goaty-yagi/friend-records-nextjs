@@ -14,7 +14,6 @@ import {
 } from "@chakra-ui/react";
 import { PopoverCloseContext } from "@/contexts";
 
-
 interface Props {
   trigger: JSX.Element;
   body: JSX.Element;
@@ -23,14 +22,15 @@ interface Props {
 export default function CustomPopover({ trigger, body }: Props) {
   const { onOpen, onClose, isOpen } = useDisclosure();
   const OnCloseProvider = ({ children }: { children: React.ReactNode }) => {
-    return <PopoverCloseContext.Provider value={onClose}>{children}</PopoverCloseContext.Provider>;
+    return (
+      <PopoverCloseContext.Provider value={onClose}>
+        {children}
+      </PopoverCloseContext.Provider>
+    );
   };
   return (
     <>
-      <Popover isOpen={isOpen}
-        onOpen={onOpen}
-        onClose={onClose}
-        >
+      <Popover isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
         <PopoverTrigger>
           <Box>{trigger}</Box>
         </PopoverTrigger>
@@ -39,9 +39,7 @@ export default function CustomPopover({ trigger, body }: Props) {
           <PopoverCloseButton />
           {/* <PopoverHeader>Confirmation!</PopoverHeader> */}
           <PopoverBody>
-            <OnCloseProvider>
-            {body}
-            </OnCloseProvider>
+            <OnCloseProvider>{body}</OnCloseProvider>
           </PopoverBody>
         </PopoverContent>
       </Popover>

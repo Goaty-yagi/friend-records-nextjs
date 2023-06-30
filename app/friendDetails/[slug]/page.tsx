@@ -4,7 +4,9 @@ import {useEffect, useState} from'react'
 import {useGetFriendDetailMutation} from "@/redux/features/friendApiSlice";
 import {FriendContext} from '@/contexts/index'
 import FriendInfo from './FriendInfo'
-
+import { useAppDispatch } from '@/redux/hooks';
+import { setFriendId } from '@/redux/features/friendSlice';
+import { EventCreatePopover } from "@/components/popovers";
 interface Props{
     params:{
         slug:string
@@ -20,10 +22,12 @@ interface Events {
 
 export default function Page({params}:Props) {
     const { slug } = params
+    const dispatch = useAppDispatch()
     const [friend, setFriend] = useState({})
     const [eventList, setEventList] = useState<Events[]>([])
     const [getFriendDetail, { isLoading }] = useGetFriendDetailMutation();
     useEffect(() => {
+        dispatch(setFriendId(slug))
         getFriendDetail(slug)
 			.unwrap()
 			.then((res) => {
@@ -38,7 +42,7 @@ export default function Page({params}:Props) {
         <>
         <FriendContext.Provider value={{friend,eventList}}>
             <FriendInfo/>
-        {slug}
+            <EventCreatePopover/>
         </FriendContext.Provider>
         </>
     )

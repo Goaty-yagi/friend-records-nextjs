@@ -12,7 +12,7 @@ export const eventSvgArray = [
   "cog.svg",
 ];
 
-const eventIcons = eventSvgArray.map((a) => {
+export const eventIcons = eventSvgArray.map((a) => {
     const obj = {
       name: a,
       svg: `/svgs/events/${a}`,

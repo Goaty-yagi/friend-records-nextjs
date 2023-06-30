@@ -3,7 +3,7 @@
 import { ChangeEvent, FormEvent } from "react";
 import { CustomInput } from "@/components/forms";
 import { Spinner } from "@/components/common";
-import { Center, Button } from "@chakra-ui/react";
+import { Center,Flex, Button } from "@chakra-ui/react";
 interface Config {
   labelText: string;
   labelId: string;
@@ -23,6 +23,7 @@ interface Props {
   btnText: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  children?:React.ReactNode
 }
 
 export default function Form({
@@ -31,6 +32,7 @@ export default function Form({
   btnText,
   onChange,
   onSubmit,
+  children
 }: Props) {
   return (
     <>
@@ -49,11 +51,14 @@ export default function Form({
           />
         ))}
 
-        <Center mt={"1rem"}>
+        <Flex mt={"1rem"} flexDirection={'column'}>
+          {typeof children !== 'undefined' &&(
+            children
+          )}
           <Button type="submit" isDisabled={isLoading}>
             {isLoading ? <Spinner /> : `${btnText}`}
           </Button>
-        </Center>
+        </Flex>
       </form>
     </>
   );
