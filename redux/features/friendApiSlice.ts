@@ -50,7 +50,7 @@ const friendApiSlice = apiSlice.injectEndpoints({
 		}),
 		updateBirthday: builder.mutation({
 			query: ({year, month, day, id}) => ({
-				url: '/logout/',
+				url: '/birthday-update/',
 				method: 'POST',
 				body: { year, month, day, id },
 			}),
