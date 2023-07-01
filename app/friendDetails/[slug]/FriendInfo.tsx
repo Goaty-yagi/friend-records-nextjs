@@ -7,20 +7,20 @@ import {
   VStack,
   Text,
   StackDivider,
-  CloseButton
+  CloseButton,
+  StatHelpText
 } from "@chakra-ui/react";
 import React, { useRef, useEffect, useState, useContext } from "react";
 import Header from "./Header";
-import { FriendContext } from "@/contexts/index";
 import { dateConvert } from "@/utils/dates";
+import { useAppSelector } from "@/redux/hooks";
 
 export default function FriendInfo() {
   const outerRef = useRef<any>();
   const innerRef = useRef<any>();
-  const friend = useContext(FriendContext).friend;
-  const eventList = useContext(FriendContext).eventList;
+  const friend = useAppSelector((state) => state.friend).friendDetail
+  const eventList = useAppSelector((state) => state.event).eventList;
   useEffect(() => {
-    console.log("EFE",innerRef.current.offsetHeight,outerRef)
     if (typeof innerRef.current !== "undefined") {
         console.log("TRUE")
       outerRef.current.style.height =

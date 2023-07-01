@@ -5,9 +5,11 @@ import { useGetFriendDetailMutation } from "@/redux/features/friendApiSlice";
 import { FriendContext } from "@/contexts/index";
 import FriendInfo from "./FriendInfo";
 import { useAppDispatch } from "@/redux/hooks";
-import { setFriendId } from "@/redux/features/friendSlice";
+import { setFriendId, setFriendDetail} from "@/redux/features/friendSlice";
+import { setEventList as setEvents } from "@/redux/features/eventSlice";
 import { EventCreatePopover } from "@/components/popovers";
-import { Center } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
+import EventList from "./eventList";
 
 interface Props {
   params: {
@@ -16,7 +18,7 @@ interface Props {
 }
 interface Events {
   name: string;
-  friend: number;
+  friend: string;
   money: number;
   created_on: string;
   icon: string;
@@ -33,6 +35,8 @@ export default function Page({ params }: Props) {
     getFriendDetail(slug)
       .unwrap()
       .then((res) => {
+        dispatch(setEvents(res.event));
+        dispatch(setFriendDetail(res));
         setFriend(res);
         setEventList(res.event);
       })
@@ -42,11 +46,12 @@ export default function Page({ params }: Props) {
   }, []);
   return (
     <>
-      <FriendContext.Provider value={{ friend, eventList }}>
+      <FriendContext.Provider value={{ friend, eventList, setFriend, setEventList }}>
         <FriendInfo />
-        <Center mt={"1rem"}>
+        <Flex mt={"1rem"} flexDirection={'column'} alignItems={'center'}>
           <EventCreatePopover />
-        </Center>
+          <EventList/>
+        </Flex>
       </FriendContext.Provider>
     </>
   );

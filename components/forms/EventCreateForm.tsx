@@ -1,27 +1,12 @@
 "use client";
 
-import { Form } from "@/components/forms";
 import { SvgSlider } from "../avatarsAndIcons";
 import { eventIcons } from "../avatarsAndIcons/icons";
 import { useContext, FormEvent } from "react";
 import { PopoverCloseContext } from "@/contexts";
 import useEventCreate from "@/hooks/events/use-event-create";
-import { SlideNumInput } from "@/components/forms";
-import { Dispatch, SetStateAction, ForwardedRef } from "react";
-import {
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-  Slider,
-  SliderTrack,
-  SliderFilledTrack,
-  SliderThumb,
-  Flex,
-  Box,
-} from "@chakra-ui/react";
-import CustomRadio from "./CustomRadio";
+import { Flex, Box } from "@chakra-ui/react";
+import { Form, CustomNumInput, CustomRadio, CustomSlider } from "./index";
 
 export default function EventCreateForm() {
   const format = (val: number) => `$ ` + val;
@@ -30,7 +15,6 @@ export default function EventCreateForm() {
     isLoading,
     icon,
     money,
-    whoPayed,
     setIcon,
     onChange,
     numOnChange,
@@ -71,48 +55,19 @@ export default function EventCreateForm() {
           onChange={onChange}
           onSubmit={customOnsubmit}
         >
-          <Box
-            position={"relative"}
-          >
-            <Box position={"absolute"} top={-3}>
+          <Box position={"relative"}>
+            <Box position={"absolute"} top={-2}>
               <CustomRadio
                 config={radioConfig}
-                value={whoPayed}
+                name={'whoPayed'}
                 defaltValue={"+"}
                 setter={onChange}
               />
             </Box>
           </Box>
           <Flex mt={"1rem"} maxW={{ base: "300px", md: "600px" }}>
-            <NumberInput
-              maxW="120px"
-              mr="2rem"
-              value={money}
-              onChange={numOnChange}
-              min={0}
-              isRequired={false}
-            >
-              <NumberInputField />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
-            <Slider
-              flex="1"
-              focusThumbOnChange={false}
-              value={money}
-              onChange={numOnChange}
-              defaultValue={500}
-              min={0}
-              max={1000}
-              step={1}
-            >
-              <SliderTrack>
-                <SliderFilledTrack />
-              </SliderTrack>
-              <SliderThumb color={"gray"} fontSize="sm" boxSize="20px" />
-            </Slider>
+            <CustomNumInput value={money} onChange={numOnChange} />
+            <CustomSlider value={money} onChange={numOnChange} />
           </Flex>
         </Form>
       </Box>

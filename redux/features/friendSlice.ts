@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface Events {
 	name: string
-	friend: number
+	friend: string
 	money: number
 	created_on: string
 	icon: string
@@ -25,13 +25,15 @@ interface FriendResponse {
 type friendState = {
 	friendList: FriendResponse[],
 	isLoading: boolean,
-	friendId: string
+	friendId: string,
+	friendDetail: FriendResponse
 }
 
 const initialState: friendState = {
 	isLoading: true,
 	friendList: [],
-	friendId: 'def'
+	friendId: '',
+	friendDetail: {} as FriendResponse
 }
 
 const friendSlice = createSlice({
@@ -50,8 +52,21 @@ const friendSlice = createSlice({
 		setFriendId: (state, action: PayloadAction<string>) => {
 			state.friendId = action.payload
 		},
+		setFriendDetail: (state, action: PayloadAction<FriendResponse>) => {
+			state.friendDetail = action.payload
+		},
+		updateFriend: (state, action: PayloadAction<Events>) => {
+			state.friendDetail.last_log = action.payload.created_on;
+			state.friendDetail.sum += Number(action.payload.money);
+			state.friendList.forEach((e) => {
+				if (e.id === action.payload.friend) {
+					e.sum += Number(action.payload.money);
+				}
+
+			});
+		},
 	}
 })
 
-export const { finishInitialLoad, setFriends, unshiftFriend, setFriendId } = friendSlice.actions
+export const { finishInitialLoad, setFriends, unshiftFriend, setFriendId, setFriendDetail, updateFriend } = friendSlice.actions
 export default friendSlice.reducer

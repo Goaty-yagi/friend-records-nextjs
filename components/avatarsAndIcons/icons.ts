@@ -21,5 +21,6 @@ export const eventIcons = eventSvgArray.map((a) => {
 });
 
 export default function getIconObj(name:string){
-    return eventIcons.find((e) => e.name === name) 
+  const eventIcon = eventIcons.find((e) => e.name === name);
+  return eventIcon?eventIcon.svg:''
 }

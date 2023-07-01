@@ -1,9 +1,9 @@
 // import { apiSlice } from '../services/apiSlice';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-interface Event {
+export interface Event {
 	name:string
-	friend:number
+	friend:string
 	money:number
 	created_on:string
 	icon:string

@@ -7,14 +7,14 @@ interface Config {
 }
 
 interface RadioProps {
-  value: string;
+  name: string;
   setter: any;
   defaltValue:string
   config: Config[];
 }
-export default function CustomRadio({ value, setter, defaltValue, config }: RadioProps) {
+export default function CustomRadio({ name, setter, defaltValue, config }: RadioProps) {
   return (
-    <RadioGroup defaultValue={defaltValue} name="whoPayed">
+    <RadioGroup defaultValue={defaltValue} name={name}>
       <Stack direction="row">
         {config.map((e, index) => (
             <Radio

@@ -2,7 +2,7 @@ import { apiSlice } from '../services/apiSlice';
 
 interface Events {
 	name:string
-	friend:number
+	friend:string
 	money:number
 	created_on:string
 	icon:string
