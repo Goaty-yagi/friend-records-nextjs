@@ -36,7 +36,7 @@ export default function Form({
 }: Props) {
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} >
         {config.map((input) => (
           <CustomInput
             key={input.labelId}
@@ -55,11 +55,14 @@ export default function Form({
           {typeof children !== 'undefined' &&(
             children
           )}
-          <Button type="submit" isDisabled={isLoading}>
+          <Flex justifyContent={"flex-end"}>
+          <Button type="submit" mt={'0.7rem'}  isDisabled={isLoading}>
             {isLoading ? <Spinner /> : `${btnText}`}
           </Button>
+          </Flex>
         </Flex>
       </form>
     </>
   );
 }
+ 

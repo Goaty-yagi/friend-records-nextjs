@@ -4,32 +4,32 @@ import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { useEventCreateMutation } from '@/redux/features/eventApiSlice';
 import { unshiftEvent } from '@/redux/features/eventSlice';
 import { NumberInputProps } from '@chakra-ui/react';
-// interface Props {
-//     userId: string;
-//   }
 
 export default function useEventCreate() {
 	const [eventCreate, { isLoading }] = useEventCreateMutation();
+	const dispatch = useAppDispatch()
     const { friendId } = useAppSelector((state) => state.friend);
 	const [formData, setFormData] = useState({
 		eventName: '',
+		whoPayed:'+'
 	});
     const [icon, setIcon] = useState('')
     const [money, setMoney] = useState<number>(0)
-	const dispatch = useAppDispatch()
-	const { eventName } = formData;
+	const { eventName, whoPayed } = formData;
 
 	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
 		setFormData({ ...formData, [name]: value });
 	};
+
     const numOnChange = (e: any) => {
-        console.log(e,friendId)
         setMoney(e);
     }
+
 	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		eventCreate({ name:eventName, friend:friendId, icon, money })
+		const CustomMoney = whoPayed==='+'?money:money * -1
+		eventCreate({ name:eventName, friend:friendId, icon, money:CustomMoney })
 			.unwrap()
 			.then((res) => {
 				dispatch(unshiftEvent(res))
@@ -43,6 +43,7 @@ export default function useEventCreate() {
 
 	return {
 		eventName,
+		whoPayed,
         isLoading,
 		icon,
         money,

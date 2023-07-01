@@ -3,8 +3,7 @@
 import { Form } from "@/components/forms";
 import { SvgSlider } from "../avatarsAndIcons";
 import { eventIcons } from "../avatarsAndIcons/icons";
-import { Box } from "@chakra-ui/react";
-import { useContext, FormEvent, useState, forwardRef, RefObject, RefAttributes } from "react";
+import { useContext, FormEvent } from "react";
 import { PopoverCloseContext } from "@/contexts";
 import useEventCreate from "@/hooks/events/use-event-create";
 import { SlideNumInput } from "@/components/forms";
@@ -20,28 +19,9 @@ import {
   SliderFilledTrack,
   SliderThumb,
   Flex,
-  RadioGroup,
-  Radio,
-  Stack
+  Box,
 } from "@chakra-ui/react";
-// interface Props {
-//   userId: string;
-// }
-export const WhoRadio = forwardRef<HTMLInputElement>((props, ref) => {
-  // const [val, setVal] = useState(typeof defaultVal!=='undefined'?defaultVal:'0') // 0 means +, 1 means -
-  function setValue(e:any) {
-   
-  
-  }
-  return (
-    <RadioGroup mt={'0.5rem'} onChange={setValue} ref={ref}>
-      <Stack direction='row'>
-        <Radio value={'0'}>You Paid</Radio>
-        <Radio value={'1'}>They Paid</Radio>
-      </Stack>
-    </RadioGroup>
-  )
-})
+import CustomRadio from "./CustomRadio";
 
 export default function EventCreateForm() {
   const format = (val: number) => `$ ` + val;
@@ -50,6 +30,7 @@ export default function EventCreateForm() {
     isLoading,
     icon,
     money,
+    whoPayed,
     setIcon,
     onChange,
     numOnChange,
@@ -59,7 +40,6 @@ export default function EventCreateForm() {
 
   function customOnsubmit(event: FormEvent<HTMLFormElement>) {
     onSubmit(event);
-    console.log("CREATE", onClose());
     onClose();
   }
   const config = [
@@ -72,7 +52,14 @@ export default function EventCreateForm() {
       required: true,
     },
   ];
-
+  const radioConfig = [
+    { text: "You Payed", value: "+", checked: true },
+    {
+      text: "They Payed",
+      value: "-",
+      checked: false,
+    },
+  ];
   return (
     <>
       <Box mt={"0.9rem"}>
@@ -84,37 +71,49 @@ export default function EventCreateForm() {
           onChange={onChange}
           onSubmit={customOnsubmit}
         >
-        <Flex mt={"1rem"} maxW={{ base: "300px", md: "600px" }}>
-          <NumberInput
-            maxW="120px"
-            mr="2rem"
-            value={money}
-            onChange={numOnChange}
-            min={0}
-            isRequired={false}
+          <Box
+            position={"relative"}
           >
-            <NumberInputField />
-            <NumberInputStepper>
-              <NumberIncrementStepper />
-              <NumberDecrementStepper />
-            </NumberInputStepper>
-          </NumberInput>
-          <Slider
-            flex="1"
-            focusThumbOnChange={false}
-            value={money}
-            onChange={numOnChange}
-            defaultValue={500}
-            min={0}
-            max={1000}
-            step={1}
-          >
-            <SliderTrack>
-              <SliderFilledTrack />
-            </SliderTrack>
-            <SliderThumb color={"gray"} fontSize="sm" boxSize="20px" />
-          </Slider>
-        </Flex>
+            <Box position={"absolute"} top={-3}>
+              <CustomRadio
+                config={radioConfig}
+                value={whoPayed}
+                defaltValue={"+"}
+                setter={onChange}
+              />
+            </Box>
+          </Box>
+          <Flex mt={"1rem"} maxW={{ base: "300px", md: "600px" }}>
+            <NumberInput
+              maxW="120px"
+              mr="2rem"
+              value={money}
+              onChange={numOnChange}
+              min={0}
+              isRequired={false}
+            >
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+            <Slider
+              flex="1"
+              focusThumbOnChange={false}
+              value={money}
+              onChange={numOnChange}
+              defaultValue={500}
+              min={0}
+              max={1000}
+              step={1}
+            >
+              <SliderTrack>
+                <SliderFilledTrack />
+              </SliderTrack>
+              <SliderThumb color={"gray"} fontSize="sm" boxSize="20px" />
+            </Slider>
+          </Flex>
         </Form>
       </Box>
     </>

@@ -28,7 +28,7 @@ export default function Slider({ svgArray, setFun, defaultSvg }: Props) {
       setFun(defaultSvg)
     } else {
       setSelectedSvg(svgArray[0].svg)
-      setFun(svgArray[0].svg)
+      setFun(svgArray[0].name)
     }
   }, []);
   // useEffect(() => {
