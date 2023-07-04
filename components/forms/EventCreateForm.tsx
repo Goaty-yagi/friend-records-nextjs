@@ -18,6 +18,7 @@ export default function EventCreateForm() {
     money,
     setIcon,
     onChange,
+    setFieldName,
     numOnChange,
     onSubmit,
   } = useEventCreate();
@@ -67,8 +68,8 @@ export default function EventCreateForm() {
             </Box>
           </Box>
           <Flex mt={"1rem"} maxW={{ base: "300px", md: "600px" }}>
-            <CustomNumInput value={money} onChange={numOnChange} />
-            <CustomSlider value={money} onChange={numOnChange} />
+            <CustomNumInput value={money} name={'money'} setField={setFieldName} onChange={numOnChange} />
+            <CustomSlider value={money} name={'money'} setField={setFieldName} onChange={numOnChange} />
           </Flex>
         </Form>
       </Box>

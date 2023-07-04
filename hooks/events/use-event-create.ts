@@ -12,19 +12,21 @@ export default function useEventCreate() {
     const { friendId } = useAppSelector((state) => state.friend);
 	const [formData, setFormData] = useState({
 		eventName: '',
-		whoPayed:'+'
+		whoPayed:'+',
+		money:0
 	});
+	const [fieldName, setFieldName] = useState('') // for exception of text input.
     const [icon, setIcon] = useState('')
-    const [money, setMoney] = useState<number>(0)
-	const { eventName, whoPayed } = formData;
+    // const [money, setMoney] = useState<number>(0)
+	const { eventName, whoPayed ,money } = formData;
 
 	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
 		setFormData({ ...formData, [name]: value });
 	};
 
-    const numOnChange = (e: any) => {
-        setMoney(e);
+    const numOnChange = (event: ChangeEvent<any>) => {
+		setFormData({ ...formData, [fieldName]: event });
     }
 
 	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -51,6 +53,7 @@ export default function useEventCreate() {
         money,
         setIcon,
 		onChange,
+		setFieldName,
         numOnChange,
 		onSubmit,
 	};

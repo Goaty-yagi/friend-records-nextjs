@@ -6,13 +6,20 @@ import {
   NumberDecrementStepper,
   Flex
 } from "@chakra-ui/react";
+import { ChangeEvent } from "react";
 
 interface Props {
   value: number;
+  name: string
+  setField:(e: any) => void;
   onChange: (e: any) => void;
 }
 
-export default function CustomNumInput({ value, onChange }: Props) {
+export default function CustomNumInput({ value, name,setField, onChange }: Props) {
+  const numOnChange = ((event:any) => {
+    onChange(event)
+    setField(name)
+  })  
   // const format = (val: number) => `$ ` + val;
   return (
     <Flex
@@ -23,7 +30,7 @@ export default function CustomNumInput({ value, onChange }: Props) {
         maxW="120px"
         mr="2rem"
         value={value}
-        onChange={onChange}
+        onChange={numOnChange}
         min={0}
       >
         <NumberInputField />
