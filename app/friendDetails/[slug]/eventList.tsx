@@ -6,20 +6,21 @@ import getIconObj from "@/components/avatarsAndIcons/icons";
 import Image from "next/legacy/image";
 import { Event } from "@/redux/features/eventSlice";
 import { useAppSelector } from "@/redux/hooks";
+import NoEvent from "./noEvent";
 
 export default function EventList() {
   const listRef = useRef() as RefObject<HTMLDivElement>;
   const [maxH, setMaxH] = useState(0);
-//   const events = useContext(FriendContext).eventList;
-  const eventList = useAppSelector((state) => state.event).eventList
-  console.log("EVE", eventList)
+  //   const events = useContext(FriendContext).eventList;
+  const eventList = useAppSelector((state) => state.event).eventList;
+  console.log("EVE", eventList);
   useEffect(() => {
     if (listRef.current) {
-      const lisrect = listRef?.current.getBoundingClientRect()
+      const lisrect = listRef?.current.getBoundingClientRect();
       setMaxH(window.innerHeight - lisrect.top - 48);
     }
   }, []);
-  function colorHandler(amount:number) {
+  function colorHandler(amount: number) {
     if (amount > 0) {
       return "#e4feff";
     } else if (amount < 0) {
@@ -28,7 +29,7 @@ export default function EventList() {
       return "#ffffe0";
     }
   }
-  function spentOrReceive(amount:number) {
+  function spentOrReceive(amount: number) {
     return amount >= 0 ? "I owe them" : "They owe me";
   }
   return (
@@ -42,7 +43,7 @@ export default function EventList() {
     >
       {eventList.length ? (
         <>
-          {eventList.map((e:Event, index:number) => (
+          {eventList.map((e: Event, index: number) => (
             <Card
               border={"solid #ffddf9"}
               position={"relative"}
@@ -74,7 +75,7 @@ export default function EventList() {
                     bg={"#919191bf"}
                     alignItems={"center"}
                   >
-                    <Image src={getIconObj(e.icon)}  layout='fill'/>
+                    <Image src={getIconObj(e.icon)} layout="fill" />
                   </Flex>
 
                   <VStack align="stretch" color={"gray"}>
@@ -91,7 +92,7 @@ export default function EventList() {
           ))}
         </>
       ) : (
-        <></>
+        <NoEvent/>
       )}
     </Box>
   );
