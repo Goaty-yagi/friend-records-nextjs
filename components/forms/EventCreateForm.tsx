@@ -18,12 +18,9 @@ export default function EventCreateForm() {
     money,
     setIcon,
     onChange,
-    setFieldName,
-    numOnChange,
     onSubmit,
   } = useEventCreate();
   const onClose = useContext(PopoverCloseContext);
-
   function customOnsubmit(event: FormEvent<HTMLFormElement>) {
     onSubmit(event);
     onClose();
@@ -46,6 +43,15 @@ export default function EventCreateForm() {
       checked: false,
     },
   ];
+  const sliderConfig = [{
+    name:'money',
+    value:money,
+    max:1000,
+    min:0,
+    style:{
+
+    }
+  }]
   return (
     <>
       <Box mt={"0.9rem"}>
@@ -68,8 +74,8 @@ export default function EventCreateForm() {
             </Box>
           </Box>
           <Flex mt={"1rem"} maxW={{ base: "300px", md: "600px" }}>
-            <CustomNumInput value={money} name={'money'} setField={setFieldName} onChange={numOnChange} />
-            <CustomSlider value={money} name={'money'} setField={setFieldName} onChange={numOnChange} />
+            <CustomNumInput config={sliderConfig} onChange={onChange} />
+            <CustomSlider sliderConfig={sliderConfig} onChange={onChange} />
           </Flex>
         </Form>
       </Box>

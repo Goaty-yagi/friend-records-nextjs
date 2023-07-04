@@ -14,7 +14,7 @@ import React, { useRef, useEffect, useState, useContext } from "react";
 import Header from "./Header";
 import { dateConvert } from "@/utils/dates";
 import { useAppSelector } from "@/redux/hooks";
-import { FriendDelConfPopover } from "@/components/popovers";
+import { FriendDelConfPopover, FriendBirthdayUpdatePopover } from "@/components/popovers";
 
 
 export default function FriendInfo() {
@@ -90,11 +90,17 @@ export default function FriendInfo() {
                       </Flex>
                     </Box>
                   </Flex>
-                  {/* {birthdayDisplay} */}
+                  <Text>
+                    {friend.birthday && (
+                      <>Birthday : {dateConvert(friend.last_log)}</>
+                    )}
+                  </Text>
                   <Text>
                     Last interaction : {dateConvert(friend.last_log)}
                   </Text>
-                  {/* {birthday} */}
+                  {!friend.birthday && (
+                    <FriendBirthdayUpdatePopover/>
+                  )}
                 </VStack>
               </Flex>
               <Flex

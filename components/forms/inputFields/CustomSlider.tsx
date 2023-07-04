@@ -6,38 +6,46 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
-interface Props {
+export interface SliderConfig {
   value: number;
-  name?: string;
-  setField?: (e: any) => void;
+  name: string;
+  orientation?: string;
+  max: number;
+  min: number;
+  style?: any;
+}
+interface SliderProps {
+  sliderConfig: SliderConfig[];
   onChange: (e: any) => void;
 }
 
-export default function CustomSlider({ value,name, setField, onChange }: Props) {
+export default function CustomSlider({ sliderConfig, onChange }: SliderProps) {
   const format = (val: number) => `$ ` + val;
-  const numOnChange = (event: any) => {
-    onChange(event);
-    if(typeof setField !== 'undefined') {
-      setField(name);
-    }
-  };
   return (
     <Flex mt={"1rem"} w={{ base: "300px", md: "600px" }}>
-      <Slider
-        flex="1"
-        focusThumbOnChange={false}
-        value={value}
-        onChange={numOnChange}
-        defaultValue={0}
-        min={0}
-        max={1000}
-        step={1}
-      >
-        <SliderTrack>
-          <SliderFilledTrack />
-        </SliderTrack>
-        <SliderThumb color={"gray"} fontSize="sm" boxSize="20px" />
-      </Slider>
+      {sliderConfig.map((e) => (
+        <Slider
+          {...e}
+          {...e.style}
+          key={e.name}
+          flex="1"
+          // orientation={e.orientation===('horizontal'||"vertical")?e.orientation:'horizontal'}
+          focusThumbOnChange={false}
+          // value={e.value}
+          onChange={(event) => {
+            onChange({ target: { name: e.name, value: event } });
+          }}
+          defaultValue={0}
+          // min={e.min}
+          // max={e.max}
+          step={1}
+        >
+          <SliderTrack>
+            <SliderFilledTrack />
+          </SliderTrack>
+          <SliderThumb color={"gray"} fontSize="sm" boxSize="20px" />
+        </Slider>
+      ))}
     </Flex>
   );
 }

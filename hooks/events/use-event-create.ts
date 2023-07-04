@@ -9,30 +9,25 @@ import { updateFriend } from '@/redux/features/friendSlice';
 export default function useEventCreate() {
 	const [eventCreate, { isLoading }] = useEventCreateMutation();
 	const dispatch = useAppDispatch()
-    const { friendId } = useAppSelector((state) => state.friend);
+	const { friendId } = useAppSelector((state) => state.friend);
 	const [formData, setFormData] = useState({
 		eventName: '',
-		whoPayed:'+',
-		money:0
+		whoPayed: '+',
+		money: 0
 	});
-	const [fieldName, setFieldName] = useState('') // for exception of text input.
-    const [icon, setIcon] = useState('')
-    // const [money, setMoney] = useState<number>(0)
-	const { eventName, whoPayed ,money } = formData;
+
+	const [icon, setIcon] = useState('')
+	const { eventName, whoPayed, money } = formData;
 
 	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
 		setFormData({ ...formData, [name]: value });
 	};
 
-    const numOnChange = (event: ChangeEvent<any>) => {
-		setFormData({ ...formData, [fieldName]: event });
-    }
-
 	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		const CustomMoney = whoPayed==='+'?money:money * -1
-		eventCreate({ name:eventName, friend:friendId, icon, money:CustomMoney })
+		const CustomMoney = whoPayed === '+' ? money : money * -1
+		eventCreate({ name: eventName, friend: friendId, icon, money: CustomMoney })
 			.unwrap()
 			.then((res) => {
 				dispatch(unshiftEvent(res))
@@ -48,13 +43,11 @@ export default function useEventCreate() {
 	return {
 		eventName,
 		whoPayed,
-        isLoading,
+		isLoading,
 		icon,
-        money,
-        setIcon,
+		money,
+		setIcon,
 		onChange,
-		setFieldName,
-        numOnChange,
 		onSubmit,
 	};
 }

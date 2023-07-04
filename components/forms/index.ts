@@ -6,4 +6,5 @@ export { default as PasswordResetForm } from './PasswordResetForm';
 export { default as PasswordResetConfirmForm } from './PasswordResetConfirmForm';
 
 export { default as FriendCreateForm } from './FriendCreateForm';
+export { default as FriendBirthdayUpdateForm } from './FriendBirthdayUpdateForm';
 export { default as EventCreateForm } from './EventCreateForm';
