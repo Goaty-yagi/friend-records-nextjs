@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent, FormEvent } from "react";
-import { CustomInput } from "@/components/forms";
+import { CustomInput } from "./inputFields";
 import { Spinner } from "@/components/common";
 import { Center,Flex, Button } from "@chakra-ui/react";
 interface Config {
