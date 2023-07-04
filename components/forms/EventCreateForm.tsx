@@ -6,7 +6,8 @@ import { useContext, FormEvent } from "react";
 import { PopoverCloseContext } from "@/contexts";
 import useEventCreate from "@/hooks/events/use-event-create";
 import { Flex, Box } from "@chakra-ui/react";
-import { Form, CustomNumInput, CustomRadio, CustomSlider } from "./index";
+import { Form } from "./index";
+import { CustomNumInput , CustomSlider, CustomRadio} from "./inputFields";
 
 export default function EventCreateForm() {
   const format = (val: number) => `$ ` + val;

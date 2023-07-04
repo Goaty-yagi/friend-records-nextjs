@@ -14,11 +14,14 @@ import React, { useRef, useEffect, useState, useContext } from "react";
 import Header from "./Header";
 import { dateConvert } from "@/utils/dates";
 import { useAppSelector } from "@/redux/hooks";
+import { FriendDelConfPopover } from "@/components/popovers";
+
 
 export default function FriendInfo() {
   const outerRef = useRef<any>();
   const innerRef = useRef<any>();
   const friend = useAppSelector((state) => state.friend).friendDetail
+  // const id = friend.id
   const eventList = useAppSelector((state) => state.event).eventList;
   useEffect(() => {
     if (typeof innerRef.current !== "undefined") {
@@ -67,7 +70,9 @@ export default function FriendInfo() {
           overflow={"hidden"}
           position={"relative"}
         >
-            <CloseButton/>
+          <Flex justifyContent={"flex-end"}>
+          <FriendDelConfPopover/>
+          </Flex>
           {/* <FriendDeletePopover id={friend.id} friendName={friend.name} /> */}
           <CardBody w={"100%"} pt={"0.2rem"}>
             <Stack divider={<StackDivider />} spacing={{ base: "1", md: "4" }}>

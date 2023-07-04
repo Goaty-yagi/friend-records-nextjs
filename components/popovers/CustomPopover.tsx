@@ -14,12 +14,20 @@ import {
 } from "@chakra-ui/react";
 import { PopoverCloseContext } from "@/contexts";
 
-interface Props {
+
+interface Style {
+  color:string
+  bg:string
+  border:string
+}
+interface PopoverProps {
   trigger: JSX.Element;
   body: JSX.Element;
+  header?:string
+  style?: Style
 }
 
-export default function CustomPopover({ trigger, body }: Props) {
+export default function CustomPopover({ trigger, body,header, style}: PopoverProps) {
   const { onOpen, onClose, isOpen } = useDisclosure();
   const OnCloseProvider = ({ children }: { children: React.ReactNode }) => {
     return (
@@ -34,10 +42,14 @@ export default function CustomPopover({ trigger, body }: Props) {
         <PopoverTrigger>
           <Box>{trigger}</Box>
         </PopoverTrigger>
-        <PopoverContent>
-          <PopoverArrow />
+        <PopoverContent {...style}>
+          {typeof style === 'undefined' && (
+            <PopoverArrow />
+          )}
           <PopoverCloseButton />
-          {/* <PopoverHeader>Confirmation!</PopoverHeader> */}
+          {header && (
+             <PopoverHeader>{header}</PopoverHeader>
+          )}
           <PopoverBody>
             <OnCloseProvider>{body}</OnCloseProvider>
           </PopoverBody>

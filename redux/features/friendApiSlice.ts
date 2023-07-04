@@ -7,7 +7,7 @@ interface Events {
 	created_on:string
 	icon:string
 }
-interface FriendResponse {
+export interface FriendResponse {
 	id:string
 	name:string
 	user:string
@@ -48,6 +48,12 @@ const friendApiSlice = apiSlice.injectEndpoints({
 				method: 'GET',
 			}),
 		}),
+		deleteFriend: builder.mutation({
+			query: (id) => ({
+				url: `/friend-detail/${id}`,
+				method: 'DELETE',
+			}),
+		}),
 		updateBirthday: builder.mutation({
 			query: ({year, month, day, id}) => ({
 				url: '/birthday-update/',
@@ -62,5 +68,6 @@ export const {
 	useFriendCreateMutation,
 	useGetFriendListMutation,
 	useGetFriendDetailMutation,
+	useDeleteFriendMutation,
 	useUpdateBirthdayMutation,
 } = friendApiSlice;
