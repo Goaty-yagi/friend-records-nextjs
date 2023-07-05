@@ -25,6 +25,7 @@ interface PopoverProps {
   trigger: JSX.Element;
   body: JSX.Element;
   switchableButton?: boolean;
+  hasCloseButton?:boolean
   header?: string;
   style?: Style;
 }
@@ -33,6 +34,7 @@ export default function CustomPopover({
   trigger,
   body,
   header,
+  hasCloseButton=true,
   switchableButton,
   style,
 }: PopoverProps) {
@@ -43,7 +45,7 @@ export default function CustomPopover({
     return (
       <>
         <PopoverCloseContext.Provider
-          value={switchableButton ? { close, isEditing } : onClose}
+          value={switchableButton ? { setIsEditing, isEditing } : onClose}
         >
           {switchableButton ? (
             <>
@@ -75,7 +77,7 @@ export default function CustomPopover({
         </PopoverTrigger>
         <PopoverContent {...style}>
           {typeof style === "undefined" && <PopoverArrow />}
-          <PopoverCloseButton />
+          {hasCloseButton && ( <PopoverCloseButton />)}
           {header && <PopoverHeader>{header}</PopoverHeader>}
           <PopoverBody>{body}</PopoverBody>
         </PopoverContent>

@@ -9,8 +9,7 @@ import { FaBirthdayCake } from "react-icons/fa";
 
 export function BirthdayButton() {
   const { isEditing, close } = useContext(PopoverCloseContext);
-  const { onSubmit, isChanged } = useFriendBirthdayUpdate();
-  console.log(isEditing, isChanged);
+  const { onSubmit } = useFriendBirthdayUpdate();
   return (
     <Center>
       <Button

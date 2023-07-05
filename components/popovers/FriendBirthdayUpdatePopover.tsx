@@ -16,21 +16,6 @@ export default function FriendCreatePopover() {
   } = useFriendBirthdayUpdate();
 
   console.log(close);
-//   function CreateButton() {
-//     return (
-//       <Center>
-//         <Button
-//           w={"60%"}
-//           colorScheme="twitter"
-//           isDisabled={isEditing?isEditing.isEditing:false}
-//           leftIcon={<FaBirthdayCake />}
-//           onClick={isEditing?isEditing.isEditing:false ? onSubmit : () => {}}
-//         >
-//           {isEditing?isEditing.isEditing:false  ? "Save" : "Add Birthday?"}
-//         </Button>
-//       </Center>
-//     );
-//   }
 
   return (
     <>

@@ -9,7 +9,6 @@ import { useAppSelector } from '@/redux/hooks';
 export default function useFriendBirthdayUpdate() {
 	const [updateBirthday, { isLoading }] = useUpdateBirthdayMutation();
     const friend = useAppSelector((state) => state.friend).friendDetail
-    const [isChanged, setIsChanged] = useState(false)
     const date = new Date(Date.now());
 	const [formData, setFormData] = useState({
 		year: date.getFullYear(),
@@ -44,9 +43,7 @@ export default function useFriendBirthdayUpdate() {
 		year,
         month,
 		day,
-        isChanged,
         isLoading,
-        setIsChanged,
 		onChange,
 		onSubmit,
 	};

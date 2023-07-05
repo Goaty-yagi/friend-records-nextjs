@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useRef, useEffect, useState, useContext } from "react";
 import Header from "./Header";
-import { dateConvert } from "@/utils/dates";
+import { dateConvert, getYearMonthDate } from "@/utils/dates";
 import { useAppSelector } from "@/redux/hooks";
 import { FriendDelConfPopover, FriendBirthdayUpdatePopover } from "@/components/popovers";
 
@@ -73,7 +73,6 @@ export default function FriendInfo() {
           <Flex justifyContent={"flex-end"}>
           <FriendDelConfPopover/>
           </Flex>
-          {/* <FriendDeletePopover id={friend.id} friendName={friend.name} /> */}
           <CardBody w={"100%"} pt={"0.2rem"}>
             <Stack divider={<StackDivider />} spacing={{ base: "1", md: "4" }}>
               <Flex w={"100%"} justifyContent={"center"}>
@@ -90,11 +89,11 @@ export default function FriendInfo() {
                       </Flex>
                     </Box>
                   </Flex>
-                  <Text>
                     {friend.birthday && (
-                      <>Birthday : {dateConvert(friend.last_log)}</>
+                      <Text>
+                      <>Birthday : {getYearMonthDate(friend.birthday)}</>
+                      </Text>
                     )}
-                  </Text>
                   <Text>
                     Last interaction : {dateConvert(friend.last_log)}
                   </Text>
