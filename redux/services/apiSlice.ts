@@ -34,7 +34,7 @@ const baseQueryWithReauth: BaseQueryFn<
 				);
 				if (refreshResult.data) {
 					api.dispatch(setAuth());
-
+					console.log("ref",refreshResult.data)
 					result = await baseQuery(args, api, extraOptions);
 				} else {
 					api.dispatch(logout());

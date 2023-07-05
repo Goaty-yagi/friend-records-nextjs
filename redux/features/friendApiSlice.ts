@@ -54,6 +54,13 @@ const friendApiSlice = apiSlice.injectEndpoints({
 				method: 'DELETE',
 			}),
 		}),
+		updateFriend: builder.mutation({
+			query: ({id, ...props}) => ({
+				url: `/friend-detail/${id}`,
+				method: 'PATCH',
+				body: { ...props },
+			}),
+		}),
 		updateBirthday: builder.mutation({
 			query: ({year, month, day, id}) => ({
 				url: '/birthday-update/',
@@ -69,5 +76,6 @@ export const {
 	useGetFriendListMutation,
 	useGetFriendDetailMutation,
 	useDeleteFriendMutation,
+	useUpdateFriendMutation,
 	useUpdateBirthdayMutation,
 } = friendApiSlice;

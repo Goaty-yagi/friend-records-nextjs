@@ -23,7 +23,6 @@ export default function Slider({ svgArray, setFun, defaultSvg }: Props) {
     fontSize: eachSlideWidth,
   };
   useEffect(() => {
-    console.log("EFFE")
     if (typeof defaultSvg !== "undefined") {
       setSelectedSvg(defaultSvg)
       setFun(defaultSvg)

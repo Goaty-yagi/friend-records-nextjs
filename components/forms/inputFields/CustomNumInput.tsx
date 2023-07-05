@@ -27,8 +27,8 @@ export default function CustomNumInput({ config, onChange }: NumInputProps) {
   // const format = (val: number) => `$ ` + val;
   return (
     <Flex mt={"1rem"} w={{ base: "300px", md: "600px" }}>
-      {config.map((e) => (
-        <Box key={e.name} position={"relative"}>
+      {config.map((e, index) => (
+        <Box key={index} position={"relative"}>
           {e.title && (
             <Text position={"absolute"} top={"-5"} left={0}>
               {e.title}
@@ -36,7 +36,6 @@ export default function CustomNumInput({ config, onChange }: NumInputProps) {
           )}
           <NumberInput
             {...e.style}
-            key={e.name}
             max={e.max}
             min={e.min}
             maxW="120px"

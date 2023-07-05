@@ -7,7 +7,7 @@ import {
 interface Props{
     icon: JSX.Element
     header:string
-    text:string
+    text:any
     mr?:string
 }
 

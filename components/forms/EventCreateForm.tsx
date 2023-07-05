@@ -74,7 +74,7 @@ export default function EventCreateForm() {
             </Box>
           </Box>
           <Flex mt={"1rem"} maxW={{ base: "300px", md: "600px" }}>
-            <CustomNumInput config={sliderConfig} onChange={onChange} />
+            <CustomNumInput key={'input'} config={sliderConfig} onChange={onChange} />
             <CustomSlider sliderConfig={sliderConfig} onChange={onChange} />
           </Flex>
         </Form>

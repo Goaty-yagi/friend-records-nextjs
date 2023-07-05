@@ -15,17 +15,18 @@ import Header from "./Header";
 import { dateConvert, getYearMonthDate } from "@/utils/dates";
 import { useAppSelector } from "@/redux/hooks";
 import { FriendDelConfPopover, FriendBirthdayUpdatePopover } from "@/components/popovers";
-
+import FriendNameUpdateForm from "@/components/forms/FriendNameUpdateForm";
+import { BsCheck2Square } from "react-icons/bs";
+import { RiEdit2Line } from "react-icons/ri";
+import { FriendContext } from "@/contexts";
 
 export default function FriendInfo() {
   const outerRef = useRef<any>();
   const innerRef = useRef<any>();
   const friend = useAppSelector((state) => state.friend).friendDetail
-  // const id = friend.id
   const eventList = useAppSelector((state) => state.event).eventList;
   useEffect(() => {
     if (typeof innerRef.current !== "undefined") {
-        console.log("TRUE")
       outerRef.current.style.height =
         innerRef.current.offsetHeight + 32 + "px"; //32 is half of the image
 
@@ -60,6 +61,13 @@ export default function FriendInfo() {
     }
     return chack();
   };
+  const nameEditConfig = {
+    title:'Name :',
+    iconToEdit:<RiEdit2Line color={'green'}/>,
+    iconIsEditting:<BsCheck2Square color={'red'}/>,
+    iconIsReady:<BsCheck2Square color={'green'}/>,
+    // defaultVal:friend.name
+  }
   return (
     <>
       <Header innerRef={innerRef} outerRef={outerRef}>
@@ -78,14 +86,9 @@ export default function FriendInfo() {
               <Flex w={"100%"} justifyContent={"center"}>
                 <VStack align="stretch" fontWeight={"bold"} spacing={"0.5rem"}>
                   <Flex alignItems={"center"}>
-                    <Text mr={"0.3rem"}>Name :</Text>
-                    <Box w={"50%%"} h={"100%"}>
+                    <FriendNameUpdateForm {...nameEditConfig} />
+                    <Box w={"50%"} h={"100%"}>
                       <Flex alignItems={"center"} position={"absolute"}>
-                        {/* <EditableInput
-                              ref={editableInputRef}
-                              value={friend.name}
-                              func={friendNameUpdate}
-                            /> */}
                       </Flex>
                     </Box>
                   </Flex>
