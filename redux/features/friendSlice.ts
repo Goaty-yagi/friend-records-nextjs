@@ -65,6 +65,17 @@ const friendSlice = createSlice({
 
 			});
 		},
+		patchFriend: (state, action: PayloadAction<FriendResponse>) => {
+			state.friendDetail = action.payload
+			for(let i=0; i < state.friendList.length; i++) {
+				if (state.friendList[i].id === action.payload.id) {
+					state.friendList.splice(i,1)
+					state.friendList.unshift(action.payload)
+					break
+				}
+			}
+			
+		},
 		deleteFriend: (state, action: PayloadAction<string>) => {
 			state.friendList.forEach((e, index) => {
 				if(e.id === action.payload) {
@@ -75,5 +86,5 @@ const friendSlice = createSlice({
 	}
 })
 
-export const { finishInitialLoad, setFriends, unshiftFriend, setFriendId, setFriendDetail, deleteFriend, updateFriend } = friendSlice.actions
+export const { finishInitialLoad, setFriends, unshiftFriend, setFriendId, setFriendDetail, deleteFriend,patchFriend, updateFriend } = friendSlice.actions
 export default friendSlice.reducer

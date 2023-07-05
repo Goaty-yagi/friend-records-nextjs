@@ -55,6 +55,7 @@ export default function CustomEditableInput({
             <IconButton
               aria-label="edit"
               icon={iconIsReady}
+              size={'xs'}
               type="submit"
               ml={'0.3rem'}
               onClick={customSubmit}
@@ -65,6 +66,7 @@ export default function CustomEditableInput({
             <IconButton
               aria-label="edit"
               icon={iconIsEditting}
+              size={'xs'}
               ml={'0.3rem'}
               onClick={() => {
                 setIsEditing.off(), setIsChanged(false);
@@ -77,7 +79,7 @@ export default function CustomEditableInput({
       <Flex justifyContent="center">
         <IconButton
           aria-label="edit"
-          size="sm"
+          size={'xs'}
           ml={'0.3rem'}
           onClick={setIsEditing.on}
           icon={typeof iconToEdit !== "undefined" ? iconToEdit : <></>}

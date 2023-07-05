@@ -1,19 +1,18 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { toast } from 'react-toastify';
-import { unshiftFriend } from '@/redux/features/friendSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import { useUpdateBirthdayMutation } from '@/redux/features/friendApiSlice'
 import { useAppSelector } from '@/redux/hooks';
-
+import { patchFriend } from '@/redux/features/friendSlice';
 
 export default function useFriendBirthdayUpdate() {
 	const [updateBirthday, { isLoading }] = useUpdateBirthdayMutation();
     const friend = useAppSelector((state) => state.friend).friendDetail
-    const date = new Date(Date.now());
+
 	const [formData, setFormData] = useState({
-		year: date.getFullYear(),
-        month: date.getMonth() + 1,
-        day: date.getDate()
+		year: 2000,
+        month: 1,
+        day: 1
 	});
 	const dispatch = useAppDispatch()
 	const { year, month, day } = formData;
@@ -21,15 +20,17 @@ export default function useFriendBirthdayUpdate() {
 
 	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
+		console.log("check",name, value)
 		setFormData({ ...formData, [name]: value });
 	};
-
+	console.log("CHECKKK", year, month, day)
 	const onSubmit = () => {
+		console.log("SUBMIT",year, month, day, id)
 		// event.preventDefault();
 		updateBirthday({year, month, day, id})
 			.unwrap()
 			.then((res) => {
-				dispatch(unshiftFriend(res))
+				dispatch(patchFriend(res))
 				toast.success('Syccessfully added birthday!');
 			})
 			.catch((e) => {
