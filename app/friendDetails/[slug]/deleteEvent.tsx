@@ -26,7 +26,7 @@ export default function DeleteEvent({ id, name }: Props) {
       .then(() => {
         dispatch(setDeleteEvent(id));
         onClose()
-        toast.success(`Your Event ${name} SuccessFully deleteed!`);
+        toast.success(`Your Event ${name} Successfully deleteed!`);
       });
   };
   return (

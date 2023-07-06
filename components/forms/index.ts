@@ -11,3 +11,4 @@ export {default as UsernameUpdateForm} from './UsernameUpdateForm'
 export { default as FriendCreateForm } from './FriendCreateForm';
 export { default as FriendBirthdayUpdateForm } from './FriendBirthdayUpdateForm';
 export { default as EventCreateForm } from './EventCreateForm';
+export { default as EventUpdateForm } from './EventUpdateForm';

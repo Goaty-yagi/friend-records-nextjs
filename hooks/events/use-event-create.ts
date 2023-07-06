@@ -15,7 +15,6 @@ export default function useEventCreate() {
 		whoPayed: '+',
 		money: 0
 	});
-
 	const [icon, setIcon] = useState('')
 	const { eventName, whoPayed, money } = formData;
 

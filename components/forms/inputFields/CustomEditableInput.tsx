@@ -12,9 +12,10 @@ import { RiEdit2Line } from "react-icons/ri";
 
 interface Props {
   value: string;
+  defaultValue?: string;
   name: string;
   title?: string;
-  size?:string
+  size?: string;
   maxLength?: number;
   iconToEdit?: JSX.Element;
   iconIsEditting?: JSX.Element;
@@ -27,11 +28,12 @@ export default function CustomEditableInput({
   name,
   title,
   value,
-  size='sm',
+  defaultValue,
+  size = "sm",
   maxLength = 20,
-  iconToEdit =<RiEdit2Line/>,
-  iconIsEditting =<BsFileX/>,
-  iconIsReady =<BsCheck2Square/>,
+  iconToEdit = <RiEdit2Line color={"green"} />,
+  iconIsEditting = <BsFileX color={"red"} />,
+  iconIsReady = <BsCheck2Square color={"green"} />,
   onChange,
   onSubmit,
 }: Props) {
@@ -39,7 +41,7 @@ export default function CustomEditableInput({
   const [isEditing, setIsEditing] = useBoolean(false);
   const [fixedDefaultValue, setFixedDefaultValue] = useState("");
   useEffect(() => {
-    setFixedDefaultValue(value);
+    setFixedDefaultValue(defaultValue ? defaultValue : value);
   }, []);
   function customOnChange(e: any) {
     onChange(e);
@@ -59,9 +61,9 @@ export default function CustomEditableInput({
             <IconButton
               aria-label="edit"
               icon={iconIsReady}
-              size={'xs'}
+              size={"xs"}
               type="submit"
-              ml={'0.3rem'}
+              ml={"0.3rem"}
               onClick={customSubmit}
             />
           </>
@@ -70,8 +72,8 @@ export default function CustomEditableInput({
             <IconButton
               aria-label="edit"
               icon={iconIsEditting}
-              size={'xs'}
-              ml={'0.3rem'}
+              size={"xs"}
+              ml={"0.3rem"}
               onClick={() => {
                 setIsEditing.off(), setIsChanged(false);
               }}
@@ -83,8 +85,8 @@ export default function CustomEditableInput({
       <Flex justifyContent="center">
         <IconButton
           aria-label="edit"
-          size={'xs'}
-          ml={'0.3rem'}
+          size={"xs"}
+          ml={"0.3rem"}
           onClick={setIsEditing.on}
           icon={typeof iconToEdit !== "undefined" ? iconToEdit : <></>}
         />
@@ -101,11 +103,12 @@ export default function CustomEditableInput({
             <Box h={"1.5rem"}>
               <Flex position={"absolute"} alignItems={"center"} top={-1}>
                 <Input
+                  autoFocus={true} 
                   maxLength={maxLength}
                   w={"200px"}
                   size={size}
                   name={name}
-                  defaultValue={value ? value : fixedDefaultValue}
+                  defaultValue={fixedDefaultValue}
                   onChange={customOnChange}
                 />
                 <EditableControls />
@@ -114,7 +117,7 @@ export default function CustomEditableInput({
           </>
         ) : (
           <Flex position={"absolute"} top={-3} left={-2} alignItems={"center"}>
-            {value ? value : fixedDefaultValue} <EditableControls />
+            {fixedDefaultValue} <EditableControls />
           </Flex>
         )}
       </Box>

@@ -6,7 +6,6 @@ import { Box } from "@chakra-ui/react";
 import { useContext, FormEvent } from "react";
 import { PopoverCloseContext } from "@/contexts";
 import useFriendNameUpdate from "@/hooks/friends/use-friend-name-update";
-import { AbstractForm } from "./index";
 
 interface Props {
   title?: string;
@@ -27,7 +26,6 @@ export default function FriendNameUpdateForm({
   return (
     <>
       <Box mt={"0.9rem"}>
-        <AbstractForm onSubmit={onSubmit}>
           <CustomEditableInput
             title={title}
             iconToEdit={iconToEdit}
@@ -38,7 +36,6 @@ export default function FriendNameUpdateForm({
             onChange={onChange}
             onSubmit={onSubmit}
           />
-        </AbstractForm>
       </Box>
     </>
   );

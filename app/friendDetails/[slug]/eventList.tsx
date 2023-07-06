@@ -8,6 +8,8 @@ import { EventProps } from "@/redux/features/eventApiSlice";
 import { useAppSelector } from "@/redux/hooks";
 import NoEvent from "./noEvent";
 import { EventDelConfPopover } from "@/components/popovers";
+import EventNameUpdateForm from "@/components/forms/events/EventNameUpdateForm";
+// import EventUpdatePopover from "@/components/popovers/EventUpdatePopover";
 
 export default function EventList() {
   const listRef = useRef() as RefObject<HTMLDivElement>;
@@ -55,13 +57,7 @@ export default function EventList() {
             >
               <Flex position={"absolute"} right={0}>
                 <EventDelConfPopover id={e.id} name={e.name}/>
-                {/* <DeletePopover id={e.id} eventName={e.name} />
-                  <EditPopover
-                    eventName={e.name}
-                    money={e.money}
-                    id={e.id}
-                    defaultIcon={getIconObj(e.icon)}
-                  /> */}
+                {/* <EventUpdatePopover id={e.id} name={e.name} money={e.money} icon={getIconObj(e.icon)}/> */}
               </Flex>
               <CardBody>
                 <Flex alignItems={"center"}>
@@ -81,7 +77,8 @@ export default function EventList() {
                   </Flex>
 
                   <VStack align="stretch" color={"gray"}>
-                    <Text>Event Name : {e.name}</Text>
+                    <EventNameUpdateForm id={e.id} name={e.name} title='Event Name :'/>
+                    {/* <Text>Event Name : {e.name}</Text> */}
                     <Text>
                       {spentOrReceive(e.money)} : $
                       {e.money >= 0 ? e.money : e.money * -1}
