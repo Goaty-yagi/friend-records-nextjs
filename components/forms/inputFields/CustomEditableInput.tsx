@@ -7,11 +7,14 @@ import {
   useBoolean,
 } from "@chakra-ui/react";
 import { ChangeEvent, useState, FormEvent, useEffect } from "react";
+import { BsCheck2Square, BsFileX } from "react-icons/bs";
+import { RiEdit2Line } from "react-icons/ri";
 
 interface Props {
   value: string;
   name: string;
   title?: string;
+  size?:string
   maxLength?: number;
   iconToEdit?: JSX.Element;
   iconIsEditting?: JSX.Element;
@@ -24,10 +27,11 @@ export default function CustomEditableInput({
   name,
   title,
   value,
+  size='sm',
   maxLength = 20,
-  iconToEdit,
-  iconIsEditting,
-  iconIsReady,
+  iconToEdit =<RiEdit2Line/>,
+  iconIsEditting =<BsFileX/>,
+  iconIsReady =<BsCheck2Square/>,
   onChange,
   onSubmit,
 }: Props) {
@@ -94,12 +98,12 @@ export default function CustomEditableInput({
       <Box position={"relative"}>
         {isEditing ? (
           <>
-            <Box h={"2rem"}>
+            <Box h={"1.5rem"}>
               <Flex position={"absolute"} alignItems={"center"} top={-1}>
                 <Input
                   maxLength={maxLength}
                   w={"200px"}
-                  size="sm"
+                  size={size}
                   name={name}
                   defaultValue={value ? value : fixedDefaultValue}
                   onChange={customOnChange}
@@ -109,7 +113,7 @@ export default function CustomEditableInput({
             </Box>
           </>
         ) : (
-          <Flex alignItems={"center"}>
+          <Flex position={"absolute"} top={-3} left={-2} alignItems={"center"}>
             {value ? value : fixedDefaultValue} <EditableControls />
           </Flex>
         )}

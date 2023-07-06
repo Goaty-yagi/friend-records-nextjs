@@ -4,14 +4,15 @@ import { Text, Flex, Stack,  } from "@chakra-ui/react";
 import {  HiUser, HiMail, HiOutlineLockClosed } from "react-icons/hi";
 import { CustomField } from "@/components/fields";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
-
+import { UsernameUpdateForm } from "@/components/forms";
+import FriendNameUpdateForm from "@/components/forms/FriendNameUpdateForm";
 export default function AccountInfo() {
   const { data: user } = useRetrieveUserQuery();
   const config = [
     {
       icon: <HiUser fontSize={"2rem"} color={"gray"} />,
       header: "USER NAME",
-      text:user?user.username:''
+      text:<UsernameUpdateForm/>,
     },
     {
       icon: <HiMail fontSize={"2rem"} color={"gray"} />,
