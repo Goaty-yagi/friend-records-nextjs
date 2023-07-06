@@ -3,8 +3,8 @@ import React, { useRef, useEffect, useState, useContext, forwardRef } from "reac
 import { getAvaterObj } from "@/components/avatarsAndIcons";
 import { FriendContext } from "@/contexts";
 import Image from "next/legacy/image";
-
-
+import {FriendAvatarUpdatePopover} from '@/components/popovers'
+import { useAppSelector } from "@/redux/hooks";
 interface Props {
     children:React.ReactNode
     innerRef:any
@@ -14,7 +14,7 @@ interface Props {
 const Header = forwardRef(({children, innerRef,outerRef}:Props) => {
   // const { onOpen, onClose, isOpen } = useDisclosure();
   const [avatar, setAvatar] = useState("");
-  const friend = useContext(FriendContext).friend;
+  const friend = useAppSelector((state) => state.friend).friendDetail;
   const [isDisabled, setIsDisabled] = useState(true);
   useEffect(() => {
     //   if (avatar) {
@@ -42,6 +42,9 @@ const Header = forwardRef(({children, innerRef,outerRef}:Props) => {
             bg={"#cfcfcf"}
           >
             <Image src={getAvaterObj(friend.avatar)} layout="fill" />
+            <Box className={'UNKO'}>
+            <FriendAvatarUpdatePopover/>
+            </Box>
             {/* <Popover isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
                 <PopoverTrigger>
                   <Box

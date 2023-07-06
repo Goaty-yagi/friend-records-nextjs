@@ -8,7 +8,7 @@ interface Config {
 }
 
 interface Props {
-  selected:string
+  // selected:string
   svgArray: Config[];
   setFun: any;
   defaultSvg?: string;
@@ -23,6 +23,7 @@ export default function Slider({ svgArray, setFun, defaultSvg }: Props) {
     fontSize: eachSlideWidth,
   };
   useEffect(() => {
+    console.log("EFFECT from Slider",svgArray[0].svg)
     if (typeof defaultSvg !== "undefined") {
       setSelectedSvg(defaultSvg)
       setFun(defaultSvg)
@@ -30,6 +31,7 @@ export default function Slider({ svgArray, setFun, defaultSvg }: Props) {
       setSelectedSvg(svgArray[0].svg)
       setFun(svgArray[0].name)
     }
+
   }, []);
   // useEffect(() => {
   //   console.log(selectedSvg)
