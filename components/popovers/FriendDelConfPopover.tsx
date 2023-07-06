@@ -4,7 +4,7 @@ import { FriendCreateForm } from "../forms"
 import { useState } from "react"
 import DeleteFriend from "@/app/friendDetails/[slug]/deleteFriend"
 
-export default function FriendCreatePopover() {
+export default function FriendDelConfPopover() {
     const [close, setClose] = useState(() => {})
     const style =  {
         bg:'gray',

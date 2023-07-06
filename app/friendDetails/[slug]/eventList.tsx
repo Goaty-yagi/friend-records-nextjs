@@ -4,9 +4,10 @@ import { FriendContext } from "@/contexts";
 import { Box, Flex, VStack, Card, CardBody, Text } from "@chakra-ui/react";
 import getIconObj from "@/components/avatarsAndIcons/icons";
 import Image from "next/legacy/image";
-import { Event } from "@/redux/features/eventSlice";
+import { EventProps } from "@/redux/features/eventApiSlice";
 import { useAppSelector } from "@/redux/hooks";
 import NoEvent from "./noEvent";
+import { EventDelConfPopover } from "@/components/popovers";
 
 export default function EventList() {
   const listRef = useRef() as RefObject<HTMLDivElement>;
@@ -43,7 +44,7 @@ export default function EventList() {
     >
       {eventList.length ? (
         <>
-          {eventList.map((e: Event, index: number) => (
+          {eventList.map((e: EventProps, index: number) => (
             <Card
               border={"solid #ffddf9"}
               position={"relative"}
@@ -53,6 +54,7 @@ export default function EventList() {
               bg={colorHandler(e.money)}
             >
               <Flex position={"absolute"} right={0}>
+                <EventDelConfPopover id={e.id} name={e.name}/>
                 {/* <DeletePopover id={e.id} eventName={e.name} />
                   <EditPopover
                     eventName={e.name}

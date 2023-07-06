@@ -28,7 +28,7 @@ export function EditButton() {
 }
 
 export default function FriendAvatarUpdateForm() {
-  const { onChange, onSubmit } = useFriendAvatarUpdate();
+  const { icon, onChange, onSubmit } = useFriendAvatarUpdate();
   const onClose = useContext(PopoverCloseContext);
   const {friendDetail} = useAppSelector((state) => state.friend)
   const defaultAvatar = getAvaterObj(friendDetail.avatar)
@@ -36,17 +36,15 @@ export default function FriendAvatarUpdateForm() {
     onSubmit()
     onClose()
   }
-
+  console.log("A chack",icon, defaultAvatar)
   return (
     <>
-      <>
         <Box pt={"1rem"}>
           <SvgSlider defaultSvg={defaultAvatar} svgArray={avatars} setFun={onChange} />
           <Flex mt={"0.5rem"} justifyContent={"flex-end"}>
-            <Button onClick={CustomOnSubmit}>Update</Button>
+            <Button isDisabled={icon===defaultAvatar} onClick={CustomOnSubmit}>Update</Button>
           </Flex>
         </Box>
-      </>
     </>
   );
 }

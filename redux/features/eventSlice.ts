@@ -1,16 +1,10 @@
 // import { apiSlice } from '../services/apiSlice';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { EventProps } from "./eventApiSlice"
 
-export interface Event {
-	name:string
-	friend:string
-	money:number
-	created_on:string
-	icon:string
-}
 type EventState = {
     isLoading:boolean,
-    eventList:Event[]
+    eventList:EventProps[]
 }
 
 const initialState: EventState = {
@@ -25,14 +19,21 @@ const eventSlice = createSlice({
 		finishInitialLoad: state => {
 			state.isLoading = false
 		},
-        setEventList: (state, action: PayloadAction<Event[]>) => {
+        setEventList: (state, action: PayloadAction<EventProps[]>) => {
 			state.eventList = action.payload
 		},
-		unshiftEvent: (state, action: PayloadAction<Event>) => {
+		unshiftEvent: (state, action: PayloadAction<EventProps>) => {
 			state.eventList.unshift(action.payload)
+		},
+		deleteEvent: (state, action: PayloadAction<string>) => {
+			state.eventList.forEach((e, index) => {
+				if(e.id === action.payload) {
+					state.eventList.splice(index,1)
+				}
+			})
 		},
 	}
 })
 
-export const {  finishInitialLoad, setEventList, unshiftEvent  } = eventSlice.actions
+export const {  finishInitialLoad, setEventList, unshiftEvent, deleteEvent  } = eventSlice.actions
 export default eventSlice.reducer

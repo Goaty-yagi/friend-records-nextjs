@@ -2,7 +2,6 @@ import { Flex } from "@chakra-ui/react";
 import Image from "next/legacy/image";
 
 export default function SlectedSvg({selectedSvg}:{selectedSvg:string}) {
-  console.log("SELECTED", selectedSvg)
     return (
       <>
         <Flex fontSize={"2rem"} mr={"1rem"} alignItems={"center"}>
