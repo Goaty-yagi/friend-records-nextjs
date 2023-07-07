@@ -10,6 +10,7 @@ import NoEvent from "./noEvent";
 import { EventDelConfPopover } from "@/components/popovers";
 import EventNameUpdateForm from "@/components/forms/events/EventNameUpdateForm";
 // import EventUpdatePopover from "@/components/popovers/EventUpdatePopover";
+import EventMoneyUpdatePopover from "@/components/popovers/EventMoneyUpdatePopover";
 
 export default function EventList() {
   const listRef = useRef() as RefObject<HTMLDivElement>;
@@ -56,7 +57,7 @@ export default function EventList() {
               bg={colorHandler(e.money)}
             >
               <Flex position={"absolute"} right={0}>
-                <EventDelConfPopover id={e.id} name={e.name}/>
+                <EventDelConfPopover id={e.id} name={e.name} />
                 {/* <EventUpdatePopover id={e.id} name={e.name} money={e.money} icon={getIconObj(e.icon)}/> */}
               </Flex>
               <CardBody>
@@ -77,12 +78,18 @@ export default function EventList() {
                   </Flex>
 
                   <VStack align="stretch" color={"gray"}>
-                    <EventNameUpdateForm id={e.id} name={e.name} title='Event Name :'/>
-                    {/* <Text>Event Name : {e.name}</Text> */}
-                    <Text>
-                      {spentOrReceive(e.money)} : $
-                      {e.money >= 0 ? e.money : e.money * -1}
-                    </Text>
+                    <EventNameUpdateForm
+                      id={e.id}
+                      name={e.name}
+                      title="Event Name :"
+                    />
+                    <Flex alignItems={'center'}>
+                      <Text>
+                        {spentOrReceive(e.money)} : $
+                        {e.money >= 0 ? e.money : e.money * -1}
+                      </Text>
+                      <EventMoneyUpdatePopover money={e.money} id={e.id}/>
+                    </Flex>
                     <Text>Created : {dateConvert(e.created_on)}</Text>
                   </VStack>
                 </Flex>
@@ -91,7 +98,7 @@ export default function EventList() {
           ))}
         </>
       ) : (
-        <NoEvent/>
+        <NoEvent />
       )}
     </Box>
   );

@@ -65,6 +65,16 @@ const friendSlice = createSlice({
 
 			});
 		},
+		updateFriendFromEventUpdate: (state, action: PayloadAction<any>) => {
+			console.log("REDUX",state.friendDetail.sum, action.payload)
+			state.friendDetail.sum += action.payload
+			// state.friendList.forEach((e) => {
+			// 	if (e.id === action.payload.friend) {
+			// 		e.sum += Number(action.payload.money);
+			// 	}
+
+			// });
+		},
 		patchFriend: (state, action: PayloadAction<FriendResponse>) => {
 			state.friendDetail = action.payload
 			for(let i=0; i < state.friendList.length; i++) {
@@ -86,5 +96,5 @@ const friendSlice = createSlice({
 	}
 })
 
-export const { finishInitialLoad, setFriends, unshiftFriend, setFriendId, setFriendDetail, deleteFriend,patchFriend, updateFriend } = friendSlice.actions
+export const { finishInitialLoad, setFriends, unshiftFriend, setFriendId, setFriendDetail, deleteFriend,patchFriend, updateFriend, updateFriendFromEventUpdate } = friendSlice.actions
 export default friendSlice.reducer

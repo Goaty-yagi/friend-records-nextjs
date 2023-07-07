@@ -13,6 +13,7 @@ import { useEffect } from "react";
 interface NumInputConfig {
   name: string;
   value: number;
+  defaultValue?:number;
   title?: string;
   max?: number;
   min?: number;
@@ -25,6 +26,7 @@ interface NumInputProps {
 
 export default function CustomNumInput({ config, onChange }: NumInputProps) {
   // const format = (val: number) => `$ ` + val;
+  
   return (
     <Flex mt={"1rem"} w={{ base: "300px", md: "600px" }}>
       {config.map((e, index) => (
@@ -39,7 +41,7 @@ export default function CustomNumInput({ config, onChange }: NumInputProps) {
             max={e.max}
             min={e.min}
             maxW="120px"
-            value={e.value}
+            value={e.value===0&&e.defaultValue?e.defaultValue:e.value}
             onChange={(event) => {
               onChange({ target: { name: e.name, value: event } });
             }}

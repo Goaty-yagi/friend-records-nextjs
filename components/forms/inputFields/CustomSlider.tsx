@@ -8,6 +8,7 @@ import {
 
 export interface SliderConfig {
   value: number;
+  defaultValue?:number
   name: string;
   orientation?: string;
   max: number;
@@ -29,11 +30,11 @@ export default function CustomSlider({ sliderConfig, onChange }: SliderProps) {
           {...e}
           {...e.style}
           flex="1"
+          value={e.value===0&&e.defaultValue?e.defaultValue:e.value}
           focusThumbOnChange={false}
           onChange={(event) => {
             onChange({ target: { name: e.name, value: event } });
           }}
-          defaultValue={0}
           step={1}
         >
           <SliderTrack>
