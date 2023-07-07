@@ -56,14 +56,11 @@ export default function EventMOneyUpdateForm({ eventMoney, id }: Props) {
       style: {},
     },
   ];
-  function SubmitButton() {
-    return <Button type="submit">SUB</Button>;
-  }
   return (
     <>
       {mounted && (
         <Box mt={"0.9rem"}>
-          <AbstractForm onSubmit={customOnsubmit} button={<SubmitButton />}>
+          <AbstractForm onSubmit={customOnsubmit}>
             <Box position={"relative"}>
               <CustomRadio
                 config={radioConfig}

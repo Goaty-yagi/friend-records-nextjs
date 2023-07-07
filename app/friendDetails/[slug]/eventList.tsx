@@ -1,16 +1,17 @@
 import { useRef, useState, useEffect, useContext, RefObject } from "react";
 import { dateConvert } from "@/utils/dates";
 import { FriendContext } from "@/contexts";
-import { Box, Flex, VStack, Card, CardBody, Text } from "@chakra-ui/react";
+import { Box, Flex, VStack, Card, CardBody,IconButton, Text } from "@chakra-ui/react";
 import getIconObj from "@/components/avatarsAndIcons/icons";
 import Image from "next/legacy/image";
 import { EventProps } from "@/redux/features/eventApiSlice";
 import { useAppSelector } from "@/redux/hooks";
 import NoEvent from "./noEvent";
-import { EventDelConfPopover } from "@/components/popovers";
+import { EventDelConfPopover, EventIconUpdatePopover,EventMoneyUpdatePopover} from "@/components/popovers";
 import EventNameUpdateForm from "@/components/forms/events/EventNameUpdateForm";
 // import EventUpdatePopover from "@/components/popovers/EventUpdatePopover";
-import EventMoneyUpdatePopover from "@/components/popovers/EventMoneyUpdatePopover";
+
+
 
 export default function EventList() {
   const listRef = useRef() as RefObject<HTMLDivElement>;
@@ -63,6 +64,7 @@ export default function EventList() {
               <CardBody>
                 <Flex alignItems={"center"}>
                   <Flex
+                  as={IconButton}
                     w={"50px"}
                     h={"50px"}
                     position={"relative"}
@@ -74,10 +76,10 @@ export default function EventList() {
                     bg={"#919191bf"}
                     alignItems={"center"}
                   >
-                    <Image src={getIconObj(e.icon)} layout="fill" />
+                    <EventIconUpdatePopover id={e.id} icon={getIconObj(e.icon)} button={<Image src={getIconObj(e.icon)} layout="fill" />}/>
                   </Flex>
 
-                  <VStack align="stretch" color={"gray"}>
+                  <VStack align="stretch" spacing={0} color={"gray"}>
                     <EventNameUpdateForm
                       id={e.id}
                       name={e.name}
