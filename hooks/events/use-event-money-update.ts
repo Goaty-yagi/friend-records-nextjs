@@ -11,11 +11,11 @@ export default function useEventMoneyUpdate() {
     const dispatch = useAppDispatch()
     const [formData, setFormData] = useState({
         money: 0,
-        whoPayed: '',
     });
-    const [ defaultMoney, setDefaultMoney] = useState(0)
+    const [whoPayed, setWhoPayed] = useState('')
+    const [defaultMoney, setDefaultMoney] = useState(0)
     const [eventId, setEventId] = useState('')
-    const { money, whoPayed } = formData;
+    const { money } = formData;
 
     const onChange = (event: any) => {
         const { name, value } = event.target;
@@ -24,6 +24,7 @@ export default function useEventMoneyUpdate() {
     const onSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const resultMoney = whoPayed === '+' ? money : money * -1
+        console.log("sub",whoPayed)
         updateEvent({ id: eventId, money: resultMoney })
             .unwrap()
             .then((res) => {
@@ -38,10 +39,11 @@ export default function useEventMoneyUpdate() {
     };
 
     return {
-        money, 
+        money,
         whoPayed,
         isLoading,
         setEventId,
+        setWhoPayed,
         setDefaultMoney,
         onChange,
         onSubmit,

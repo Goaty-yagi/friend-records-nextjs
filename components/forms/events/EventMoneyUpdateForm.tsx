@@ -21,24 +21,28 @@ export default function EventMOneyUpdateForm({ eventMoney, id }: Props) {
           value: eventMoney >= 0 ? eventMoney : eventMoney * -1,
         },
       });
+      setWhoPayed(eventMoney >= 0 ? "+" : "-")
       return setMounted(true);
     }
   }, []);
   const format = (val: number) => `$ ` + val;
   const [mounted, setMounted] = useState(false);
-  const { isLoading, money, whoPayed, setEventId,setDefaultMoney, onChange, onSubmit } =
+  const { isLoading, money, whoPayed, setEventId,setDefaultMoney,setWhoPayed, onChange, onSubmit } =
     useEventMoneyUpdate();
   const onClose = useContext(PopoverCloseContext);
   const [isChange, setIsChange] = useState(false);
   function customOnsubmit(event: FormEvent<HTMLFormElement>) {
-    onSubmit(event);
+    onSubmit(event)
     onClose();
   }
   function customOnChange(e: any) {
     onChange(e);
     setIsChange(true);
   }
-
+  function radioOnChange(e:any) {
+    setWhoPayed(e.target.value)
+    setIsChange(true);
+  }
   const radioConfig = [
     { text: "You Payed", value: "+", checked: true },
     {
@@ -65,8 +69,8 @@ export default function EventMOneyUpdateForm({ eventMoney, id }: Props) {
               <CustomRadio
                 config={radioConfig}
                 name={"whoPayed"}
-                defaltValue={eventMoney >= 0 ? "+" : "-"}
-                setter={customOnChange}
+                defaltValue={whoPayed}
+                setter={radioOnChange}
               />
             </Box>
             <Flex maxW={{ base: "300px", md: "600px" }}>

@@ -64,7 +64,6 @@ export default function EventList() {
               <CardBody>
                 <Flex alignItems={"center"}>
                   <Flex
-                  as={IconButton}
                     w={"50px"}
                     h={"50px"}
                     position={"relative"}
@@ -75,6 +74,9 @@ export default function EventList() {
                     justifyContent={"center"}
                     bg={"#919191bf"}
                     alignItems={"center"}
+                    transition={'.3s'}
+                    _hover={{bg:'#ffffff38'}}
+                    cursor={'pointer'}
                   >
                     <EventIconUpdatePopover id={e.id} icon={getIconObj(e.icon)} button={<Image src={getIconObj(e.icon)} layout="fill" />}/>
                   </Flex>
