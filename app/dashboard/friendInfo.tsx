@@ -19,11 +19,14 @@ import { useAppSelector } from "@/redux/hooks";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { getAvaterObj } from "@/components/avatarsAndIcons";
 import { monthColors } from "@/styles/colors";
+import { useContext } from "react";
+import { UserContext } from "@/contexts";
 
 export default function FriendInfo() {
   const date = new Date(Date.now());
+  const {user, setUser} = useContext(UserContext);
+  console.log("CHECKUSEr",user, setUser)
   const { friendList } = useAppSelector((state) => state.friend);
-  const { data: user } = useRetrieveUserQuery();
   const monthNames = [
     "January",
     "February",
@@ -104,7 +107,7 @@ export default function FriendInfo() {
         {/* <EditIcon /> */}
         {/* {getAvaterObj(user?user.avatar:'')} */}
         <Text color={"gray"} fontFamily={'"Gill Sans", sans-serif'}>
-          {user?user.username:''}
+          {user.username}
         </Text>
         <Flex
           mt={"1rem"}

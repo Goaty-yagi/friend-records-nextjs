@@ -6,6 +6,7 @@ import { useAppSelector } from '@/redux/hooks';
 import { patchFriend } from '@/redux/features/friendSlice';
 
 export default function useFriendBirthdayUpdate() {
+	console.log("FIRST_LOG")
 	const [updateBirthday, { isLoading }] = useUpdateBirthdayMutation();
     const friend = useAppSelector((state) => state.friend).friendDetail
 
@@ -18,15 +19,13 @@ export default function useFriendBirthdayUpdate() {
 	const { year, month, day } = formData;
     const id = friend.id
 
-	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+	const onChange = (event: any) => {
 		const { name, value } = event.target;
-		console.log("check",name, value)
-		setFormData({ ...formData, [name]: value });
+		console.log('chack form hook', name, value)
+		setFormData({ ...formData, [name]: Number(value) });
 	};
-	console.log("CHECKKK", year, month, day)
-	const onSubmit = () => {
-		console.log("SUBMIT",year, month, day, id)
-		// event.preventDefault();
+	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
 		updateBirthday({year, month, day, id})
 			.unwrap()
 			.then((res) => {
@@ -34,7 +33,6 @@ export default function useFriendBirthdayUpdate() {
 				toast.success('Syccessfully added birthday!');
 			})
 			.catch((e) => {
-				console.log(e)
 				const firstErrorMsg = Object.values(e.data)[0]
 				toast.error('Failed to add a birthday' + '\n' + firstErrorMsg);
 			});
@@ -45,6 +43,8 @@ export default function useFriendBirthdayUpdate() {
         month,
 		day,
         isLoading,
+		formData,
+		setFormData,
 		onChange,
 		onSubmit,
 	};

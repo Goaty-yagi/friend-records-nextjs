@@ -7,10 +7,15 @@ import { PopoverCloseContext } from "@/contexts";
 import useFriendBirthdayUpdate from "@/hooks/friends/use-friend-birthday-update";
 import { BirthdayButton } from "../forms/FriendBirthdayUpdateForm";
 
-export default function FriendCreatePopover() {
+interface Props {
+  state:'initial'|'patch'
+  defaultDate?:string
+}
+
+export default function FriendCreatePopover({state, defaultDate}:Props) {
   const [close, setClose] = useState(() => {});
-  const isEditing = useContext(PopoverCloseContext);
-  console.log(isEditing)
+  const  onClose = useContext(PopoverCloseContext);
+  console.log("check", onClose)
   const {
     onSubmit,
   } = useFriendBirthdayUpdate();
@@ -21,9 +26,9 @@ export default function FriendCreatePopover() {
   return (
     <>
       <CustomPopover
-        trigger={<BirthdayButton />}
-        switchableButton={true}
-        body={<FriendBirthdayUpdateForm />}
+        trigger={<BirthdayButton state={state}/>}
+        // switchableButton={true}
+        body={<FriendBirthdayUpdateForm defaultDate={defaultDate}/>}
       />
     </>
   );

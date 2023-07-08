@@ -1,22 +1,30 @@
 import { useRef, useState, useEffect, useContext, RefObject } from "react";
 import { dateConvert } from "@/utils/dates";
 import { FriendContext } from "@/contexts";
-import { Box, Flex, VStack, Card, CardBody,IconButton, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  VStack,
+  Card,
+  CardBody,
+  IconButton,
+  Text,
+} from "@chakra-ui/react";
 import getIconObj from "@/components/avatarsAndIcons/icons";
 import Image from "next/legacy/image";
 import { EventProps } from "@/redux/features/eventApiSlice";
 import { useAppSelector } from "@/redux/hooks";
 import NoEvent from "./noEvent";
-import { EventDelConfPopover, EventIconUpdatePopover,EventMoneyUpdatePopover} from "@/components/popovers";
+import {
+  EventDelConfPopover,
+  EventIconUpdatePopover,
+  EventMoneyUpdatePopover,
+} from "@/components/popovers";
 import EventNameUpdateForm from "@/components/forms/events/EventNameUpdateForm";
-// import EventUpdatePopover from "@/components/popovers/EventUpdatePopover";
-
-
 
 export default function EventList() {
   const listRef = useRef() as RefObject<HTMLDivElement>;
   const [maxH, setMaxH] = useState(0);
-  //   const events = useContext(FriendContext).eventList;
   const eventList = useAppSelector((state) => state.event).eventList;
   console.log("EVE", eventList);
   useEffect(() => {
@@ -59,7 +67,6 @@ export default function EventList() {
             >
               <Flex position={"absolute"} right={0}>
                 <EventDelConfPopover id={e.id} name={e.name} />
-                {/* <EventUpdatePopover id={e.id} name={e.name} money={e.money} icon={getIconObj(e.icon)}/> */}
               </Flex>
               <CardBody>
                 <Flex alignItems={"center"}>
@@ -74,11 +81,15 @@ export default function EventList() {
                     justifyContent={"center"}
                     bg={"#919191bf"}
                     alignItems={"center"}
-                    transition={'.3s'}
-                    _hover={{bg:'#ffffff38'}}
-                    cursor={'pointer'}
+                    transition={".3s"}
+                    _hover={{ bg: "#ffffff38" }}
+                    cursor={"pointer"}
                   >
-                    <EventIconUpdatePopover id={e.id} icon={getIconObj(e.icon)} button={<Image src={getIconObj(e.icon)} layout="fill" />}/>
+                    <EventIconUpdatePopover
+                      id={e.id}
+                      icon={getIconObj(e.icon)}
+                      button={<Image src={getIconObj(e.icon)} layout="fill" />}
+                    />
                   </Flex>
 
                   <VStack align="stretch" spacing={0} color={"gray"}>
@@ -87,12 +98,12 @@ export default function EventList() {
                       name={e.name}
                       title="Event Name :"
                     />
-                    <Flex alignItems={'center'}>
+                    <Flex alignItems={"center"}>
                       <Text>
                         {spentOrReceive(e.money)} : $
                         {e.money >= 0 ? e.money : e.money * -1}
                       </Text>
-                      <EventMoneyUpdatePopover money={e.money} id={e.id}/>
+                      <EventMoneyUpdatePopover money={e.money} id={e.id} />
                     </Flex>
                     <Text>Created : {dateConvert(e.created_on)}</Text>
                   </VStack>

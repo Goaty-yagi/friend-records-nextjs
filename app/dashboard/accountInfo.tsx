@@ -5,9 +5,11 @@ import {  HiUser, HiMail, HiOutlineLockClosed } from "react-icons/hi";
 import { CustomField } from "@/components/fields";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { UsernameUpdateForm } from "@/components/forms";
-import FriendNameUpdateForm from "@/components/forms/FriendNameUpdateForm";
+import { useContext } from "react";
+import { UserContext } from "@/contexts";
+
 export default function AccountInfo() {
-  const { data: user } = useRetrieveUserQuery();
+  const {user, setUser} = useContext(UserContext);
   const config = [
     {
       icon: <HiUser fontSize={"2rem"} color={"gray"} />,

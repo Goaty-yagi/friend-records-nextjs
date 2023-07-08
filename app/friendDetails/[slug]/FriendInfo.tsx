@@ -98,6 +98,7 @@ export default function FriendInfo() {
                   {friend.birthday && (
                     <Flex alignItems={"center"}>
                       <>Birthday : {getYearMonthDate(friend.birthday)}</>
+                      <FriendBirthdayUpdatePopover  state={'patch'} defaultDate={friend.birthday}/>
                       {/* <FriendBirthdayUpdatePopover
                         // state={"patch"}
                         // defaultYear={Number(
@@ -114,7 +115,7 @@ export default function FriendInfo() {
                   )}
                   <Text>Last interaction : {dateConvert(friend.last_log)}</Text>
                   {!friend.birthday && (
-                    <FriendBirthdayUpdatePopover  />
+                    <FriendBirthdayUpdatePopover  state={'initial'}/>
                   )}
                 </VStack>
               </Flex>

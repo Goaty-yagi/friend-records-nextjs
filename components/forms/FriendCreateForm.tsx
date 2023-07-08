@@ -35,7 +35,7 @@ export default function FriendCreateForm() {
   return (
     <>
       <Box mt={"0.9rem"}>
-        <SvgSlider selected={avatar} svgArray={avatars} setFun={setAvatar} />
+        <SvgSlider svgArray={avatars} setFun={setAvatar} />
         <Form
           config={config}
           isLoading={isLoading}

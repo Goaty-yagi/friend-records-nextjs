@@ -23,7 +23,7 @@ interface Style {
 }
 interface PopoverProps {
   trigger: JSX.Element;
-  body: JSX.Element;
+  body: any;
   switchableButton?: boolean;
   hasCloseButton?:boolean
   header?: string;
