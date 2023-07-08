@@ -8,31 +8,33 @@ import { useAppSelector } from "@/redux/hooks";
 import { Flex, Text, Button } from "@chakra-ui/react";
 import { EventProps } from "@/redux/features/eventApiSlice";
 import { PopoverCloseContext } from "@/contexts";
+import { updateFriendFromEventDelete } from "@/redux/features/friendSlice";
 import { useContext } from "react";
+// interface Props {
+//   id: string;
+//   name: string;
+// }
 
-interface Props {
-  id: string;
-  name: string;
-}
-
-export default function DeleteEvent({ id, name }: Props) {
+export default function DeleteEvent({ ...event }: EventProps) {
   const onClose = useContext(PopoverCloseContext);
   const [deleteEvent] = useDeleteEventMutation();
   const dispatch = useAppDispatch();
 
   const handleDeleteFriend = () => {
-    deleteEvent(id)
+    deleteEvent(event.id)
       .unwrap()
       .then(() => {
-        dispatch(setDeleteEvent(id));
+        dispatch(setDeleteEvent(event.id));
+        console.log("event",event)
+        dispatch(updateFriendFromEventDelete(event));
         onClose()
-        toast.success(`Your Event ${name} Successfully deleteed!`);
+        toast.success(`Your Event ${event.name} Successfully deleteed!`);
       });
   };
   return (
     <>
       <Flex alignItems={"center"} justifyContent={"space-between"}>
-        <Text>Delete {name}??</Text>
+        <Text>Delete {event.name}??</Text>
         <Button aria-label="delete friend" onClick={handleDeleteFriend}>
           Delete
         </Button>

@@ -4,12 +4,8 @@ import { useState } from "react";
 import DeleteEvent from "@/app/friendDetails/[slug]/deleteEvent";
 import { EventProps } from "@/redux/features/eventApiSlice";
 
-interface Props {
-  id: string;
-  name: string;
-}
 
-export default function EventDelConfPopover({ id, name }: Props) {
+export default function EventDelConfPopover({ ...event }: EventProps) {
   const [close, setClose] = useState(() => {});
   const style = {
     bg: "gray",
@@ -26,7 +22,7 @@ export default function EventDelConfPopover({ id, name }: Props) {
         trigger={<CreateButton />}
         header={"Confirmation"}
         style={style}
-        body={<DeleteEvent id={id} name={name} />}
+        body={<DeleteEvent {...event} />}
       />
     </>
   );

@@ -54,6 +54,7 @@ const friendSlice = createSlice({
 		},
 		setFriendDetail: (state, action: PayloadAction<FriendResponse>) => {
 			state.friendDetail = action.payload
+			console.log("SET_FRIEND_DETAIL",state.friendDetail)
 		},
 		updateFriend: (state, action: PayloadAction<Events>) => {
 			state.friendDetail.last_log = action.payload.created_on;
@@ -66,7 +67,7 @@ const friendSlice = createSlice({
 			});
 		},
 		updateFriendFromEventUpdate: (state, action: PayloadAction<any>) => {
-			console.log("REDUX",state.friendDetail.sum, action.payload)
+			console.log("REDUX", state.friendDetail.sum, action.payload)
 			state.friendDetail.sum += action.payload
 			// state.friendList.forEach((e) => {
 			// 	if (e.id === action.payload.friend) {
@@ -75,26 +76,30 @@ const friendSlice = createSlice({
 
 			// });
 		},
+		updateFriendFromEventDelete: (state, action: PayloadAction<Events>) => {
+			console.log("FROM,SLICE", action.payload.money, state.friendDetail.sum)
+			state.friendDetail.sum -= Number(action.payload.money);
+		},
 		patchFriend: (state, action: PayloadAction<FriendResponse>) => {
 			state.friendDetail = action.payload
-			for(let i=0; i < state.friendList.length; i++) {
+			for (let i = 0; i < state.friendList.length; i++) {
 				if (state.friendList[i].id === action.payload.id) {
-					state.friendList.splice(i,1)
+					state.friendList.splice(i, 1)
 					state.friendList.unshift(action.payload)
 					break
 				}
 			}
-			
+
 		},
 		deleteFriend: (state, action: PayloadAction<string>) => {
 			state.friendList.forEach((e, index) => {
-				if(e.id === action.payload) {
-					state.friendList.splice(index,1)
+				if (e.id === action.payload) {
+					state.friendList.splice(index, 1)
 				}
 			})
 		},
 	}
 })
 
-export const { finishInitialLoad, setFriends, unshiftFriend, setFriendId, setFriendDetail, deleteFriend,patchFriend, updateFriend, updateFriendFromEventUpdate } = friendSlice.actions
+export const { finishInitialLoad, setFriends, unshiftFriend, setFriendId, setFriendDetail, deleteFriend, patchFriend, updateFriend, updateFriendFromEventUpdate, updateFriendFromEventDelete } = friendSlice.actions
 export default friendSlice.reducer

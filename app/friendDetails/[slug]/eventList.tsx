@@ -66,7 +66,7 @@ export default function EventList() {
               bg={colorHandler(e.money)}
             >
               <Flex position={"absolute"} right={0}>
-                <EventDelConfPopover id={e.id} name={e.name} />
+                <EventDelConfPopover {...e}/>
               </Flex>
               <CardBody>
                 <Flex alignItems={"center"}>
