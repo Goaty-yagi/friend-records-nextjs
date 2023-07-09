@@ -4,6 +4,7 @@ import Provider from "@/redux/provider";
 import type { Metadata } from "next";
 import Layout from "@/components/common/layout";
 import { Setup, Throttle } from "@/components/utils";
+import LayoutWrapper from "./layoutWrapper";
 import { ThrottleAlert } from "@/components/alerts";
 
 export const metadata: Metadata = {
@@ -20,14 +21,16 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Provider>
-          <Setup/>
+          <Setup />
           <ChakraProviders>
-            <div style={{width:'100vw'}}>
+            <div style={{ width: "100vw" }}>
               <Navbar />
-              <Layout >
-                {children}
-                <ThrottleAlert/>
-              </Layout>
+              <LayoutWrapper>
+                <Layout>
+                  {children}
+                  <ThrottleAlert />
+                </Layout>
+              </LayoutWrapper>
             </div>
           </ChakraProviders>
         </Provider>

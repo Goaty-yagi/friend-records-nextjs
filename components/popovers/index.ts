@@ -1,5 +1,7 @@
 export {default as CustomPopover} from './CustomPopover'
 
+export {default as AvatarUpdatePopover} from './AvatarUpdatePopover'
+
 export {default as EventCreatePopover} from './EventCreatePopover'
 export {default as EventDelConfPopover} from './EventDelConfPopover'
 export {default as EventIconUpdatePopover} from './EventIconUpdatePopover'

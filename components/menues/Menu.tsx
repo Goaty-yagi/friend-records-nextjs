@@ -23,7 +23,7 @@ interface Props {
   btnText?: string;
 }
 
-export default function Form({ config, iconBtn, btnText }: Props) {
+export default function CustomMenu({ config, iconBtn, btnText }: Props) {
   return (
     <>
       <Menu>

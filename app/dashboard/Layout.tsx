@@ -3,7 +3,10 @@
 import { RequireAuth } from "@/components/utils";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { useEffect, useState } from "react";
+import { useGetFriendListMutation } from "@/redux/features/friendApiSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { UserContext } from "@/contexts";
+import { setFriends } from "@/redux/features/friendSlice";
 
 interface Props {
   children: React.ReactNode;
@@ -11,19 +14,28 @@ interface Props {
 
 export default function Layout({ children }: Props) {
   const { data: user } = useRetrieveUserQuery();
+  const [getFriendList, { data: isLoading }] = useGetFriendListMutation();
+  const dispatch = useAppDispatch();
   const [userState, setUserState] = useState({
     username: "",
     email: "",
     UID: "",
   });
+  const handleFriendList = () => {
+    getFriendList(undefined)
+      .unwrap()
+      .then((res) => {
+        dispatch(setFriends(res));
+      });
+  };
   useEffect(() => {
     if (user) {
-		console.log("user",user)
       Object.keys(userState).forEach((e) => {
         const index = Object.keys(user).indexOf(e);
         setUserState({ ...userState, [e]: Object.values(user)[index] });
       });
     }
+    handleFriendList()
   }, []);
 
   return (

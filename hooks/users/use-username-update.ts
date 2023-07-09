@@ -5,7 +5,7 @@ import { useUpdateUserMutation } from '@/redux/features/authApiSlice';
 
 export default function useFriendNameUpdate() {
     const { data: user } = useRetrieveUserQuery();
-    const [ updateUser, { isLoading }] = useUpdateUserMutation();
+    const [updateUser, { isLoading }] = useUpdateUserMutation();
     const [formData, setFormData] = useState({
         username: user ? user.username : '',
     });
@@ -18,21 +18,15 @@ export default function useFriendNameUpdate() {
 
     const onSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const UID = user ? user.UID : ''
-        if (UID) {
-            console.log("CHE",UID, {username:username})
-            updateUser( {UID, username} )
-                .unwrap()
-                .then((res) => {
-                    console.log("res",res,username)
-                    toast.success('Syccessfully updated!');
-                })
-                .catch((e) => {
-                    const firstErrorMsg = Object.values(e.data)[0]
-                    toast.error('Failed to update!' + '\n' + firstErrorMsg);
-                });
-
-        }
+        updateUser({ username })
+            .unwrap()
+            .then(() => {
+                toast.success('Syccessfully updated!');
+            })
+            .catch((e) => {
+                const firstErrorMsg = Object.values(e.data)[0]
+                toast.error('Failed to update!' + '\n' + firstErrorMsg);
+            });
     };
 
     return {

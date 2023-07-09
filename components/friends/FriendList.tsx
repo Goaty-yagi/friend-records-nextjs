@@ -4,38 +4,18 @@ import {
   Flex,
   Text,
   Box,
-  Input,
-  Button,
-  FormControl,
-  FormErrorMessage,
-  InputGroup,
-  InputLeftElement,
   VStack,
-} from "@chakra-ui/react";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
 } from "@chakra-ui/react";
 import Image from "next/legacy/image";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
-// import FriendCreate from "./friendCreate";
-import { FaSearchPlus } from "react-icons/fa";
-import { FiChevronDown } from "react-icons/fi";
 import { dateConvert } from "@/utils/dates";
 import { getAvaterObj } from "../avatarsAndIcons";
-// import MobileList from "./friendLists/mobileList";
-import { useGetFriendListMutation } from "@/redux/features/friendApiSlice";
 import DateAlert from "./dateAlert";
 import BirthdayAlert from "./birthdayAlert";
-import { useAppDispatch } from '@/redux/hooks';
 import { useAppSelector } from "@/redux/hooks";
-import { setFriends, finishInitialLoad } from '@/redux/features/friendSlice';
+import FriendSort from "./friendSort";
+import { FriendContext } from "@/contexts";
+
 
 interface Events {
   name: string;
@@ -59,50 +39,61 @@ interface FriendResponse {
 }
 
 export default function FriendList() {
-  // const [getFriendList, { data:  isLoading }] = useGetFriendListMutation();
-  // const [friendsArray, setFriendsArray] = useState<FriendResponse[]>([]);
+
+  const [friendsArray, setFriendsArray] = useState<FriendResponse[]>([]);
   const { friendList } = useAppSelector((state) => state.friend);
-  // const dispatch = useAppDispatch()
-  // const handleFriendList = () => {
-  //   console.log("HAANFDLE")
-  //   getFriendList(undefined)
-  //     .unwrap()
-  //     .then((res) => {
-  //       console.log("res",res)
-  //       dispatch(setFriends(res));
-  //     });
-  // };
-  // useEffect(() => {
-  //   handleFriendList();
-  // }, []);
+
+  function dateCalculation(date:string) {
+    const nowDate = new Date();
+    const last_log = new Date(date);
+    const diffMilliSec = nowDate.getTime() - last_log.getTime();
+    const diffDays = diffMilliSec / 1000 / 60 / 60 / 24;
+    return diffDays;
+  }
+  function birthDateCalculation(date:string) {
+    if (date) {
+      const nowDate = new Date();
+      const bDate = new Date(date);
+      const diffMonth = nowDate.getMonth() - bDate.getMonth();
+      const diffDate = nowDate.getDate() - bDate.getDate();
+      if (diffMonth === 0) {
+        if (diffDate <= 0) {
+          return { alert: true, diffDate: diffDate };
+        }
+      } else if (diffMonth === -1 || diffMonth === 11) {
+        if (diffDate >= 0) {
+          return { alert: true, diffDate: diffDate };
+        }
+      }
+    }
+  }
   const avatarProp = {
     border: "solid red",
   };
-  //   useEffect(() => {
-  //     if (context.friends.length) {
-  //       const chachUpArray = [];
-  //       const dateOrderedArray = context.friends.filter((d) => {
-  //         const birthdayObj = birthDateCalculation(d.birthday);
-  //         if (dateCalculation(d.last_log) >= 30) {
-  //           chachUpArray.unshift(d);
-  //         } else if (typeof birthdayObj !== "undefined") {
-  //           chachUpArray.unshift(d);
-  //         } else {
-  //           return d;
-  //         }
-  //       });
-  //       const orderedArray = chachUpArray.concat(dateOrderedArray);
-  //       setSearchFriend([...orderedArray]);
-  //       setMounted(true);
-  //     }
-  //   }, []);
+    useEffect(() => {
+      if (friendList.length) {
+        let chachUpArray:any = [];
+        const dateOrderedArray = friendList.filter((d) => {
+          const birthdayObj = birthDateCalculation(d.birthday);
+          if (dateCalculation(d.last_log) >= 30) {
+            chachUpArray.unshift(d);
+          } else if (typeof birthdayObj !== "undefined") {
+            chachUpArray.unshift(d);
+          } else {
+            return d;
+          }
+        });
+        const orderedArray = chachUpArray.concat(dateOrderedArray);
+        setFriendsArray([...orderedArray]);
+      }
+    }, []);
 
   
   function spentOrReceive(amount:number) {
     return amount >= 0 ? "I owe them" : "They owe me";
   }
   return (
-    <>
+    <FriendContext.Provider value={{friendsArray, setFriendsArray}}>
       {/* <Search
         searchFriend={searchFriend}
         setSearchFriend={setSearchFriend}
@@ -111,13 +102,9 @@ export default function FriendList() {
       {friendList.length && (
         <>
           <Flex w={"100%"} mb={"0.5rem"} justifyContent={"flex-end"}>
-            {/* <Selector
-              searchFriend={searchFriend}
-              setSearchFriend={setSearchFriend}
-            //   context={context}
-            /> */}
+            <FriendSort/>
           </Flex>
-          {friendList.map((f, index) => (
+          {friendsArray.map((f, index) => (
             <Card w={"100%"} key={index} mb={"0.5rem"} color={"gray"}>
               <Flex
                 fontSize={{ base: "0.7rem", sm: "1rem" }}
@@ -186,6 +173,6 @@ export default function FriendList() {
           ))}
         </>
       )}
-    </>
+    </FriendContext.Provider>
   );
 }

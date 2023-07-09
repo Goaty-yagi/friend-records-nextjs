@@ -43,10 +43,9 @@ const authApiSlice = apiWithTag.injectEndpoints({
 				},
 			}),
 		}),
-		updateUser: builder.mutation({
-			//shoude be '/users/me/'. will fix. 
-			query: ({ UID, ...props }) => ({
-				url: `/user-retrieve/${UID}`,
+		updateUser: builder.mutation({ 
+			query: ({  ...props }) => ({
+				url: '/users/me/',
 				method: 'PATCH',
 				body: { ...props },
 			}),
