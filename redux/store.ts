@@ -3,7 +3,6 @@ import { apiSlice,} from './services/apiSlice';
 import authReducer from './features/authSlice';
 import friendReducer from './features/friendSlice';
 import eventReducer from './features/eventSlice'
-import userReducer from './features/eventSlice'
 
 export const store = configureStore({
 	reducer: {
@@ -11,7 +10,6 @@ export const store = configureStore({
 		auth: authReducer,
 		friend:friendReducer,
 		event:eventReducer,
-		user:userReducer
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware().concat(apiSlice.middleware),

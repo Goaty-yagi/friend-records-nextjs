@@ -3,7 +3,10 @@ import { apiSlice } from '../services/apiSlice';
 interface User {
 	username: string;
 	email: string;
-	UID: string
+	UID: string;
+	avatar:string;
+	is_staff:boolean;
+
 }
 
 interface SocialAuthArgs {
@@ -17,10 +20,13 @@ interface CreateUserResponse {
 	user: User;
 }
 
-const authApiSlice = apiSlice.injectEndpoints({
+const apiWithTag = apiSlice.enhanceEndpoints({addTagTypes: ['user']})
+
+const authApiSlice = apiWithTag.injectEndpoints({
 	endpoints: builder => ({
 		retrieveUser: builder.query<User, void>({
 			query: () => '/users/me/',
+			providesTags:['user']
 		}),
 		socialAuthenticate: builder.mutation<
 			CreateUserResponse,
@@ -36,6 +42,15 @@ const authApiSlice = apiSlice.injectEndpoints({
 					'Content-Type': 'application/x-www-form-urlencoded',
 				},
 			}),
+		}),
+		updateUser: builder.mutation({
+			//shoude be '/users/me/'. will fix. 
+			query: ({ UID, ...props }) => ({
+				url: `/user-retrieve/${UID}`,
+				method: 'PATCH',
+				body: { ...props },
+			}),
+			invalidatesTags:['user']
 		}),
 		login: builder.mutation({
 			query: ({ email, password }) => ({
@@ -95,6 +110,7 @@ const authApiSlice = apiSlice.injectEndpoints({
 export const {
 	useRetrieveUserQuery,
 	useSocialAuthenticateMutation,
+	useUpdateUserMutation,
 	useLoginMutation,
 	useRegisterMutation,
 	useVerifyMutation,

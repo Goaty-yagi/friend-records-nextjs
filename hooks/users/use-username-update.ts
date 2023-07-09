@@ -1,22 +1,14 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
-import { useRouter } from 'next/navigation';
-import { useFriendCreateMutation } from '@/redux/features/friendApiSlice';
 import { toast } from 'react-toastify';
-import { unshiftFriend } from '@/redux/features/friendSlice';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { useUpdateFriendMutation } from '@/redux/features/friendApiSlice';
 import { useRetrieveUserQuery } from '@/redux/features/authApiSlice';
-import { usePatchUserMutation } from '@/redux/features/userApiSlice';
-
+import { useUpdateUserMutation } from '@/redux/features/authApiSlice';
 
 export default function useFriendNameUpdate() {
     const { data: user } = useRetrieveUserQuery();
-    const [patchUser, { isLoading }] = usePatchUserMutation();
+    const [ updateUser, { isLoading }] = useUpdateUserMutation();
     const [formData, setFormData] = useState({
         username: user ? user.username : '',
     });
-    console.log("USER", user)
-    // const dispatch = useAppDispatch()
     const { username } = formData;
 
     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -28,10 +20,11 @@ export default function useFriendNameUpdate() {
         event.preventDefault();
         const UID = user ? user.UID : ''
         if (UID) {
-            patchUser({ UID, username })
+            console.log("CHE",UID, {username:username})
+            updateUser( {UID, username} )
                 .unwrap()
                 .then((res) => {
-                    console.log("res",res)
+                    console.log("res",res,username)
                     toast.success('Syccessfully updated!');
                 })
                 .catch((e) => {

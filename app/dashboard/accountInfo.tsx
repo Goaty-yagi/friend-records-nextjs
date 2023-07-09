@@ -9,7 +9,7 @@ import { useContext } from "react";
 import { UserContext } from "@/contexts";
 
 export default function AccountInfo() {
-  const {user, setUser} = useContext(UserContext);
+  const { data: user } = useRetrieveUserQuery();
   const config = [
     {
       icon: <HiUser fontSize={"2rem"} color={"gray"} />,
