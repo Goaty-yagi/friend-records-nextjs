@@ -6,7 +6,7 @@ import {
 
 interface Props{
     icon: JSX.Element
-    header:string
+    header:string|JSX.Element
     text:any
     mr?:string
 }
@@ -14,7 +14,7 @@ interface Props{
 export default function CustomField({ icon, header, text, mr }:Props) {
     return (
       <>
-        <Flex key={header} w={"100%"} alignItems={'center'}>
+        <Flex key={text} w={"100%"} alignItems={'center'}>
           <Flex
             alignItems={"center"}
             justifyContent={"center"}

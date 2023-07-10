@@ -13,7 +13,7 @@ import { getAvaterObj } from "../avatarsAndIcons";
 import DateAlert from "./dateAlert";
 import BirthdayAlert from "./birthdayAlert";
 import { useAppSelector } from "@/redux/hooks";
-import { FriendSearch, FriendSort } from "./index";
+import { FriendSearch, FriendSort,MobileFriendList } from "./index";
 import { FriendResponse } from "@/redux/features/friendApiSlice";
 import { FriendContext } from "@/contexts";
 
@@ -185,13 +185,14 @@ export default function FriendList() {
                           lineHeight={"1rem"}
                           fontWeight={"bold"}
                           textAlign={"center"}
+                          fontSize={'0.8rem'}
                         >
                           {f.name.slice(0, 7)}
                           {f.name.length > 7 ? ".." : ""}
                         </Text>
                       </Box>
                     </Flex>
-                    {/* <MobileList friend={f} spentOrReceive={spentOrReceive} /> */}
+                    <MobileFriendList friend={f} spentOrReceive={spentOrReceive} />
                     <VStack
                       display={{ base: "none", md: "flex" }}
                       align="stretch"
