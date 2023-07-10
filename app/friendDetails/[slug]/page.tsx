@@ -10,6 +10,7 @@ import { setEventList as setEvents } from "@/redux/features/eventSlice";
 import { EventCreatePopover } from "@/components/popovers";
 import { Flex } from "@chakra-ui/react";
 import { Spinner } from "@/components/common";
+import { EventProps } from "@/redux/features/eventApiSlice";
 import EventList from "./eventList";
 
 interface Props {
@@ -60,7 +61,7 @@ export default function Page({ params }: Props) {
             value={{ slug, friend, eventList, setFriend, setEventList }}
           >
             <FriendInfo />
-            <Flex mt={"1rem"} flexDirection={"column"} alignItems={"center"}>
+            <Flex h={'100%'} mt={"1rem"} flexDirection={"column"} alignItems={"center"}>
               <EventCreatePopover />
               <EventList />
             </Flex>

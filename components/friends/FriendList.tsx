@@ -16,6 +16,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { FriendSearch, FriendSort,MobileFriendList } from "./index";
 import { FriendResponse } from "@/redux/features/friendApiSlice";
 import { FriendContext } from "@/contexts";
+import { YScrollLimitationWrapper } from "@/components/common";
 
 export const sortOptionStates = {
   LOW_AMOUNT: "Low Amount",
@@ -27,7 +28,7 @@ export const sortOptionStates = {
   // BIRTHDAY: "Birthday",
 };
 export default function FriendList() {
-  const [friendsArray, setFriendsArray] = useState<FriendResponse[]>([]);
+  const [friendsArray, setFriendsArray] = useState<any>([]);
   const { friendList } = useAppSelector((state) => state.friend);
 
 
@@ -152,6 +153,7 @@ export default function FriendList() {
           <Flex w={"100%"} mb={"0.5rem"} justifyContent={"flex-end"}>
             <FriendSort />
           </Flex>
+          <YScrollLimitationWrapper isLimited={true}>
           {friendsArray.map((f: any, index: number) => (
             <Card w={"100%"} key={index} mb={"0.5rem"} color={"gray"}>
               <Flex
@@ -220,6 +222,7 @@ export default function FriendList() {
               </Link>
             </Card>
           ))}
+          </YScrollLimitationWrapper>
         </>
       )}
     </FriendContext.Provider>

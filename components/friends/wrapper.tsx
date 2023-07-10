@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Flex, Box } from "@chakra-ui/react";
 
 export default function Wrapper({children}:{children:React.ReactNode}) {
@@ -7,20 +7,19 @@ export default function Wrapper({children}:{children:React.ReactNode}) {
   const [friends, setFriends] = useState();
 //   const [friendList, { data: events, isLoading }] = useFriendListMutation();
   const ref = useRef();
-  //   useEffect(() => {
-  //     if (typeof window !== "undefined") {
-  //       setWrapperHeight(ref.current.offsetHeight);
-  //       setInnerHeight(window.innerHeight - 112 - 16); // 112 is navber height
-  //     }
-  //   }, [window.innerHeight]);
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        // setWrapperHeight(ref.current.offsetHeight);
+        setInnerHeight(window.innerHeight - 112 - 16); // 112 is navber height
+      }
+    }, [window.innerHeight]);
 
   return (
     <Flex
       w={"100%"}
       // h={{ base: "calc(100vh - 44px)", md: "auto" }}
       minH={"200px"}
-      // maxH={{ md: innerHeight }}
-      overflowY={"scroll"}
+      maxH={{ md: innerHeight }}
       p={{ base: "0.3rem", md: "1rem" }}
       alignItems={"center"}
       flexDirection={"column"}

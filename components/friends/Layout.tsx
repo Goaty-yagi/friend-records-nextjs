@@ -17,7 +17,6 @@ export default function Layout() {
     getFriendList(undefined)
       .unwrap()
       .then((res) => {
-        console.log("res", res);
         dispatch(setFriends(res));
       });
   };

@@ -46,9 +46,9 @@ export default function Navbar() {
     <chakra.header id="header">
         {isAuthenticated && (
           <Flex as="nav">
-            <Image position={{base:'absolute',md:'relative'}} src={Logo.src} alt="logo" h="50px" m={'0.5rem'}/>
             <Show breakpoint="(min-width: 600px)">
               <Flex w={'100%'} px="6" py="5" align="center" justify="center">
+              <Image position={'absolute'} left={0} src={Logo.src} alt="logo" h="50px" m={'0.5rem'}/>
               {data(isAuthenticated).map(
                 (item, i) =>
                   item.isVisible && (

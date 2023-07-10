@@ -99,18 +99,6 @@ export default function FriendInfo() {
                     <Flex alignItems={"center"}>
                       <>Birthday : {getYearMonthDate(friend.birthday)}</>
                       <FriendBirthdayUpdatePopover  state={'patch'} defaultDate={friend.birthday}/>
-                      {/* <FriendBirthdayUpdatePopover
-                        // state={"patch"}
-                        // defaultYear={Number(
-                        //   createDateObj(friend.birthday).getFullYear
-                        // )}
-                        // defaultMonth={Number(
-                        //   createDateObj(friend.birthday).getMonth
-                        // )}
-                        // defaultDate={Number(
-                        //   createDateObj(friend.birthday).getDate
-                        // )}
-                      /> */}
                     </Flex>
                   )}
                   <Text>Last interaction : {dateConvert(friend.last_log)}</Text>

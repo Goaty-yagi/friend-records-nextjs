@@ -12,7 +12,7 @@ export default function LayoutWrapper({ children }: Props) {
   const { data: user, isLoading } = useRetrieveUserQuery();
   if (isLoading) {
     return (
-      <Flex alignItems={'center'} h={'80vh'}>
+      <Flex alignItems={'center'} h={'100vh'}>
         <Spinner size={"lg"} />
       </Flex>
     );

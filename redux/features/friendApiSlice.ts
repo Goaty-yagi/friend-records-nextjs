@@ -1,12 +1,13 @@
+import { EventProps } from './eventApiSlice';
 import { apiSlice } from '../services/apiSlice';
 
-interface Events {
-	name:string
-	friend:string
-	money:number
-	created_on:string
-	icon:string
-}
+// interface Events {
+// 	name:string
+// 	friend:string
+// 	money:number
+// 	created_on:string
+// 	icon:string
+// }
 export interface FriendResponse {
 	id:string
 	name:string
@@ -17,7 +18,7 @@ export interface FriendResponse {
 	avatar:string,
 	last_log:string,
 	created_on:string,
-	event:Events[],
+	event:EventProps[],
 	event_length:number,
 }
 

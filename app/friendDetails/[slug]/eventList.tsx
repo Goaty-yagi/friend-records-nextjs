@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useContext, RefObject } from "react";
 import { dateConvert } from "@/utils/dates";
-import { FriendContext } from "@/contexts";
+import { YScrollLimitationWrapper } from "@/components/common";
 import {
   Box,
   Flex,
@@ -46,23 +46,20 @@ export default function EventList() {
     return amount >= 0 ? "I owe them" : "They owe me";
   }
   return (
-    <Box
-      w={"99%"}
-      fontWeight={"bold"}
-      ref={listRef}
-      maxH={maxH}
-      overflowY={eventList.length > 1 ? "scroll" : "auto"}
-      overflowX={eventList.length > 1 ? "hidden" : "auto"}
+    <YScrollLimitationWrapper
+    isLimited={false }
     >
       {eventList.length ? (
         <>
           {eventList.map((e: EventProps, index: number) => (
             <Card
+            bgPosition={'relative'}
               border={"solid #ffddf9"}
               position={"relative"}
               key={index}
               mt={"0.3rem"}
               minW={"100%"}
+              fontWeight={'bold'}
               bg={colorHandler(e.money)}
             >
               <Flex position={"absolute"} right={0}>
@@ -115,6 +112,6 @@ export default function EventList() {
       ) : (
         <NoEvent />
       )}
-    </Box>
+    </YScrollLimitationWrapper>
   );
 }
