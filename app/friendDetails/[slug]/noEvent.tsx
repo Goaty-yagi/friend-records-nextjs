@@ -16,8 +16,8 @@ export default function NoEvent() {
         <Box
           boxShadow="xl"
           border={"solid #cf5701"}
-          w={"80%"}
-          h={400}
+          w={"100%"}
+          h={300}
           position="relative"
         >
           <Image

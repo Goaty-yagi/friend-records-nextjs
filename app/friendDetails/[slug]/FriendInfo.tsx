@@ -30,7 +30,9 @@ export default function FriendInfo() {
   const eventList = useAppSelector((state) => state.event).eventList;
   useEffect(() => {
     if (typeof innerRef.current !== "undefined") {
-      outerRef.current.style.height = innerRef.current.offsetHeight + 32 + "px"; //32 is half of the image
+      const halfImage = 32
+      const border = 4
+      outerRef.current.style.height = innerRef.current.offsetHeight + halfImage + border+ "px"; //32 is half of the image
     }
   }, [innerRef.current]);
   function amountCalculation(sub: string) {

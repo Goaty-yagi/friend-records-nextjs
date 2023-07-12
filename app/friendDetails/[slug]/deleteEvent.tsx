@@ -4,40 +4,58 @@ import { useAppDispatch } from "@/redux/hooks";
 import { useDeleteEventMutation } from "@/redux/features/eventApiSlice";
 import { deleteEvent as setDeleteEvent } from "@/redux/features/eventSlice";
 import { toast } from "react-toastify";
-import { useAppSelector } from "@/redux/hooks";
-import { Flex, Text, Button } from "@chakra-ui/react";
-import { EventProps } from "@/redux/features/eventApiSlice";
-import { PopoverCloseContext } from "@/contexts";
+import { Flex, Button } from "@chakra-ui/react";
+import {ModalCloseContext} from "@/contexts";
 import { updateFriendFromEventDelete } from "@/redux/features/friendSlice";
-import { useContext } from "react";
-// interface Props {
-//   id: string;
-//   name: string;
-// }
+import { useContext, useState } from "react";
+interface Props {
+  id: string;
+  name: string;
+  money: number;
+}
 
-export default function DeleteEvent({ ...event }: EventProps) {
-  const onClose = useContext(PopoverCloseContext);
+export default function DeleteEvent({ ...event }: Props) {
+  const onClose = useContext(ModalCloseContext);
   const [deleteEvent] = useDeleteEventMutation();
   const dispatch = useAppDispatch();
+  const [isConfirming, setIsConfirming] = useState(false);
 
   const handleDeleteFriend = () => {
     deleteEvent(event.id)
       .unwrap()
       .then(() => {
         dispatch(setDeleteEvent(event.id));
-        console.log("event",event)
-        dispatch(updateFriendFromEventDelete(event));
-        onClose()
+        console.log("event", event);
+        dispatch(updateFriendFromEventDelete(event.money));
+        onClose();
         toast.success(`Your Event ${event.name} Successfully deleteed!`);
       });
   };
   return (
     <>
       <Flex alignItems={"center"} justifyContent={"space-between"}>
-        <Text>Delete {event.name}??</Text>
-        <Button aria-label="delete friend" onClick={handleDeleteFriend}>
-          Delete
-        </Button>
+        {isConfirming ? (
+          <>
+            <Button
+              colorScheme="red"
+              border={'solid red'}
+              aria-label="delete friend"
+              onClick={handleDeleteFriend}
+            >
+              Really want to delete {event.name}??
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button
+              colorScheme="pink"
+              aria-label="delete friend"
+              onClick={() => setIsConfirming(true)}
+            >
+              Delete {event.name}??
+            </Button>
+          </>
+        )}
       </Flex>
     </>
   );

@@ -1,0 +1,135 @@
+"use client";
+
+import { SvgSlider } from "../../avatarsAndIcons";
+import { eventIcons } from "../../avatarsAndIcons/icons";
+import { useContext, useState, FormEvent, useEffect } from "react";
+import { PopoverCloseContext } from "@/contexts";
+import useEventUpdate from "@/hooks/events/use-event-update";
+import { Flex, Box, Button } from "@chakra-ui/react";
+import { CustomInput } from "../inputFields";
+import EventMoneyUpdateForm from "./EventMoneyUpdateForm";
+import { AbstractForm } from "../index";
+import { ModalCloseContext } from "@/contexts";
+import EventIconUpdateForm from "./EventIconUpdateForm";
+import DeleteEvent from "@/app/friendDetails/[slug]/deleteEvent";
+import { CustomNumInput, CustomSlider, CustomRadio } from "../inputFields";
+
+interface Props {
+  id: string;
+  name: string;
+  eventMoney: number;
+  icon: string;
+}
+
+export default function EventUpdateForm({ id, name, eventMoney, icon }: Props) {
+  console.log(id, name, eventMoney, icon);
+  const format = (val: number) => `$ ` + val;
+  useEffect(() => {
+    setEventId(id);
+    setDefaultMoney(eventMoney);
+    // });
+    setFormData({
+      ...formData,
+      money: eventMoney >= 0 ? eventMoney : eventMoney * -1,
+      eventName: name,
+      whoPayed: eventMoney >= 0 ? "+" : "-",
+    });
+  }, []);
+  const {
+    eventName,
+    formData,
+    isLoading,
+    money,
+    setFormData,
+    setIcon,
+    setEventId,
+    setDefaultMoney,
+    onChange,
+    onSubmit,
+  } = useEventUpdate();
+
+  const onClose = useContext(ModalCloseContext);
+  const [isChange, setIsChange] = useState(false);
+  function customOnsubmit(event: FormEvent<HTMLFormElement>) {
+    onSubmit(event);
+    onClose();
+  }
+  function customOnChange(e: any) {
+    onChange(e);
+    setIsChange(true);
+  }
+  function customSetIcon(e: any) {
+    if(e===icon) {
+      setIcon(e)
+    } else {
+      setIcon(e)
+      setIsChange(true);
+    }
+  }
+  const radioConfig = [
+    { text: "You Payed", value: "+", checked: true },
+    {
+      text: "They Payed",
+      value: "-",
+      checked: false,
+    },
+  ];
+  const sliderConfig = [
+    {
+      name: "money",
+      value: money,
+      max: 1000,
+      min: 0,
+      style: {},
+    },
+  ];
+  const config = [
+    {
+      labelText: "Event Name",
+      labelId: "eventName",
+      placeholder: "Enter event name.",
+      type: "text",
+      value: eventName,
+      defaultValue: name,
+      required: true,
+    },
+  ];
+
+  return (
+    <>
+      <Box mt={"-1rem"}>
+        <AbstractForm onSubmit={customOnsubmit}>
+          <SvgSlider defaultSvg={icon} svgArray={eventIcons} setFun={customSetIcon} />
+          {config.map((e) => (
+            <CustomInput {...e} key={e.labelId} onChange={customOnChange} />
+          ))}
+          <Box position={"relative"} top={1.5}>
+            <CustomRadio
+              config={radioConfig}
+              name={"whoPayed"}
+              defaltValue={eventMoney >= 0 ? "+" : "-"}
+              setter={customOnChange}
+            />
+          </Box>
+          <Flex maxW={{ base: "300px", md: "600px" }}>
+            <CustomNumInput
+              key={"input"}
+              config={sliderConfig}
+              onChange={customOnChange}
+            />
+            <CustomSlider
+              sliderConfig={sliderConfig}
+              onChange={customOnChange}
+            />
+          </Flex>
+          <Flex mt={"0.5rem"} justifyContent={"flex-end"}>
+            <DeleteEvent {...{ id, name, money: eventMoney }} />
+            <Button isDisabled={!isChange} ml={'0.5rem'} type="submit">
+              Update
+            </Button>
+          </Flex>
+        </AbstractForm>
+      </Box>
+    </>
+  );
+}

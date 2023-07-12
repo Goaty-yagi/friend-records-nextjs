@@ -24,7 +24,7 @@ export default function useEventMoneyUpdate() {
     const onSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const resultMoney = whoPayed === '+' ? money : money * -1
-        console.log("sub",whoPayed)
+        console.log("sub",whoPayed,resultMoney)
         updateEvent({ id: eventId, money: resultMoney })
             .unwrap()
             .then((res) => {

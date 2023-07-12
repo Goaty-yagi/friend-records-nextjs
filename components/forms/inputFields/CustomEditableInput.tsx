@@ -24,6 +24,8 @@ interface Props {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }
 
+
+// better not to use in loop. it moght break styling
 export default function CustomEditableInput({
   name,
   title,

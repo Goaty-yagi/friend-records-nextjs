@@ -1,53 +1,57 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { toast } from 'react-toastify';
-import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import { useEventCreateMutation } from '@/redux/features/eventApiSlice';
-import { unshiftEvent } from '@/redux/features/eventSlice';
-import { updateEvent as setUpdateEvent } from '@/redux/features/eventSlice';
+import {  useAppDispatch } from "@/redux/hooks";
 import { useUpdateEventMutation } from '@/redux/features/eventApiSlice';
+import { updateFriendFromEventUpdate } from '@/redux/features/friendSlice';
+import { updateEvent as setUpdateEvent } from '@/redux/features/eventSlice';
 
-export default function useEventUpdate() {
-    const [updateEvent, { isLoading }] = useUpdateEventMutation();
-    const dispatch = useAppDispatch()
-    const [formData, setFormData] = useState({
-        eventName: '',
-        whoPayed: '',
-        money: 0
-    });
 
-    const [icon, setIcon] = useState('')
+export default function useEventCreate() {
+	const [updateFriend, { isLoading }] = useUpdateEventMutation();
+	const dispatch = useAppDispatch()
+	const [formData, setFormData] = useState({
+		eventName: '',
+		whoPayed: '+',
+		money: 0
+	});
     const [eventId, setEventId] = useState('')
-    const { eventName, whoPayed, money } = formData;
+	const [icon, setIcon] = useState('')
+    const [defaultMoney, setDefaultMoney] = useState(0)
+	const { eventName, whoPayed, money } = formData;
 
-    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-        setFormData({ ...formData, [name]: value });
-    };
-    const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const CustomMoney = whoPayed === '+' ? money : money * -1
-        updateEvent({ name: eventName, id: eventId, icon, money: CustomMoney })
-            .unwrap()
-            .then((res) => {
-                dispatch(setUpdateEvent(res))
-                // dispatch(updateFriend(res))
-                toast.success('Syccessfully updated!');
-            })
-            .catch((e) => {
-                const firstErrorMsg = Object.values(e.data)[0]
-                toast.error('Failed to update a event' + '\n' + firstErrorMsg);
-            });
-    };
+	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = event.target;
+		setFormData({ ...formData, [name]: value });
+	};
 
-    return {
-        eventName,
-        whoPayed,
-        isLoading,
-        icon,
-        money,
+	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		const CustomMoney = whoPayed === '+' ? money : money * -1
+		updateFriend({ name: eventName, id: eventId, icon, money: CustomMoney })
+			.unwrap()
+			.then((res) => {
+				dispatch(setUpdateEvent(res))
+                dispatch(updateFriendFromEventUpdate(res.money - defaultMoney))
+				toast.success('Syccessfully created!');
+			})
+			.catch((e) => {
+				const firstErrorMsg = Object.values(e.data)[0]
+				toast.error('Failed to create a event' + '\n' + firstErrorMsg);
+			});
+	};
+
+	return {
+		eventName,
+		whoPayed,
+		isLoading,
+		icon,
+		money,
+        formData,
+        setFormData,
+		setIcon,
         setEventId,
-        setIcon,
-        onChange,
-        onSubmit,
-    };
+		onChange,
+		onSubmit,
+        setDefaultMoney,
+	};
 }

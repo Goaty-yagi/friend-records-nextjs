@@ -34,7 +34,7 @@ export default function AvatarUpdateForm({state}:{state:string}) {
   const onClose = useContext(PopoverCloseContext);
   const {friendDetail} = useAppSelector((state) => state.friend)
   const { data: user } = useRetrieveUserQuery();
-  const defaultAvatar = state==='friend'?getAvaterObj(friendDetail.avatar):user?getAvaterObj(user.avatar):''
+  const defaultAvatar = state==='friend'?friendDetail.avatar:user?user.avatar:''
   const CustomOnSubmit = () => {
     onSubmit()
     onClose()

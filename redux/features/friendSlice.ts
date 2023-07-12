@@ -76,9 +76,9 @@ const friendSlice = createSlice({
 
 			// });
 		},
-		updateFriendFromEventDelete: (state, action: PayloadAction<Events>) => {
-			console.log("FROM,SLICE", action.payload.money, state.friendDetail.sum)
-			state.friendDetail.sum -= Number(action.payload.money);
+		updateFriendFromEventDelete: (state, action: PayloadAction<number>) => {
+			console.log("FROM,SLICE", action.payload, state.friendDetail.sum)
+			state.friendDetail.sum -= Number(action.payload);
 		},
 		patchFriend: (state, action: PayloadAction<FriendResponse>) => {
 			state.friendDetail = action.payload

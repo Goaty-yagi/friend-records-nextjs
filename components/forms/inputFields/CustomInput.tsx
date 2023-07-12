@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from "react";
 import NextLink from "next/link";
 import {
   Input,
@@ -20,10 +20,11 @@ import { RiLockPasswordLine, RiUserLine } from "react-icons/ri";
 
 interface Props {
   labelId: string;
-  labelText: string
+  labelText: string;
   type: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: string;
+  // defaultValue?: string;
   placeholder: string;
   link?: {
     linkText: string;
@@ -39,9 +40,23 @@ export default function CustomInput({
   placeholder,
   onChange,
   value,
+  // defaultValue,
   link,
   required = false,
 }: Props) {
+  // useEffect(() => {
+  //   console.log("EEFE", defaultValue)
+  //   if (defaultValue) {
+  //     const target = {
+  //       target: {
+  //         name: labelId,
+  //         value: defaultValue,
+  //       },
+  //     };
+  //     onChange(target as ChangeEvent<HTMLInputElement>);
+  //   }
+  // }, []);
+
   const [showPassword, setShowpassword] = useState(false);
 
   const isPassword = () => {
@@ -50,14 +65,12 @@ export default function CustomInput({
     }
   };
   function leftElement() {
-    if(labelId==='username') {
-      return (
-      <RiUserLine />
-      )
-    } else if(labelId==='email') {
-      return (<GoMail />)
-    } else if(isPassword()) {
-      return (<RiLockPasswordLine />)
+    if (labelId === "username") {
+      return <RiUserLine />;
+    } else if (labelId === "email") {
+      return <GoMail />;
+    } else if (isPassword()) {
+      return <RiLockPasswordLine />;
     }
   }
   return (
@@ -72,9 +85,9 @@ export default function CustomInput({
           )}
         </Flex>
         <InputGroup>
-        <InputLeftElement pointerEvents='none'>
-          {leftElement()}
-        </InputLeftElement>
+          <InputLeftElement pointerEvents="none">
+            {leftElement()}
+          </InputLeftElement>
           <Input
             placeholder={placeholder}
             name={labelId}

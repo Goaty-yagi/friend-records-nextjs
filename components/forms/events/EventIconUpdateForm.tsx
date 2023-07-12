@@ -26,7 +26,7 @@ export default function EventIconUpdateForm({ id, icon }: Props) {
   }
   return (
     <>
-      <Box mt={"0.9rem"}>
+      <Box mt={"0.9rem"} >
         <AbstractForm onSubmit={customOnSubmit}>
         <SvgSlider defaultSvg={icon} svgArray={eventIcons} setFun={setIcon} />
         <Flex justifyContent={"flex-end"}>

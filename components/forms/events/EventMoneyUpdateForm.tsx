@@ -10,7 +10,7 @@ interface Props {
   id: string;
 }
 
-export default function EventMOneyUpdateForm({ eventMoney, id }: Props) {
+export default function EventMoneyUpdateForm({ eventMoney, id }: Props) {
   useEffect(() => {
     if (!mounted) {
       setEventId(id);

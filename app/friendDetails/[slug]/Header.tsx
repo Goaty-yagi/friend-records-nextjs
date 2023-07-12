@@ -1,13 +1,6 @@
 import { Flex, Box } from "@chakra-ui/react";
-import React, {
-  useRef,
-  useEffect,
-  useState,
-  useContext,
-  forwardRef,
-} from "react";
+import React, { forwardRef } from "react";
 import { getAvaterObj } from "@/components/avatarsAndIcons";
-import { FriendContext } from "@/contexts";
 import Image from "next/legacy/image";
 import { FriendAvatarUpdatePopover } from "@/components/popovers";
 import { useAppSelector } from "@/redux/hooks";
@@ -18,21 +11,9 @@ interface Props {
 }
 
 const Header = forwardRef(({ children, innerRef, outerRef }: Props) => {
-  // const { onOpen, onClose, isOpen } = useDisclosure();
-  const [avatar, setAvatar] = useState("");
   const friend = useAppSelector((state) => state.friend).friendDetail;
-  const [isDisabled, setIsDisabled] = useState(true);
-  useEffect(() => {
-    //   if (avatar) {
-    //     if (friend.avatar !== avatar.name) {
-    //       setIsDisabled(false);
-    //     } else {
-    //       setIsDisabled(true);
-    //     }
-    //   }
-  }, [avatar]);
   return (
-    <Box w={"100%"} ref={outerRef}>
+    <Box w={"100%"} ref={outerRef} overflow={'hidden'}>
       <Flex position={"relative"} justifyContent={"center"} w={"100%"}>
         <Box zIndex={1}>
           <Box
@@ -43,7 +24,6 @@ const Header = forwardRef(({ children, innerRef, outerRef }: Props) => {
             border={"solid gray"}
             borderRadius={"50vh"}
             bg={"#cfcfcf"}
-            overflow={'hidden'}
           >
             <Image src={getAvaterObj(friend.avatar)} layout="fill" />
             <Flex h={"100%"} justifyContent={"center"}>

@@ -4,7 +4,6 @@ import {
   Box, Flex, Heading, Text
 } from "@chakra-ui/react";
 import {Background, Buttons} from "./index";
-import { CustomModal } from '@/components/modals'
 
 interface Props {
   innerWidth:number

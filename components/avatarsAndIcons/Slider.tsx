@@ -23,8 +23,12 @@ export default function Slider({ svgArray, setFun, defaultSvg }: Props) {
     fontSize: eachSlideWidth,
   };
   useEffect(() => {
+    console.log("AVATAR", svgArray)
     if (typeof defaultSvg !== "undefined") {
-      setSelectedSvg(defaultSvg)
+      const def = svgArray.find(e => e.name === defaultSvg)
+      if(def) {
+        setSelectedSvg(def.svg)
+      } 
       setFun(defaultSvg)
     } else {
       setSelectedSvg(svgArray[0].svg)
