@@ -20,7 +20,6 @@ interface Style {
   color: string;
   bg: string;
   border: string;
-  w:string
 }
 interface PopoverProps {
   trigger: JSX.Element;

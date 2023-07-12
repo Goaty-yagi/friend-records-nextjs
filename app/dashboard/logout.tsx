@@ -3,7 +3,7 @@
 import { useLogoutMutation } from "@/redux/features/authApiSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { logout as setLogout } from "@/redux/features/authSlice";
-import { Button } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 
 export default function Logout() {
   const [logout] = useLogoutMutation();
@@ -18,7 +18,12 @@ export default function Logout() {
   };
   return (
     <>
-     <Button colorScheme='red' variant='outline' onClick={handleLogout}>Logout</Button>
+     <Flex alignItems={'center'} justifyContent={'space-between'}>
+        <Text>Do you want to logout??</Text>
+        <Button aria-label="logout" onClick={handleLogout}>
+          Logout
+        </Button>
+      </Flex>
     </>
   )
 }

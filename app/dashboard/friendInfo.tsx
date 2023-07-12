@@ -15,13 +15,12 @@ import { GiPayMoney, GiReceiveMoney } from "react-icons/gi";
 import { FaPeopleArrows } from "react-icons/fa";
 import { HiUsers } from "react-icons/hi";
 import Theme from "@/components/utils/Theme";
-import Logout from "./logout";
 import { useAppSelector } from "@/redux/hooks";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { getAvaterObj } from "@/components/avatarsAndIcons";
 import { monthColors } from "@/styles/colors";
 import Image from "next/legacy/image";
-import AvatarUpdatePopover from "@/components/popovers/AvatarUpdatePopover";
+import {AvatarUpdatePopover, LogoutConfPopover} from "@/components/popovers";
 
 export default function FriendInfo() {
   const date = new Date(Date.now());
@@ -168,7 +167,7 @@ export default function FriendInfo() {
           </Stack>
           <Box position={"relative"} h={"30px"} w={"100%"} m={"0.5rem 0"}>
             <Box position={"absolute"} right={0}>
-              <Logout />
+              <LogoutConfPopover />
             </Box>
             <Box position={"absolute"} left={0}>
               <Theme />
