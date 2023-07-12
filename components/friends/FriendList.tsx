@@ -1,10 +1,5 @@
 import Link from "next/link";
-import React, {
-  useState,
-  useEffect,
-  ChangeEvent,
-  useMemo,
-} from "react";
+import React, { useState, useEffect, ChangeEvent, useMemo } from "react";
 import { Flex, Text, Box, VStack } from "@chakra-ui/react";
 import Image from "next/legacy/image";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
@@ -13,7 +8,7 @@ import { getAvaterObj } from "../avatarsAndIcons";
 import DateAlert from "./dateAlert";
 import BirthdayAlert from "./birthdayAlert";
 import { useAppSelector } from "@/redux/hooks";
-import { FriendSearch, FriendSort,MobileFriendList } from "./index";
+import { FriendSearch, FriendSort, MobileFriendList } from "./index";
 import { FriendResponse } from "@/redux/features/friendApiSlice";
 import { FriendContext } from "@/contexts";
 import { YScrollLimitationWrapper } from "@/components/common";
@@ -30,7 +25,6 @@ export const sortOptionStates = {
 export default function FriendList() {
   const [friendsArray, setFriendsArray] = useState<any>([]);
   const { friendList } = useAppSelector((state) => state.friend);
-
 
   const filterAndSort = useMemo(() => {
     return (queryType: string, query?: string) => {
@@ -90,13 +84,12 @@ export default function FriendList() {
   }, [friendsArray]);
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
-    console.log(event.target.value)
+    console.log(event.target.value);
     filterAndSort("search", event.target.value);
   }
   function onClick(event: any) {
-    console.log(event)
+    console.log(event);
     filterAndSort(event);
-
   }
 
   function dateCalculation(date: string) {
@@ -154,74 +147,77 @@ export default function FriendList() {
             <FriendSort />
           </Flex>
           <YScrollLimitationWrapper isLimited={true}>
-          {friendsArray.map((f: any, index: number) => (
-            <Card w={"100%"} key={index} mb={"0.5rem"} color={"gray"}>
-              <Flex
-                fontSize={{ base: "0.7rem", sm: "1rem" }}
-                position={"absolute"}
-                flexDirection={"column"}
-                right={0}
-              >
-                <BirthdayAlert date={f.birthday} />
-                <DateAlert date={f.last_log} />
-              </Flex>
-              <Link href={"friendDetails/" + f.id} scroll={false}>
-                <CardBody>
-                  <Flex alignItems={"center"}>
-                    <Flex
-                      position={"relative"}
-                      justifyContent={"center"}
-                      w={{ base: "50px", md: "70px" }}
-                      h={{ base: "50px", md: "70px" }}
-                      left={{ base: -3, sm: 0 }}
-                      mr={{ base: 0, sm: "1rem" }}
-                      border={"solid gray"}
-                      borderRadius={"50vh"}
-                      bg={"#bebebe4a"}
-                    >
-                      {f.avatar && (
-                        <Image src={getAvaterObj(f.avatar)} layout="fill" />
-                      )}
-                      <Box position={"absolute"} w={"150%"} bottom={-4}>
-                        <Text
-                          lineHeight={"1rem"}
-                          fontWeight={"bold"}
-                          textAlign={"center"}
-                          fontSize={'0.8rem'}
-                        >
-                          {f.name.slice(0, 7)}
-                          {f.name.length > 7 ? ".." : ""}
-                        </Text>
-                      </Box>
-                    </Flex>
-                    <MobileFriendList friend={f} spentOrReceive={spentOrReceive} />
-                    <VStack
-                      display={{ base: "none", md: "flex" }}
-                      align="stretch"
-                    >
+            {friendsArray.map((f: any, index: number) => (
+              <Card w={"100%"} key={index} mb={"0.5rem"} color={"gray"}>
+                <Flex
+                  fontSize={{ base: "0.7rem", sm: "1rem" }}
+                  position={"absolute"}
+                  flexDirection={"column"}
+                  right={0}
+                >
+                  <BirthdayAlert date={f.birthday} />
+                  <DateAlert date={f.last_log} />
+                </Flex>
+                <Link href={"friendDetails/" + f.id} scroll={false}>
+                  <CardBody>
+                    <Flex alignItems={"center"}>
                       <Flex
-                        color={f.sum >= 0 ? "#c0fafb" : "#ff9393"}
-                        w={"100%"}
-                        fontWeight={"bold"}
+                        position={"relative"}
+                        justifyContent={"center"}
+                        w={{ base: "50px", md: "70px" }}
+                        h={{ base: "50px", md: "70px" }}
+                        left={{ base: -3, sm: 0 }}
+                        mr={{ base: 0, sm: "1rem" }}
+                        border={"solid gray"}
+                        borderRadius={"50vh"}
+                        bg={"#bebebe4a"}
                       >
-                        {spentOrReceive(f.sum)}
-                        <Text m={"0 0.2em"}>:</Text>＄
-                        {f.sum >= 0 ? f.sum : f.sum * -1}
+                        {f.avatar && (
+                          <Image src={getAvaterObj(f.avatar)} layout="fill" />
+                        )}
+                        <Box position={"absolute"} w={"150%"} bottom={-4}>
+                          <Text
+                            lineHeight={"1rem"}
+                            fontWeight={"bold"}
+                            textAlign={"center"}
+                            fontSize={"0.8rem"}
+                          >
+                            {f.name.slice(0, 7)}
+                            {f.name.length > 7 ? ".." : ""}
+                          </Text>
+                        </Box>
                       </Flex>
-                      <Flex w={"100%"} fontWeight={"bold"}>
-                        Number of events<Text m={"0 0.2em"}>:</Text>
-                        {f.event_length}
-                      </Flex>
-                      <Flex w={"100%"} fontWeight={"bold"}>
-                        Last interaction<Text m={"0 0.2em"}>:</Text>
-                        {dateConvert(f.last_log)}
-                      </Flex>
-                    </VStack>
-                  </Flex>
-                </CardBody>
-              </Link>
-            </Card>
-          ))}
+                      <MobileFriendList
+                        friend={f}
+                        spentOrReceive={spentOrReceive}
+                      />
+                      <VStack
+                        display={{ base: "none", md: "flex" }}
+                        align="stretch"
+                      >
+                        <Flex
+                          color={f.sum >= 0 ? "#c0fafb" : "#ff9393"}
+                          w={"100%"}
+                          fontWeight={"bold"}
+                        >
+                          {spentOrReceive(f.sum)}
+                          <Text m={"0 0.2em"}>:</Text>＄
+                          {f.sum >= 0 ? f.sum : f.sum * -1}
+                        </Flex>
+                        <Flex w={"100%"} fontWeight={"bold"}>
+                          Number of events<Text m={"0 0.2em"}>:</Text>
+                          {f.event_length}
+                        </Flex>
+                        <Flex w={"100%"} fontWeight={"bold"}>
+                          Last interaction<Text m={"0 0.2em"}>:</Text>
+                          {dateConvert(f.last_log)}
+                        </Flex>
+                      </VStack>
+                    </Flex>
+                  </CardBody>
+                </Link>
+              </Card>
+            ))}
           </YScrollLimitationWrapper>
         </>
       )}

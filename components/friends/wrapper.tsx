@@ -23,8 +23,8 @@ export default function Wrapper({children}:{children:React.ReactNode}) {
       p={{ base: "0.3rem", md: "1rem" }}
       alignItems={"center"}
       flexDirection={"column"}
-      background={"rgb(255 191 220 / 42%)"}
-      border={"solid #a4bded"}
+      // background={"rgb(255 191 220 / 42%)"}
+      // border={"solid #a4bded"}
     //   ref={ref}
     >
       <Box mt={"1rem"}>

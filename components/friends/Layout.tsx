@@ -6,11 +6,12 @@ import { useAppDispatch } from "@/redux/hooks";
 import { setFriends } from "@/redux/features/friendSlice";
 import { Spinner } from "../common";
 import { useEffect } from "react";
-
+import { Flex } from "@chakra-ui/react";
 
 export default function Layout() {
   const { friendList } = useAppSelector((state) => state.friend);
-  const [getFriendList, { data: isLoading }] = useGetFriendListMutation();
+  const [getFriendList, { data: isLoading, isSuccess }] =
+    useGetFriendListMutation();
   const dispatch = useAppDispatch();
 
   const handleFriendList = () => {
@@ -22,13 +23,17 @@ export default function Layout() {
   };
 
   useEffect(() => {
-    handleFriendList();
+    if(!friendList.length) {
+      handleFriendList();
+    }
   }, []);
   return (
     <>
-      {/* {isLoading ? (
-        <Spinner />
-      ) : ( */}
+      {!isSuccess&&!friendList.length ? (
+        <Flex h={'100vh'} alignItems={'center'}>
+          <Spinner size={"lg"} />
+        </Flex>
+      ) : (
         <Wrapper>
           <>
             {friendList.length ? (
@@ -43,7 +48,7 @@ export default function Layout() {
             )}
           </>
         </Wrapper>
-      {/* )} */}
+      )}
     </>
   );
 }

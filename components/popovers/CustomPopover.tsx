@@ -60,7 +60,7 @@ export default function CustomPopover({
             </>
           ) : (
             <>
-              <Popover isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+              <Popover isLazy isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
                 {children}
               </Popover>
             </>

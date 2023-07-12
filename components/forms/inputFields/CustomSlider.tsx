@@ -22,8 +22,9 @@ interface SliderProps {
 
 export default function CustomSlider({ sliderConfig, onChange }: SliderProps) {
   const format = (val: number) => `$ ` + val;
+  const hasOrientationVertical = Object.keys(sliderConfig).find((e) => e==='orientation')
   return (
-    <Flex mt={"1rem"} >
+    <Flex mt={"1rem"} w={{base: "300px", md: "600px" }}>
       {sliderConfig.map((e, index) => (
         <Slider
           key={index}

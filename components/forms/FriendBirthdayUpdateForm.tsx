@@ -125,7 +125,6 @@ export default function FriendBirthdayUpdateForm({
       style: {
         w: "60px",
         size: "sm",
-        // mr:'0.5rem'
       },
     },
   ];
@@ -137,7 +136,6 @@ export default function FriendBirthdayUpdateForm({
       max: date.getFullYear(),
       min: 1941,
       style: {
-        mr: "0.5rem",
       },
     },
   ];
