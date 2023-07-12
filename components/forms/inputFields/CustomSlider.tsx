@@ -23,7 +23,7 @@ interface SliderProps {
 export default function CustomSlider({ sliderConfig, onChange }: SliderProps) {
   const format = (val: number) => `$ ` + val;
   return (
-    <Flex mt={"1rem"} w={{ base: "300px", md: "600px" }}>
+    <Flex mt={"1rem"} >
       {sliderConfig.map((e, index) => (
         <Slider
           key={index}

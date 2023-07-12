@@ -7,6 +7,8 @@ import useFriendBirthdayUpdate from "@/hooks/friends/use-friend-birthday-update"
 import { CustomNumInput, CustomSlider } from "./inputFields";
 import { FaBirthdayCake } from "react-icons/fa";
 import AbstractForm from "./AbstractForm";
+import { BsCheck2Square, BsFileX } from "react-icons/bs";
+import { RiEdit2Line } from "react-icons/ri";
 interface Props {
   state: "initial" | "patch";
 }
@@ -33,7 +35,7 @@ export function BirthdayButton({ state }: Props) {
     return (
       <IconButton
         size={"xs"}
-        ml={'0.3rem'}
+        ml={"0.3rem"}
         aria-label="birthday-update"
         icon={<FaBirthdayCake />}
       />
@@ -49,35 +51,45 @@ export default function FriendBirthdayUpdateForm({
 }: DefaultProps) {
   console.log("CHECK DATE", defaultDate);
   const [mounted, setMounted] = useState(false);
-
-
+  const { isEditing, close } = useContext(PopoverCloseContext);
+  
   useEffect(() => {
     if (defaultDate && !mounted) {
-      const dt = new Date(defaultDate?defaultDate:'')
+      const dt = new Date(defaultDate ? defaultDate : "");
       const year = dt.getFullYear();
       const month = dt.getMonth() + 1;
       const day = dt.getDate();
-      setFormData({...formData,year:year,month:month, day:day })
+      setFormData({ ...formData, year: year, month: month, day: day });
+    } else {
+      setIsChange(true)
     }
     return setMounted(true);
   }, []);
-  const { year, month, day,formData, isLoading, setFormData,onChange, onSubmit } =
-    useFriendBirthdayUpdate();
+  const {
+    year,
+    month,
+    day,
+    formData,
+    isLoading,
+    setFormData,
+    onChange,
+    onSubmit,
+  } = useFriendBirthdayUpdate();
   const onClose = useContext(PopoverCloseContext);
   const date = new Date(Date.now());
   const customOnSubmit = (e: any) => {
     onClose();
     onSubmit(e);
   };
-  const [isChanged, setIsChange] = useState(false)
-  const customOnChange = (e:any) => {
-    if(defaultDate) {
-      setIsChange(true)
-      onChange(e)
+  const [isChanged, setIsChange] = useState(false);
+  const customOnChange = (e: any) => {
+    if (defaultDate) {
+      setIsChange(true);
+      onChange(e);
     } else {
-      onChange(e)
+      onChange(e);
     }
-  }
+  };
 
   const config = [
     {
@@ -87,8 +99,9 @@ export default function FriendBirthdayUpdateForm({
       max: date.getFullYear(),
       min: 1941,
       style: {
-        w: "90px",
-        mr: "1rem",
+        w: "80px",
+        mr: "0.5rem",
+        size: "sm",
       },
     },
     {
@@ -98,8 +111,9 @@ export default function FriendBirthdayUpdateForm({
       max: 12,
       min: 1,
       style: {
-        w: "70px",
+        w: "60px",
         mr: "0.3rem",
+        size: "sm",
       },
     },
     {
@@ -109,7 +123,9 @@ export default function FriendBirthdayUpdateForm({
       max: 31,
       min: 1,
       style: {
-        w: "70px",
+        w: "60px",
+        size: "sm",
+        // mr:'0.5rem'
       },
     },
   ];
@@ -129,19 +145,26 @@ export default function FriendBirthdayUpdateForm({
     return (
       <>
         <AbstractForm onSubmit={customOnSubmit}>
-          <Flex mt={"1rem"}>
-            <CustomSlider sliderConfig={sliderConfig} onChange={customOnChange} />
-            <Flex>
-              <CustomNumInput config={config} onChange={customOnChange} />
+          <Flex w={"100%"} h={'50px'} className="PARENT WRAPPER" mt={"1rem"}>
+            <CustomSlider
+              sliderConfig={sliderConfig}
+              onChange={customOnChange}
+            />
+            <CustomNumInput config={config} onChange={customOnChange} />
+            <Flex h={'100%'} position={'relative'} top={'1.1rem'} right={'0.5rem'}>
+              <IconButton
+                size={"xs"}
+                aria-label="submit"
+                type="submit"
+                isDisabled={!isChanged}
+                icon={<BsCheck2Square color={isChanged?'green':'red'}/>}
+              />
             </Flex>
-          </Flex>
-          <Flex mt={"0.5rem"} justifyContent={"flex-end"}>
-            <Button isDisabled={typeof defaultDate!=='undefined'&&!isChanged} type={"submit"}>Update</Button>
           </Flex>
         </AbstractForm>
       </>
     );
   } else {
-    return <></>
+    return <></>;
   }
 }

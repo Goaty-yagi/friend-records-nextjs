@@ -27,8 +27,7 @@ export default function FriendCreatePopover({state, defaultDate}:Props) {
     <>
       <CustomPopover
         trigger={<BirthdayButton state={state}/>}
-        // switchableButton={true}
-        body={<FriendBirthdayUpdateForm defaultDate={defaultDate}/>}
+        body={<FriendBirthdayUpdateForm  defaultDate={defaultDate}/>}
       />
     </>
   );
