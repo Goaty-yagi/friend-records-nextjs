@@ -1,7 +1,6 @@
-import { useContext, useState, ChangeEvent, useMemo } from "react";
+import { useContext, useState, useEffect } from "react";
 import { FriendContext } from "@/contexts";
 import { FaSearchPlus } from "react-icons/fa";
-import { useAppSelector } from "@/redux/hooks";
 import {
   FormControl,
   InputGroup,
@@ -12,12 +11,16 @@ import {
 
 export default function FrinedSearch() {
   const { friendsArray, onChange } = useContext(FriendContext);
-  const { friendList } = useAppSelector((state) => state.friend);
+  const [isMounted, setIsMounted] = useState(false)
+  useEffect(() => {
+    if(friendsArray.length) {
+      setIsMounted(true)
+    }
+  },[friendsArray])
 
-  if (friendList.length) {
    return (
       <>
-        <FormControl isInvalid={!friendsArray.length} m={"1rem 0"}>
+        <FormControl isInvalid={!friendsArray.length&&isMounted} m={"1rem 0"}>
           <InputGroup>
             <InputLeftElement pointerEvents="none">
               <FaSearchPlus fontSize={"1.3rem"} color="gray.300" />
@@ -35,6 +38,4 @@ export default function FrinedSearch() {
         </FormControl>
       </>
     );
-  }
-  return <></>;
 }
