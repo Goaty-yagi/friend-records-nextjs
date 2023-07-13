@@ -12,6 +12,7 @@ export default function AvatarUpdatePopover({
       <CustomPopover
         trigger={<EditButton />}
         body={<AvatarUpdateForm state={state} />}
+        hasArrow={false}
       />
     </>
   );

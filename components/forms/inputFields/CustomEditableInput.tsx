@@ -17,6 +17,7 @@ interface Props {
   title?: string;
   size?: string;
   maxLength?: number;
+  inputWidth?:string;
   iconToEdit?: JSX.Element;
   iconIsEditting?: JSX.Element;
   iconIsReady?: JSX.Element;
@@ -33,6 +34,7 @@ export default function CustomEditableInput({
   defaultValue,
   size = "sm",
   maxLength = 20,
+  inputWidth='150px',
   iconToEdit = <RiEdit2Line color={"green"} />,
   iconIsEditting = <BsFileX color={"red"} />,
   iconIsReady = <BsCheck2Square color={"green"} />,
@@ -98,7 +100,7 @@ export default function CustomEditableInput({
 
   return (
     <Flex w={"150%"} alignItems={"center"}>
-      <Text mr={"0.5rem"}>{title}</Text>
+      <Text mr={title?"0.8rem":"0.5rem"}>{title}</Text>
       <Box position={"relative"}>
         {isEditing ? (
           <>
@@ -107,7 +109,7 @@ export default function CustomEditableInput({
                 <Input
                   autoFocus={true} 
                   maxLength={maxLength}
-                  w={"200px"}
+                  w={inputWidth}
                   size={size}
                   name={name}
                   defaultValue={fixedDefaultValue}

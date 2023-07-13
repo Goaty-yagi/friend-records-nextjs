@@ -24,6 +24,7 @@ interface Style {
 interface PopoverProps {
   trigger: JSX.Element;
   body: any;
+  hasArrow?:boolean;
   switchableButton?: boolean;
   hasCloseButton?:boolean
   header?: string;
@@ -34,6 +35,7 @@ export default function CustomPopover({
   trigger,
   body,
   header,
+  hasArrow,
   hasCloseButton=true,
   switchableButton,
   style,
@@ -60,7 +62,7 @@ export default function CustomPopover({
             </>
           ) : (
             <>
-              <Popover isLazy isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+              <Popover isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
                 {children}
               </Popover>
             </>
@@ -76,7 +78,7 @@ export default function CustomPopover({
           <Box>{trigger}</Box>
         </PopoverTrigger>
         <PopoverContent {...style}>
-          {typeof style === "undefined" && <PopoverArrow />}
+          {typeof style === "undefined"||!hasArrow && <PopoverArrow />}
           {hasCloseButton && ( <PopoverCloseButton />)}
           {header && <PopoverHeader>{header}</PopoverHeader>}
           <PopoverBody>{body}</PopoverBody>
