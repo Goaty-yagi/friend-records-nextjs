@@ -25,7 +25,6 @@ export default function EventCreateForm() {
     onSubmit(event);
     onClose();
   }
-  console.log("event-create-form")
   const config = [
     {
       labelText: "Event Name",

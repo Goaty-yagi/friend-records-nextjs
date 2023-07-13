@@ -18,7 +18,6 @@ export default function FriendCreateForm() {
 
   function customOnsubmit(event: FormEvent<HTMLFormElement>) {
     onSubmit(event);
-    console.log("CREATE", onClose());
     onClose();
   }
   const config = [

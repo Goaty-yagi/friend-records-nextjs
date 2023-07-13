@@ -25,7 +25,6 @@ export default function DeleteEvent({ ...event }: Props) {
       .unwrap()
       .then(() => {
         dispatch(setDeleteEvent(event.id));
-        console.log("event", event);
         dispatch(updateFriendFromEventDelete(event.money));
         onClose();
         toast.success(`Your Event ${event.name} Successfully deleteed!`);

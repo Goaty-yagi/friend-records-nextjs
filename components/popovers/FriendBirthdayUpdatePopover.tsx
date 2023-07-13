@@ -13,15 +13,6 @@ interface Props {
 }
 
 export default function FriendCreatePopover({state, defaultDate}:Props) {
-  const [close, setClose] = useState(() => {});
-  const  onClose = useContext(PopoverCloseContext);
-  console.log("check", onClose)
-  const {
-    onSubmit,
-  } = useFriendBirthdayUpdate();
-
-  console.log(close);
-
 
   return (
     <>

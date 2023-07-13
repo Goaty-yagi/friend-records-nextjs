@@ -64,13 +64,14 @@ export default function Layout() {
       setFriendsArray([...orderedArray]);
   }
   useEffect(() => {
+    console.log("EFFECT", friendList)
     if(!friendList.length) {
       handleFriendList();
 
     } else {
       initialOrderChange()
     }
-  }, []);
+  }, [friendList]);
   return (
     <>
     <FriendContext.Provider value={{initialOrderChange,friendsArray, setFriendsArray}}>

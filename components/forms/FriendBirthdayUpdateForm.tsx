@@ -49,7 +49,6 @@ interface DefaultProps {
 export default function FriendBirthdayUpdateForm({
   defaultDate,
 }: DefaultProps) {
-  console.log("CHECK DATE", defaultDate);
   const [mounted, setMounted] = useState(false);
   const { isEditing, close } = useContext(PopoverCloseContext);
   

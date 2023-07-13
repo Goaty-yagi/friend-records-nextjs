@@ -44,18 +44,6 @@ export default function CustomInput({
   link,
   required = false,
 }: Props) {
-  // useEffect(() => {
-  //   console.log("EEFE", defaultValue)
-  //   if (defaultValue) {
-  //     const target = {
-  //       target: {
-  //         name: labelId,
-  //         value: defaultValue,
-  //       },
-  //     };
-  //     onChange(target as ChangeEvent<HTMLInputElement>);
-  //   }
-  // }, []);
 
   const [showPassword, setShowpassword] = useState(false);
 

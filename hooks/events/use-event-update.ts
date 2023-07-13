@@ -31,7 +31,7 @@ export default function useEventCreate() {
 			.unwrap()
 			.then((res) => {
 				dispatch(setUpdateEvent(res))
-                dispatch(updateFriendFromEventUpdate(res.money - defaultMoney))
+                dispatch(updateFriendFromEventUpdate({caledMoney:res.money - defaultMoney, event:res}))
 				toast.success('Syccessfully created!');
 			})
 			.catch((e) => {

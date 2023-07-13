@@ -16,12 +16,10 @@ export default function YScrollLimitationWrapper({
   useEffect(() => {
     if (listRef.current) {
       const lisrect = listRef?.current.getBoundingClientRect();
-      console.log("lisrect",lisrect, window.innerHeight - lisrect.top - 48)
       setMaxH(window.innerHeight - lisrect.top - 48);
     }
   }, [listRef.current]);
 
-  //   function UnlimitedWrapper({children}:{'children': React.ReactNode}) {
   if (!isLimited) {
     return <>{children}</>;
   }

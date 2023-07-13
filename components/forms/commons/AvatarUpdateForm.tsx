@@ -39,7 +39,6 @@ export default function AvatarUpdateForm({state}:{state:string}) {
     onSubmit()
     onClose()
   }
-  console.log("A chack",icon, defaultAvatar)
   return (
     <>
         <Box pt={"1rem"}>

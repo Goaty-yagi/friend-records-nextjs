@@ -30,12 +30,10 @@ export default function useFriendCreate() {
 		friendCreate({ name:friendName, user:userId, avatar:avatar })
 			.unwrap()
 			.then((res) => {
-				console.log("FRIEND", typeof res)
 				dispatch(unshiftFriend(res))
 				toast.success('Syccessfully created!');
 			})
 			.catch((e) => {
-				console.log(e)
 				const firstErrorMsg = Object.values(e.data)[0]
 				toast.error('Failed to create a friend' + '\n' + firstErrorMsg);
 			});

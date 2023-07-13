@@ -23,7 +23,6 @@ export default function Slider({ svgArray, setFun, defaultSvg }: Props) {
     fontSize: eachSlideWidth,
   };
   useEffect(() => {
-    console.log("AVATAR", svgArray)
     if (typeof defaultSvg !== "undefined") {
       const def = svgArray.find(e => e.name === defaultSvg)
       if(def) {
@@ -36,10 +35,6 @@ export default function Slider({ svgArray, setFun, defaultSvg }: Props) {
     }
 
   }, []);
-  // useEffect(() => {
-  //   console.log(selectedSvg)
-  //   setFun(() => {defaultSvg});
-  // },[selectedSvg])
   return (
     <>
       <Flex w={"100%"} h={"100%"} alignItems={"center"} className={"out"}>

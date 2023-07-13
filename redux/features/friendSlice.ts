@@ -1,4 +1,5 @@
 // import { apiSlice } from '../services/apiSlice';
+import { EventProps } from "./eventApiSlice"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface Events {
@@ -28,6 +29,10 @@ type friendState = {
 	friendId: string,
 	friendDetail: FriendResponse
 }
+interface UpdateFromEventProps {
+	caledMoney: number,
+	event: EventProps
+}
 
 const initialState: friendState = {
 	isLoading: true,
@@ -54,7 +59,6 @@ const friendSlice = createSlice({
 		},
 		setFriendDetail: (state, action: PayloadAction<FriendResponse>) => {
 			state.friendDetail = action.payload
-			console.log("SET_FRIEND_DETAIL",state.friendDetail)
 		},
 		updateFriend: (state, action: PayloadAction<Events>) => {
 			state.friendDetail.last_log = action.payload.created_on;
@@ -66,18 +70,15 @@ const friendSlice = createSlice({
 
 			});
 		},
-		updateFriendFromEventUpdate: (state, action: PayloadAction<any>) => {
-			console.log("REDUX", state.friendDetail.sum, action.payload)
-			state.friendDetail.sum += action.payload
-			// state.friendList.forEach((e) => {
-			// 	if (e.id === action.payload.friend) {
-			// 		e.sum += Number(action.payload.money);
-			// 	}
-
-			// });
+		updateFriendFromEventUpdate: (state, action: PayloadAction<UpdateFromEventProps>) => {
+			state.friendDetail.sum += action.payload.caledMoney
+			state.friendList.forEach((e) => {
+				if (e.id === action.payload.event.friend) {
+					e.sum +=action.payload.caledMoney;
+				}
+			});
 		},
 		updateFriendFromEventDelete: (state, action: PayloadAction<number>) => {
-			console.log("FROM,SLICE", action.payload, state.friendDetail.sum)
 			state.friendDetail.sum -= Number(action.payload);
 		},
 		patchFriend: (state, action: PayloadAction<FriendResponse>) => {

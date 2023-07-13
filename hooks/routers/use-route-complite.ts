@@ -18,7 +18,6 @@ export default function useRouteComplite({event}:any): void {
   }, [mounted]);
 
   function handleChangeRoute () {
-    console.log('complete');
     event()
   }
 }

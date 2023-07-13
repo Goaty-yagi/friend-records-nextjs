@@ -42,7 +42,6 @@ export default function Layout({ children }: Props) {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const autoResize = () => {
-        console.log(innerHeight, window.innerHeight);
         setInnerHeight(window.innerHeight);
       };
       window.addEventListener("resize", autoResize);

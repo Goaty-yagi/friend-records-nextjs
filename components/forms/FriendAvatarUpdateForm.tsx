@@ -36,7 +36,6 @@ export default function FriendAvatarUpdateForm() {
     onSubmit()
     onClose()
   }
-  console.log("A chack",icon, defaultAvatar)
   return (
     <>
         <Box pt={"1rem"}>

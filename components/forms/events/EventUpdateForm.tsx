@@ -22,7 +22,6 @@ interface Props {
 }
 
 export default function EventUpdateForm({ id, name, eventMoney, icon }: Props) {
-  console.log(id, name, eventMoney, icon);
   const format = (val: number) => `$ ` + val;
   useEffect(() => {
     setEventId(id);

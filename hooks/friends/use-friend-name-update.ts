@@ -19,14 +19,12 @@ export default function useFriendNameUpdate() {
 
 	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
-		console.log(name, value)
 		setFormData({ ...formData, [name]: value });
 	};
 
 	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
         const id = friend.id
-		console.log(':CHECK', friendName)
 		updateFriend({ id, name:friendName })
 			.unwrap()
 			.then((res) => {

@@ -88,11 +88,9 @@ export default function FriendList() {
   }, [friendsArray]);
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
-    console.log(event.target.value);
     filterAndSort("search", event.target.value);
   }
   function onClick(event: any) {
-    console.log(event);
     filterAndSort(event);
   }
 

@@ -18,12 +18,10 @@ export default function useEventNameUpdate() {
 
     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        console.log( name, value )
         setFormData({ ...formData, [name]: value });
     };
     const onSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log("check", eventName)
         updateEvent({ id: eventId, name: eventName })
             .unwrap()
             .then((res) => {

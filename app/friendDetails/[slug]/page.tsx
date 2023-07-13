@@ -31,17 +31,17 @@ export default function Page({ params }: Props) {
   const dispatch = useAppDispatch();
   const [friend, setFriend] = useState({});
   const [eventList, setEventList] = useState<Events[]>([]);
-  const [isLoading, setIsLoading] = useState(true)
-  const [getFriendDetail, { }] = useGetFriendDetailMutation();
+  const [isLoading, setIsLoading] = useState(true);
+  const [getFriendDetail, {}] = useGetFriendDetailMutation();
   useEffect(() => {
-    setFriend({})
+    setFriend({});
     dispatch(setFriendId(slug));
     getFriendDetail(slug)
       .unwrap()
       .then((res) => {
         dispatch(setEvents(res.event));
-        dispatch(setFriendDetail(res))
-        setIsLoading(false)
+        dispatch(setFriendDetail(res));
+        setIsLoading(false);
         setFriend(res);
         setEventList(res.event);
       })
@@ -53,7 +53,9 @@ export default function Page({ params }: Props) {
     <>
       {isLoading ? (
         <>
-          <Spinner />
+          <Flex h={"90vh"} alignItems={"center"}>
+            <Spinner size={"lg"} />
+          </Flex>
         </>
       ) : (
         <>
@@ -61,7 +63,12 @@ export default function Page({ params }: Props) {
             value={{ slug, friend, eventList, setFriend, setEventList }}
           >
             <FriendInfo />
-            <Flex h={'100%'} mt={"1rem"} flexDirection={"column"} alignItems={"center"}>
+            <Flex
+              h={"100%"}
+              mt={"1rem"}
+              flexDirection={"column"}
+              alignItems={"center"}
+            >
               <EventCreatePopover />
               <EventList />
             </Flex>

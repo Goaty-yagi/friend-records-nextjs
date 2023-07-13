@@ -6,7 +6,6 @@ import { useAppSelector } from '@/redux/hooks';
 import { patchFriend } from '@/redux/features/friendSlice';
 
 export default function useFriendBirthdayUpdate() {
-	console.log("FIRST_LOG")
 	const [updateBirthday, { isLoading }] = useUpdateBirthdayMutation();
     const friend = useAppSelector((state) => state.friend).friendDetail
 
@@ -21,7 +20,6 @@ export default function useFriendBirthdayUpdate() {
 
 	const onChange = (event: any) => {
 		const { name, value } = event.target;
-		console.log('chack form hook', name, value)
 		setFormData({ ...formData, [name]: Number(value) });
 	};
 	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
