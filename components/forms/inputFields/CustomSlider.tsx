@@ -5,7 +5,7 @@ import {
   SliderThumb,
   Flex,
 } from "@chakra-ui/react";
-
+import { useState, useEffect } from "react";
 export interface SliderConfig {
   value: number;
   defaultValue?:number
@@ -22,9 +22,16 @@ interface SliderProps {
 
 export default function CustomSlider({ sliderConfig, onChange }: SliderProps) {
   const format = (val: number) => `$ ` + val;
-  const hasOrientationVertical = Object.keys(sliderConfig).find((e) => e==='orientation')
+  const [isvVertical, setIsvVertical] = useState(false)
+
+  useEffect(() => {
+    const orientationVertical = Object.keys(sliderConfig[0]).includes('orientation')
+    if(orientationVertical) {
+      setIsvVertical(sliderConfig[0].orientation==='vertical'?true:false)
+    }
+  },[])
   return (
-    <Flex mt={"1rem"} w={{base: "300px", md: "600px" }}>
+    <Flex mt={"1rem"} w={isvVertical?'':{base: "300px", md: "600px" }}>
       {sliderConfig.map((e, index) => (
         <Slider
           key={index}

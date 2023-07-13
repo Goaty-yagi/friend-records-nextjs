@@ -24,7 +24,11 @@ export const sortOptionStates = {
 };
 export default function FriendList() {
   const { friendList } = useAppSelector((state) => state.friend);
-  const { friendsArray, setFriendsArray } = useContext(FriendContext);
+  const { friendsArray, setFriendsArray, initialOrderChange } = useContext(FriendContext);
+  
+  useEffect(() => {
+    initialOrderChange()
+  },[])
 
   const filterAndSort = useMemo(() => {
     return (queryType: string, query?: string) => {

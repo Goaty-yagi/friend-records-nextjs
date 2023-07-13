@@ -48,11 +48,8 @@ export default function Layout() {
       }
     }
   }
-  useEffect(() => {
-    if(!friendList.length) {
-      handleFriendList();
-    } else {
-      let chachUpArray: any = [];
+  function initialOrderChange() {
+    let chachUpArray: any = [];
       const dateOrderedArray = friendList.filter((d) => {
         const birthdayObj = birthDateCalculation(d.birthday);
         if (dateCalculation(d.last_log) >= 30) {
@@ -65,11 +62,18 @@ export default function Layout() {
       });
       const orderedArray = chachUpArray.concat(dateOrderedArray);
       setFriendsArray([...orderedArray]);
+  }
+  useEffect(() => {
+    if(!friendList.length) {
+      handleFriendList();
+
+    } else {
+      initialOrderChange()
     }
   }, []);
   return (
     <>
-    <FriendContext.Provider value={{friendsArray, setFriendsArray}}>
+    <FriendContext.Provider value={{initialOrderChange,friendsArray, setFriendsArray}}>
       {!isSuccess&&!friendList.length ? (
         <Flex h={'100vh'} alignItems={'center'}>
           <Spinner size={"lg"} />
