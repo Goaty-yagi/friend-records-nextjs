@@ -21,6 +21,7 @@ interface Props {
   config: Config[];
   isLoading: boolean;
   btnText: string;
+  btnPosition?:string
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   children?:React.ReactNode
@@ -30,6 +31,7 @@ export default function Form({
   config,
   isLoading,
   btnText,
+  btnPosition="flex-end",
   onChange,
   onSubmit,
   children
@@ -55,7 +57,7 @@ export default function Form({
           {typeof children !== 'undefined' &&(
             children
           )}
-          <Flex justifyContent={"flex-end"}>
+          <Flex justifyContent={btnPosition}>
           <Button type="submit" mt={'0.7rem'}  isDisabled={isLoading}>
             {isLoading ? <Spinner /> : `${btnText}`}
           </Button>

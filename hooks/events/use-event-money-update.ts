@@ -24,12 +24,11 @@ export default function useEventMoneyUpdate() {
     const onSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const resultMoney = whoPayed === '+' ? money : money * -1
-        console.log("sub",whoPayed,resultMoney)
         updateEvent({ id: eventId, money: resultMoney })
             .unwrap()
             .then((res) => {
                 dispatch(setUpdateEvent(res))
-                dispatch(updateFriendFromEventUpdate(res.money - defaultMoney))
+                dispatch(updateFriendFromEventUpdate({caledMoney:res.money - defaultMoney, event:res}))
                 toast.success('Syccessfully updated!');
             })
             .catch((e) => {

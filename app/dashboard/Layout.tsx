@@ -39,6 +39,7 @@ export default function Layout({ children }: Props) {
     }
     handleFriendList();
   }, []);
+  
   useEffect(() => {
     if (typeof window !== "undefined") {
       const autoResize = () => {

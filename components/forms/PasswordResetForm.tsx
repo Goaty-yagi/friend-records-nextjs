@@ -23,6 +23,7 @@ export default function PasswordResetForm() {
       config={config}
       isLoading={isLoading}
       btnText="Request password reset"
+      btnPosition="center"
       onChange={onChange}
       onSubmit={onSubmit}
     />

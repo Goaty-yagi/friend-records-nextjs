@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useGetFriendDetailMutation } from "@/redux/features/friendApiSlice";
 import { FriendContext } from "@/contexts/index";
 import FriendInfo from "./FriendInfo";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setFriendId, setFriendDetail } from "@/redux/features/friendSlice";
 import { setEventList as setEvents } from "@/redux/features/eventSlice";
 import { EventCreatePopover } from "@/components/popovers";
@@ -30,24 +30,25 @@ export default function Page({ params }: Props) {
   const { slug } = params;
   const dispatch = useAppDispatch();
   const [friend, setFriend] = useState({});
-  const [eventList, setEventList] = useState<Events[]>([]);
+  const eventList = useAppSelector((state) => state.event).eventList;
   const [isLoading, setIsLoading] = useState(true);
   const [getFriendDetail, {}] = useGetFriendDetailMutation();
   useEffect(() => {
-    setFriend({});
+    // setFriend({});
     dispatch(setFriendId(slug));
-    getFriendDetail(slug)
+    if(!eventList.length) {
+      getFriendDetail(slug)
       .unwrap()
       .then((res) => {
         dispatch(setEvents(res.event));
         dispatch(setFriendDetail(res));
-        setIsLoading(false);
         setFriend(res);
-        setEventList(res.event);
       })
       .catch((e) => {
         // do something
       });
+    }
+    return setIsLoading(false);
   }, []);
   return (
     <>
@@ -60,7 +61,7 @@ export default function Page({ params }: Props) {
       ) : (
         <>
           <FriendContext.Provider
-            value={{ slug, friend, eventList, setFriend, setEventList }}
+            value={{ slug, friend, eventList, setFriend }}
           >
             <FriendInfo />
             <Flex

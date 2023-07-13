@@ -8,7 +8,7 @@ export default function Page() {
     <>
       <Flex flexDirection={"column"} w={"100%"} alignItems={"center"}>
         <Box>
-          <Heading mb={'1rem'}>Password Reset</Heading>
+          <Heading  mt={'2rem'} mb={'1rem'}>Password Reset</Heading>
           <PasswordResetForm />
         </Box>
       </Flex>
