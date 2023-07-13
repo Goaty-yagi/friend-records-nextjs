@@ -122,7 +122,7 @@ export default function EventUpdateForm({ id, name, eventMoney, icon }: Props) {
               onChange={customOnChange}
             />
           </Flex>
-          <Flex mt={"0.5rem"} justifyContent={"flex-end"}>
+          <Flex mt={"1rem"} mb={'0.5rem'} justifyContent={"flex-end"}>
             <DeleteEvent {...{ id, name, money: eventMoney }} />
             <Button isDisabled={!isChange} ml={'0.5rem'} type="submit">
               Update

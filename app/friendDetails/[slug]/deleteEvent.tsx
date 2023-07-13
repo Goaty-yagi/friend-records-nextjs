@@ -42,7 +42,7 @@ export default function DeleteEvent({ ...event }: Props) {
               aria-label="delete friend"
               onClick={handleDeleteFriend}
             >
-              Really want to delete {event.name}??
+              Are you sure??
             </Button>
           </>
         ) : (
@@ -52,7 +52,7 @@ export default function DeleteEvent({ ...event }: Props) {
               aria-label="delete friend"
               onClick={() => setIsConfirming(true)}
             >
-              Delete {event.name}??
+              Delete this event??
             </Button>
           </>
         )}

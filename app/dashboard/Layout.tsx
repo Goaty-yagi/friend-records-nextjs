@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useGetFriendListMutation } from "@/redux/features/friendApiSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { UserContext } from "@/contexts";
+import { Box } from "@chakra-ui/react";
 import { setFriends } from "@/redux/features/friendSlice";
 
 interface Props {
@@ -21,6 +22,7 @@ export default function Layout({ children }: Props) {
     email: "",
     UID: "",
   });
+  const [innerHeight, setInnerHeight] = useState(window.innerHeight);
   const handleFriendList = () => {
     getFriendList(undefined)
       .unwrap()
@@ -35,7 +37,17 @@ export default function Layout({ children }: Props) {
         setUserState({ ...userState, [e]: Object.values(user)[index] });
       });
     }
-    handleFriendList()
+    handleFriendList();
+  }, []);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const autoResize = () => {
+        console.log(innerHeight, window.innerHeight);
+        setInnerHeight(window.innerHeight);
+      };
+      window.addEventListener("resize", autoResize);
+      return () => window.removeEventListener("resize", autoResize);
+    }
   }, []);
 
   return (
@@ -44,7 +56,7 @@ export default function Layout({ children }: Props) {
         <>
           <RequireAuth>
             <UserContext.Provider
-              value={{ user: userState, setUser: setUserState }}
+              value={{ user: userState, setUser: setUserState,innerHeight:innerHeight }}
             >
               {children}
             </UserContext.Provider>

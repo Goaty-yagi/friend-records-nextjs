@@ -13,7 +13,7 @@ export default function LogoutConfPopover() {
     }
     function CreateButton() {
         return (
-            <Button colorScheme='red' variant='outline' >Logout</Button>
+            <Button size={'sm'} colorScheme='red' variant='outline' >Logout</Button>
         )
     }
     

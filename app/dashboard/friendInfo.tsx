@@ -20,12 +20,15 @@ import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { getAvaterObj } from "@/components/avatarsAndIcons";
 import { monthColors } from "@/styles/colors";
 import Image from "next/legacy/image";
+import { useContext } from "react";
+import { UserContext } from "@/contexts";
 import {AvatarUpdatePopover, LogoutConfPopover} from "@/components/popovers";
 
 export default function FriendInfo() {
   const date = new Date(Date.now());
   const { data: user } = useRetrieveUserQuery();
   const { friendList } = useAppSelector((state) => state.friend);
+  const {innerHeight} = useContext(UserContext)
   const monthNames = [
     "January",
     "February",
@@ -90,6 +93,9 @@ export default function FriendInfo() {
     }
     return 0;
   }
+  function innerHeightCalculation() {
+    return innerHeight > 720
+  }
   if (user) {
     return (
       <>
@@ -99,8 +105,10 @@ export default function FriendInfo() {
           alignItems={"center"}
         >
           <Box zIndex={1}>
-            <Box
+            <Flex
               position={"relative"}
+              alignItems={'center'}
+              justifyContent={'center'}
               w={"96px"}
               h={"96px"}
               mr={"1rem"}
@@ -119,7 +127,7 @@ export default function FriendInfo() {
                 </>
               )}
               <AvatarUpdatePopover state={"user"} />
-            </Box>
+            </Flex>
           </Box>
           {/* <EditIcon /> */}
           {/* {getAvaterObj(user?user.avatar:'')} */}
@@ -165,7 +173,7 @@ export default function FriendInfo() {
               />
             </Box>
           </Stack>
-          <Box position={"relative"} h={"30px"} w={"100%"} m={"0.5rem 0"}>
+          <Box position={innerHeightCalculation()?"relative":"absolute"} top={innerHeightCalculation()?0:"80px"} h={"30px"} w={"100%"} m={"0.5rem 0"}>
             <Box position={"absolute"} right={0}>
               <LogoutConfPopover />
             </Box>
