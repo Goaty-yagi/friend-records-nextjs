@@ -5,16 +5,17 @@ import { toast } from 'react-toastify';
 import { useRetrieveUserQuery } from '@/redux/features/authApiSlice';
 import { unshiftFriend } from '@/redux/features/friendSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { patchFriend } from '@/redux/features/friendSlice';
 import { useUpdateFriendMutation } from '@/redux/features/friendApiSlice';
 
 export default function useFriendNameUpdate() {
     const friend = useAppSelector((state) => state.friend).friendDetail
 	const [updateFriend, { isLoading }] = useUpdateFriendMutation();
+	const dispatch = useAppDispatch()
 	const [formData, setFormData] = useState({
-		friendName: friend.name,
+		friendName: friend?friend.name:'',
 	});
 
-	// const dispatch = useAppDispatch()
 	const { friendName } = formData;
 
 	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -28,6 +29,7 @@ export default function useFriendNameUpdate() {
 		updateFriend({ id, name:friendName })
 			.unwrap()
 			.then((res) => {
+				dispatch(patchFriend(res))
 				toast.success('Syccessfully updated!');
 			})
 			.catch((e) => {

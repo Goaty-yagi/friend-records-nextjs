@@ -12,7 +12,7 @@ interface Props {
   defaultDate?:string
 }
 
-export default function FriendCreatePopover({state, defaultDate}:Props) {
+export default function FriendBirthdayUpdatePopover({state, defaultDate}:Props) {
 
   return (
     <>

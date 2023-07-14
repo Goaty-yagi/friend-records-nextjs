@@ -24,6 +24,7 @@ import { RiEdit2Line } from "react-icons/ri";
 import { FriendContext } from "@/contexts";
 
 export default function FriendInfo() {
+  const context = useContext(FriendContext)
   const outerRef = useRef<any>();
   const innerRef = useRef<any>();
   const friend = useAppSelector((state) => state.friend).friendDetail;
@@ -69,7 +70,7 @@ export default function FriendInfo() {
     iconToEdit: <RiEdit2Line color={"green"} />,
     iconIsEditting: <BsCheck2Square color={"red"} />,
     iconIsReady: <BsCheck2Square color={"green"} />,
-    // defaultVal:friend.name
+    defaultVal:friend.name
   };
   function createDateObj(date: string) {
     return new Date(date);

@@ -64,7 +64,6 @@ export default function Layout() {
       setFriendsArray([...orderedArray]);
   }
   useEffect(() => {
-    console.log("EFFECT", friendList)
     if(!friendList.length) {
       handleFriendList();
 

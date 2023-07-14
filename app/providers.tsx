@@ -15,18 +15,6 @@ const breakpoints = {
 
 const theme = extendTheme({
   breakpoints,
-  components: {
-    Popover: {
-      variants: {
-        responsive: {
-          popper: {
-            maxWidth: 'unset',
-            width: 'unset'
-          }
-        }
-      }
-    }
-  }
 });
 
 export function ChakraProviders({ children }: { children: React.ReactNode }) {

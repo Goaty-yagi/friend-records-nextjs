@@ -1,16 +1,11 @@
 import { ChakraProviders } from "./providers";
 import Navbar from "@/components/common/navbar";
 import Provider from "@/redux/provider";
-import type { Metadata } from "next";
 import Layout from "@/components/common/layout";
 import { Setup, Throttle } from "@/components/utils";
 import LayoutWrapper from "./layoutWrapper";
 import { ThrottleAlert } from "@/components/alerts";
 
-export const metadata: Metadata = {
-  title: `process.env.APP_NAME | home`,
-  description: "Friend record App",
-};
 
 export default function RootLayout({
   children,

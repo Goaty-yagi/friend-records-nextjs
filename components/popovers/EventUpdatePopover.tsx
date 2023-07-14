@@ -31,7 +31,7 @@ export default function EventUpdatePopover({ id, name, money, icon }: Props) {
     <>
       <CustomPopover
         trigger={<CreateButton />}
-        body={<EventUpdateForm {...{ id, name, money, icon }} />}
+        body={<EventUpdateForm {...{ id, name, eventMoney:money, icon }} />}
       />
     </>
   );

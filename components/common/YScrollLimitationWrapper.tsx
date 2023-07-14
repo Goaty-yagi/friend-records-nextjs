@@ -16,7 +16,7 @@ export default function YScrollLimitationWrapper({
   useEffect(() => {
     if (listRef.current) {
       const lisrect = listRef?.current.getBoundingClientRect();
-      setMaxH(window.innerHeight - lisrect.top - 48);
+      setMaxH(window.innerHeight - lisrect.top - 36);
     }
   }, [listRef.current]);
 

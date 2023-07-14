@@ -1,13 +1,9 @@
 import { Button, Box } from "@chakra-ui/react"
 import CustomPopover from "./CustomPopover"
 import { EventCreateForm } from "../forms"
-import { useState } from "react"
+import { CreateButton } from "../forms/EventCreateForm"
+
 export default function EventCreatePopover() {
-    function CreateButton() {
-        return (
-            <Button>Create</Button>
-        )
-    }
     
     return (
         <>

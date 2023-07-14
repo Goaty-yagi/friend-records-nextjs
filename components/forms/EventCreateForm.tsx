@@ -3,12 +3,18 @@
 import { SvgSlider } from "../avatarsAndIcons";
 import { eventIcons } from "../avatarsAndIcons/icons";
 import { useContext, FormEvent } from "react";
-import { PopoverCloseContext } from "@/contexts";
+import { PopoverCloseContext, ModalCloseContext } from "@/contexts";
 import useEventCreate from "@/hooks/events/use-event-create";
-import { Flex, Box } from "@chakra-ui/react";
+import { Flex, Box, Button } from "@chakra-ui/react";
 import { Form } from "./index";
 import { CustomNumInput , CustomSlider, CustomRadio} from "./inputFields";
 
+
+export function CreateButton() {
+  return (
+      <Button>Create</Button>
+  )
+}
 export default function EventCreateForm() {
   const format = (val: number) => `$ ` + val;
   const {
@@ -21,9 +27,14 @@ export default function EventCreateForm() {
     onSubmit,
   } = useEventCreate();
   const onClose = useContext(PopoverCloseContext);
+  const modalContext = useContext(ModalCloseContext);
   function customOnsubmit(event: FormEvent<HTMLFormElement>) {
     onSubmit(event);
-    onClose();
+    if(modalContext === null) {
+      onClose();
+    } else {
+      modalContext()
+    }
   }
   const config = [
     {

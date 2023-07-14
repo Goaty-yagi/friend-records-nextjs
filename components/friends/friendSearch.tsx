@@ -7,6 +7,7 @@ import {
   InputLeftElement,
   Input,
   FormErrorMessage,
+  Center
 } from "@chakra-ui/react";
 
 export default function FrinedSearch() {
@@ -34,7 +35,9 @@ export default function FrinedSearch() {
               size="md"
             ></Input>
           </InputGroup>
+          <Center>
           <FormErrorMessage>No friend to show with the words.</FormErrorMessage>
+          </Center>
         </FormControl>
       </>
     );

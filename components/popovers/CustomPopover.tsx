@@ -47,7 +47,7 @@ export default function CustomPopover({
     return (
       <>
         <PopoverCloseContext.Provider
-          value={switchableButton ? { setIsEditing, isEditing } : onClose}
+          value={onClose}
         >
           {switchableButton ? (
             <>

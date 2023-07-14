@@ -9,10 +9,10 @@ import NextLink from "next/link";
 import Logo from "@/public/logo.svg";
 
 import { IoHomeOutline } from "react-icons/io5";
-import {RiAccountPinCircleLine} from 'react-icons/ri'
+import { RiAccountPinCircleLine } from "react-icons/ri";
+import { FaBlackTie } from "react-icons/fa";
 
 export default function Navbar() {
-
   const { isAuthenticated } = useAppSelector((state) => state.auth);
 
   const data = (isAuthenticated: boolean) => {
@@ -44,11 +44,18 @@ export default function Navbar() {
 
   return (
     <chakra.header id="header">
-        {isAuthenticated && (
-          <Flex as="nav">
-            <Show breakpoint="(min-width: 600px)">
-              <Flex w={'100%'} px="6" py="5" align="center" justify="center">
-              <Image position={'absolute'} left={0} src={Logo.src} alt="logo" h="50px" m={'0.5rem'}/>
+      {isAuthenticated && (
+        <Flex as="nav">
+          <Show breakpoint="(min-width: 600px)">
+            <Flex w={"100%"} px="6" py="5" align="center" justify="center">
+              <Image
+                position={"absolute"}
+                left={0}
+                src={Logo.src}
+                alt="logo"
+                h="50px"
+                m={"0.5rem"}
+              />
               {data(isAuthenticated).map(
                 (item, i) =>
                   item.isVisible && (
@@ -56,7 +63,9 @@ export default function Navbar() {
                       key={i}
                       as={NextLink}
                       borderRight={"solid #ffab00"}
-                      _first={{ borderLeft:"solid #ffab00" }}
+                      bg={"whiteAlpha.900"}
+                      color={"black"}
+                      _first={{ borderLeft: "solid #ffab00" }}
                       href={item.path ? item.path : ""}
                     >
                       <Button
@@ -71,15 +80,15 @@ export default function Navbar() {
                     </Link>
                   )
               )}
-              </Flex>
-            </Show>
-            <Show breakpoint="(max-width: 599px)">
-              <Box zIndex={1} w={'100%'} position={'fixed'} bottom={0} left={0}>
-              <MobileNavber/>
-              </Box>
-            </Show>
-          </Flex>
-        )}
+            </Flex>
+          </Show>
+          <Show breakpoint="(max-width: 599px)">
+            <Box zIndex={1} w={"100%"} position={"fixed"} bottom={0} left={0}>
+              <MobileNavber />
+            </Box>
+          </Show>
+        </Flex>
+      )}
     </chakra.header>
   );
 }

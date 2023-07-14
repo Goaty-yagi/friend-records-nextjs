@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { useEventCreateMutation } from '@/redux/features/eventApiSlice';
 import { unshiftEvent } from '@/redux/features/eventSlice';
-import { updateFriend } from '@/redux/features/friendSlice';
+import { updateFriendFromEventCreation } from '@/redux/features/friendSlice';
 
 
 export default function useEventCreate() {
@@ -30,7 +30,7 @@ export default function useEventCreate() {
 			.unwrap()
 			.then((res) => {
 				dispatch(unshiftEvent(res))
-				dispatch(updateFriend(res))
+				dispatch(updateFriendFromEventCreation(res))
 				toast.success('Syccessfully created!');
 			})
 			.catch((e) => {

@@ -60,12 +60,13 @@ const friendSlice = createSlice({
 		setFriendDetail: (state, action: PayloadAction<FriendResponse>) => {
 			state.friendDetail = action.payload
 		},
-		updateFriend: (state, action: PayloadAction<Events>) => {
+		updateFriendFromEventCreation: (state, action: PayloadAction<Events>) => {
 			state.friendDetail.last_log = action.payload.created_on;
 			state.friendDetail.sum += Number(action.payload.money);
 			state.friendList.forEach((e) => {
 				if (e.id === action.payload.friend) {
 					e.sum += Number(action.payload.money);
+					e.last_log === action.payload.created_on
 				}
 
 			});
@@ -74,7 +75,7 @@ const friendSlice = createSlice({
 			state.friendDetail.sum += action.payload.caledMoney
 			state.friendList.forEach((e) => {
 				if (e.id === action.payload.event.friend) {
-					e.sum +=action.payload.caledMoney;
+					e.sum += action.payload.caledMoney;
 				}
 			});
 		},
@@ -102,5 +103,5 @@ const friendSlice = createSlice({
 	}
 })
 
-export const { finishInitialLoad, setFriends, unshiftFriend, setFriendId, setFriendDetail, deleteFriend, patchFriend, updateFriend, updateFriendFromEventUpdate, updateFriendFromEventDelete } = friendSlice.actions
+export const { finishInitialLoad, setFriends, unshiftFriend, setFriendId, setFriendDetail, deleteFriend, patchFriend, updateFriendFromEventCreation, updateFriendFromEventUpdate, updateFriendFromEventDelete } = friendSlice.actions
 export default friendSlice.reducer
