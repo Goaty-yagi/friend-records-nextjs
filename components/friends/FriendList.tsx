@@ -168,7 +168,7 @@ export default function FriendList() {
                           {f.event_length}
                         </Flex>
                         <Flex w={"100%"} fontWeight={"bold"}>
-                          Last interaction<Text m={"0 0.2em"}>:</Text>
+                          Last Interaction<Text m={"0 0.2em"}>:</Text>
                           {dateConvert(f.last_log)}
                         </Flex>
                       </VStack>

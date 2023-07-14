@@ -104,7 +104,7 @@ export default function FriendInfo() {
                       <FriendBirthdayUpdatePopover  state={'patch'} defaultDate={friend.birthday}/>
                     </Flex>
                   )}
-                  <Text>Last interaction : {dateConvert(friend.last_log)}</Text>
+                  <Text>Last Interaction : {dateConvert(friend.last_log)}</Text>
                   {!friend.birthday && (
                     <FriendBirthdayUpdatePopover  state={'initial'}/>
                   )}

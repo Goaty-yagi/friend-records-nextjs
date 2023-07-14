@@ -64,7 +64,7 @@ export default function Layout() {
       setFriendsArray([...orderedArray]);
   }
   useEffect(() => {
-    if(!friendList.length) {
+    if(!friendList.length&&!isSuccess) {
       handleFriendList();
 
     } else {

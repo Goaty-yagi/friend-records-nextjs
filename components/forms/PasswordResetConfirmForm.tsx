@@ -38,6 +38,7 @@ export default function PasswordResetConfirmForm({ uid, token }: Props) {
       config={config}
       isLoading={isLoading}
       btnText="Request password reset"
+      btnPosition="center"
       onChange={onChange}
       onSubmit={onSubmit}
     />

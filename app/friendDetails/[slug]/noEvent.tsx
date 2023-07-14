@@ -1,4 +1,5 @@
 import { Flex, Text, Box } from "@chakra-ui/react";
+import CustomImage from "@/components/common/CustomImages";
 import Image from "next/legacy/image";
 
 export default function NoEvent() {
@@ -15,12 +16,12 @@ export default function NoEvent() {
         </Text>
         <Box
           boxShadow="xl"
-          border={"solid #cf5701"}
+          border={"solid #f5d7ff"}
           w={"100%"}
           h={{base:300, md:'500'}}
           position="relative"
         >
-          <Image
+          <CustomImage
             priority={true}
             src={"/images/event.jpg"}
             layout="fill"

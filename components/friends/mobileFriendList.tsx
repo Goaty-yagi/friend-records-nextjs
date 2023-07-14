@@ -33,7 +33,7 @@ export default function MobileFriendList({ friend, spentOrReceive }: Props) {
     },
     {
       icon: <BsCalendarEvent fontSize={"1.5rem"} color={"gray"} />,
-      header: <Box color={"white"}>Last interaction</Box>,
+      header: <Box color={"white"}>Last Interaction</Box>,
       text: dateConvert(friend.last_log),
       mr: mr,
     },

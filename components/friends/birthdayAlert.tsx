@@ -46,8 +46,8 @@ export default function BirthdayAlert({ date }: { date: string }) {
           />
           <Text fontWeight={"bold"}>
             {dateResultObj?(dateResultObj.deffDate === 0
-              ? "Birthday is Today!"
-              : "Birthday is Soon!"):''}
+              ? "Birthday Today!!"
+              : "Birthday coming up!"):''}
           </Text>
         </Flex>
       ) : (

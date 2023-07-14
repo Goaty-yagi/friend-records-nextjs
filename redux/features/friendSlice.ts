@@ -67,6 +67,7 @@ const friendSlice = createSlice({
 				if (e.id === action.payload.friend) {
 					e.sum += Number(action.payload.money);
 					e.last_log === action.payload.created_on
+					e.event_length += 1
 				}
 
 			});
