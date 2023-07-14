@@ -1,7 +1,7 @@
 import { Button, IconButton, Box } from "@chakra-ui/react";
 import CustomPopover from "./CustomPopover";
 import { useState } from "react";
-import { EventUpdateForm } from "../forms";
+import { EventUpdateForm } from "../forms/events";
 import { RiSettings4Line, RiEdit2Line } from "react-icons/ri";
 
 interface Props {

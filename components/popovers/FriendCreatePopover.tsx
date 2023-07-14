@@ -1,6 +1,6 @@
 import { Button, Box } from "@chakra-ui/react"
 import CustomPopover from "./CustomPopover"
-import { FriendCreateForm } from "../forms"
+import { FriendCreateForm } from "../forms/friends"
 import { useState } from "react"
 export default function FriendCreatePopover() {
     const [close, setClose] = useState(() => {})

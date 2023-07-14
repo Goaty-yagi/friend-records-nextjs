@@ -17,7 +17,7 @@ export default function NoEvent() {
           boxShadow="xl"
           border={"solid #cf5701"}
           w={"100%"}
-          h={300}
+          h={{base:300, md:'500'}}
           position="relative"
         >
           <Image

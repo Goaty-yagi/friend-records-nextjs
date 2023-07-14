@@ -4,11 +4,12 @@ import { useContext, useEffect, useState } from "react";
 import { PopoverCloseContext } from "@/contexts";
 import { Flex, Center, Button, IconButton } from "@chakra-ui/react";
 import useFriendBirthdayUpdate from "@/hooks/friends/use-friend-birthday-update";
-import { CustomNumInput, CustomSlider } from "./inputFields";
+import { CustomNumInput, CustomSlider } from "../inputFields";
 import { FaBirthdayCake } from "react-icons/fa";
-import AbstractForm from "./AbstractForm";
+import AbstractForm from "../AbstractForm";
 import { BsCheck2Square, BsFileX } from "react-icons/bs";
 import { RiEdit2Line } from "react-icons/ri";
+
 interface Props {
   state: "initial" | "patch";
 }

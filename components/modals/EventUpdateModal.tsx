@@ -1,7 +1,7 @@
 import CustomModal from "./CustomModal"
 import {RiSettings4Line} from "react-icons/ri"
 import { IconButton } from "@chakra-ui/react";
-import { EventUpdateForm } from "../forms"
+import { EventUpdateForm } from "../forms/events"
 
 interface Props {
     id:string;

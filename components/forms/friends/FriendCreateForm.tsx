@@ -2,8 +2,8 @@
 
 import useFriendCreate from "@/hooks/friends/use-friend-create";
 import { Form } from "@/components/forms";
-import { SvgSlider } from "../avatarsAndIcons";
-import { avatars } from "../avatarsAndIcons/avatars";
+import { SvgSlider } from "@/components/avatarsAndIcons";
+import { avatars } from "@/components/avatarsAndIcons/avatars";
 import { Box } from "@chakra-ui/react";
 import { useContext, FormEvent } from "react";
 import { PopoverCloseContext } from "@/contexts";

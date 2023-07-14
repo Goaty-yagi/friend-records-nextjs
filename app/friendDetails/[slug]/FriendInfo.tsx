@@ -18,7 +18,7 @@ import {
   FriendDelConfPopover,
   FriendBirthdayUpdatePopover,
 } from "@/components/popovers";
-import FriendNameUpdateForm from "@/components/forms/FriendNameUpdateForm";
+import FriendNameUpdateForm from "@/components/forms/friends/FriendNameUpdateForm";
 import { BsCheck2Square, BsFileX } from "react-icons/bs";
 import { RiEdit2Line } from "react-icons/ri";
 import { FriendContext } from "@/contexts";
@@ -67,7 +67,7 @@ export default function FriendInfo() {
   };
   const nameEditConfig = {
     title: "Name :",
-    iconToEdit: <RiEdit2Line color={"green"} />,
+    iconToEdit: <RiEdit2Line />,
     iconIsEditting: <BsCheck2Square color={"red"} />,
     iconIsReady: <BsCheck2Square color={"green"} />,
     defaultVal:friend.name

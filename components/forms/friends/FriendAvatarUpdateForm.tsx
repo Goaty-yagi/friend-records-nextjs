@@ -4,10 +4,10 @@ import { Box, Flex, Button } from "@chakra-ui/react";
 import { useContext } from "react";
 import { PopoverCloseContext } from "@/contexts";
 import useFriendAvatarUpdate from "@/hooks/friends/use-friend-avatar-update";
-import { SvgSlider } from "../avatarsAndIcons";
-import { avatars } from "../avatarsAndIcons/avatars";
+import { SvgSlider } from "@/components/avatarsAndIcons";
+import { avatars } from "@/components/avatarsAndIcons/avatars";
 import { useAppSelector } from "@/redux/hooks";
-import getAvaterObj from "../avatarsAndIcons/avatars";
+import getAvaterObj from "@/components/avatarsAndIcons/avatars";
 
 export function EditButton() {
   return (

@@ -1,11 +1,11 @@
 import { Button, Center } from "@chakra-ui/react";
 import CustomPopover from "./CustomPopover";
-import { FriendBirthdayUpdateForm } from "../forms";
+import { FriendBirthdayUpdateForm } from "../forms/friends";
 import { useState, useContext } from "react";
 import { FaBirthdayCake } from "react-icons/fa";
 import { PopoverCloseContext } from "@/contexts";
 import useFriendBirthdayUpdate from "@/hooks/friends/use-friend-birthday-update";
-import { BirthdayButton } from "../forms/FriendBirthdayUpdateForm";
+import { BirthdayButton } from "../forms/friends/FriendBirthdayUpdateForm";
 
 interface Props {
   state:'initial'|'patch'

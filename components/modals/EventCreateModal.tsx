@@ -1,7 +1,6 @@
 import CustomModal from "./CustomModal"
 import {RiSettings4Line} from "react-icons/ri"
-import EventCreateForm, { CreateButton }from "../forms/EventCreateForm";
-import { IconButton } from "@chakra-ui/react";
+import EventCreateForm, { CreateButton }from "@/components/forms/events/EventCreateForm";
 
 
 export default function EventCreateModal() {

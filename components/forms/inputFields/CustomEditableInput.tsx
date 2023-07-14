@@ -35,7 +35,7 @@ export default function CustomEditableInput({
   size = "sm",
   maxLength = 20,
   inputWidth='150px',
-  iconToEdit = <RiEdit2Line color={"green"} />,
+  iconToEdit = <RiEdit2Line />,
   iconIsEditting = <BsFileX color={"red"} />,
   iconIsReady = <BsCheck2Square color={"green"} />,
   onChange,

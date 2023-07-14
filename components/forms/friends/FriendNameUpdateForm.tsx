@@ -1,7 +1,7 @@
 "use client";
 
-import { CustomEditableInput } from "./inputFields";
-import { avatars } from "../avatarsAndIcons/avatars";
+import { CustomEditableInput } from "../inputFields";
+import { avatars } from "@/components/avatarsAndIcons/avatars";
 import { Box } from "@chakra-ui/react";
 import { useContext, FormEvent } from "react";
 import { PopoverCloseContext } from "@/contexts";

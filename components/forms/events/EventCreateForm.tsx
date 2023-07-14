@@ -1,13 +1,13 @@
 "use client";
 
-import { SvgSlider } from "../avatarsAndIcons";
-import { eventIcons } from "../avatarsAndIcons/icons";
+import { SvgSlider } from "@/components/avatarsAndIcons";
+import { eventIcons } from "@/components/avatarsAndIcons/icons";
 import { useContext, FormEvent } from "react";
 import { PopoverCloseContext, ModalCloseContext } from "@/contexts";
 import useEventCreate from "@/hooks/events/use-event-create";
 import { Flex, Box, Button } from "@chakra-ui/react";
-import { Form } from "./index";
-import { CustomNumInput , CustomSlider, CustomRadio} from "./inputFields";
+import { Form } from "../index";
+import { CustomNumInput , CustomSlider, CustomRadio} from "../inputFields";
 
 
 export function CreateButton() {
