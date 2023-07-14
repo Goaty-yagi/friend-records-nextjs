@@ -28,7 +28,7 @@ interface FriendArgs {
 	avatar:string
 }
 
-const friendApiSlice = apiSlice.injectEndpoints({
+export const friendApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
 		friendCreate: builder.mutation<FriendResponse,FriendArgs>({
 			query: ({ name, user, avatar }) => ({

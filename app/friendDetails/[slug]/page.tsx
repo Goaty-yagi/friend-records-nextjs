@@ -1,81 +1,28 @@
-"use client";
+import type { Metadata } from "next";
+import { store } from "@/redux/store";
+import Layout from "./layout";
+import React from "react";
+import { friendApiSlice } from "@/redux/features/friendApiSlice";
 
-import { useEffect, useState } from "react";
-import { useGetFriendDetailMutation } from "@/redux/features/friendApiSlice";
-import { FriendContext } from "@/contexts/index";
-import FriendInfo from "./FriendInfo";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { setFriendId, setFriendDetail } from "@/redux/features/friendSlice";
-import { setEventList as setEvents } from "@/redux/features/eventSlice";
-import { EventCreatePopover } from "@/components/popovers";
-import { Flex } from "@chakra-ui/react";
-import { Spinner } from "@/components/common";
-import { EventProps } from "@/redux/features/eventApiSlice";
-import EventList from "./eventList";
+const appName = process.env.APP_NAME;
 
-interface Props {
-  params: {
-    slug: string;
-  };
-}
-interface Events {
-  name: string;
-  friend: string;
-  money: number;
-  created_on: string;
-  icon: string;
-}
+// const req = async (id: string) =>
+//   await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/friend-detail/${id}`);
 
-export default function Page({ params }: Props) {
-  const { slug } = params;
-  const dispatch = useAppDispatch();
-  const [friend, setFriend] = useState({});
-  const eventList = useAppSelector((state) => state.event).eventList;
-  const [isLoading, setIsLoading] = useState(true);
-  const [getFriendDetail, {}] = useGetFriendDetailMutation();
-  useEffect(() => {
-    // setFriend({});
-    dispatch(setFriendId(slug));
-    if(!eventList.length) {
-      getFriendDetail(slug)
-      .unwrap()
-      .then((res) => {
-        dispatch(setEvents(res.event));
-        dispatch(setFriendDetail(res));
-        setFriend(res);
-      })
-      .catch((e) => {
-        // do something
-      });
-    }
-    return setIsLoading(false);
-  }, []);
-  return (
-    <>
-      {isLoading ? (
-        <>
-          <Flex h={"90vh"} alignItems={"center"}>
-            <Spinner size={"lg"} />
-          </Flex>
-        </>
-      ) : (
-        <>
-          <FriendContext.Provider
-            value={{ slug, friend, eventList, setFriend }}
-          >
-            <FriendInfo />
-            <Flex
-              h={"100%"}
-              mt={"1rem"}
-              flexDirection={"column"}
-              alignItems={"center"}
-            >
-              <EventCreatePopover />
-              <EventList />
-            </Flex>
-          </FriendContext.Provider>
-        </>
-      )}
-    </>
-  );
+export const metadata: Metadata = {
+  title: `${appName} | friend dtail `,
+  description: `${appName} friend dtail `,
+};
+// export async function generateMetadata({ params }: { params: any }) {
+//   const slug = params.slug
+//   const friendList = store.getState().friend;
+//   console.log("FL",friendList)
+//   // const friend = friendList.find((e) => e.id === slug)
+//   return {
+//     title: `${appName} | friend dtail`,
+//     description: `${appName} friend dtail`,
+//   };
+// }
+export default function Page({ params }: { params: any }) {
+  return <Layout params={params} />;
 }
