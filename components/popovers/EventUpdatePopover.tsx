@@ -9,9 +9,10 @@ interface Props {
   name: string;
   money: number;
   icon: string;
+  friendId:string
 }
 
-export default function EventUpdatePopover({ id, name, money, icon }: Props) {
+export default function EventUpdatePopover({ id, name, money, icon, friendId }: Props) {
   const [close, setClose] = useState(() => {});
   function CreateButton() {
     return (
@@ -31,7 +32,7 @@ export default function EventUpdatePopover({ id, name, money, icon }: Props) {
     <>
       <CustomPopover
         trigger={<CreateButton />}
-        body={<EventUpdateForm {...{ id, name, eventMoney:money, icon }} />}
+        body={<EventUpdateForm {...{ id, name, eventMoney:money, icon,friendId }} />}
       />
     </>
   );

@@ -7,13 +7,14 @@ interface Props {
     id:string;
     name:string;
     money:number;
-    icon:string
+    icon:string;
+    friendId:string
 }
 
-export default function EventUpdateModal({ id, name, money, icon }:Props) {
+export default function EventUpdateModal({ id, name, money, icon,friendId }:Props) {
     return (
         <>
-         <CustomModal isCentered={true} title={"Event-Info"} open={ <IconButton aria-label="evnet-info" color={'gray'} icon={<RiSettings4Line/>}/>} content={<EventUpdateForm {...{id, name, eventMoney:money, icon }}/>}/>
+         <CustomModal isCentered={true} title={"Event-Info"} open={ <IconButton aria-label="evnet-info" color={'gray'} icon={<RiSettings4Line/>}/>} content={<EventUpdateForm {...{id, name, eventMoney:money, icon,friendId }}/>}/>
         </>
     )
 }

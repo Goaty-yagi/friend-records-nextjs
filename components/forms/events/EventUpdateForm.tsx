@@ -19,9 +19,10 @@ interface Props {
   name: string;
   eventMoney: number;
   icon: string;
+  friendId:string;
 }
 
-export default function EventUpdateForm({ id, name, eventMoney, icon }: Props) {
+export default function EventUpdateForm({ id, name, eventMoney, icon, friendId}: Props) {
   const format = (val: number) => `$ ` + val;
   useEffect(() => {
     setEventId(id);
@@ -122,7 +123,7 @@ export default function EventUpdateForm({ id, name, eventMoney, icon }: Props) {
             />
           </Flex>
           <Flex mt={"1rem"} mb={'0.5rem'} justifyContent={"flex-end"}>
-            <DeleteEvent {...{ id, name, money: eventMoney }} />
+            <DeleteEvent {...{ id, name, money: eventMoney,friendId }} />
             <Button isDisabled={!isChange} ml={'0.5rem'} type="submit">
               Update
             </Button>

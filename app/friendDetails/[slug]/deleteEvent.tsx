@@ -12,6 +12,7 @@ interface Props {
   id: string;
   name: string;
   money: number;
+  friendId:string
 }
 
 export default function DeleteEvent({ ...event }: Props) {
@@ -24,8 +25,9 @@ export default function DeleteEvent({ ...event }: Props) {
     deleteEvent(event.id)
       .unwrap()
       .then(() => {
+        console.log("EVE",event)
         dispatch(setDeleteEvent(event.id));
-        dispatch(updateFriendFromEventDelete(event.money));
+        dispatch(updateFriendFromEventDelete({money:event.money,id:event.friendId}));
         onClose();
         toast.success(`Your Event ${event.name} Successfully deleteed!`);
       });

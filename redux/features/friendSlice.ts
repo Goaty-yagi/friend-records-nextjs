@@ -66,7 +66,7 @@ const friendSlice = createSlice({
 			state.friendList.forEach((e) => {
 				if (e.id === action.payload.friend) {
 					e.sum += Number(action.payload.money);
-					e.last_log === action.payload.created_on
+					e.last_log = action.payload.created_on
 					e.event_length += 1
 				}
 
@@ -80,8 +80,15 @@ const friendSlice = createSlice({
 				}
 			});
 		},
-		updateFriendFromEventDelete: (state, action: PayloadAction<number>) => {
-			state.friendDetail.sum -= Number(action.payload);
+		updateFriendFromEventDelete: (state, action: PayloadAction<{money:string,id:string}>) => {
+			console.log("action",action.payload)
+			state.friendDetail.sum -= Number(action.payload.money);
+			state.friendList.forEach((e, index) => {
+				if (e.id === action.payload.id) {
+					e.sum -= Number(action.payload.money);
+					e.event_length -= 1
+				}
+			})
 		},
 		patchFriend: (state, action: PayloadAction<FriendResponse>) => {
 			state.friendDetail = action.payload
