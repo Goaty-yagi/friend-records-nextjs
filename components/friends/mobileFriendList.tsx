@@ -42,7 +42,7 @@ export default function MobileFriendList({ friend, spentOrReceive }: Props) {
     <Box h={'105px'} display={{ md: "none" }}>
       <Stack position={"relative"} spacing={"-10px"}>
         {config.map((e, index) => (
-          <Box mt={'-0.4rem'} key={index}>
+          <Box mt={'-0.4rem'} key={index} fontFamily={'"Gill Sans", sans-serif'}>
             <CustomField {...e} />
           </Box>
         ))}

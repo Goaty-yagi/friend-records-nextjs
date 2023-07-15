@@ -12,9 +12,17 @@ const breakpoints = {
   "2xl": "1550px",
   "3xl": "1800px",
 };
+const styles = {
+  global: {
+    body: {
+      fontFamily: 'Futura',
+    },
+  }
+}
 
 const theme = extendTheme({
   breakpoints,
+  styles
 });
 
 export function ChakraProviders({ children }: { children: React.ReactNode }) {

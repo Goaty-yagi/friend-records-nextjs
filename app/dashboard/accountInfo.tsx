@@ -42,18 +42,6 @@ export default function AccountInfo() {
             {config.map((each, index) => (
               <CustomField key={index} icon={each.icon} header={each.header} text={each.text}/>
             ))}
-            {/* <CustomField
-              icon={<HiUser fontSize={"2rem"} color={"gray"} />}
-              header={"USER NAME"}
-              // text={user.username}
-            //   text={
-            //     <EditableInput
-            //       ref={userNameRef}
-            //       value={user.username}
-            //       func={editUser}
-            //     />
-            //   }
-            /> */}
           </Stack>
         </Flex>
       </>
