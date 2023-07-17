@@ -20,13 +20,10 @@ export default function LayoutWrapper({ children }: Props) {
       top={0}
       pt={{base:0, md:'80px'}}
       bg={isAuthenticated ? 'url("/images/background.png")' : ""}
-      // layout={"fill"}
       backgroundSize={"cover"}
       backgroundPosition={"center"}
-      // justifyContent={"center"}
       role="img"
       zIndex={-1}
-      // alt="background"
     >
       {isLoading ? (
         <>
