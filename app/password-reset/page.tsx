@@ -2,7 +2,7 @@
 
 import { PasswordResetForm } from "@/components/forms";
 import { Heading, Flex, Box } from "@chakra-ui/react";
-
+import { PrivateRouterWithAuth } from "@/components/common/PrivateRouter";
 import type { Metadata } from "next";
 
 // const appName = process.env.APP_NAME;
@@ -11,18 +11,20 @@ import type { Metadata } from "next";
 //   description: `${appName} password reset page`,
 // }
 
-
 export default function Page() {
-  console.log('PasswordResetForm')
+  console.log("PasswordResetForm");
   return (
     <>
-     <Flex flexDirection={"column"} w={"100%"} alignItems={"center"}>
-        <Box>
-          <Heading  mt={'2rem'} mb={'1rem'}>Password Reset</Heading>
-          <PasswordResetForm />
-        </Box>
-      </Flex>
+      <PrivateRouterWithAuth>
+        <Flex flexDirection={"column"} w={"100%"} alignItems={"center"}>
+          <Box>
+            <Heading mt={"2rem"} mb={"1rem"}>
+              Password Reset
+            </Heading>
+            <PasswordResetForm />
+          </Box>
+        </Flex>
+      </PrivateRouterWithAuth>
     </>
   );
-
 }
