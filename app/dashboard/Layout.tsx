@@ -7,6 +7,7 @@ import { useGetFriendListMutation } from "@/redux/features/friendApiSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { UserContext } from "@/contexts";
 import { Box } from "@chakra-ui/react";
+import { PrivateRouterWithoutAuth } from "@/components/common/PrivateRouter";
 import { setFriends } from "@/redux/features/friendSlice";
 
 interface Props {
@@ -39,7 +40,7 @@ export default function Layout({ children }: Props) {
     }
     handleFriendList();
   }, []);
-  
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const autoResize = () => {
@@ -52,19 +53,25 @@ export default function Layout({ children }: Props) {
 
   return (
     <>
-      {user ? (
-        <>
-          <RequireAuth>
-            <UserContext.Provider
-              value={{ user: userState, setUser: setUserState,innerHeight:innerHeight }}
-            >
-              {children}
-            </UserContext.Provider>
-          </RequireAuth>
-        </>
-      ) : (
-        <></>
-      )}
+      <PrivateRouterWithoutAuth>
+        {user ? (
+          <>
+            <RequireAuth>
+              <UserContext.Provider
+                value={{
+                  user: userState,
+                  setUser: setUserState,
+                  innerHeight: innerHeight,
+                }}
+              >
+                {children}
+              </UserContext.Provider>
+            </RequireAuth>
+          </>
+        ) : (
+          <></>
+        )}
+      </PrivateRouterWithoutAuth>
     </>
   );
 }

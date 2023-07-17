@@ -8,17 +8,16 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setFriendId, setFriendDetail } from "@/redux/features/friendSlice";
 import { setEventList as setEvents } from "@/redux/features/eventSlice";
 import { EventCreatePopover } from "@/components/popovers";
-import { Flex,Show } from "@chakra-ui/react";
+import { Flex, Show } from "@chakra-ui/react";
 import { Spinner } from "@/components/common";
-import { EventProps } from "@/redux/features/eventApiSlice";
 import { EventCreateModal } from "@/components/modals";
-import { store } from "@/redux/store";
+import { PrivateRouterWithoutAuth } from "@/components/common/PrivateRouter";
 import EventList from "./eventList";
 
 interface Props {
   params: {
     slug: string;
-    children?:React.ReactNode
+    children?: React.ReactNode;
   };
 }
 interface Events {
@@ -39,7 +38,7 @@ export default function Layout({ params }: Props) {
   useEffect(() => {
     setFriend({});
     dispatch(setFriendId(slug));
-      getFriendDetail(slug)
+    getFriendDetail(slug)
       .unwrap()
       .then((res) => {
         dispatch(setEvents(res.event));
@@ -53,35 +52,37 @@ export default function Layout({ params }: Props) {
   }, []);
   return (
     <>
-      {isLoading ? (
-        <>
-          <Flex h={"90vh"} alignItems={"center"}>
-            <Spinner size={"lg"} />
-          </Flex>
-        </>
-      ) : (
-        <>
-          <FriendContext.Provider
-            value={{ slug, friend, eventList, setFriend }}
-          >
-            <FriendInfo />
-            <Flex
-              h={"100%"}
-              mt={"0.3rem"}
-              flexDirection={"column"}
-              alignItems={"center"}
-            >
-               <Show breakpoint="(min-width: 600px)">
-               <EventCreatePopover />
-               </Show>
-               <Show breakpoint="(max-width: 599px)">
-               <EventCreateModal/>
-                </Show>
-              <EventList />
+      <PrivateRouterWithoutAuth>
+        {isLoading ? (
+          <>
+            <Flex h={"90vh"} alignItems={"center"}>
+              <Spinner size={"lg"} />
             </Flex>
-          </FriendContext.Provider>
-        </>
-      )}
+          </>
+        ) : (
+          <>
+            <FriendContext.Provider
+              value={{ slug, friend, eventList, setFriend }}
+            >
+              <FriendInfo />
+              <Flex
+                h={"100%"}
+                mt={"0.3rem"}
+                flexDirection={"column"}
+                alignItems={"center"}
+              >
+                <Show breakpoint="(min-width: 600px)">
+                  <EventCreatePopover />
+                </Show>
+                <Show breakpoint="(max-width: 599px)">
+                  <EventCreateModal />
+                </Show>
+                <EventList />
+              </Flex>
+            </FriendContext.Provider>
+          </>
+        )}
+      </PrivateRouterWithoutAuth>
     </>
   );
 }
