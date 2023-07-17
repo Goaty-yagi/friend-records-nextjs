@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useState, useEffect, useContext, ChangeEvent, useMemo } from "react";
-import { Flex, Text, Box, VStack } from "@chakra-ui/react";
+import { Flex, Text, Box, VStack, DarkMode } from "@chakra-ui/react";
 import Image from "next/legacy/image";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { dateConvert } from "@/utils/dates";
@@ -118,7 +118,7 @@ export default function FriendList() {
                   <DateAlert date={f.last_log} />
                 </Flex>
                 <Link href={{pathname:"friendDetails/" + f.id, query: { name:f.name }}}  scroll={false}>
-                  <CardBody>
+                  <CardBody >
                     <Flex alignItems={"center"}>
                       <Flex
                         position={"relative"}

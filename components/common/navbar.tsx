@@ -47,7 +47,7 @@ export default function Navbar() {
       {isAuthenticated && (
         <Flex as="nav">
           <Show breakpoint="(min-width: 600px)">
-            <Flex w={"100%"} px="6" py="5" align="center" justify="center">
+            <Flex w={"100%"} px="6" py="5" align="center" justify="flex-end">
               <Image
                 position={"absolute"}
                 left={0}
@@ -62,10 +62,13 @@ export default function Navbar() {
                     <Link
                       key={i}
                       as={NextLink}
-                      borderRight={"solid #ffab00"}
-                      bg={"whiteAlpha.900"}
-                      color={"black"}
-                      _first={{ borderLeft: "solid #ffab00" }}
+                      border={"solid #efafc5"}
+                      borderRadius={'20px'}
+                      bg={"#313131f2"}
+                      color={"white"}
+                      mr={'0.5rem'}
+                      // _first={{ borderLeft: "solid #ffab00" }}
+                      _hover={{ bg: "gray" }}
                       href={item.path ? item.path : ""}
                     >
                       <Button
@@ -73,7 +76,6 @@ export default function Navbar() {
                         borderRadius={"none"}
                         leftIcon={item.icon ? item.icon : <></>}
                         p={"0 1.3rem"}
-                        _hover={{ bg: "gray" }}
                       >
                         {item.labelText}
                       </Button>

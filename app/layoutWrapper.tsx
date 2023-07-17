@@ -3,6 +3,8 @@
 import { Flex, Box } from "@chakra-ui/react";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { useAppSelector } from "@/redux/hooks";
+import { useColorModeValue, useColorMode } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { Spinner } from "@/components/common";
 
 interface Props {
@@ -10,8 +12,22 @@ interface Props {
 }
 
 export default function LayoutWrapper({ children }: Props) {
+  const { colorMode, toggleColorMode } = useColorMode();
+  useEffect(() => {
+    if(typeof window !== 'undefined') {
+      console.log("BG",bg)
+      document.body.style.height = '100vh'
+      document.body.style.zIndex = '-1'
+      document.body.style.background = bg
+      document.body.style.backgroundRepeat = 'no-repeat'
+    }
+  },[colorMode])
   const { data: user, isLoading } = useRetrieveUserQuery();
   const { isAuthenticated } = useAppSelector((state) => state.auth);
+  const bg = useColorModeValue(
+    "linear-gradient(to bottom, green, pink)",
+    "linear-gradient(to bottom, #141e30, #243b55)"
+  );
   return (
     <Box
       position={"absolute"}

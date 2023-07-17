@@ -15,7 +15,7 @@ interface Props {
 export default function EventUpdateModal({ ...event }:EventProps) {
     return (
         <>
-         <CustomModal isCentered={true} title={"Event-Info"} open={ <IconButton aria-label="evnet-info" color={'gray'} icon={<RiSettings4Line/>}/>} content={<EventUpdateForm {...event}/>}/>
+         <CustomModal isCentered={true} title={"Event-Info"} open={ <IconButton size={'xs'} aria-label="evnet-info" color={'gray'} icon={<RiSettings4Line/>}/>} content={<EventUpdateForm {...event}/>}/>
         </>
     )
 }
