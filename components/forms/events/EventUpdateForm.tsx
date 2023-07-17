@@ -11,6 +11,7 @@ import EventMoneyUpdateForm from "./EventMoneyUpdateForm";
 import { AbstractForm } from "../index";
 import { ModalCloseContext } from "@/contexts";
 import EventIconUpdateForm from "./EventIconUpdateForm";
+import { EventProps } from "@/redux/features/eventApiSlice";
 import DeleteEvent from "@/app/friendDetails/[slug]/deleteEvent";
 import { CustomNumInput, CustomSlider, CustomRadio } from "../inputFields";
 
@@ -22,8 +23,10 @@ interface Props {
   friendId:string;
 }
 
-export default function EventUpdateForm({ id, name, eventMoney, icon, friendId}: Props) {
+export default function EventUpdateForm({ ...event}: EventProps) {
   const format = (val: number) => `$ ` + val;
+  const {id, name, icon } = event
+  const eventMoney = event.money
   useEffect(() => {
     setEventId(id);
     setDefaultMoney(eventMoney);
@@ -123,7 +126,7 @@ export default function EventUpdateForm({ id, name, eventMoney, icon, friendId}:
             />
           </Flex>
           <Flex mt={"1rem"} mb={'0.5rem'} justifyContent={"flex-end"}>
-            <DeleteEvent {...{ id, name, money: eventMoney,friendId }} />
+            <DeleteEvent {... event} />
             <Button isDisabled={!isChange} ml={'0.5rem'} type="submit">
               Update
             </Button>

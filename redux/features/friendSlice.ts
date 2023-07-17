@@ -80,12 +80,12 @@ const friendSlice = createSlice({
 				}
 			});
 		},
-		updateFriendFromEventDelete: (state, action: PayloadAction<{money:string,id:string}>) => {
+		updateFriendFromEventDelete: (state, action: PayloadAction<{money:number,id:string}>) => {
 			console.log("action",action.payload)
 			state.friendDetail.sum -= Number(action.payload.money);
 			state.friendList.forEach((e, index) => {
 				if (e.id === action.payload.id) {
-					e.sum -= Number(action.payload.money);
+					e.sum -= action.payload.money;
 					e.event_length -= 1
 				}
 			})

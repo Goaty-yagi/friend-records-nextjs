@@ -47,7 +47,7 @@ export default function EventList() {
               bg={colorHandler(e.money)}
             >
               <Flex position={"absolute"} right={0}  color={'darkblue'}>
-                <EventUpdateModal name={e.name} money={e.money} icon={e.icon} id={e.id} friendId={e.friend}/>
+                <EventUpdateModal {...e}/>
               </Flex>
               <CardBody p={{base:2,md:6}}>
                 <Flex alignItems={"center"}>

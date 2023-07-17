@@ -1,7 +1,6 @@
 import { Button, IconButton, Box } from "@chakra-ui/react";
 import CustomPopover from "./CustomPopover";
 import { useState } from "react";
-import { EventUpdateForm } from "../forms";
 import { RiSettings4Line, RiEdit2Line } from "react-icons/ri";
 import EventMoneyUpdateForm from '../forms/events/EventMoneyUpdateForm'
 

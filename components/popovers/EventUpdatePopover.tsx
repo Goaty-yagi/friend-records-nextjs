@@ -2,17 +2,10 @@ import { Button, IconButton, Box } from "@chakra-ui/react";
 import CustomPopover from "./CustomPopover";
 import { useState } from "react";
 import { EventUpdateForm } from "../forms/events";
+import { EventProps } from "@/redux/features/eventApiSlice";
 import { RiSettings4Line, RiEdit2Line } from "react-icons/ri";
 
-interface Props {
-  id: string;
-  name: string;
-  money: number;
-  icon: string;
-  friendId:string
-}
-
-export default function EventUpdatePopover({ id, name, money, icon, friendId }: Props) {
+export default function EventUpdatePopover({ ...event }: EventProps) {
   const [close, setClose] = useState(() => {});
   function CreateButton() {
     return (
@@ -32,7 +25,7 @@ export default function EventUpdatePopover({ id, name, money, icon, friendId }: 
     <>
       <CustomPopover
         trigger={<CreateButton />}
-        body={<EventUpdateForm {...{ id, name, eventMoney:money, icon,friendId }} />}
+        body={<EventUpdateForm {...event} />}
       />
     </>
   );

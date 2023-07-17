@@ -14,7 +14,7 @@ export default function EventIconUpdatePopover({ id, icon, button }: Props) {
     
     return (
         <>
-        <CustomPopover trigger={button} body={<EventIconUpdateForm icon={icon} id={id}/>} />
+        {/* <CustomPopover trigger={button} body={<EventIconUpdateForm icon={icon} id={id}/>} /> */}
         </>
     )
 }

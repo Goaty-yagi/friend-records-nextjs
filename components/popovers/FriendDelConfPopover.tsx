@@ -1,6 +1,5 @@
-import { Button, CloseButton } from "@chakra-ui/react"
+import { CloseButton } from "@chakra-ui/react"
 import CustomPopover from "./CustomPopover"
-import { FriendCreateForm } from "../forms"
 import { useState } from "react"
 import DeleteFriend from "@/app/friendDetails/[slug]/deleteFriend"
 

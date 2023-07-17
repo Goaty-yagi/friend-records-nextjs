@@ -1,6 +1,7 @@
 import CustomModal from "./CustomModal"
 import {RiSettings4Line} from "react-icons/ri"
 import { IconButton } from "@chakra-ui/react";
+import { EventProps } from "@/redux/features/eventApiSlice";
 import { EventUpdateForm } from "../forms/events"
 
 interface Props {
@@ -11,10 +12,10 @@ interface Props {
     friendId:string
 }
 
-export default function EventUpdateModal({ id, name, money, icon,friendId }:Props) {
+export default function EventUpdateModal({ ...event }:EventProps) {
     return (
         <>
-         <CustomModal isCentered={true} title={"Event-Info"} open={ <IconButton aria-label="evnet-info" color={'gray'} icon={<RiSettings4Line/>}/>} content={<EventUpdateForm {...{id, name, eventMoney:money, icon,friendId }}/>}/>
+         <CustomModal isCentered={true} title={"Event-Info"} open={ <IconButton aria-label="evnet-info" color={'gray'} icon={<RiSettings4Line/>}/>} content={<EventUpdateForm {...event}/>}/>
         </>
     )
 }

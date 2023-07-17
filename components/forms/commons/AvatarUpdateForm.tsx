@@ -30,11 +30,13 @@ export function EditButton() {
 
 export default function AvatarUpdateForm({state}:{state:string}) {
     // state should be friend or avatar
-  const { icon, onChange, onSubmit } = state==='friend'?useFriendAvatarUpdate():useUserAvatarUpdate();
+  const friendUpdate = useFriendAvatarUpdate()
+  const userUpdate = useUserAvatarUpdate();
   const onClose = useContext(PopoverCloseContext);
   const {friendDetail} = useAppSelector((state) => state.friend)
   const { data: user } = useRetrieveUserQuery();
   const defaultAvatar = state==='friend'?friendDetail.avatar:user?user.avatar:''
+  const {icon, onChange, onSubmit} = state==='friend'?friendUpdate:userUpdate
   const CustomOnSubmit = () => {
     onSubmit()
     onClose()

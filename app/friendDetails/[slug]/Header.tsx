@@ -10,7 +10,7 @@ interface Props {
   outerRef: any;
 }
 
-const Header = forwardRef(({ children, innerRef, outerRef }: Props) => {
+export default function Header({ children, innerRef, outerRef }: Props) {
   const friend = useAppSelector((state) => state.friend).friendDetail;
   return (
     <Box w={"100%"} ref={outerRef} overflow={'hidden'}>
@@ -25,7 +25,7 @@ const Header = forwardRef(({ children, innerRef, outerRef }: Props) => {
             borderRadius={"50vh"}
             bg={"#cfcfcf"}
           >
-            <Image src={getAvaterObj(friend.avatar)} layout="fill" />
+            <Image src={getAvaterObj(friend.avatar)} alt={'avatar'} layout="fill" />
             <Flex h={"100%"} justifyContent={"center"}>
               <FriendAvatarUpdatePopover />
             </Flex>
@@ -43,6 +43,5 @@ const Header = forwardRef(({ children, innerRef, outerRef }: Props) => {
       </Flex>
     </Box>
   );
-});
+};
 
-export default Header;
