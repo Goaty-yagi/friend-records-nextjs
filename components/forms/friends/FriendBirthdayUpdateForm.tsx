@@ -111,7 +111,7 @@ export default function FriendBirthdayUpdateForm({
       max: 12,
       min: 1,
       style: {
-        w: "60px",
+        w: "70px",
         mr: "0.3rem",
         size: "sm",
       },
@@ -123,7 +123,7 @@ export default function FriendBirthdayUpdateForm({
       max: 31,
       min: 1,
       style: {
-        w: "60px",
+        w: "70px",
         size: "sm",
       },
     },

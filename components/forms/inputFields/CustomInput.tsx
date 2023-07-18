@@ -73,9 +73,11 @@ export default function CustomInput({
           )}
         </Flex>
         <InputGroup>
-          <InputLeftElement pointerEvents="none">
-            {leftElement()}
-          </InputLeftElement>
+        {leftElement()&& (
+           <InputLeftElement pointerEvents="none">
+           {leftElement()}
+         </InputLeftElement>
+        )}
           <Input
             placeholder={placeholder}
             name={labelId}

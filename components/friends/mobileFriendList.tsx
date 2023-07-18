@@ -5,6 +5,7 @@ import { CustomField } from "../fields";
 import { BsCalendarEvent } from "react-icons/bs";
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { useAppSelector } from "@/redux/hooks";
+import useThemeColors from "@/hooks/use-theme-colors";
 import { FriendResponse } from "@/redux/features/friendApiSlice";
 
 interface Props {
@@ -15,9 +16,13 @@ interface Props {
 export default function MobileFriendList({ friend, spentOrReceive }: Props) {
   const { friendList } = useAppSelector((state) => state.friend);
   const mr = "0.5rem";
+  const {theme} =useThemeColors('opposite')
   const color = () => {
-    return friend.sum >= 0 ? "#c0fafb" : "#ff9393";
+    return friend.sum >= 0 ? plusTheme : minusTheme;
   };
+
+  const plusTheme = useThemeColors('plus-text').theme
+  const minusTheme = useThemeColors('minus-text').theme
   const config = [
     {
       icon: <FaMoneyCheckAlt fontSize={"1.5rem"} color={color()} />,
@@ -27,13 +32,13 @@ export default function MobileFriendList({ friend, spentOrReceive }: Props) {
     },
     {
       icon: <FaPeopleArrows fontSize={"1.5rem"} color={"gray"} />,
-      header: <Text color={"white"}>Number of events</Text>,
+      header: <Text color={theme}>Number of events</Text>,
       text: friend.event_length,
       mr: mr,
     },
     {
       icon: <BsCalendarEvent fontSize={"1.5rem"} color={"gray"} />,
-      header: <Box color={"white"}>Last Interaction</Box>,
+      header: <Box color={theme}>Last Interaction</Box>,
       text: dateConvert(friend.last_log),
       mr: mr,
     },

@@ -6,7 +6,7 @@ export default function FriendCreatePopover() {
     const [close, setClose] = useState(() => {})
     function CreateButton() {
         return (
-            <Button>Create</Button>
+            <Button bg={'#337bd3'} border={'solid #ffdce2'} color={'white'} size={'lg'} _hover={{bg:'#1e6595'}}>Create</Button>
         )
     }
     

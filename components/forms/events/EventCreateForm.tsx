@@ -12,7 +12,7 @@ import { CustomNumInput , CustomSlider, CustomRadio} from "../inputFields";
 
 export function CreateButton() {
   return (
-      <Button>Create</Button>
+    <Button bg={'#337bd3'} border={'solid #ffdce2'} color={'white'} size={'lg'} _hover={{bg:'#1e6595'}}>Create</Button>
   )
 }
 export default function EventCreateForm() {

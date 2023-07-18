@@ -12,3 +12,9 @@ export const monthColors = [
     '#f94a6e',
     '#3dcbff'
 ]
+export const themeColor = {
+    bg:{
+        light:'linear-gradient(to bottom, green, pink)',
+        dark:'linear-gradient(to bottom, #141e30, #243b55)'
+    }
+}

@@ -12,7 +12,7 @@ export default function Buttons() {
       color={"white"}
       fontSize={{
         base: "1.2rem",
-        md: "2rem",
+        md: "1.7rem",
       }}
       width={{ base: "5rem", md: "8rem" }}
       height={{
@@ -34,7 +34,7 @@ export default function Buttons() {
       transition={".3s"}
       fontSize={{
         base: "1.2rem",
-        md: "2rem",
+        md: "1.7rem",
         xl: "2rem",
       }}
       width={{ base: "5rem", md: "8rem" }}

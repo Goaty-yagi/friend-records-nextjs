@@ -48,7 +48,7 @@ export default function CustomSlider({ sliderConfig, onChange }: SliderProps) {
           <SliderTrack>
             <SliderFilledTrack />
           </SliderTrack>
-          <SliderThumb color={"gray"} fontSize="sm" boxSize="20px" />
+          <SliderThumb color={"gray"} fontSize="sm" boxSize="12px" />
         </Slider>
       ))}
     </Flex>

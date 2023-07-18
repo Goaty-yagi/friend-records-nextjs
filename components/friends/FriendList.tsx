@@ -11,6 +11,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { FriendSearch, FriendSort, MobileFriendList } from "./index";
 import { FriendResponse } from "@/redux/features/friendApiSlice";
 import { FriendContext } from "@/contexts";
+import useThemeColors from "@/hooks/use-theme-colors";
 import { YScrollLimitationWrapper } from "@/components/common";
 
 export const sortOptionStates = {
@@ -97,6 +98,8 @@ export default function FriendList() {
   function spentOrReceive(amount: number) {
     return amount >= 0 ? "I owe them" : "They owe me";
   }
+  const plusTheme = useThemeColors('plus-text').theme
+  const minusTheme = useThemeColors('minus-text').theme
   return (
     <FriendContext.Provider value={{ friendsArray, onChange, onClick }}>
       <FriendSearch />
@@ -107,7 +110,7 @@ export default function FriendList() {
           </Flex>
           <YScrollLimitationWrapper isLimited={true}>
             {friendsArray.map((f: any, index: number) => (
-              <Card w={"100%"} key={index} mb={"0.5rem"} color={"gray"}>
+              <Card w={"100%"} key={index} mb={"0.5rem"} >
                 <Flex
                   fontSize={{ base: "0.7rem", sm: "1rem" }}
                   position={"absolute"}
@@ -155,7 +158,7 @@ export default function FriendList() {
                         align="stretch"
                       >
                         <Flex
-                          color={f.sum >= 0 ? "#c0fafb" : "#ff9393"}
+                          color={f.sum >= 0 ? plusTheme : minusTheme}
                           w={"100%"}
                           fontWeight={"bold"}
                         >

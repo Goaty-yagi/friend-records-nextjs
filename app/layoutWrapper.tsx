@@ -5,6 +5,7 @@ import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { useColorModeValue, useColorMode } from "@chakra-ui/react";
 import { useEffect } from "react";
+import useThemeColors from "@/hooks/use-theme-colors";
 import { Spinner } from "@/components/common";
 
 interface Props {
@@ -13,21 +14,21 @@ interface Props {
 
 export default function LayoutWrapper({ children }: Props) {
   const { colorMode, toggleColorMode } = useColorMode();
-  useEffect(() => {
-    if(typeof window !== 'undefined') {
-      console.log("BG",bg)
-      document.body.style.height = '100vh'
-      document.body.style.zIndex = '-1'
-      document.body.style.background = bg
-      document.body.style.backgroundRepeat = 'no-repeat'
-    }
-  },[colorMode])
+  const {theme} =  useThemeColors('bg')
+
+  // this effect is for theme color change with bgImage
+  
+  // useEffect(() => {
+  //   console.log('color', theme)
+  //   if(typeof window !== 'undefined') {
+  //     document.body.style.height = '100vh'
+  //     document.body.style.zIndex = '-1'
+  //     document.body.style.background = ''
+  //     document.body.style.backgroundRepeat = 'no-repeat'
+  //   }
+  // },[colorMode])
   const { data: user, isLoading } = useRetrieveUserQuery();
   const { isAuthenticated } = useAppSelector((state) => state.auth);
-  const bg = useColorModeValue(
-    "linear-gradient(to bottom, green, pink)",
-    "linear-gradient(to bottom, #141e30, #243b55)"
-  );
   return (
     <Box
       position={"absolute"}
