@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Spinner from "./Spinner";
+import { Spinner } from "@/components/common";
 import { useAppSelector } from "@/redux/hooks";
 
 
