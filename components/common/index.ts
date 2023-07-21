@@ -5,4 +5,4 @@ export { default as SocialButton } from './SocialButton';
 export { default as SocialButtons } from './SocialButtons';
 export { default as YScrollLimitationWrapper } from './YScrollLimitationWrapper';
 export { default as CustomImages } from './CustomImages';
-export { default as Spinner } from './Spinner';
+export { default as Spinner } from './CustomSpinner';
