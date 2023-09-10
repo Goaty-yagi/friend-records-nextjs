@@ -18,7 +18,6 @@ export default function SocialButton({
     color: "white.200",
     bg: "red.500",
   };
-  const iconVariant = {};
   return (
     <Flex
       onClick={clickEvent}
@@ -28,6 +27,7 @@ export default function SocialButton({
       fontFamily={'"Roboto" sans-serif'}
       transition={"500ms"}
       cursor={"pointer"}
+      boxShadow={'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px'}
       _hover={{ filter: "brightness(110%)", border: "solid #4285F4" }}
     >
       <Flex
@@ -39,7 +39,7 @@ export default function SocialButton({
       >
         {icon}
       </Flex>
-      <Box bg={"#4285F4"} p={"0.5rem 0.8rem"}>
+      <Box bg={"#4285F4"} color={"white"} p={"0.5rem 0.8rem"}>
         {text}
       </Box>
     </Flex>
