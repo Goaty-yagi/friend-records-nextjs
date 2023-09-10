@@ -7,33 +7,43 @@ import { PopoverCloseContext, ModalCloseContext } from "@/contexts";
 import useEventCreate from "@/hooks/events/use-event-create";
 import { Flex, Box, Button } from "@chakra-ui/react";
 import { Form } from "../index";
-import { CustomNumInput , CustomSlider, CustomRadio} from "../inputFields";
-
+import { CustomNumInput, CustomSlider, CustomRadio } from "../inputFields";
+import { useAppSelector } from "@/redux/hooks";
+import { Spinner } from "@/components/common";
 
 export function CreateButton() {
+  const { isLoading } = useAppSelector((state) => state.event);
   return (
-    <Button bg={'#337bd3'} border={'solid #ffdce2'} color={'white'} size={'lg'} _hover={{bg:'#1e6595'}}>Create</Button>
-  )
+    <Button
+      bg={"#337bd3"}
+      border={"solid #ffdce2"}
+      color={"white"}
+      size={"lg"}
+      isDisabled={isLoading}
+      _hover={{ bg: "#1e6595" }}
+    >
+      {isLoading ? (
+        <>
+          <Spinner />
+        </>
+      ) : (
+        <>Create</>
+      )}
+    </Button>
+  );
 }
 export default function EventCreateForm() {
   const format = (val: number) => `$ ` + val;
-  const {
-    eventName,
-    isLoading,
-    icon,
-    money,
-    setIcon,
-    onChange,
-    onSubmit,
-  } = useEventCreate();
+  const { eventName, isLoading, icon, money, setIcon, onChange, onSubmit } =
+    useEventCreate();
   const onClose = useContext(PopoverCloseContext);
   const modalContext = useContext(ModalCloseContext);
   function customOnsubmit(event: FormEvent<HTMLFormElement>) {
     onSubmit(event);
-    if(modalContext === null) {
+    if (modalContext === null) {
       onClose();
     } else {
-      modalContext()
+      modalContext();
     }
   }
   const config = [
@@ -54,15 +64,15 @@ export default function EventCreateForm() {
       checked: false,
     },
   ];
-  const sliderConfig = [{
-    name:'money',
-    value:money,
-    max:1000,
-    min:0,
-    style:{
-
-    }
-  }]
+  const sliderConfig = [
+    {
+      name: "money",
+      value: money,
+      max: 1000,
+      min: 0,
+      style: {},
+    },
+  ];
   return (
     <>
       <Box mt={"0.9rem"}>
@@ -78,14 +88,18 @@ export default function EventCreateForm() {
             <Box position={"absolute"} top={-2}>
               <CustomRadio
                 config={radioConfig}
-                name={'whoPayed'}
+                name={"whoPayed"}
                 defaltValue={"+"}
                 setter={onChange}
               />
             </Box>
           </Box>
           <Flex mt={"1rem"} maxW={{ base: "300px", md: "600px" }}>
-            <CustomNumInput key={'input'} config={sliderConfig} onChange={onChange} />
+            <CustomNumInput
+              key={"input"}
+              config={sliderConfig}
+              onChange={onChange}
+            />
             <CustomSlider sliderConfig={sliderConfig} onChange={onChange} />
           </Flex>
         </Form>

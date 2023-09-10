@@ -110,7 +110,7 @@ export default function FriendList() {
           </Flex>
           <YScrollLimitationWrapper isLimited={true}>
             {friendsArray.map((f: any, index: number) => (
-              <Card w={"100%"} key={index} mb={"0.5rem"} >
+              <Card w={"100%"} key={index} mb={"0.5rem"} transition={'300ms'} _hover={{'bg':'gray.600'}}>
                 <Flex
                   fontSize={{ base: "0.7rem", sm: "1rem" }}
                   position={"absolute"}

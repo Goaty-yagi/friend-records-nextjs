@@ -49,8 +49,16 @@ export default function Buttons() {
   return (
     <>
       <HStack spacing="24px" mt={"1.5rem"} zIndex={100}>
-        <CustomModal title='Create your account' content={<RegisterForm/>} open={SignupButton}/>
-        <CustomModal title='Login your account' content={<Login/>} open={LoginButton}/>
+        <CustomModal
+          title="Create your account"
+          content={<RegisterForm />}
+          open={SignupButton}
+        />
+        <CustomModal
+          title="Login your account"
+          content={<Login />}
+          open={LoginButton}
+        />
       </HStack>
     </>
   );

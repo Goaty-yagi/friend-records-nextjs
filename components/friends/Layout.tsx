@@ -20,7 +20,7 @@ export default function Layout() {
   const handleFriendList = () => {
     getFriendList(undefined)
       .unwrap()
-      .then((res) => {
+      .then((res:any) => {
         dispatch(setFriends(res));
       });
   };

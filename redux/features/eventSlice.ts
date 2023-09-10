@@ -8,7 +8,7 @@ type EventState = {
 }
 
 const initialState: EventState = {
-	isLoading: true,
+	isLoading: false,
     eventList: []
 } 
 
@@ -16,8 +16,11 @@ const eventSlice = createSlice({
 	name: 'event',
 	initialState,
 	reducers: {
-		finishInitialLoad: state => {
+		setIsLoadingFalse: state => {
 			state.isLoading = false
+		},
+		setIsLoadingTrue: state => {
+			state.isLoading = true
 		},
         setEventList: (state, action: PayloadAction<EventProps[]>) => {
 			state.eventList = action.payload
@@ -26,7 +29,7 @@ const eventSlice = createSlice({
 			state.eventList.unshift(action.payload)
 		},
 		updateEvent: (state, action: PayloadAction<EventProps>) => {
-			// need to think about money calcurations
+			// need to think about money calculations
 			// state.friendDetail.sum += Number(action.payload.money);
 			for(let i=0; i < state.eventList.length; i++) {
 				if (state.eventList[i].id === action.payload.id) {
@@ -46,5 +49,5 @@ const eventSlice = createSlice({
 	}
 })
 
-export const {  finishInitialLoad, setEventList, unshiftEvent, deleteEvent, updateEvent  } = eventSlice.actions
+export const {  setIsLoadingFalse,setIsLoadingTrue, setEventList, unshiftEvent, deleteEvent, updateEvent  } = eventSlice.actions
 export default eventSlice.reducer

@@ -16,17 +16,7 @@ export default function LayoutWrapper({ children }: Props) {
   const { colorMode, toggleColorMode } = useColorMode();
   const {theme} =  useThemeColors('bg')
 
-  // this effect is for theme color change with bgImage
-  
-  // useEffect(() => {
-  //   console.log('color', theme)
-  //   if(typeof window !== 'undefined') {
-  //     document.body.style.height = '100vh'
-  //     document.body.style.zIndex = '-1'
-  //     document.body.style.background = ''
-  //     document.body.style.backgroundRepeat = 'no-repeat'
-  //   }
-  // },[colorMode])
+ 
   const { data: user, isLoading } = useRetrieveUserQuery();
   const { isAuthenticated } = useAppSelector((state) => state.auth);
   return (

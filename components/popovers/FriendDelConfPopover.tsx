@@ -1,10 +1,8 @@
 import { CloseButton } from "@chakra-ui/react"
 import CustomPopover from "./CustomPopover"
-import { useState } from "react"
 import DeleteFriend from "@/app/friendDetails/[slug]/deleteFriend"
 
 export default function FriendDelConfPopover() {
-    const [close, setClose] = useState(() => {})
     const style =  {
         bg:'gray',
         color:'white',

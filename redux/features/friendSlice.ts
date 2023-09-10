@@ -35,7 +35,7 @@ interface UpdateFromEventProps {
 }
 
 const initialState: friendState = {
-	isLoading: true,
+	isLoading: false,
 	friendList: [],
 	friendId: '',
 	friendDetail: {} as FriendResponse
@@ -45,8 +45,11 @@ const friendSlice = createSlice({
 	name: 'friend',
 	initialState,
 	reducers: {
-		finishInitialLoad: state => {
+		setIsLoadingFalse: state => {
 			state.isLoading = false
+		},
+		setIsLoadingTrue: state => {
+			state.isLoading = true
 		},
 		setFriends: (state, action: PayloadAction<FriendResponse[]>) => {
 			state.friendList = action.payload
@@ -81,7 +84,6 @@ const friendSlice = createSlice({
 			});
 		},
 		updateFriendFromEventDelete: (state, action: PayloadAction<{money:number,id:string}>) => {
-			console.log("action",action.payload)
 			state.friendDetail.sum -= Number(action.payload.money);
 			state.friendList.forEach((e, index) => {
 				if (e.id === action.payload.id) {
@@ -111,5 +113,5 @@ const friendSlice = createSlice({
 	}
 })
 
-export const { finishInitialLoad, setFriends, unshiftFriend, setFriendId, setFriendDetail, deleteFriend, patchFriend, updateFriendFromEventCreation, updateFriendFromEventUpdate, updateFriendFromEventDelete } = friendSlice.actions
+export const { setIsLoadingFalse, setIsLoadingTrue, setFriends, unshiftFriend, setFriendId, setFriendDetail, deleteFriend, patchFriend, updateFriendFromEventCreation, updateFriendFromEventUpdate, updateFriendFromEventDelete } = friendSlice.actions
 export default friendSlice.reducer

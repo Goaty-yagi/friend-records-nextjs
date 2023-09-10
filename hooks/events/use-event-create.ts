@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { useEventCreateMutation } from '@/redux/features/eventApiSlice';
 import { unshiftEvent } from '@/redux/features/eventSlice';
 import { updateFriendFromEventCreation } from '@/redux/features/friendSlice';
-
+import { setIsLoadingTrue, setIsLoadingFalse} from '@/redux/features/eventSlice';
 
 export default function useEventCreate() {
 	const [eventCreate, { isLoading }] = useEventCreateMutation();
@@ -25,6 +25,7 @@ export default function useEventCreate() {
 
 	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		dispatch(setIsLoadingTrue())
 		const CustomMoney = whoPayed === '+' ? money : money * -1
 		eventCreate({ name: eventName, friend: friendId, icon, money: CustomMoney })
 			.unwrap()
@@ -32,10 +33,12 @@ export default function useEventCreate() {
 				dispatch(unshiftEvent(res))
 				dispatch(updateFriendFromEventCreation(res))
 				toast.success('Syccessfully created!');
+				dispatch(setIsLoadingFalse())
 			})
 			.catch((e) => {
 				const firstErrorMsg = Object.values(e.data)[0]
 				toast.error('Failed to create a event' + '\n' + firstErrorMsg);
+				dispatch(setIsLoadingFalse())
 			});
 	};
 
