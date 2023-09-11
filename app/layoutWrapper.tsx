@@ -31,7 +31,7 @@ export default function LayoutWrapper({ children }: Props) {
   return (
     <Box
       position={"absolute"}
-      w={"100vw"}
+      w={"100%"}
       // minH={h?h:"100vh"}
       minH={"100svh"}
       top={0}

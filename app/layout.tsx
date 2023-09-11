@@ -26,7 +26,7 @@ export default function RootLayout({
         <Provider>
           <Setup />
           <ChakraProviders>
-            <div style={{ width: "100vw" }}>
+            <div className="safe-area" style={{ width: "100vw" }}>
               <Navbar />
               <LayoutWrapper>
                 <Layout>
