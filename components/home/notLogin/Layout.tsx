@@ -10,7 +10,7 @@ export default function Layout() {
     <>
       <Flex
         width={"100vw"}
-        height={{ base: "100vh" }}
+        height={{ base: "100svh" }}
         position={"absolute"}
         top={0}
       >
