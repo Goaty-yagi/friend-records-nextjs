@@ -33,7 +33,7 @@ export default function LayoutWrapper({ children }: Props) {
       position={"absolute"}
       w={"100vw"}
       // minH={h?h:"100vh"}
-      minH={"100svh"}
+      h={"100svh"}
       top={0}
       pt={{ base: 0, md: "80px" }}
       bg={isAuthenticated ? 'url("/images/background.png")' : ""}
