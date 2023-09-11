@@ -30,7 +30,6 @@ export default function LayoutWrapper({ children }: Props) {
   const { isAuthenticated } = useAppSelector((state) => state.auth);
   return (
     <Box
-      className={"main-wrapper"}
       position={"absolute"}
       w={"100vw"}
       minH={h?h:"100vh"}
