@@ -15,7 +15,19 @@ interface Props {
 export default function LayoutWrapper({ children }: Props) {
   const { colorMode, toggleColorMode } = useColorMode();
   const {theme} =  useThemeColors('bg')
- 
+  function setHeight() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
+  useEffect(() => {
+    if(typeof window !== 'undefined') {
+      setHeight();
+      window.addEventListener('resize', setHeight);
+      return () => {
+        window.removeEventListener('resize', setHeight);
+    };
+    }
+  },[])
   const { data: user, isLoading } = useRetrieveUserQuery();
   const { isAuthenticated } = useAppSelector((state) => state.auth);
   return (
