@@ -20,9 +20,9 @@ export default function Content() {
   return (
     <>
       <Card
-        className={"safe-area"}
         minW={"100%"}
         h={{ base: "100svh", md: "auto" }}
+        // bg={{ base: theme, md: defo }}
         overflow={"hidden"}
       >
         <CardBody>
