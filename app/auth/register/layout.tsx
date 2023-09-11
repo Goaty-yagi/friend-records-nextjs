@@ -11,7 +11,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
     <>
       <PrivateRouterWithAuth>
         <Flex w={"100%"} justifyContent={"center"}>
-          <Box w={"600px"}>
+          <Box w={{base:'100%',md:'600px'}}>
             <Heading mt={"2rem"} textAlign={"center"}>
               Register
             </Heading>

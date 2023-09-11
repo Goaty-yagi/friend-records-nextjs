@@ -28,6 +28,7 @@ export default function Texts({ innerWidth }: Props) {
           fontSize={{ base: "3.5rem", xl: "6rem", "2xl": "7rem" }}
           bgGradient='linear(to-l, #7928CA, #1166EE)'
           bgClip='text'
+          textAlign={'center'}
         >
          {title}
         </Heading>

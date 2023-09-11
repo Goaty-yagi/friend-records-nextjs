@@ -15,7 +15,6 @@ interface Props {
 export default function LayoutWrapper({ children }: Props) {
   const { colorMode, toggleColorMode } = useColorMode();
   const {theme} =  useThemeColors('bg')
-
  
   const { data: user, isLoading } = useRetrieveUserQuery();
   const { isAuthenticated } = useAppSelector((state) => state.auth);
@@ -23,7 +22,7 @@ export default function LayoutWrapper({ children }: Props) {
     <Box
       position={"absolute"}
       w={"100vw"}
-      h={"100vh"}
+      h={"100%"}
       top={0}
       pt={{base:0, md:'80px'}}
       bg={isAuthenticated ? 'url("/images/background.png")' : ""}
@@ -34,7 +33,7 @@ export default function LayoutWrapper({ children }: Props) {
     >
       {isLoading ? (
         <>
-          <Flex alignItems={"center"} h={"100vh"}>
+          <Flex alignItems={"center"} h={"100%"}>
             <Spinner size={"lg"} />
           </Flex>
         </>
