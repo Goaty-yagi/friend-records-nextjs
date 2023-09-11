@@ -17,7 +17,16 @@ import {EventUpdateModal} from "@/components/modals";
 
 export default function EventList() {
   const eventList = useAppSelector((state) => state.event).eventList;
+  // const [windowHeight,setWindowHeight] = useState(0)
+  useEffect(() => {
+    // function setHeight() {
+    //   setWindowHeight(window.innerHeight)
+    // }
 
+    // setHeight();
+    // window.addEventListener('resize', setHeight);
+    // return () => window.removeEventListener('resize', setHeight);
+  },[])
   function colorHandler(amount: number) {
     if (amount > 0) {
       return "#e4feff";
@@ -32,7 +41,7 @@ export default function EventList() {
   }
   
   return (
-    <YScrollLimitationWrapper isLimited={true}>
+    <YScrollLimitationWrapper isLimited={window.innerHeight > 550}>
       {eventList.length ? (
         <>
           {eventList.map((e: EventProps, index: number) => (

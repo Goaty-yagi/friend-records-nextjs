@@ -18,7 +18,7 @@ export default function FriendCreatePopover() {
         isDisabled={isLoading}
         _hover={{ bg: "#1e6595" }}
       >
-        {isLoading?<><Spinner/></>:<>Cretae</>}
+        {isLoading?<><Spinner/></>:<>Create</>}
       </Button>
     );
   }

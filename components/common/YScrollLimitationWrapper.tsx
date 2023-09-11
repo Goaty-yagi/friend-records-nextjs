@@ -33,6 +33,7 @@ export default function YScrollLimitationWrapper({
         h={maxH}
         overflowY={"auto"}
         overflowX={"hidden"}
+        mb={'1rem'}
       >
         {children}
       </Box>
