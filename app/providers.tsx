@@ -30,7 +30,7 @@ const theme = extendTheme({
 export function ChakraProviders({ children }: { children: React.ReactNode }) {
   return (
     <CacheProvider>
-      <ChakraProvider theme={theme}><CSSReset/>{children}</ChakraProvider>
+      <ChakraProvider theme={theme}>{children}</ChakraProvider>
     </CacheProvider>
   );
 }

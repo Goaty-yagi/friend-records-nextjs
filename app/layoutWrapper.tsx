@@ -21,7 +21,7 @@ export default function LayoutWrapper({ children }: Props) {
   //     const vh = window.innerHeight * 0.01
   //     setH(vh * 100 )
   //   }
-    
+
   //   setHeight();
   //   window.addEventListener('resize', setHeight);
   //   return () => window.removeEventListener('resize', setHeight);
@@ -30,6 +30,7 @@ export default function LayoutWrapper({ children }: Props) {
   const { isAuthenticated } = useAppSelector((state) => state.auth);
   return (
     <Box
+      className={"safe-area"}
       position={"absolute"}
       w={"100vw"}
       // minH={h?h:"100vh"}
@@ -44,7 +45,7 @@ export default function LayoutWrapper({ children }: Props) {
     >
       {isLoading ? (
         <>
-          <Flex alignItems={"center"} h={"100vh"}>
+          <Flex alignItems={"center"} minH={"100svh"}>
             <Spinner size={"lg"} />
           </Flex>
         </>
