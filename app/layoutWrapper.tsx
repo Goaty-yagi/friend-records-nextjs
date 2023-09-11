@@ -30,6 +30,7 @@ export default function LayoutWrapper({ children }: Props) {
   const { isAuthenticated } = useAppSelector((state) => state.auth);
   return (
     <Box
+      className={'safe-area'}
       position={"absolute"}
       w={"100%"}
       // minH={h?h:"100vh"}
