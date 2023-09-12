@@ -105,12 +105,11 @@ a {
     color-scheme: dark;
   }
 }
-@supports(padding: max(0px)) {
-  .safe-area {
-    min-height:-moz-available;  
-    min-height: -webkit-fill-available;
-    min-height:fill-available;
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-  }
+
+.safe-area {
+  min-height:-moz-available;  
+  min-height: -webkit-fill-available;
+  min-height:fill-available;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }

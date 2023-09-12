@@ -28,7 +28,7 @@ interface PopoverProps {
   switchableButton?: boolean;
   hasCloseButton?:boolean
   header?: string;
-  style?: Style;
+  style?: any;
 }
 
 export default function CustomPopover({

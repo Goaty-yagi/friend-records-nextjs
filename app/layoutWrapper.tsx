@@ -22,7 +22,6 @@ export default function LayoutWrapper({ children }: Props) {
   const defaltLimiteHeight = 550
   useEffect(() => {
     function setHW() {
-      console.log("ESIZE")
       setH(window.innerHeight )
       setW(window.innerWidth )
     }
@@ -38,7 +37,6 @@ export default function LayoutWrapper({ children }: Props) {
       className={'safe-area'}
       position={"absolute"}
       w={"100%"}
-      // minH={h?h:"100vh"}
       minH={"100svh"}
       top={0}
       pt={{ base: 0, md: "80px" }}

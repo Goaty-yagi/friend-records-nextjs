@@ -7,6 +7,7 @@ import { useGetFriendListMutation } from "@/redux/features/friendApiSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { UserContext } from "@/contexts";
 import { Box } from "@chakra-ui/react";
+import { Spinner } from "@/components/common";
 import { PrivateRouterWithoutAuth } from "@/components/common/PrivateRouter";
 import { setFriends } from "@/redux/features/friendSlice";
 
@@ -69,7 +70,7 @@ export default function Layout({ children }: Props) {
             </RequireAuth>
           </>
         ) : (
-          <></>
+          <><Spinner isCentered={true}/></>
         )}
       </PrivateRouterWithoutAuth>
     </>

@@ -13,12 +13,16 @@ interface Props {
 }
 
 export default function FriendBirthdayUpdatePopover({state, defaultDate}:Props) {
-
+  const style = {
+    bg:'#93816a',
+    color:'white'
+  }
   return (
     <>
       <CustomPopover
         trigger={<BirthdayButton state={state}/>}
         body={<FriendBirthdayUpdateForm  defaultDate={defaultDate}/>}
+        style={style}
       />
     </>
   );
