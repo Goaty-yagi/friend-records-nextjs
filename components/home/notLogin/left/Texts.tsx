@@ -19,7 +19,7 @@ export default function Texts({ innerWidth }: Props) {
   return (
     <Box
       position={"relative"}
-      w={{ baee: innerWidth, xl: 800, "2xl": 900 }}
+      width={{ baee: innerWidth, xl: 800, "2xl": 900 }}
       h={{ base: 400, md: 600, xl: 800, "2xl": 900 }}
       zIndex={1}
     >

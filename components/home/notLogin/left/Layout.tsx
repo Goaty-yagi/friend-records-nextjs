@@ -1,6 +1,6 @@
 "use client";
 
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { useState, useEffect, useContext } from "react";
 import { Texts, MainImage } from "./index";
 import { GlobalContext } from "@/contexts";
@@ -14,9 +14,9 @@ export default function Layout() {
   }
   return (
     <>
-      <Box position={{ base: !isMobileHorizontal()?"absolute":'relative', lg: "relative" }}  >
+      <Flex position={{ base: !isMobileHorizontal()?"absolute":'relative', lg: "relative" }} w={'100%'}  >
         <Texts innerWidth={W} />
-      </Box>
+      </Flex>
       <MainImage innerWidth={W} />
     </>
   );
