@@ -63,7 +63,7 @@ export default function Navbar() {
                       key={i}
                       as={NextLink}
                       border={"solid #efafc5"}
-                      borderRadius={'20px'}
+                      borderRadius={'10px'}
                       bg={"#313131f2"}
                       color={"white"}
                       mr={'0.5rem'}

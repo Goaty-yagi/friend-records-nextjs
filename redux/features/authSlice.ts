@@ -5,19 +5,21 @@ interface AuthState {
 	isAuthenticated: boolean;
 	isLoading: boolean,
 	isThrottled: boolean,
-	minutes:number,
-	seconds:number
+	isAvatarLoading: boolean,
+	minutes: number,
+	seconds: number
 }
 interface Props {
-	minutes:number,
-	seconds:number
+	minutes: number,
+	seconds: number
 }
 const initialState = {
 	isAuthenticated: false,
 	isLoading: true,
 	isThrottled: false,
-	minutes:0,
-	seconds:0
+	isAvatarLoading: false,
+	minutes: 0,
+	seconds: 0
 } as AuthState
 
 const authSlice = createSlice({
@@ -29,6 +31,7 @@ const authSlice = createSlice({
 		},
 		logout: state => {
 			state.isAuthenticated = false
+			console.log("LO")
 		},
 		finishInitialLoad: state => {
 			state.isLoading = false
@@ -42,9 +45,15 @@ const authSlice = createSlice({
 		setThrottle: (state, action: PayloadAction<Props>) => {
 			state.minutes = action.payload.minutes
 			state.seconds = action.payload.seconds
-		}		
+		},
+		isAvatarLoadingTrue: state => {
+			state.isAvatarLoading = true
+		},
+		isAvatarLoadingFalse: state => {
+			state.isAvatarLoading = false
+		},
 	}
 })
 
-export const { setAuth, logout, finishInitialLoad,setIsThrottled, resetIsThrottled, setThrottle } = authSlice.actions
+export const { setAuth, logout, finishInitialLoad, setIsThrottled, resetIsThrottled, setThrottle, isAvatarLoadingFalse, isAvatarLoadingTrue } = authSlice.actions
 export default authSlice.reducer

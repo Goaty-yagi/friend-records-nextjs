@@ -1,7 +1,6 @@
 // import { apiSlice } from '../services/apiSlice';
 import { EventProps } from "./eventApiSlice"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-
 interface Events {
 	name: string
 	friend: string
@@ -101,7 +100,6 @@ const friendSlice = createSlice({
 					break
 				}
 			}
-
 		},
 		deleteFriend: (state, action: PayloadAction<string>) => {
 			state.friendList.forEach((e, index) => {

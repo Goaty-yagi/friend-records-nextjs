@@ -7,6 +7,7 @@ import {
   Heading,
   StackDivider,
   Stack,
+  Skeleton,
   Avatar,
 } from "@chakra-ui/react";
 import { CustomField } from "@/components/fields";
@@ -20,15 +21,17 @@ import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { getAvaterObj } from "@/components/avatarsAndIcons";
 import { monthColors } from "@/styles/colors";
 import Image from "next/legacy/image";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext, GlobalContext} from "@/contexts";
 import {AvatarUpdatePopover, LogoutConfPopover} from "@/components/popovers";
-
+import { toast } from "react-toastify";
 
 export default function FriendInfo() {
   const date = new Date(Date.now());
-  const { data: user } = useRetrieveUserQuery();
+  const { data: user, isFetching, isError } = useRetrieveUserQuery();
   const { friendList } = useAppSelector((state) => state.friend);
+  const { isAvatarLoading } = useAppSelector((state) => state.auth);
+  const [isMounted, setIsMounted] = useState(false)
   const {innerHeight} = useContext(UserContext)
   const globalContext = useContext(GlobalContext);
   const { H, W, defaH } = globalContext;
@@ -68,7 +71,16 @@ export default function FriendInfo() {
       text: getMonthlyData(MonthlyStates.INTERACTIONS).toString(),
     },
   ];
-  
+  useEffect(() => {
+    if(!isMounted) {
+      return setIsMounted(true)
+    }
+    if(!isFetching&&!isError) {
+      toast.success('Syccessfully updated!');
+    } 
+  },[isFetching])
+
+
   function getMonthlyData(key: string) {
     //here should be usereducer
     if (friendList) {
@@ -109,6 +121,7 @@ export default function FriendInfo() {
         >
           <Box zIndex={1}>
             <Flex
+              as={isAvatarLoading||isFetching?Skeleton:Flex}
               position={"relative"}
               alignItems={'center'}
               justifyContent={'center'}
@@ -125,7 +138,6 @@ export default function FriendInfo() {
                 </>
               ) : (
                 <>
-                  {" "}
                   <Image src={getAvaterObj(user.avatar)} layout="fill" />
                 </>
               )}
