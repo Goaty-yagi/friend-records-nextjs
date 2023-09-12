@@ -21,7 +21,6 @@ export default function DeleteEvent({ ...event }: EventProps) {
   const [deleteEvent] = useDeleteEventMutation();
   const dispatch = useAppDispatch();
   const [isConfirming, setIsConfirming] = useState(false);
-  console.log("CHECK", event)
   const handleDeleteFriend = () => {
     deleteEvent(event.id)
       .unwrap()

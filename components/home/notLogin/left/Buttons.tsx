@@ -4,20 +4,27 @@ import { HStack, Button } from "@chakra-ui/react";
 import { Login } from "@/components/auth";
 import { RegisterForm } from "@/components/forms";
 import { CustomModal } from "@/components/modals";
+import { useContext } from "react";
+import { GlobalContext } from "@/contexts";
 
 export default function Buttons() {
+  const globalContext = useContext(GlobalContext);
+  const { H, W, defaH } = globalContext;
+  const isMobileHorizontal = () => {
+    return H < defaH
+  }
   const SignupButton = (
     <Button
       background={"#1166EE"}
       color={"white"}
       fontSize={{
         base: "1.2rem",
-        md: "1.7rem",
+        md: !isMobileHorizontal()?"1.7rem":"1.3rem",
       }}
-      width={{ base: "5rem", md: "8rem" }}
+      width={{ base: "5rem", md: !isMobileHorizontal()?"8rem":"6rem" }}
       height={{
         base: "2.5rem",
-        md: "4rem",
+        md: !isMobileHorizontal()?"4rem":"3rem",
       }}
     >
       SignUp
@@ -34,13 +41,13 @@ export default function Buttons() {
       transition={".3s"}
       fontSize={{
         base: "1.2rem",
-        md: "1.7rem",
+        md: !isMobileHorizontal()?"1.7rem":"1.3rem",
         xl: "2rem",
       }}
-      width={{ base: "5rem", md: "8rem" }}
+      width={{ base: "5rem", md: !isMobileHorizontal()?"8rem":"6rem" }}
       height={{
         base: "2.5rem",
-        md: "4rem",
+        md: !isMobileHorizontal()?"4rem":"3rem",
       }}
     >
       Login

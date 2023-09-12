@@ -21,14 +21,17 @@ import { getAvaterObj } from "@/components/avatarsAndIcons";
 import { monthColors } from "@/styles/colors";
 import Image from "next/legacy/image";
 import { useContext } from "react";
-import { UserContext } from "@/contexts";
+import { UserContext, GlobalContext} from "@/contexts";
 import {AvatarUpdatePopover, LogoutConfPopover} from "@/components/popovers";
+
 
 export default function FriendInfo() {
   const date = new Date(Date.now());
   const { data: user } = useRetrieveUserQuery();
   const { friendList } = useAppSelector((state) => state.friend);
   const {innerHeight} = useContext(UserContext)
+  const globalContext = useContext(GlobalContext);
+  const { H, W, defaH } = globalContext;
   const monthNames = [
     "January",
     "February",
@@ -140,7 +143,7 @@ export default function FriendInfo() {
             w={"100%"}
             fontWeight={"bold"}
             color={"gray"}
-            fontSize={"1.5rem"}
+            fontSize={W > 400?"1.5rem":"1.4rem"}
             alignItems={"center"}
           >
             <Text>Monthly Info</Text>

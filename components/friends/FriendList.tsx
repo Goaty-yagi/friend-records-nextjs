@@ -26,16 +26,8 @@ export const sortOptionStates = {
 export default function FriendList() {
   const { friendList } = useAppSelector((state) => state.friend);
   const { friendsArray, setFriendsArray, initialOrderChange } = useContext(FriendContext);
-  // const [windowHeight,setWindowHeight] = useState(0)
   useEffect(() => {
     initialOrderChange()
-    // function setHeight() {
-    //       setWindowHeight(window.innerHeight)
-    //     }
-    
-    //     setHeight();
-    //     window.addEventListener('resize', setHeight);
-    //     return () => window.removeEventListener('resize', setHeight);
   },[])
 
   const filterAndSort = useMemo(() => {

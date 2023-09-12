@@ -6,26 +6,31 @@ import { useAppSelector } from "@/redux/hooks";
 import { useColorModeValue, useColorMode } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import useThemeColors from "@/hooks/use-theme-colors";
+import { GlobalContext } from "@/contexts";
 import { Spinner } from "@/components/common";
 
 interface Props {
   children: React.ReactNode;
 }
 
+
 export default function LayoutWrapper({ children }: Props) {
   const { colorMode, toggleColorMode } = useColorMode();
   const { theme } = useThemeColors("bg");
-  // const [h, setH] = useState(0)
-  // useEffect(() => {
-  //   function setHeight() {
-  //     const vh = window.innerHeight * 0.01
-  //     setH(vh * 100 )
-  //   }
+  const [h, setH] = useState(0)
+  const [w, setW] = useState(0)
+  const defaltLimiteHeight = 550
+  useEffect(() => {
+    function setHW() {
+      console.log("ESIZE")
+      setH(window.innerHeight )
+      setW(window.innerWidth )
+    }
 
-  //   setHeight();
-  //   window.addEventListener('resize', setHeight);
-  //   return () => window.removeEventListener('resize', setHeight);
-  // },[])
+    setHW();
+    window.addEventListener('resize', setHW);
+    return () => window.removeEventListener('resize', setHW);
+  },[])
   const { data: user, isLoading } = useRetrieveUserQuery();
   const { isAuthenticated } = useAppSelector((state) => state.auth);
   return (
@@ -50,7 +55,7 @@ export default function LayoutWrapper({ children }: Props) {
           </Flex>
         </>
       ) : (
-        <>{children}</>
+        <GlobalContext.Provider value={{H:h,W:w,defaH:defaltLimiteHeight}}>{children}</GlobalContext.Provider>
       )}
     </Box>
   );

@@ -13,6 +13,7 @@ export default function Layout() {
         height={{ base: "100svh" }}
         position={"absolute"}
         top={0}
+        overflow={'hidden'}
       >
         <LeftLayout />
         <RightLayout />

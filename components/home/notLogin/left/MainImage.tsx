@@ -14,6 +14,7 @@ export default function MainImage({ innerWidth }: Props) {
       bottom="0"
       w={{ md: 200, xl: 300, "2xl": 350 }}
       h={{ md: 200, xl: 300, "2xl": 350 }}
+      zIndex={-10}
     >
       <Image
         priority={true}

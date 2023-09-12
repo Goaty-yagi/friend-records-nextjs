@@ -68,6 +68,7 @@ export default function Layout({ params }: Props) {
               <Flex
                 h={"100%"}
                 mt={"0.3rem"}
+                mb={'1rem'}
                 flexDirection={"column"}
                 alignItems={"center"}
               >

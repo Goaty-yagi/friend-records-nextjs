@@ -32,11 +32,11 @@ export default function useEventCreate() {
 			.then((res) => {
 				dispatch(setUpdateEvent(res))
                 dispatch(updateFriendFromEventUpdate({caledMoney:res.money - defaultMoney, event:res}))
-				toast.success('Syccessfully created!');
+				toast.success('Syccessfully updated!');
 			})
 			.catch((e) => {
 				const firstErrorMsg = Object.values(e.data)[0]
-				toast.error('Failed to create a event' + '\n' + firstErrorMsg);
+				toast.error('Failed to update a event' + '\n' + firstErrorMsg);
 			});
 	};
 

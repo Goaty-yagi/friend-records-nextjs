@@ -13,8 +13,13 @@ import {
   Stack,
   StackDivider,
 } from "@chakra-ui/react";
+import { GlobalContext } from "@/contexts";
+import { useContext } from "react";
+
 export default function Content() {
   const { colorMode, toggleColorMode } = useColorMode();
+  const globalContext = useContext(GlobalContext);
+  const { H, W, defaH } = globalContext;
   // const { theme } = useThemeColors("bg");
   // const defo = useThemeColors().theme;
   return (
@@ -24,6 +29,7 @@ export default function Content() {
         h={{ base: "100svh", md: "auto" }}
         // bg={{ base: theme, md: defo }}
         overflow={"hidden"}
+        mb={H < defaH?'2rem':0}
       >
         <CardBody>
           <Stack divider={<StackDivider />} spacing={{ base: "1", md: "4" }}>

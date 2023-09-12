@@ -12,7 +12,6 @@ import type { Metadata } from "next";
 // }
 
 export default function Page() {
-  console.log("PasswordResetForm");
   return (
     <>
       <PrivateRouterWithAuth>

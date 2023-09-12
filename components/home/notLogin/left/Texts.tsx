@@ -2,7 +2,8 @@
 
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { Background, Buttons } from "./index";
-
+import { useContext } from "react";
+import { GlobalContext } from "@/contexts";
 interface Props {
   innerWidth: number;
 }
@@ -10,18 +11,25 @@ interface Props {
 export default function Texts({ innerWidth }: Props) {
   const title = 'Friend Record'
   const text = 'Maintain great friendships and build fair relationships.'
+  const globalContext = useContext(GlobalContext);
+  const { H, W, defaH } = globalContext;
+  const isMobileHorizontal = () => {
+    return H < defaH
+  }
   return (
     <Box
       position={"relative"}
-      width={{ baee: innerWidth, xl: 800, "2xl": 900 }}
+      w={{ baee: innerWidth, xl: 800, "2xl": 900 }}
       h={{ base: 400, md: 600, xl: 800, "2xl": 900 }}
+      zIndex={1}
     >
       <Flex
         height={"100%"}
         w={"100%"}
-        justifyContent={"center"}
+        justifyContent={!isMobileHorizontal()?"center":''}
         alignItems={"center"}
         flexDirection={"column"}
+        m={!isMobileHorizontal()?'':'1rem'}
       >
         <Background innerWidth={innerWidth} />
         <Heading

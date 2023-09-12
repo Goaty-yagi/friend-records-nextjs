@@ -7,8 +7,6 @@ import {
   VStack,
   Text,
   StackDivider,
-  CloseButton,
-  StatHelpText,
 } from "@chakra-ui/react";
 import React, { useRef, useEffect, useState, useContext } from "react";
 import Header from "./Header";
@@ -21,19 +19,22 @@ import {
 import FriendNameUpdateForm from "@/components/forms/friends/FriendNameUpdateForm";
 import { BsCheck2Square, BsFileX } from "react-icons/bs";
 import { RiEdit2Line } from "react-icons/ri";
-import { FriendContext } from "@/contexts";
+import { GlobalContext } from "@/contexts";
 
 export default function FriendInfo() {
-  const context = useContext(FriendContext)
   const outerRef = useRef<any>();
   const innerRef = useRef<any>();
   const friend = useAppSelector((state) => state.friend).friendDetail;
   const eventList = useAppSelector((state) => state.event).eventList;
+  const globalContext = useContext(GlobalContext);
+  const { H, W, defaH } = globalContext;
   useEffect(() => {
     if (typeof innerRef.current !== "undefined") {
-      const halfImage = 32
-      const border = 4
-      outerRef.current.style.height = innerRef.current.offsetHeight + halfImage + border+ "px"; //32 is half of the image
+      console.log("globalContext", globalContext);
+      const halfImage = 32;
+      const border = 4;
+      outerRef.current.style.height =
+        innerRef.current.offsetHeight + halfImage + border + "px"; //32 is half of the image
     }
   }, [innerRef.current]);
   function amountCalculation(sub: string) {
@@ -70,7 +71,7 @@ export default function FriendInfo() {
     iconToEdit: <RiEdit2Line />,
     iconIsEditting: <BsCheck2Square color={"red"} />,
     iconIsReady: <BsCheck2Square color={"green"} />,
-    defaultVal:friend.name
+    defaultVal: friend.name,
   };
   function createDateObj(date: string) {
     return new Date(date);
@@ -89,9 +90,12 @@ export default function FriendInfo() {
             <FriendDelConfPopover />
           </Flex>
           <CardBody w={"100%"} pt={"0.2rem"}>
-            <Stack divider={<StackDivider />} spacing={{ base: "1", md: "4" }}>
+            <Stack
+              divider={<StackDivider />}
+              spacing={H < defaH || W < 600 ? 1 : 4}
+            >
               <Flex w={"100%"} justifyContent={"center"}>
-                <VStack align="stretch" fontWeight={"bold"} spacing={"0.5rem"}>
+                <VStack align="stretch" fontWeight={"bold"} spacing={H < defaH || W < 600 ? '0.1rem' : '0.5rem'}>
                   <Flex alignItems={"center"}>
                     <FriendNameUpdateForm {...nameEditConfig} />
                     <Box w={"50%"} h={"100%"}>
@@ -101,12 +105,15 @@ export default function FriendInfo() {
                   {friend.birthday && (
                     <Flex alignItems={"center"}>
                       <>Birthday : {getYearMonthDate(friend.birthday)}</>
-                      <FriendBirthdayUpdatePopover  state={'patch'} defaultDate={friend.birthday}/>
+                      <FriendBirthdayUpdatePopover
+                        state={"patch"}
+                        defaultDate={friend.birthday}
+                      />
                     </Flex>
                   )}
                   <Text>Last Interaction : {dateConvert(friend.last_log)}</Text>
                   {!friend.birthday && (
-                    <FriendBirthdayUpdatePopover  state={'initial'}/>
+                    <FriendBirthdayUpdatePopover state={"initial"} />
                   )}
                 </VStack>
               </Flex>
@@ -124,7 +131,7 @@ export default function FriendInfo() {
                   <Text m={"0 0.2rem"}>:</Text>
                   <Text>${friend.sum}</Text>
                 </Flex>
-                <Flex w={"100%"} mt={{ md: "1rem" }}>
+                <Flex w={"100%"}>
                   <Box textAlign={"center"} flexBasis={"50%"}>
                     <Text color={"#008dff"}>I Paid</Text>
                     <Text>${amountCalculation("paied")}</Text>

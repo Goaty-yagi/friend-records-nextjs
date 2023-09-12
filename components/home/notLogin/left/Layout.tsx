@@ -1,27 +1,23 @@
 "use client";
 
 import { Box } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Texts, MainImage } from "./index";
+import { GlobalContext } from "@/contexts";
 
 export default function Layout() {
   const [innerWidth, setInnerWidth] = useState(0);
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      addEventListener("resize", () => setInnerWidth(window.innerWidth));
-      return () =>
-        window.removeEventListener("resize", () =>
-          setInnerWidth(window.innerWidth)
-        );
-    }
-  }, []);
-
+  const globalContext = useContext(GlobalContext);
+  const { H, W, defaH } = globalContext;
+  const isMobileHorizontal = () => {
+    return H < defaH
+  }
   return (
     <>
-      <Box position={{ base: "absolute", lg: "relative" }} w="100%">
-        <Texts innerWidth={innerWidth} />
+      <Box position={{ base: !isMobileHorizontal()?"absolute":'relative', lg: "relative" }}  >
+        <Texts innerWidth={W} />
       </Box>
-      <MainImage innerWidth={innerWidth} />
+      <MainImage innerWidth={W} />
     </>
   );
 }
