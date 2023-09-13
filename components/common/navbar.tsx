@@ -50,7 +50,7 @@ export default function Navbar() {
             <Flex w={"100%"} px="6" py="5" align="center" justify="flex-end">
               <Image
                 position={"absolute"}
-                left={0}
+                left={3}
                 src={Logo.src}
                 alt="logo"
                 h="50px"

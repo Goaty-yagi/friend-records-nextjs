@@ -1,14 +1,15 @@
 "use client";
 import { ImSpinner3 } from "react-icons/im";
-import { Center, Flex } from "@chakra-ui/react";
+import { Center, Flex, Box } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
 interface Props {
   size?: string;
   isCentered?: boolean;
+  hasContainer?: boolean;
 }
 
-export default function Spinner({ size, isCentered }: Props) {
+export default function Spinner({ size, isCentered, hasContainer }: Props) {
   const spinnerSize = () => {
     switch (size) {
       case "sm":
@@ -19,6 +20,11 @@ export default function Spinner({ size, isCentered }: Props) {
         return { fontSize: "2rem" };
     }
   };
+  const containerStyle = {
+    background:'#80808042',
+    borderRadius: '10px',
+    padding:'0.5rem'
+  }
   const Wrapper = ({ children }: { children: React.ReactNode }) => {
     if (isCentered) {
       return <Flex h={"100vh"}>{children}</Flex>;
@@ -28,13 +34,15 @@ export default function Spinner({ size, isCentered }: Props) {
   };
   return (
     <Wrapper>
-      <Center w={"100%"}>
+      <Center  w={"100%"}>
+      <Box {...(hasContainer ? containerStyle : "")}>
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
         >
           <ImSpinner3 {...(size ? spinnerSize() : "")} />
         </motion.div>
+        </Box>
       </Center>
     </Wrapper>
   );
