@@ -4,6 +4,7 @@ import {
   Box,
   Flex,
   Text,
+  Heading,
   StackDivider,
   Stack,
   Skeleton,
@@ -23,6 +24,8 @@ import Image from "next/legacy/image";
 import { useContext, useEffect, useState } from "react";
 import { UserContext, GlobalContext} from "@/contexts";
 import {AvatarUpdatePopover, LogoutConfPopover} from "@/components/popovers";
+import { useDispatch } from "react-redux";
+import { isAvatarLoadingFalse } from "@/redux/features/authSlice";
 import { toast } from "react-toastify";
 
 export default function FriendInfo() {
@@ -31,9 +34,20 @@ export default function FriendInfo() {
   const { friendList } = useAppSelector((state) => state.friend);
   const { isAvatarLoading } = useAppSelector((state) => state.auth);
   const [isMounted, setIsMounted] = useState(false)
+  const dispatch = useDispatch()
   const {innerHeight} = useContext(UserContext)
   const globalContext = useContext(GlobalContext);
   const { H, W, defaH } = globalContext;
+  const avatarStyle = {
+    alignItems:'center',
+    justifyContent:'center',
+    w:"96px",
+    h:"96px",
+    mr:"1rem",
+    border:"solid gray",
+    borderRadius:"50vh",
+    bg:"#cfcfcf"
+  }
   const monthNames = [
     "January",
     "February",
@@ -74,8 +88,9 @@ export default function FriendInfo() {
     if(!isMounted) {
       return setIsMounted(true)
     }
-    if(!isFetching&&!isError) {
-      toast.success('Successfully updated!');
+    if(!isFetching&&!isError&&isAvatarLoading) {
+      toast.success('Syccessfully updated!');
+      dispatch(isAvatarLoadingFalse())
     } 
   },[isFetching])
 
@@ -119,17 +134,11 @@ export default function FriendInfo() {
           alignItems={"center"}
         >
           <Box zIndex={1}>
+          <Flex {...avatarStyle} bg={'pink'} position={'absolute'} justifyContent={'center'} alignItems={"center"}/>
             <Flex
-              as={isAvatarLoading||isFetching?Skeleton:Flex}
+              as={isAvatarLoading||isAvatarLoading&&isFetching?Skeleton:Flex}
               position={"relative"}
-              alignItems={'center'}
-              justifyContent={'center'}
-              w={"96px"}
-              h={"96px"}
-              mr={"1rem"}
-              border={"solid gray"}
-              borderRadius={"50vh"}
-              bg={"#cfcfcf"}
+              {...avatarStyle}
             >
               {!user.avatar ? (
                 <>

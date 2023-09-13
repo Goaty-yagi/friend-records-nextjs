@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { useAppSelector } from "@/redux/hooks";
 import { Flex, Text } from "@chakra-ui/react";
 import { Spinner } from "@/components/common";
+import { setModalSpinner } from "@/redux/features/authSlice";
 
 export default function DeleteFriend() {
   const router = useRouter();
@@ -20,6 +21,7 @@ export default function DeleteFriend() {
 
   const handleDeleteFriend = () => {
     dispatch(setIsLoadingTrue())
+    dispatch(setModalSpinner(true))
     deleteFriend(friend.id)
       .unwrap()
       .then(() => {
@@ -27,7 +29,13 @@ export default function DeleteFriend() {
         router.push("/");
         toast.success(`Your Friend ${friend.name} SuccessFully deleteed!`);
         dispatch(setIsLoadingFalse())
-      });
+        dispatch(setModalSpinner(false))
+      })
+      .catch((e) => {
+        dispatch(setModalSpinner(false))
+        const firstErrorMsg = Object.values(e.data)[0]
+        toast.error('Failed to delete a friend' + '\n' + firstErrorMsg);
+      })
   };
   return (
     <>

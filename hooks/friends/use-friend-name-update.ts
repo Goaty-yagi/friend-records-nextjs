@@ -7,6 +7,7 @@ import { unshiftFriend } from '@/redux/features/friendSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { patchFriend } from '@/redux/features/friendSlice';
 import { useUpdateFriendMutation } from '@/redux/features/friendApiSlice';
+import { setModalSpinner } from '@/redux/features/authSlice';
 
 export default function useFriendNameUpdate() {
     const friend = useAppSelector((state) => state.friend).friendDetail
@@ -26,15 +27,18 @@ export default function useFriendNameUpdate() {
 	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
         const id = friend.id
+		dispatch(setModalSpinner(true))
 		updateFriend({ id, name:friendName })
 			.unwrap()
 			.then((res) => {
 				dispatch(patchFriend(res))
 				toast.success('Successfully updated!');
+				dispatch(setModalSpinner(false))
 			})
 			.catch((e) => {
 				const firstErrorMsg = Object.values(e.data)[0]
 				toast.error('Failed to update!' + '\n' + firstErrorMsg);
+				dispatch(setModalSpinner(false))
 			});
 	};
 

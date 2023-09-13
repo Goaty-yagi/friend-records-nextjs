@@ -8,6 +8,7 @@ import { Flex, Button } from "@chakra-ui/react";
 import {ModalCloseContext} from "@/contexts";
 import { updateFriendFromEventDelete } from "@/redux/features/friendSlice";
 import { useContext, useState } from "react";
+import { setModalSpinner } from "@/redux/features/authSlice";
 import { EventProps } from "@/redux/features/eventApiSlice";
 interface Props {
   id: string;
@@ -22,14 +23,21 @@ export default function DeleteEvent({ ...event }: EventProps) {
   const dispatch = useAppDispatch();
   const [isConfirming, setIsConfirming] = useState(false);
   const handleDeleteFriend = () => {
+    dispatch(setModalSpinner(true))
+    onClose();
     deleteEvent(event.id)
       .unwrap()
       .then(() => {
         dispatch(setDeleteEvent(event.id));
         dispatch(updateFriendFromEventDelete({money:Number(event.money),id:event.friend}));
-        onClose();
         toast.success(`Your Event ${event.name} Successfully deleted!`);
-      });
+        dispatch(setModalSpinner(false))
+      })
+      .catch((e) => {
+        dispatch(setModalSpinner(false))
+        const firstErrorMsg = Object.values(e.data)[0]
+        toast.error('Failed to delete a event' + '\n' + firstErrorMsg);
+      })
   };
   return (
     <>

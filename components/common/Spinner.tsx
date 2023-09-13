@@ -1,6 +1,7 @@
 "use client";
 import { ImSpinner3 } from "react-icons/im";
 import { Center, Flex, Box } from "@chakra-ui/react";
+import { useAppSelector } from "@/redux/hooks";
 import { motion } from "framer-motion";
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export default function Spinner({ size, isCentered, hasContainer }: Props) {
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
   const spinnerSize = () => {
     switch (size) {
       case "sm":
@@ -34,7 +36,7 @@ export default function Spinner({ size, isCentered, hasContainer }: Props) {
   };
   return (
     <Wrapper>
-      <Center  w={"100%"}>
+      <Center w={"100%"} mb={isAuthenticated?'172px':0}>
       <Box {...(hasContainer ? containerStyle : "")}>
         <motion.div
           animate={{ rotate: 360 }}

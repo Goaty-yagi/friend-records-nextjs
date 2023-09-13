@@ -4,7 +4,7 @@ import {  useAppDispatch } from "@/redux/hooks";
 import { useUpdateEventMutation } from '@/redux/features/eventApiSlice';
 import { updateFriendFromEventUpdate } from '@/redux/features/friendSlice';
 import { updateEvent as setUpdateEvent } from '@/redux/features/eventSlice';
-
+import { setModalSpinner } from '@/redux/features/authSlice';
 
 export default function useEventCreate() {
 	const [updateFriend, { isLoading }] = useUpdateEventMutation();
@@ -27,15 +27,19 @@ export default function useEventCreate() {
 	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const CustomMoney = whoPayed === '+' ? money : money * -1
+		dispatch(setModalSpinner(true))
+		console.log("IN")
 		updateFriend({ name: eventName, id: eventId, icon, money: CustomMoney })
 			.unwrap()
 			.then((res) => {
 				dispatch(setUpdateEvent(res))
                 dispatch(updateFriendFromEventUpdate({caledMoney:res.money - defaultMoney, event:res}))
+				dispatch(setModalSpinner(false))
 				toast.success('Successfully updated!');
 			})
 			.catch((e) => {
 				const firstErrorMsg = Object.values(e.data)[0]
+				dispatch(setModalSpinner(true))
 				toast.error('Failed to update a event' + '\n' + firstErrorMsg);
 			});
 	};

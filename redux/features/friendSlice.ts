@@ -1,8 +1,7 @@
 // import { apiSlice } from '../services/apiSlice';
 import { EventProps } from "./eventApiSlice"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { FaSearch } from "react-icons/fa"
-import { BlobOptions } from "buffer"
+
 interface Events {
 	name: string
 	friend: string

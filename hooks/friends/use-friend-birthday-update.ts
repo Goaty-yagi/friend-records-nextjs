@@ -4,6 +4,7 @@ import { useAppDispatch } from '@/redux/hooks';
 import { useUpdateBirthdayMutation } from '@/redux/features/friendApiSlice'
 import { useAppSelector } from '@/redux/hooks';
 import { patchFriend } from '@/redux/features/friendSlice';
+import { setModalSpinner } from '@/redux/features/authSlice';
 
 export default function useFriendBirthdayUpdate() {
 	const [updateBirthday, { isLoading }] = useUpdateBirthdayMutation();
@@ -24,15 +25,18 @@ export default function useFriendBirthdayUpdate() {
 	};
 	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		dispatch(dispatch(setModalSpinner(true)))
 		updateBirthday({year, month, day, id})
 			.unwrap()
 			.then((res) => {
 				dispatch(patchFriend(res))
 				toast.success('Successfully added birthday!');
+				dispatch(setModalSpinner(false))
 			})
 			.catch((e) => {
 				const firstErrorMsg = Object.values(e.data)[0]
 				toast.error('Failed to add a birthday' + '\n' + firstErrorMsg);
+				dispatch(setModalSpinner(false))
 			});
 	};
 

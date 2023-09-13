@@ -22,7 +22,7 @@ export default function useUserAvatarUpdate() {
 			.unwrap()
 			.then((res) => {
                 dispatch(patchFriend(res))
-				dispatch(isAvatarLoadingFalse())
+				// dispatch(isAvatarLoadingFalse())
 				// toast.success('Syccessfully updated!');
 			})
 			.catch((e) => {

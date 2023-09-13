@@ -7,7 +7,8 @@ interface AuthState {
 	isThrottled: boolean,
 	isAvatarLoading: boolean,
 	minutes: number,
-	seconds: number
+	seconds: number,
+	modalSpinner:boolean
 }
 interface Props {
 	minutes: number,
@@ -19,7 +20,8 @@ const initialState = {
 	isThrottled: false,
 	isAvatarLoading: false,
 	minutes: 0,
-	seconds: 0
+	seconds: 0,
+	modalSpinner: false,
 } as AuthState
 
 const authSlice = createSlice({
@@ -31,7 +33,6 @@ const authSlice = createSlice({
 		},
 		logout: state => {
 			state.isAuthenticated = false
-			console.log("LO")
 		},
 		finishInitialLoad: state => {
 			state.isLoading = false
@@ -52,8 +53,11 @@ const authSlice = createSlice({
 		isAvatarLoadingFalse: state => {
 			state.isAvatarLoading = false
 		},
+		setModalSpinner: (state, action: PayloadAction<boolean>) => {
+			state.modalSpinner = action.payload
+		},
 	}
 })
 
-export const { setAuth, logout, finishInitialLoad, setIsThrottled, resetIsThrottled, setThrottle, isAvatarLoadingFalse, isAvatarLoadingTrue } = authSlice.actions
+export const { setAuth, logout, finishInitialLoad, setIsThrottled, resetIsThrottled, setThrottle, isAvatarLoadingFalse, isAvatarLoadingTrue, setModalSpinner } = authSlice.actions
 export default authSlice.reducer

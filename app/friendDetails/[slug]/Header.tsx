@@ -25,12 +25,18 @@ export default function Header({ children, innerRef, outerRef }: Props) {
     <Box w={"100%"} ref={outerRef} overflow={"hidden"}>
       <Flex position={"relative"} justifyContent={"center"} w={"100%"}>
         <Box zIndex={1}>
-        <Flex {...style} bg={'pink'} position={'absolute'} justifyContent={'center'} alignItems={"center"}/>
+          <Flex
+            {...style}
+            bg={"pink"}
+            position={"absolute"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          />
           <Box
             as={isLoading ? Skeleton : Box}
             position={"relative"}
             {...style}
-            _before={{...style} }
+            _before={{ ...style }}
           >
             <Image
               src={getAvaterObj(friend.avatar)}
