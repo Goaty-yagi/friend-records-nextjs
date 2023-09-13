@@ -17,7 +17,7 @@ const breakpoints = {
 };
 
 const config: ThemeConfig = {
-  initialColorMode: 'light',
+  initialColorMode: 'dark',
   useSystemColorMode: true,
 }
 const styles = {
