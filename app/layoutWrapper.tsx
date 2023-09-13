@@ -17,6 +17,10 @@ interface Props {
 export default function LayoutWrapper({ children }: Props) {
   const { colorMode, toggleColorMode } = useColorMode();
   const { theme } = useThemeColors("bg");
+  const bg = useColorModeValue(
+    "linear-gradient(to bottom, #f8edff, #c8e6df)",
+    "linear-gradient(to bottom, #232323 80%, #6cd8e8)"
+  );
   const [h, setH] = useState(0)
   const [w, setW] = useState(0)
   const defaltLimiteHeight = 550
@@ -40,6 +44,7 @@ export default function LayoutWrapper({ children }: Props) {
       minH={"100svh"}
       top={0}
       pt={{ base: 0, md: "80px" }}
+      bg={isAuthenticated?bg:''}
       // bg={isAuthenticated ? 'url("/images/background.png")' : ""}
       backgroundSize={"cover"}
       backgroundPosition={"center"}

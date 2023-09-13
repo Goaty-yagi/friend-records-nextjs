@@ -58,7 +58,7 @@ export default function FriendInfo() {
       if (amount === 0) {
         return "";
       } else if (amount > 0) {
-        return "#c0fafb";
+        return "#18c7ca";
       } else {
         return "#ff9393";
       }

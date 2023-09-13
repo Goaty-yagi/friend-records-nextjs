@@ -3,8 +3,8 @@
 import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider, CSSReset } from "@chakra-ui/react";
 import { store } from "@/redux/store";
-import { extendTheme } from "@chakra-ui/react";
-
+import { useColorModeValue } from "@chakra-ui/react";
+import { extendTheme, type ThemeConfig } from '@chakra-ui/react'
 
 const breakpoints = {
   sm: "480px",
@@ -14,6 +14,11 @@ const breakpoints = {
   "2xl": "1550px",
   "3xl": "1800px",
 };
+
+const config: ThemeConfig = {
+  initialColorMode: 'light',
+  useSystemColorMode: true,
+}
 const styles = {
   global: {
     body: {
@@ -24,7 +29,8 @@ const styles = {
 
 const theme = extendTheme({
   breakpoints,
-  styles
+  styles,
+  config
 });
 
 export function ChakraProviders({ children }: { children: React.ReactNode }) {
