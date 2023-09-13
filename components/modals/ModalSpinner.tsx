@@ -13,11 +13,13 @@ import {
 interface Props {
   open:boolean;
   close?: boolean;
+  top?:string;
 }
 
 export default function ModaleSpinner({
   open,
   close,
+  top
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
@@ -41,7 +43,7 @@ export default function ModaleSpinner({
       <ModalCloseContext.Provider value={onClose}>
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <Spinner size={"lg"} isCentered={true} hasContainer={true} />
+          <Spinner size={"lg"} isCentered={true} hasContainer={true} top={top} />
         </Modal>
       </ModalCloseContext.Provider>
     </>

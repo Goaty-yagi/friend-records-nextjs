@@ -8,10 +8,10 @@ interface Props {
   size?: string;
   isCentered?: boolean;
   hasContainer?: boolean;
+  top?:string
 }
 
-export default function Spinner({ size, isCentered, hasContainer }: Props) {
-  const { isAuthenticated } = useAppSelector((state) => state.auth);
+export default function Spinner({ size, isCentered, hasContainer, top }: Props) {
   const spinnerSize = () => {
     switch (size) {
       case "sm":
@@ -36,7 +36,7 @@ export default function Spinner({ size, isCentered, hasContainer }: Props) {
   };
   return (
     <Wrapper>
-      <Center w={"100%"} mb={isAuthenticated?'172px':0}>
+      <Center w={"100%"} mb={top?top:0}>
       <Box {...(hasContainer ? containerStyle : "")}>
         <motion.div
           animate={{ rotate: 360 }}
