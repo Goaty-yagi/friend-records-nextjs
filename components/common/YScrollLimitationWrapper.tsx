@@ -4,11 +4,13 @@ import { Flex, Box } from "@chakra-ui/react";
 interface Props {
   children: React.ReactNode;
   isLimited: boolean;
+  limitedStyle?:{}
 }
 
 export default function YScrollLimitationWrapper({
   children,
   isLimited,
+  limitedStyle
 }: Props) {
   //this is a wrapper which limite Y scroll from the parent to the bottom
   const listRef = useRef() as RefObject<HTMLDivElement>;
@@ -21,7 +23,7 @@ export default function YScrollLimitationWrapper({
   }, [listRef.current]);
 
   if (!isLimited) {
-    return <>{children}</>;
+    return <Box {...limitedStyle} w={'100%'}>{children}</Box>;
   }
 
   return (

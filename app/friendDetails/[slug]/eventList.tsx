@@ -31,7 +31,7 @@ export default function EventList() {
   }
   
   return (
-    <YScrollLimitationWrapper isLimited={window.innerHeight > 550}>
+    <YScrollLimitationWrapper isLimited={window.innerHeight > 550} limitedStyle={{mb:'36px'}}>
       {eventList.length ? (
         <>
           {eventList.map((e: EventProps, index: number) => (

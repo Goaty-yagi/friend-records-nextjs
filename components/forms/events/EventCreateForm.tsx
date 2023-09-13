@@ -10,15 +10,18 @@ import { Form } from "../index";
 import { CustomNumInput, CustomSlider, CustomRadio } from "../inputFields";
 import { useAppSelector } from "@/redux/hooks";
 import { Spinner } from "@/components/common";
+import { GlobalContext } from "@/contexts";
 
 export function CreateButton() {
   const { isLoading } = useAppSelector((state) => state.event);
+  const globalContext = useContext(GlobalContext);
+  const { H, W, defaH } = globalContext;
   return (
     <Button
       bg={"#337bd3"}
       border={"solid #ffdce2"}
       color={"white"}
-      size={"lg"}
+      size={{base:'md',md:"lg"}}
       isDisabled={isLoading}
       _hover={{ bg: "#1e6595" }}
     >

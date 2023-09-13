@@ -26,8 +26,7 @@ export default function Content() {
     <>
       <Card
         minW={"100%"}
-        h={{ base: "100svh", md: "auto" }}
-        // bg={{ base: theme, md: defo }}
+        h={{ base: "100svh", 'IP5md': "auto" }}
         overflow={"hidden"}
         mb={H < defaH?'2rem':0}
       >

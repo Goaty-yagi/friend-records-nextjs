@@ -10,8 +10,9 @@ import BirthdayAlert from "./birthdayAlert";
 import { useAppSelector } from "@/redux/hooks";
 import { FriendSearch, FriendSort, MobileFriendList } from "./index";
 import { FriendResponse } from "@/redux/features/friendApiSlice";
-import { FriendContext } from "@/contexts";
+import { FriendContext, GlobalContext } from "@/contexts";
 import useThemeColors from "@/hooks/use-theme-colors";
+
 import { YScrollLimitationWrapper } from "@/components/common";
 
 export const sortOptionStates = {
@@ -26,6 +27,8 @@ export const sortOptionStates = {
 export default function FriendList() {
   const { friendList } = useAppSelector((state) => state.friend);
   const { friendsArray, setFriendsArray, initialOrderChange } = useContext(FriendContext);
+  const globalContext = useContext(GlobalContext);
+  const { H, W, defaH } = globalContext;
   useEffect(() => {
     initialOrderChange()
   },[])
@@ -107,7 +110,7 @@ export default function FriendList() {
           <Flex w={"100%"} mb={"0.5rem"} justifyContent={"flex-end"}>
             <FriendSort />
           </Flex>
-          <YScrollLimitationWrapper isLimited={window.innerHeight > 550}>
+          <YScrollLimitationWrapper isLimited={H > 550} limitedStyle={{mb:'36px'}}>
             {friendsArray.map((f: any, index: number) => (
               <Card w={"100%"} key={index} mb={"0.5rem"} transition={'300ms'} _hover={{'bg':'gray.600'}}>
                 <Flex

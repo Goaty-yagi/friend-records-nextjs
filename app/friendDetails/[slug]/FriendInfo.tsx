@@ -33,7 +33,7 @@ export default function FriendInfo() {
       const halfImage = 32;
       const border = 4;
       outerRef.current.style.height =
-        innerRef.current.offsetHeight + halfImage + border + "px"; //32 is half of the image
+        innerRef.current.offsetHeight + halfImage + border + "px";
     }
   }, [innerRef.current]);
   function amountCalculation(sub: string) {
@@ -88,13 +88,13 @@ export default function FriendInfo() {
           <Flex justifyContent={"flex-end"}>
             <FriendDelConfPopover />
           </Flex>
-          <CardBody w={"100%"} pt={"0.2rem"}>
+          <CardBody w={"100%"} pt={"0.5px"}>
             <Stack
               divider={<StackDivider />}
               spacing={H < defaH || W < 600 ? 1 : 4}
             >
               <Flex w={"100%"} justifyContent={"center"}>
-                <VStack align="stretch" fontWeight={"bold"} spacing={H < defaH || W < 600 ? '0.1rem' : '0.5rem'}>
+                <VStack align="stretch" fontWeight={"bold"} spacing={H < defaH || W < 600 ? 0 : '0.5rem'}>
                   <Flex alignItems={"center"}>
                     <FriendNameUpdateForm {...nameEditConfig} />
                     <Box w={"50%"} h={"100%"}>
@@ -124,7 +124,7 @@ export default function FriendInfo() {
                 <Flex
                   color={totalAmountColor(friend.sum)}
                   alignItems={"center"}
-                  fontSize={"1.5rem"}
+                  fontSize={{base:'1.2rem',md:"1.5rem"}}
                 >
                   <Text>TOTAL</Text>
                   <Text m={"0 0.2rem"}>:</Text>

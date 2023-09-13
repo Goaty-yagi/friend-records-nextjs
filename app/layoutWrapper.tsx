@@ -23,7 +23,7 @@ export default function LayoutWrapper({ children }: Props) {
   );
   const [h, setH] = useState(0)
   const [w, setW] = useState(0)
-  const defaltLimiteHeight = 550
+  const defaltLimiteHeight = 569
   useEffect(() => {
     function setHW() {
       setH(window.innerHeight )
