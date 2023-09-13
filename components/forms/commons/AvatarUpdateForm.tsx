@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { PopoverCloseContext } from "@/contexts";
 import useFriendAvatarUpdate from "@/hooks/friends/use-friend-avatar-update";
 import { SvgSlider } from "@/components/avatarsAndIcons";
-import getAvaterObj, { avatars } from "@/components/avatarsAndIcons/avatars";
+import { avatars } from "@/components/avatarsAndIcons/avatars";
 import { useAppSelector } from "@/redux/hooks";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import useUserAvatarUpdate from "@/hooks/users/use-user-avatar-update";

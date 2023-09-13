@@ -33,7 +33,7 @@ export default function useFriendCreate() {
 			.unwrap()
 			.then((res) => {
 				dispatch(unshiftFriend(res))
-				toast.success('Syccessfully created!');
+				toast.success('Successfully created!');
 				dispatch(setIsLoadingFalse())
 			})
 			.catch((e) => {

@@ -21,7 +21,7 @@ export default function useFriendNameUpdate() {
         updateUser({ username })
             .unwrap()
             .then(() => {
-                toast.success('Syccessfully updated!');
+                toast.success('Successfully updated!');
             })
             .catch((e) => {
                 const firstErrorMsg = Object.values(e.data)[0]

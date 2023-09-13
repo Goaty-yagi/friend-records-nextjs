@@ -30,7 +30,6 @@ export default function FriendInfo() {
   const { H, W, defaH } = globalContext;
   useEffect(() => {
     if (typeof innerRef.current !== "undefined") {
-      console.log("globalContext", globalContext);
       const halfImage = 32;
       const border = 4;
       outerRef.current.style.height =

@@ -1,8 +1,6 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, FormEvent } from 'react';
 import { toast } from 'react-toastify';
-import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import { useEventCreateMutation } from '@/redux/features/eventApiSlice';
-import { unshiftEvent } from '@/redux/features/eventSlice';
+import { useAppDispatch } from "@/redux/hooks";
 import { updateEvent as setUpdateEvent } from '@/redux/features/eventSlice';
 import { useUpdateEventMutation } from '@/redux/features/eventApiSlice';
 
@@ -19,8 +17,7 @@ export default function useEventIconUpdate() {
             .unwrap()
             .then((res) => {
                 dispatch(setUpdateEvent(res))
-                // dispatch(updateFriend(res))
-                toast.success('Syccessfully updated!');
+                toast.success('Successfully updated!');
             })
             .catch((e) => {
                 const firstErrorMsg = Object.values(e.data)[0]

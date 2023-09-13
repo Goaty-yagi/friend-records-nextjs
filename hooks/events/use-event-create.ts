@@ -32,7 +32,7 @@ export default function useEventCreate() {
 			.then((res) => {
 				dispatch(unshiftEvent(res))
 				dispatch(updateFriendFromEventCreation(res))
-				toast.success('Syccessfully created!');
+				toast.success('Successfully created!');
 				dispatch(setIsLoadingFalse())
 			})
 			.catch((e) => {

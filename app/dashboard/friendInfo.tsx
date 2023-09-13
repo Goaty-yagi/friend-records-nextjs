@@ -4,7 +4,6 @@ import {
   Box,
   Flex,
   Text,
-  Heading,
   StackDivider,
   Stack,
   Skeleton,
@@ -76,7 +75,7 @@ export default function FriendInfo() {
       return setIsMounted(true)
     }
     if(!isFetching&&!isError) {
-      toast.success('Syccessfully updated!');
+      toast.success('Successfully updated!');
     } 
   },[isFetching])
 

@@ -30,7 +30,7 @@ export default function useFriendNameUpdate() {
 			.unwrap()
 			.then((res) => {
 				dispatch(patchFriend(res))
-				toast.success('Syccessfully updated!');
+				toast.success('Successfully updated!');
 			})
 			.catch((e) => {
 				const firstErrorMsg = Object.values(e.data)[0]

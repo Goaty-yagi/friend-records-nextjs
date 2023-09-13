@@ -28,7 +28,7 @@ export default function useFriendBirthdayUpdate() {
 			.unwrap()
 			.then((res) => {
 				dispatch(patchFriend(res))
-				toast.success('Syccessfully added birthday!');
+				toast.success('Successfully added birthday!');
 			})
 			.catch((e) => {
 				const firstErrorMsg = Object.values(e.data)[0]

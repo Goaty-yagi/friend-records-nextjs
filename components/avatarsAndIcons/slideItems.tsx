@@ -36,6 +36,7 @@ export default function SlideItems({
               _hover={{ bg: "#ececec" }}
               transition={".3s"}
               position="relative"
+              cursor={'pointer'}
               onClick={() => {
                 // clickAction(file.svg);
                 setSelectedSvg(file.svg)

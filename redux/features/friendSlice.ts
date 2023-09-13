@@ -1,6 +1,8 @@
 // import { apiSlice } from '../services/apiSlice';
 import { EventProps } from "./eventApiSlice"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { FaSearch } from "react-icons/fa"
+import { BlobOptions } from "buffer"
 interface Events {
 	name: string
 	friend: string
@@ -21,23 +23,39 @@ interface FriendResponse {
 	event: Events[],
 	event_length: number,
 }
+interface isLoadingsTyps {
+	avatar: boolean,
+	birthday: boolean,
+	name: boolean
+}
 
 type friendState = {
 	friendList: FriendResponse[],
 	isLoading: boolean,
 	friendId: string,
-	friendDetail: FriendResponse
+	friendDetail: FriendResponse,
+	isLoadings: isLoadingsTyps
 }
 interface UpdateFromEventProps {
 	caledMoney: number,
 	event: EventProps
 }
 
+interface isLoadingsProps {
+	type:string,
+	condition: boolean
+}
+
 const initialState: friendState = {
 	isLoading: false,
 	friendList: [],
 	friendId: '',
-	friendDetail: {} as FriendResponse
+	friendDetail: {} as FriendResponse,
+	isLoadings: {
+		avatar: false,
+		birthday: false,
+		name: false
+	} as isLoadingsTyps,
 }
 
 const friendSlice = createSlice({
@@ -49,6 +67,17 @@ const friendSlice = createSlice({
 		},
 		setIsLoadingTrue: state => {
 			state.isLoading = true
+		},
+		setIsLoadings: (state, action: PayloadAction<isLoadingsProps>) => {
+			// state.isLoadings[action.payload.type]
+			switch(action.payload.type){
+				case 'avatar':
+					state.isLoadings.avatar = action.payload.condition
+				case 'name':
+					state.isLoadings.name = action.payload.condition
+				case 'birthday':
+					state.isLoadings.birthday = action.payload.condition
+			}
 		},
 		setFriends: (state, action: PayloadAction<FriendResponse[]>) => {
 			state.friendList = action.payload
@@ -82,7 +111,7 @@ const friendSlice = createSlice({
 				}
 			});
 		},
-		updateFriendFromEventDelete: (state, action: PayloadAction<{money:number,id:string}>) => {
+		updateFriendFromEventDelete: (state, action: PayloadAction<{ money: number, id: string }>) => {
 			state.friendDetail.sum -= Number(action.payload.money);
 			state.friendList.forEach((e, index) => {
 				if (e.id === action.payload.id) {
@@ -111,5 +140,5 @@ const friendSlice = createSlice({
 	}
 })
 
-export const { setIsLoadingFalse, setIsLoadingTrue, setFriends, unshiftFriend, setFriendId, setFriendDetail, deleteFriend, patchFriend, updateFriendFromEventCreation, updateFriendFromEventUpdate, updateFriendFromEventDelete } = friendSlice.actions
+export const { setIsLoadingFalse, setIsLoadingTrue, setIsLoadings, setFriends, unshiftFriend, setFriendId, setFriendDetail, deleteFriend, patchFriend, updateFriendFromEventCreation, updateFriendFromEventUpdate, updateFriendFromEventDelete } = friendSlice.actions
 export default friendSlice.reducer

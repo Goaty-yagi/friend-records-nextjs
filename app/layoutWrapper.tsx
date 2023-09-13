@@ -40,7 +40,7 @@ export default function LayoutWrapper({ children }: Props) {
       minH={"100svh"}
       top={0}
       pt={{ base: 0, md: "80px" }}
-      bg={isAuthenticated ? 'url("/images/background.png")' : ""}
+      // bg={isAuthenticated ? 'url("/images/background.png")' : ""}
       backgroundSize={"cover"}
       backgroundPosition={"center"}
       role="img"

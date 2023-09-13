@@ -78,6 +78,7 @@ export default function SlideAction({ svgArray, eachSlideWidth,setFun, setSelect
             borderRadius={"0.2rem"}
             transform="scale(-1)"
             transition={".3s"}
+            cursor={'pointer'}
             _hover={{ bg: "rgba(0,0,0,.7)" }}
             onClick={() => (edge ? "" : paginate(-1))}
           >
@@ -121,6 +122,7 @@ export default function SlideAction({ svgArray, eachSlideWidth,setFun, setSelect
             borderRadius={"0.2rem"}
             fontSize={"16px"}
             transition={".3s"}
+            cursor={'pointer'}
             _hover={{ bg: "rgba(0,0,0,.7)" }}
             onClick={() => (edge ? "" : paginate(1))}
           >

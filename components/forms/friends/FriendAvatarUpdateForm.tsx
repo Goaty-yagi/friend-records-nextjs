@@ -8,7 +8,7 @@ import { SvgSlider } from "@/components/avatarsAndIcons";
 import { avatars } from "@/components/avatarsAndIcons/avatars";
 import { useAppSelector } from "@/redux/hooks";
 import getAvaterObj from "@/components/avatarsAndIcons/avatars";
-
+// currently not in use
 export function EditButton() {
   return (
     <Box
