@@ -31,7 +31,7 @@ export default function YScrollLimitationWrapper({
     resizeFun()
     window.addEventListener('resize', resizeFun);
     return () => window.removeEventListener('resize', resizeFun);
-  }, [listRef.current]);
+  }, []);
   if (!isLimited) {
     return <Box {...limitedStyle} w={'100%'}>{children}</Box>;
   }
