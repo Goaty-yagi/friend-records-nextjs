@@ -29,13 +29,18 @@ export default function FriendInfo() {
   const globalContext = useContext(GlobalContext);
   const { H, W, defaH } = globalContext;
   useEffect(() => {
-    if (typeof innerRef.current !== "undefined") {
-      const halfImage = 32;
-      const border = 4;
-      outerRef.current.style.height =
-        innerRef.current.offsetHeight + halfImage + border + "px";
+    function setFriendInfoHeight() {
+      if (typeof innerRef.current !== "undefined") {
+        const halfImage = 32;
+        const border = 4;
+        outerRef.current.style.height =
+          innerRef.current.offsetHeight + halfImage + border + "px";
+      }
     }
-  }, [innerRef.current]);
+    setFriendInfoHeight()
+    window.addEventListener('resize', setFriendInfoHeight);
+    return () => window.removeEventListener('resize', setFriendInfoHeight);
+  }, []);
   function amountCalculation(sub: string) {
     // eventList is array, sub will be paied or bePaied
     const acceptedSubs = ["paied", "bePaied"];
@@ -94,7 +99,11 @@ export default function FriendInfo() {
               spacing={H < defaH || W < 600 ? 1 : 4}
             >
               <Flex w={"100%"} justifyContent={"center"}>
-                <VStack align="stretch" fontWeight={"bold"} spacing={H < defaH || W < 600 ? 0 : '0.5rem'}>
+                <VStack
+                  align="stretch"
+                  fontWeight={"bold"}
+                  spacing={H < defaH || W < 600 ? 0 : "0.5rem"}
+                >
                   <Flex alignItems={"center"}>
                     <FriendNameUpdateForm {...nameEditConfig} />
                     <Box w={"50%"} h={"100%"}>
@@ -124,7 +133,7 @@ export default function FriendInfo() {
                 <Flex
                   color={totalAmountColor(friend.sum)}
                   alignItems={"center"}
-                  fontSize={{base:'1.2rem',md:"1.5rem"}}
+                  fontSize={{ base: "1.2rem", md: "1.5rem" }}
                 >
                   <Text>TOTAL</Text>
                   <Text m={"0 0.2rem"}>:</Text>
