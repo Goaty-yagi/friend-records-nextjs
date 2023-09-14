@@ -16,11 +16,16 @@ export default function YScrollLimitationWrapper({
   const listRef = useRef() as RefObject<HTMLDivElement>;
   const [maxH, setMaxH] = useState(0);
   useEffect(() => {
-    if (listRef.current) {
-      const lisrect = listRef?.current.getBoundingClientRect();
-      setMaxH(window.innerHeight - lisrect.top - 36);
+    const resizeFun = () => {
+      if (listRef.current) {
+        const lisrect = listRef?.current.getBoundingClientRect();
+        setMaxH(window.innerHeight - lisrect.top - 36);
+      } 
     }
-  }, [listRef.current]);
+    resizeFun()
+    window.addEventListener('resize', resizeFun);
+    return () => window.removeEventListener('resize', resizeFun);
+  }, []);
 
   if (!isLimited) {
     return <Box {...limitedStyle} w={'100%'}>{children}</Box>;

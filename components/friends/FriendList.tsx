@@ -122,7 +122,7 @@ export default function FriendList() {
                   <BirthdayAlert date={f.birthday} />
                   <DateAlert date={f.last_log} />
                 </Flex>
-                <Link href={{pathname:"friendDetails/" + f.id, query: { name:f.name }}}  scroll={false}>
+                <Link href={{pathname:"friendDetails/" + f.id, query: { name:f.name }}}  scroll={true}>
                   <CardBody >
                     <Flex alignItems={"center"}>
                       <Flex

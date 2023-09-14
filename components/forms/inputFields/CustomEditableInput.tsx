@@ -120,7 +120,7 @@ export default function CustomEditableInput({
             </Box>
           </>
         ) : (
-          <Flex position={"absolute"} top={-3} left={-2} alignItems={"center"}>
+          <Flex position={"absolute"} top={-3} left={-2} wordBreak={'keep-all'} alignItems={"center"}>
             {fixedDefaultValue} <EditableControls />
           </Flex>
         )}
