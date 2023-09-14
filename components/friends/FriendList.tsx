@@ -146,8 +146,8 @@ export default function FriendList() {
                             textAlign={"center"}
                             fontSize={"0.8rem"}
                           >
-                            {f.name.slice(0, 7)}
-                            {f.name.length > 7 ? ".." : ""}
+                            {f.name.slice(0, 6)}
+                            {f.name.length > 6 ? ".." : ""}
                           </Text>
                         </Box>
                       </Flex>
