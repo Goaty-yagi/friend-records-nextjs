@@ -24,7 +24,7 @@ export default function useSocialAuth(authenticate: any, provider: string) {
 					toast.success('Logged in');
 				})
 				.catch(() => {
-					toast.error('Failed to log in');
+					toast.error('Failed to log in. This Email might exist already.');
 					router.push('/auth/login');
 				});
 		}

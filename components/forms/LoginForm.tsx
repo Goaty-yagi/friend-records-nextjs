@@ -33,7 +33,7 @@ export default function LoginForm() {
     <Form
       config={config}
       isLoading={isLoading}
-      btnText="Sign in"
+      btnText="Login"
       onChange={onChange}
       onSubmit={onSubmit}
     />
