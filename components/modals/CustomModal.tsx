@@ -17,6 +17,7 @@ interface Props {
   content: React.ReactNode;
   open: React.ReactNode;
   isCentered?: boolean;
+  closeEvent?:any
 }
 
 export default function CustomModal({
@@ -24,6 +25,7 @@ export default function CustomModal({
   content,
   open,
   isCentered = false,
+  closeEvent
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -34,8 +36,8 @@ export default function CustomModal({
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>{title}</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>{content}</ModalBody>
+            <ModalCloseButton onClick={closeEvent}/>
+            <ModalBody p={'2rem'}>{content}</ModalBody>
             {/* <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={onClose}>
               Close

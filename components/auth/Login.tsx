@@ -2,9 +2,8 @@
 
 import NextLink from "next/link";
 import { LoginForm } from "@/components/forms";
-import { SocialButtons } from '@/components/common';
-import { Heading, Text, Flex, Link } from "@chakra-ui/react";
-
+import { SocialButtons } from "@/components/common";
+import { Heading, Text, Flex, Link, Box } from "@chakra-ui/react";
 
 export default function Page() {
   return (
@@ -12,14 +11,12 @@ export default function Page() {
       <Flex flexDirection={"column"}>
         <Heading textAlign={"center"}>Login</Heading>
         <LoginForm />
-        <SocialButtons/>
+        <Box mt={"1rem"}>
+          <SocialButtons noEmail={true}/>
+        </Box>
         <Text mt={"1rem"} textAlign={"center"}>
           Don&apos;t have an account?{" "}
-          <Link
-            as={NextLink}
-            color={"#7e7eff"}
-            href="/auth/register"
-          >
+          <Link as={NextLink} color={"#7e7eff"} href="/auth/register">
             Register here
           </Link>
         </Text>

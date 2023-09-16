@@ -5,8 +5,6 @@ import {  HiUser, HiMail, HiOutlineLockClosed } from "react-icons/hi";
 import { CustomField } from "@/components/fields";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { UsernameUpdateForm } from "@/components/forms";
-import { useContext } from "react";
-import { UserContext } from "@/contexts";
 
 export default function AccountInfo() {
   const { data: user } = useRetrieveUserQuery();

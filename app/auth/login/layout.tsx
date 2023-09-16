@@ -6,6 +6,7 @@ import { SocialButtons } from "@/components/common";
 import { PrivateRouterWithAuth } from "@/components/common/PrivateRouter";
 import { Heading, Box, Text, Flex, Link } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
+import { Login } from "@/components/auth";
 import { IoHomeOutline } from "react-icons/io5";
 
 export default function Layout({ children }: { children?: React.ReactNode }) {
@@ -15,17 +16,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
       <PrivateRouterWithAuth>
         <Flex flexDirection={"column"} alignItems={"center"}>
           <Box w={{base:'100%',md:'600px'}} p={'0.5rem'}>
-            <Heading mt={"2rem"} textAlign={"center"}>
-              Login
-            </Heading>
-            <LoginForm />
-            <SocialButtons />
-            <Text mt={"1rem"} textAlign={"center"}>
-              Don&apos;t have an account?{" "}
-              <Link as={NextLink} color={"#7e7eff"} href="/auth/register">
-                Register here
-              </Link>
-            </Text>
+            <Login/>
             <Box display={"inline-block"}>
               <Flex
                 alignItems={"center"}

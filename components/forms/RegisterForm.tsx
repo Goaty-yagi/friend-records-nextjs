@@ -60,10 +60,10 @@ export default function RegisterForm() {
         onChange={onChange}
         onSubmit={onSubmit}
       />
-      <Flex flexDirection={'column'} alignItems={'center'} mt={'0.5rem'} borderRadius={'10px'} border={'solid #83d6ff'} bg={'#605d77'} p={'0.5rem'}>
+      {/* <Flex flexDirection={'column'} alignItems={'center'} mt={'0.5rem'} borderRadius={'10px'} border={'solid #83d6ff'} bg={'#605d77'} p={'0.5rem'}>
         <Text color={'white'} textAlign={'center'}>You have an already account or social accounts to register?
         <span><Link as={NextLink} ml={'0.5rem'} color={'#7E7EFD'} href={'/auth/login'}>Login here</Link></span></Text>
-      </Flex>
+      </Flex> */}
     </>
   );
 }

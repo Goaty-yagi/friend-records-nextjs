@@ -8,6 +8,7 @@ import { ThrottleAlert } from "@/components/alerts";
 import Script from "next/script";
 import { Metadata } from "next";
 
+
 export const metadata: Metadata = {
   viewport: {
     width: "width=device-width",

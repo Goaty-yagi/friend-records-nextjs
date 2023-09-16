@@ -23,8 +23,10 @@ export default function useSocialAuth(authenticate: any, provider: string) {
 					router.push('/dashboard');
 					toast.success('Logged in');
 				})
-				.catch(() => {
-					toast.error('Failed to log in. This Email might exist already.');
+				.catch((e:any) => {
+					if(typeof e.data.non_field_errors==='undefined') {
+						toast.error('Failed to log in. This Email might exist already.');
+					}
 					router.push('/auth/login');
 				});
 		}

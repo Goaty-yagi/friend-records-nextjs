@@ -1,11 +1,13 @@
 "use client";
 
 import { HStack, Button } from "@chakra-ui/react";
-import { Login } from "@/components/auth";
-import { RegisterForm } from "@/components/forms";
+import { Login,Register } from "@/components/auth";
+// import { RegisterForm } from "@/components/forms";
 import { CustomModal } from "@/components/modals";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { GlobalContext } from "@/contexts";
+import { SocialButtons } from "@/components/common";
+
 
 export default function Buttons() {
   const globalContext = useContext(GlobalContext);
@@ -58,8 +60,9 @@ export default function Buttons() {
       <HStack spacing="24px" mt={"1.5rem"} zIndex={100}>
         <CustomModal
           title="Create your account"
-          content={<RegisterForm />}
+          content={<Register/>}
           open={SignupButton}
+          // closeEvent={() => setEmailOpen(false)}
         />
         <CustomModal
           title="Login your account"

@@ -6,3 +6,5 @@ export const continueWithFacebook = () =>
 	continueWithSocialAuth('facebook', 'facebook');
 export const continueWithAmazon = () =>
 	continueWithSocialAuth('amazon', 'amazon');
+export const continueWithSpotify = () =>
+	continueWithSocialAuth('spotify', 'spotify');
