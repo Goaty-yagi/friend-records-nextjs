@@ -5,7 +5,7 @@ interface Props {
   text: string;
   event:any
   hasLeft?:boolean
-  style:{}
+  style?:{}
 }
 
 export default function SocialButton({
@@ -16,7 +16,6 @@ export default function SocialButton({
   hasLeft=false,
   style
 }: Props) {
-  console.log( event)
   const defaultStyle = {
     border:'0.5px solid gray',
     bg:'white',
@@ -29,7 +28,7 @@ export default function SocialButton({
   }
   return (
     <Flex
-      {...defaultStyle}
+      {...style?style:defaultStyle}
       onClick={event}
       w={"260px"}
       alignItems={"center"}
@@ -39,7 +38,7 @@ export default function SocialButton({
       boxShadow={"rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"}
     >
       <Flex
-        // bg={hasLeft? "white" : ""} // for custom style
+        bg={hasLeft? "white" : ""} // for custom style
         alignItems={"center"}
         p={"0.6rem"}
         fontSize={"1.6rem"}

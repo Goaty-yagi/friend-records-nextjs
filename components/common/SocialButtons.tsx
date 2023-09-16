@@ -50,58 +50,45 @@ export default function SocialButtons({ setEmailOpen, noEmail }: Props) {
         },
       },
     },
-    {
-      provider: "spotify",
-      icon: <FaSpotify />,
-      text: "Sign in with Spotify",
-      event: continueWithSpotify,
-      hasLeft: false,
-      style: {
-        bg: "#1DB954",
-        border: "solid #0bb346",
-        color: "white",
-        fontFamily: "",
-        _hover: {
-          filter: "brightness(110%)",
-        },
-      },
-    },
+    // {
+    //   provider: "spotify",
+    //   icon: <FaSpotify />,
+    //   text: "Sign in with Spotify",
+    //   event: continueWithSpotify,
+    //   hasLeft: false,
+    //   style: {
+    //     bg: "#1DB954",
+    //     border: "solid #0bb346",
+    //     color: "white",
+    //     fontFamily: "",
+    //     _hover: {
+    //       filter: "brightness(110%)",
+    //     },
+    //   },
+    // },
     {
       provider: "email",
       icon: <MdOutlineEmail />,
       text: "Sign in with Email",
       event: () => setEmailOpen(true),
       hasLeft: false,
-      style: {
-        bg: "#1DB954",
-        border: "solid #0bb346",
-        color: "white",
-        fontFamily: "",
-        _hover: {
-          filter: "brightness(110%)",
-        },
-      },
     },
   ];
   return (
     <Flex alignItems={"center"} flexDirection={"column"}>
       <Stack spacing={1.5}>
         {configs.map((e, index) => (
-          <>
+           <Box key={index}>
             {!noEmail ? (
-              <Box key={index}>
                 <SocialButton {...e} />
-              </Box>
             ) : (
               <>
                 {e.provider !== "email" && (
-                  <Box key={index}>
                     <SocialButton {...e} />
-                  </Box>
                 )}
               </>
             )}
-          </>
+            </Box>
         ))}
       </Stack>
     </Flex>
