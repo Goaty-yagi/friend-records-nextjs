@@ -1,12 +1,17 @@
 import { Box, Flex } from "@chakra-ui/react";
+import { NextFont } from "next/dist/compiled/@next/font";
+import { Inter } from 'next/font/google'
 interface Props {
   provider:string
   icon: React.ReactNode;
   text: string;
   event:any
   hasLeft?:boolean
+  font?:string
   style?:{}
 }
+
+const inter = Inter({ subsets: ['latin'] })
 
 export default function SocialButton({
   provider,
@@ -14,7 +19,8 @@ export default function SocialButton({
   text,
   event,
   hasLeft=false,
-  style
+  style,
+  font
 }: Props) {
   const defaultStyle = {
     border:'0.5px solid gray',
@@ -46,6 +52,7 @@ export default function SocialButton({
         {icon}
       </Flex>
       <Box
+      className={font?font:''}
         w={"100%"}
         p={"0.5rem 0.8rem"}
       >
