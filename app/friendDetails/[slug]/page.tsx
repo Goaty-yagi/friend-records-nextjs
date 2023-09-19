@@ -6,7 +6,7 @@ export async function generateMetadata({ searchParams }: {searchParams:any }) {
   const appName = process.env.APP_NAME;
   const name = searchParams.name
   return {
-    title: `${appName} | friend detail ${name}`,
+    title: `Rriend detail ${name}`,
     description: `${appName} friend detail ${name}`,
   };
 }

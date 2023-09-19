@@ -4,7 +4,7 @@ import Layout from "./layout";
 
 const appName = process.env.APP_NAME;
 export const metadata: Metadata = {
-  title: `${appName} | Dashboard`,
+  title: `Dashboard`,
   description: `${appName} Dashboard page`,
 };
 export default function Page() {

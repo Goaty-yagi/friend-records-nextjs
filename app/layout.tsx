@@ -8,13 +8,30 @@ import { ThrottleAlert } from "@/components/alerts";
 import Script from "next/script";
 import { Metadata } from "next";
 
-
+const description = "Friend record App";
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL!),
+  title: {
+    default: process.env.APP_NAME!,
+    template: `%s | ${process.env.APP_NAME!}`,
+  },
+  manifest:'/manifest.json',
+  description: description,
+  twitter: {
+    card: "summary_large_image",
+    title: process.env.APP_NAME!,
+    description: description,
+    siteId: "1467726470533754880",
+    creator: "@nobuhiro",
+    creatorId: "1467726470533754880",
+    images: ["https://nextjs.org/og.png"],
+  },
   viewport: {
-    width: "width=device-width",
+    width: "device-width",
     initialScale: 1,
     viewportFit: "cover",
   },
+  themeColor: 'black',
 };
 
 export default function RootLayout({

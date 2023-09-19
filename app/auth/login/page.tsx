@@ -3,7 +3,7 @@ import Layout from "./layout";
 
 const appName = process.env.APP_NAME;
 export const metadata: Metadata = {
-  title: `${appName} | login`,
+  title: `Login`,
   description: `${appName} login page`,
 };
 
