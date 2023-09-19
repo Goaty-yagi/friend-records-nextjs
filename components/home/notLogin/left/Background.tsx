@@ -3,41 +3,42 @@
 import Image from "next/legacy/image";
 import { useContext } from "react";
 import { GlobalContext } from "@/contexts";
-import {
-  Box,
-} from "@chakra-ui/react";
-
-
+import { Box } from "@chakra-ui/react";
+import { Image as ChakraImage } from "@chakra-ui/react";
 
 interface Props {
-  innerWidth:number
+  innerWidth: number;
 }
 
-export default function Background({innerWidth}:Props) {
+export default function Background({ innerWidth }: Props) {
   const globalContext = useContext(GlobalContext);
   const { H, W, defaH } = globalContext;
   const isMobileHorizontal = () => {
-    return H < defaH
-  }
+    return H < defaH;
+  };
   return (
     <Box
       position={"absolute"}
-      w={{ base: innerWidth, md: !isMobileHorizontal()?600:300, xl: 800, "2xl": 900 }}
-      h={{ base: 500, md: !isMobileHorizontal()?600:300, xl: 800, "2xl": 900 }}
+      aspectRatio={"17/14"}
+      w={{
+        base: innerWidth,
+        md: !isMobileHorizontal() ? 600 : 300,
+        xl: 800,
+        "2xl": 900,
+      }}
+      h={{
+        base: 500,
+        md: !isMobileHorizontal() ? 600 : 300,
+        xl: 800,
+        "2xl": 900,
+      }}
     >
-      <Image
-        priority={true}
+      <ChakraImage
         src={"/images/home/BG_Deco.png"}
-        layout="fill"
+        maxH={"100%"}
+        maxW={"100%"}
         alt={"asset"}
       />
     </Box>
   );
 }
-
-
-
-
-
-
-
