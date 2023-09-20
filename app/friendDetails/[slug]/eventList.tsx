@@ -8,6 +8,7 @@ import {
   CardBody,
   Text,
 } from "@chakra-ui/react";
+import {Image as ChakraImage} from "@chakra-ui/react";
 import getIconObj from "@/components/avatarsAndIcons/icons";
 import Image from "next/legacy/image";
 import { EventProps } from "@/redux/features/eventApiSlice";
@@ -63,7 +64,7 @@ export default function EventList() {
                     alignItems={"center"}
                     transition={".3s"}
                   >
-                    <Image src={getIconObj(e.icon)} layout="fill" />
+                    <ChakraImage as={Image} src={getIconObj(e.icon)} srcSet={`${getIconObj(e.icon)} x2`} layout="fill" alt={'event-avatar'} />
                   </Flex>
 
                   <VStack align="stretch" spacing={0} color={"gray"}>

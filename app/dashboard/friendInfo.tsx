@@ -10,6 +10,7 @@ import {
   Skeleton,
   Avatar,
 } from "@chakra-ui/react";
+import { Image as ChakraImage} from "@chakra-ui/react";{}
 import { CustomField } from "@/components/fields";
 import { MdCalendarMonth } from "react-icons/md";
 import { GiPayMoney, GiReceiveMoney } from "react-icons/gi";
@@ -146,7 +147,7 @@ export default function FriendInfo() {
                 </>
               ) : (
                 <>
-                  <Image src={getAvaterObj(user.avatar)} layout="fill" />
+                  <ChakraImage as={Image} src={getAvaterObj(user.avatar)} srcSet={`${user.avatar} x2`} layout="fill" alt={'avatar'}/>
                 </>
               )}
               <AvatarUpdatePopover state={"user"} />

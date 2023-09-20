@@ -1,4 +1,5 @@
 import { Flex, Box, Skeleton } from "@chakra-ui/react";
+import { Image as ChakraImage } from "@chakra-ui/react";
 import React, { forwardRef } from "react";
 import { getAvaterObj } from "@/components/avatarsAndIcons";
 import Image from "next/legacy/image";
@@ -38,8 +39,10 @@ export default function Header({ children, innerRef, outerRef }: Props) {
             {...style}
             _before={{ ...style }}
           >
-            <Image
+            <ChakraImage
+              as={Image}
               src={getAvaterObj(friend.avatar)}
+              srcSet={`${getAvaterObj(friend.avatar)} x2`}
               alt={"avatar"}
               layout="fill"
             />

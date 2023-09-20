@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext, ChangeEvent, useMemo } from "re
 import { Flex, Text, Box, VStack, DarkMode } from "@chakra-ui/react";
 import Image from "next/legacy/image";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+import {Image as ChakraImage} from "@chakra-ui/react";
 import { dateConvert } from "@/utils/dates";
 import { getAvaterObj } from "../avatarsAndIcons";
 import DateAlert from "./dateAlert";
@@ -137,7 +138,7 @@ export default function FriendList() {
                         bg={"#bebebe4a"}
                       >
                         {f.avatar && (
-                          <Image src={getAvaterObj(f.avatar)} layout="fill" />
+                          <ChakraImage as={Image} src={getAvaterObj(f.avatar)} srcSet={`${getAvaterObj(f.avatar)} x2`} layout="fill" alt={'friend-avatar'} />
                         )}
                         <Box position={"absolute"} w={"150%"} bottom={-4}>
                           <Text
