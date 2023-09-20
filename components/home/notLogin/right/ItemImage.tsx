@@ -21,6 +21,8 @@ export default function ItemImage() {
       h={{ md: !isMobileHorizontal()?240:150, xl: 360, "2xl": 540 }}
     >
       <Image
+      position={"absolute"}
+      right={"1rem"}
         src={"/images/home/Asset10.png"}
         maxH={'100%'}
         maxW={'100%'}

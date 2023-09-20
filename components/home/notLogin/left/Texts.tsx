@@ -42,7 +42,7 @@ export default function Texts({ innerWidth }: Props) {
         </Heading>
         <Text
           color={"gray"}
-          fontSize={"2rem"}
+          fontSize={{ base: "1.6rem", xl:'2rem'}}
           width={{ base: "90%", lg: "50%" }}
           textAlign={'center'}
         >

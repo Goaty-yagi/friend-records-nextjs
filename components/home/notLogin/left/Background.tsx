@@ -35,6 +35,7 @@ export default function Background({ innerWidth }: Props) {
     >
       <ChakraImage
         src={"/images/home/BG_Deco.png"}
+        srcSet={"/images/home/BG_Deco.png 1.5x"}
         maxH={"100%"}
         maxW={"100%"}
         alt={"asset"}

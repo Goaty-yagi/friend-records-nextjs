@@ -8,11 +8,14 @@ export default function Background() {
       position={"absolute"}
       right={"0"}
       bottom={"0"}
-      aspectRatio={'720/739'}
+      aspectRatio={"720/739"}
       w={{ base: 300, md: 400, xl: 800, "2xl": 1100 }}
       h={{ base: 300, md: 400, xl: 800, "2xl": 1100 }}
     >
       <ChakraImage
+        position={"absolute"}
+        right={"0"}
+        bottom={"0"}
         maxH={"100%"}
         maxW={"100%"}
         src={"/images/home/Asset12.png"}
