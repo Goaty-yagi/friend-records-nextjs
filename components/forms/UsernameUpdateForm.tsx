@@ -20,23 +20,18 @@ export default function UsernameUpdateForm({
   iconIsEditting,
   iconIsReady,
 }: Props) {
-  const {  username, isLoading, onChange, onSubmit } = useUsernameUpdate();
+  const { username, isLoading, onChange, onSubmit } = useUsernameUpdate();
   const onClose = useContext(PopoverCloseContext);
 
   return (
     <>
       <Box mt={"0.9rem"}>
-          <CustomEditableInput
-          size={'xs'}
-            // title={title}
-            // iconToEdit={iconToEdit}
-            // iconIsEditting={iconIsEditting}
-            // iconIsReady={iconIsReady}
-            value={username}
-            name={"username"}
-            onChange={onChange}
-            onSubmit={onSubmit}
-          />
+        <CustomEditableInput
+          value={username}
+          name={"username"}
+          onChange={onChange}
+          onSubmit={onSubmit}
+        />
       </Box>
     </>
   );

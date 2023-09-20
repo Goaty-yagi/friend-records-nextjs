@@ -17,7 +17,7 @@ interface Props {
   title?: string;
   size?: string;
   maxLength?: number;
-  inputWidth?:string;
+  inputWidth?: string;
   iconToEdit?: JSX.Element;
   iconIsEditting?: JSX.Element;
   iconIsReady?: JSX.Element;
@@ -25,16 +25,15 @@ interface Props {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }
 
-
 // better not to use in loop. it moght break styling
 export default function CustomEditableInput({
   name,
   title,
   value,
   defaultValue,
-  size = "sm",
+  size = "md",
   maxLength = 20,
-  inputWidth='150px',
+  inputWidth = "150px",
   iconToEdit = <RiEdit2Line />,
   iconIsEditting = <BsFileX color={"red"} />,
   iconIsReady = <BsCheck2Square color={"green"} />,
@@ -100,27 +99,38 @@ export default function CustomEditableInput({
 
   return (
     <Flex w={"150%"} alignItems={"center"}>
-      <Text mr={title?"0.8rem":"0.5rem"}>{title}</Text>
+      <Text mr={title ? "0.8rem" : "0.5rem"}>{title}</Text>
       <Box position={"relative"}>
         {isEditing ? (
           <>
-            <Box h={"1.5rem"}>
-              <Flex position={"absolute"} alignItems={"center"} top={-1}>
-                <Input
-                  autoFocus={true} 
-                  maxLength={maxLength}
-                  w={inputWidth}
-                  size={size}
-                  name={name}
-                  defaultValue={fixedDefaultValue}
-                  onChange={customOnChange}
-                />
-                <EditableControls />
-              </Flex>
-            </Box>
+            <Flex
+              position={"absolute"}
+              alignItems={"center"}
+              top={-3}
+              left={-2}
+            >
+              <Input
+                autoFocus={true}
+                maxLength={maxLength}
+                w={inputWidth}
+                h={"1.5rem"}
+                size={size}
+                name={name}
+                padding={0}
+                defaultValue={fixedDefaultValue}
+                onChange={customOnChange}
+              />
+              <EditableControls />
+            </Flex>
           </>
         ) : (
-          <Flex position={"absolute"} top={-3} left={-2} wordBreak={'keep-all'} alignItems={"center"}>
+          <Flex
+            position={"absolute"}
+            top={-3}
+            left={-2}
+            wordBreak={"keep-all"}
+            alignItems={"center"}
+          >
             {fixedDefaultValue} <EditableControls />
           </Flex>
         )}
