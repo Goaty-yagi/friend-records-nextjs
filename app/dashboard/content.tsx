@@ -11,6 +11,7 @@ import {
   CardBody,
   CardFooter,
   Stack,
+  Box,
   StackDivider,
 } from "@chakra-ui/react";
 import { GlobalContext } from "@/contexts";
@@ -25,13 +26,14 @@ export default function Content() {
   return (
     <>
       <Card
-        minW={"100%"}
+      className={"TEST"}
+        w={"100%"}
         h={{ base: "100svh", 'md': "auto" }}
         overflowX={'hidden'}
-        overflowY={H > defaH?"hidden":'auto'}
-        mb={H < defaH?'2rem':0}
+        // overflowY={H > defaH?"hidden":'auto'}
+        pb={H < defaH?'2rem':0}
       >
-        <CardBody>
+        <CardBody maxW={"100%"}>
           <Stack divider={<StackDivider />} spacing={{ base: "1", md: "4" }}>
             <FriendInfo />
             <AccountInfo />

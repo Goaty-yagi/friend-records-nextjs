@@ -1,11 +1,11 @@
 {
     "theme_color": "#509af1",
-    "background_color": "#f6c18f",
+    "background_color": "#716f6b",
     "display": "standalone",
-    "scope": "/",
-    "start_url": "/",
+    "scope": "./",
+    "start_url": "./",
     "name": "friend record",
-    "short_name": "FR",
+    "short_name": "Friend Record",
     "description": "records your friends.",
     "icons": [
         {

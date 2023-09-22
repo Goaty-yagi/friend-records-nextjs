@@ -13,7 +13,6 @@ import { FriendSearch, FriendSort, MobileFriendList } from "./index";
 import { FriendResponse } from "@/redux/features/friendApiSlice";
 import { FriendContext, GlobalContext } from "@/contexts";
 import useThemeColors from "@/hooks/use-theme-colors";
-
 import { YScrollLimitationWrapper } from "@/components/common";
 
 export const sortOptionStates = {

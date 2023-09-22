@@ -21,13 +21,9 @@ export function BirthdayButton({ state }: Props) {
       <Center>
         <Button
           w={"60%"}
-          // type={isEditing?'submit':'button'}
           colorScheme="twitter"
-          // isDisabled={isEditing&&!isChanged}
           leftIcon={<FaBirthdayCake />}
-          // onClick={isEditing? onSubmit : () => {}}
         >
-          {/* {isEditing ? "Save" : "Add Birthday?"} */}
           Add Birthday?
         </Button>
       </Center>

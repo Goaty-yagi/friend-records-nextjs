@@ -7,7 +7,7 @@ import { CustomModal } from "@/components/modals";
 import { useContext, useState } from "react";
 import { GlobalContext } from "@/contexts";
 import { SocialButtons } from "@/components/common";
-
+import InstallButton from "@/components/pwa/InstallButton";
 
 export default function Buttons() {
   const globalContext = useContext(GlobalContext);
@@ -69,6 +69,7 @@ export default function Buttons() {
           content={<Login />}
           open={LoginButton}
         />
+        <InstallButton/>
       </HStack>
     </>
   );
