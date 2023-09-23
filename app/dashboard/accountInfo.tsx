@@ -5,6 +5,7 @@ import {  HiUser, HiMail, HiOutlineLockClosed } from "react-icons/hi";
 import { CustomField } from "@/components/fields";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { UsernameUpdateForm } from "@/components/forms";
+import InstallButton from "@/components/pwa/InstallButton";
 
 export default function AccountInfo() {
   const { data: user } = useRetrieveUserQuery();
@@ -41,6 +42,7 @@ export default function AccountInfo() {
               <CustomField key={index} icon={each.icon} header={each.header} text={each.text}/>
             ))}
           </Stack>
+          <InstallButton/>
         </Flex>
       </>
     );

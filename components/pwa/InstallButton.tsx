@@ -7,14 +7,14 @@ export default function InstallButton() {
 
   return (
     <>
-      {/* {installPrompt !== null && !isAccepted && ( */}
+      {installPrompt !== null && !isAccepted && (
         <SlideAnimatioWrapper direction="top" id={'pwa'}>
-          <Box w={'100%'} position={'absolute'} bottom={0} border={'solid red'} p={'0.5rem'} zIndex={1}>
-          <Text>You can install on your device!</Text>
+          {/* <Box w={'100%'} position={'absolute'} bottom={0} border={'solid red'} p={'0.5rem'} zIndex={1}> */}
+          {/* <Text>You can install on your device!</Text> */}
           <Button onClick={install}>install</Button>
-        </Box>
+        {/* </Box> */}
         </SlideAnimatioWrapper>
-      {/* )} */}
+      )}
     </>
   );
 }
