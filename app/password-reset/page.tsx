@@ -3,6 +3,7 @@
 import { PasswordResetForm } from "@/components/forms";
 import { Heading, Flex, Box } from "@chakra-ui/react";
 import { PrivateRouterWithAuth } from "@/components/common/PrivateRouter";
+import BackToHome from "@/components/common/BackToHome";
 import type { Metadata } from "next";
 
 // const appName = process.env.APP_NAME;
@@ -21,6 +22,9 @@ export default function Page() {
               Password Reset
             </Heading>
             <PasswordResetForm />
+          </Box>
+          <Box mt={'1rem'}>
+            <BackToHome />
           </Box>
         </Flex>
       </PrivateRouterWithAuth>

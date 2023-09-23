@@ -37,6 +37,7 @@ export default function Alerts({
   function close() {
     if (closeEvent) {
       closeEvent();
+      onClose()
     }
   }
   return (

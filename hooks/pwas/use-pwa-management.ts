@@ -1,38 +1,42 @@
-import { useEffect, useState, Dispatch,SetStateAction} from "react";
-// interface PwaPrompt {
-//     installPrompt:Event,
-//     displayMode?:'browser tab'|'standalone'
-// }
+import { useEffect, useState} from "react";
 
-
+interface BeforeInstallPromptEvent extends Event {
+  readonly platforms: string[];
+  readonly userChoice: Promise<{
+    outcome: "accepted" | "dismissed";
+    platform: string;
+  }>;
+  prompt(): Promise<void>;
+}
 
 export default function usePwaManagement() {
-    const [installPrompt, setImstallPrompt] = useState({})
-    const [displayMode, setDisplayMode] = useState('')
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            console.log('use,  effent')
-            pwaPrompts(setImstallPrompt)
-            pwaDetector(setDisplayMode)
-            
-        }
-    },[])
-    const pwaPrompts = (setter:Dispatch<SetStateAction<Event>>) => {
-        window.addEventListener("beforeinstallprompt", (event) => {
-            event.preventDefault();
-            setter( event )
-            console.log('PWA',event.target)
-        });
+  const [isAccepted, setIsaccepted] = useState<boolean>(false);
+  const [installPrompt, setInstallPrompt] =
+    useState<BeforeInstallPromptEvent | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("beforeinstallprompt", (event: any) => {
+        event.preventDefault();
+        setInstallPrompt(event);
+      });
     }
-    const pwaDetector = (setter:Dispatch<SetStateAction<string>>) => {
-        if (window.matchMedia('(display-mode: standalone)').matches) {
-            setter('standalone')
+  }, []);
+  const install = async () => {
+    if (installPrompt !== null) {
+      await installPrompt.prompt();
+      installPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === "accepted") {
+          setIsaccepted(true);
         } else {
-            setter('browser tab')
+          setIsaccepted(false);
         }
+      });
     }
-    return {
-        installPrompt,
-        displayMode
-    }
+  };
+  return {
+    install,
+    installPrompt,
+    isAccepted
+  }
 }

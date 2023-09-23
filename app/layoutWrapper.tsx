@@ -7,44 +7,45 @@ import { useColorModeValue, useColorMode } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import useThemeColors from "@/hooks/use-theme-colors";
 import { GlobalContext } from "@/contexts";
+import { usePathname } from "next/navigation";
 import { Spinner } from "@/components/common";
 
 interface Props {
   children: React.ReactNode;
 }
 
-
 export default function LayoutWrapper({ children }: Props) {
   const { colorMode, toggleColorMode } = useColorMode();
   const { theme } = useThemeColors("bg");
+  const pathName = usePathname();
   const bg = useColorModeValue(
     "linear-gradient(to bottom, #f8edff, #c8e6df)",
     "linear-gradient(to bottom, #232323 80%, #6cd8e8)"
   );
-  const [h, setH] = useState(0)
-  const [w, setW] = useState(0)
-  const defaltLimiteHeight = 569
+  const [h, setH] = useState(0);
+  const [w, setW] = useState(0);
+  const defaltLimiteHeight = 569;
   useEffect(() => {
     function setHW() {
-      setH(window.innerHeight )
-      setW(window.innerWidth )
+      setH(window.innerHeight);
+      setW(window.innerWidth);
     }
 
     setHW();
-    window.addEventListener('resize', setHW);
-    return () => window.removeEventListener('resize', setHW);
-  },[])
+    window.addEventListener("resize", setHW);
+    return () => window.removeEventListener("resize", setHW);
+  }, []);
   const { data: user, isLoading } = useRetrieveUserQuery();
   const { isAuthenticated } = useAppSelector((state) => state.auth);
   return (
     <Box
-      className={'safe-area'}
+      className={"safe-area"}
       position={"absolute"}
       w={"100%"}
       minH={"100svh"}
       top={0}
       pt={{ base: 0, md: "80px" }}
-      bg={isAuthenticated?bg:''}
+      bg={isAuthenticated ? bg : ""}
       // bg={isAuthenticated ? 'url("/images/background.png")' : ""}
       backgroundSize={"cover"}
       backgroundPosition={"center"}
@@ -53,12 +54,20 @@ export default function LayoutWrapper({ children }: Props) {
     >
       {isLoading ? (
         <>
-          <Flex alignItems={"center"} minH={"100svh"}>
-            <Spinner size={"lg"} />
-          </Flex>
+          <GlobalContext.Provider
+            value={{ H: h, W: w, defaH: defaltLimiteHeight }}
+          >
+            <Flex alignItems={"center"} minH={"100svh"}>
+              <Spinner size={"lg"} />
+            </Flex>
+          </GlobalContext.Provider>
         </>
       ) : (
-        <GlobalContext.Provider value={{H:h,W:w,defaH:defaltLimiteHeight}}>{children}</GlobalContext.Provider>
+        <GlobalContext.Provider
+          value={{ H: h, W: w, defaH: defaltLimiteHeight }}
+        >
+          {children}
+        </GlobalContext.Provider>
       )}
     </Box>
   );

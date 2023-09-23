@@ -67,7 +67,7 @@ export default function CustomInput({
         <Flex justifyContent={"space-between"}>
           <FormLabel>{labelText}</FormLabel>
           {link && (
-            <Link as={NextLink} href={link.linkUrl}>
+            <Link as={NextLink} href={link.linkUrl} color={"#7e7eff"}>
               {link.linkText}
             </Link>
           )}
