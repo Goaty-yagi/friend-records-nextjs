@@ -119,6 +119,7 @@ export default function EventUpdateForm({ ...event}: EventProps) {
               key={"input"}
               config={sliderConfig}
               onChange={customOnChange}
+              hasFormat={true}
             />
             <CustomSlider
               sliderConfig={sliderConfig}

@@ -36,7 +36,6 @@ export function CreateButton() {
   );
 }
 export default function EventCreateForm() {
-  const format = (val: number) => `$ ` + val;
   const { eventName, isLoading, icon, money, setIcon, onChange, onSubmit } =
     useEventCreate();
   const onClose = useContext(PopoverCloseContext);
@@ -102,6 +101,7 @@ export default function EventCreateForm() {
               key={"input"}
               config={sliderConfig}
               onChange={onChange}
+              hasFormat={true}
             />
             <CustomSlider sliderConfig={sliderConfig} onChange={onChange} />
           </Flex>

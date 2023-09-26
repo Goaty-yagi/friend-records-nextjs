@@ -21,6 +21,7 @@ export default function useEventCreate() {
 
 	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
+		console.log(event.target)
 		setFormData({ ...formData, [name]: value });
 	};
 

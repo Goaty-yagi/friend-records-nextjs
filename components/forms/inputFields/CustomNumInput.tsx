@@ -21,10 +21,16 @@ interface NumInputConfig {
 interface NumInputProps {
   config: NumInputConfig[];
   onChange: (e: any) => void;
+  hasFormat?:boolean
 }
 
-export default function CustomNumInput({ config, onChange }: NumInputProps) {
-  // const format = (val: number) => `$ ` + val;
+export default function CustomNumInput({ config, hasFormat=false, onChange }: NumInputProps) {
+  const format = (val: number) => `$` + val;
+  const parse = (val: string) => val.replace(/^\$/, '')
+  function formatHandler(e:NumInputConfig) {
+    const val = e.value===0&&e.defaultValue?e.defaultValue:e.value
+    return hasFormat?format(val):val
+  }
   
   return (
     <Flex mt={"1rem"} w={{ base: "300px", md: "600px" }}>
@@ -40,9 +46,10 @@ export default function CustomNumInput({ config, onChange }: NumInputProps) {
             max={e.max}
             min={e.min}
             maxW="120px"
-            value={e.value===0&&e.defaultValue?e.defaultValue:e.value}
+            value={formatHandler(e)}
             onChange={(event) => {
-              onChange({ target: { name: e.name, value: event } });
+              console.log("s",event, typeof event, event.length)
+              onChange({ target: { name: e.name, value: Number(parse(event)) } });
             }}
           >
             <NumberInputField />
