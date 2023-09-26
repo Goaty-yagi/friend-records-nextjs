@@ -43,7 +43,7 @@ export default function ModaleSpinner({
       <ModalCloseContext.Provider value={onClose}>
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <Spinner size={"lg"} isCentered={true} hasContainer={true} top={top} />
+          <Spinner size={"lg"} isCentered={true} hasContainer={true} />
         </Modal>
       </ModalCloseContext.Provider>
     </>

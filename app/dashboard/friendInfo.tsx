@@ -4,13 +4,14 @@ import {
   Box,
   Flex,
   Text,
-  Heading,
   StackDivider,
   Stack,
   Skeleton,
   Avatar,
 } from "@chakra-ui/react";
-import { Image as ChakraImage} from "@chakra-ui/react";{}
+import { Image as ChakraImage } from "@chakra-ui/react";
+{
+}
 import { CustomField } from "@/components/fields";
 import { MdCalendarMonth } from "react-icons/md";
 import { GiPayMoney, GiReceiveMoney } from "react-icons/gi";
@@ -23,8 +24,8 @@ import { getAvaterObj } from "@/components/avatarsAndIcons";
 import { monthColors } from "@/styles/colors";
 import Image from "next/legacy/image";
 import { useContext, useEffect, useState } from "react";
-import { UserContext, GlobalContext} from "@/contexts";
-import {AvatarUpdatePopover, LogoutConfPopover} from "@/components/popovers";
+import { GlobalContext } from "@/contexts";
+import { AvatarUpdatePopover, LogoutConfPopover } from "@/components/popovers";
 import { useDispatch } from "react-redux";
 import { isAvatarLoadingFalse } from "@/redux/features/authSlice";
 import { toast } from "react-toastify";
@@ -34,21 +35,20 @@ export default function FriendInfo() {
   const { data: user, isFetching, isError } = useRetrieveUserQuery();
   const { friendList } = useAppSelector((state) => state.friend);
   const { isAvatarLoading } = useAppSelector((state) => state.auth);
-  const [isMounted, setIsMounted] = useState(false)
-  const dispatch = useDispatch()
-  const {innerHeight} = useContext(UserContext)
+  const [isMounted, setIsMounted] = useState(false);
+  const dispatch = useDispatch();
   const globalContext = useContext(GlobalContext);
   const { H, W, defaH } = globalContext;
   const avatarStyle = {
-    alignItems:'center',
-    justifyContent:'center',
-    w:"96px",
-    h:"96px",
-    mr:"1rem",
-    border:"solid gray",
-    borderRadius:"50vh",
-    bg:"#cfcfcf"
-  }
+    alignItems: "center",
+    justifyContent: "center",
+    w: "96px",
+    h: "96px",
+    mr: "1rem",
+    border: "solid gray",
+    borderRadius: "50vh",
+    bg: "#cfcfcf",
+  };
   const monthNames = [
     "January",
     "February",
@@ -86,15 +86,14 @@ export default function FriendInfo() {
     },
   ];
   useEffect(() => {
-    if(!isMounted) {
-      return setIsMounted(true)
+    if (!isMounted) {
+      return setIsMounted(true);
     }
-    if(!isFetching&&!isError&&isAvatarLoading) {
-      toast.success('Syccessfully updated!');
-      dispatch(isAvatarLoadingFalse())
-    } 
-  },[isFetching])
-
+    if (!isFetching && !isError && isAvatarLoading) {
+      toast.success("Syccessfully updated!");
+      dispatch(isAvatarLoadingFalse());
+    }
+  }, [isFetching]);
 
   function getMonthlyData(key: string) {
     //here should be usereducer
@@ -124,7 +123,7 @@ export default function FriendInfo() {
     return 0;
   }
   function innerHeightCalculation() {
-    return innerHeight > 720
+    return H > 720;
   }
   if (user) {
     return (
@@ -135,9 +134,19 @@ export default function FriendInfo() {
           alignItems={"center"}
         >
           <Box zIndex={1}>
-          <Flex {...avatarStyle} bg={'pink'} position={'absolute'} justifyContent={'center'} alignItems={"center"}/>
             <Flex
-              as={isAvatarLoading||isAvatarLoading&&isFetching?Skeleton:Flex}
+              {...avatarStyle}
+              bg={"pink"}
+              position={"absolute"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            />
+            <Flex
+              as={
+                isAvatarLoading || (isAvatarLoading && isFetching)
+                  ? Skeleton
+                  : Flex
+              }
               position={"relative"}
               {...avatarStyle}
             >
@@ -147,14 +156,18 @@ export default function FriendInfo() {
                 </>
               ) : (
                 <>
-                  <ChakraImage as={Image} src={getAvaterObj(user.avatar)} srcSet={`${user.avatar} x2`} layout="fill" alt={'avatar'}/>
+                  <ChakraImage
+                    as={Image}
+                    src={getAvaterObj(user.avatar)}
+                    srcSet={`${user.avatar} x2`}
+                    layout="fill"
+                    alt={"avatar"}
+                  />
                 </>
               )}
               <AvatarUpdatePopover state={"user"} />
             </Flex>
           </Box>
-          {/* <EditIcon /> */}
-          {/* {getAvaterObj(user?user.avatar:'')} */}
           <Text color={"gray"} fontFamily={'"Gill Sans", sans-serif'}>
             {user.username}
           </Text>
@@ -164,7 +177,7 @@ export default function FriendInfo() {
             w={"100%"}
             fontWeight={"bold"}
             color={"gray"}
-            fontSize={W > 400?"1.5rem":"1.4rem"}
+            fontSize={W > 400 ? "1.5rem" : "1.4rem"}
             alignItems={"center"}
           >
             <Text>Monthly Info</Text>
@@ -197,8 +210,14 @@ export default function FriendInfo() {
               />
             </Box>
           </Stack>
-          <Box position={innerHeightCalculation()?"relative":"absolute"} top={innerHeightCalculation()?0:"80px"} h={"30px"} w={"100%"} m={"0.5rem 0"}>
-            <Box position={"absolute"} right={0}>
+          <Box
+            position={innerHeightCalculation() ? "relative" : "absolute"}
+            top={innerHeightCalculation() ? 0 : "80px"}
+            h={"30px"}
+            w={"100%"}
+            m={"0.5rem 0"}
+          >
+            <Box position={"absolute"} top={1} right={0}>
               <LogoutConfPopover />
             </Box>
             <Box position={"absolute"} left={0}>

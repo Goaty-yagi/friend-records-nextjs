@@ -22,7 +22,7 @@ export default function Spinner({
   const { H, W, defaH } = globalContext;
   const spinnerSize = () => {
     if (W < 450 && H < defaH) {
-      return { fontSize: "1.5rem" };
+      return { fontSize: "1rem" };
     }
     switch (size) {
       case "sm":

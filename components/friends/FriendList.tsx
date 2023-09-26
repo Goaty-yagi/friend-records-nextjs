@@ -1,9 +1,15 @@
 import Link from "next/link";
-import React, { useState, useEffect, useContext, ChangeEvent, useMemo } from "react";
-import { Flex, Text, Box, VStack, DarkMode } from "@chakra-ui/react";
+import React, {
+  useEffect,
+  useContext,
+  ChangeEvent,
+  useMemo,
+  useRef,
+} from "react";
+import { Flex, Text, Box, VStack } from "@chakra-ui/react";
 import Image from "next/legacy/image";
-import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
-import {Image as ChakraImage} from "@chakra-ui/react";
+import { Card, CardBody } from "@chakra-ui/react";
+import { Image as ChakraImage } from "@chakra-ui/react";
 import { dateConvert } from "@/utils/dates";
 import { getAvaterObj } from "../avatarsAndIcons";
 import DateAlert from "./dateAlert";
@@ -13,6 +19,7 @@ import { FriendSearch, FriendSort, MobileFriendList } from "./index";
 import { FriendResponse } from "@/redux/features/friendApiSlice";
 import { FriendContext, GlobalContext } from "@/contexts";
 import useThemeColors from "@/hooks/use-theme-colors";
+import textLengthHandler from "@/utils/common/textLengthHandler";
 import { YScrollLimitationWrapper } from "@/components/common";
 
 export const sortOptionStates = {
@@ -26,12 +33,18 @@ export const sortOptionStates = {
 };
 export default function FriendList() {
   const { friendList } = useAppSelector((state) => state.friend);
-  const { friendsArray, setFriendsArray, initialOrderChange } = useContext(FriendContext);
+  const { friendsArray, setFriendsArray, initialOrderChange } =
+    useContext(FriendContext);
   const globalContext = useContext(GlobalContext);
   const { H, W, defaH } = globalContext;
+  const textRefs = useRef<HTMLElement[]>([]);
+
   useEffect(() => {
-    initialOrderChange()
-  },[])
+    initialOrderChange();
+    if (typeof window !== "undefined" && textRefs.current.length) {
+      textLengthHandler({ref:textRefs.current})
+    }
+  }, [friendsArray.length]);
 
   const filterAndSort = useMemo(() => {
     return (queryType: string, query?: string) => {
@@ -100,8 +113,8 @@ export default function FriendList() {
   function spentOrReceive(amount: number) {
     return amount >= 0 ? "I owe them" : "They owe me";
   }
-  const plusTheme = useThemeColors('plus-text').theme
-  const minusTheme = useThemeColors('minus-text').theme
+  const plusTheme = useThemeColors("plus-text").theme;
+  const minusTheme = useThemeColors("minus-text").theme;
   return (
     <FriendContext.Provider value={{ friendsArray, onChange, onClick }}>
       <FriendSearch />
@@ -110,9 +123,18 @@ export default function FriendList() {
           <Flex w={"100%"} mb={"0.5rem"} justifyContent={"flex-end"}>
             <FriendSort />
           </Flex>
-          <YScrollLimitationWrapper isLimited={H > 550} limitedStyle={{mb:'36px'}}>
+          <YScrollLimitationWrapper
+            isLimited={H > 550}
+            limitedStyle={{ mb: "36px" }}
+          >
             {friendsArray.map((f: any, index: number) => (
-              <Card w={"100%"} key={index} mb={"0.5rem"} transition={'300ms'} _hover={{'bg':'gray.600'}}>
+              <Card
+                w={"100%"}
+                key={index}
+                mb={"0.5rem"}
+                transition={"300ms"}
+                _hover={{ bg: "gray.600" }}
+              >
                 <Flex
                   fontSize={{ base: "0.7rem", sm: "1rem" }}
                   position={"absolute"}
@@ -122,34 +144,54 @@ export default function FriendList() {
                   <BirthdayAlert date={f.birthday} />
                   <DateAlert date={f.last_log} />
                 </Flex>
-                <Link href={{pathname:"friendDetails/" + f.id, query: { name:f.name }}}  scroll={true}>
-                  <CardBody >
+                <Link
+                  href={{
+                    pathname: "friendDetails/" + f.id,
+                    query: { name: f.name },
+                  }}
+                  scroll={true}
+                >
+                  <CardBody>
                     <Flex alignItems={"center"}>
                       <Flex
-                        position={"relative"}
+                        flexBasis={{ base: "25%", sm: 0 }}
                         justifyContent={"center"}
-                        w={{ base: "50px", md: "70px" }}
-                        h={{ base: "50px", md: "70px" }}
-                        left={{ base: -3, sm: 0 }}
-                        mr={{ base: 0, sm: "1rem" }}
-                        border={"solid gray"}
-                        borderRadius={"50vh"}
-                        bg={"#bebebe4a"}
+                        w={"100%"}
                       >
-                        {f.avatar && (
-                          <ChakraImage as={Image} src={getAvaterObj(f.avatar)} srcSet={`${getAvaterObj(f.avatar)} x2`} layout="fill" alt={'friend-avatar'} />
-                        )}
-                        <Box position={"absolute"} w={"150%"} bottom={-4}>
-                          <Text
-                            lineHeight={"1rem"}
-                            fontWeight={"bold"}
-                            textAlign={"center"}
-                            fontSize={"0.8rem"}
-                          >
-                            {f.name.slice(0, 6)}
-                            {f.name.length > 6 ? ".." : ""}
-                          </Text>
-                        </Box>
+                        <Flex
+                          position={"relative"}
+                          justifyContent={"center"}
+                          w={{ base: "50px", sm: "70px" }}
+                          h={{ base: "50px", sm: "70px" }}
+                          left={{ base: -3, sm: 0 }}
+                          mr={{ base: 0, sm: "1rem" }}
+                          border={"solid gray"}
+                          borderRadius={"50vh"}
+                          bg={"#bebebe4a"}
+                        >
+                          {f.avatar && (
+                            <ChakraImage
+                              as={Image}
+                              src={getAvaterObj(f.avatar)}
+                              srcSet={`${getAvaterObj(f.avatar)} x2`}
+                              layout="fill"
+                              alt={"friend-avatar"}
+                            />
+                          )}
+                          <Box position={"absolute"} w={"150%"} bottom={-4}>
+                            <Text
+                              ref={(e) =>
+                                (textRefs.current[index] = e as HTMLElement)
+                              }
+                              lineHeight={"1rem"}
+                              fontWeight={"bold"}
+                              textAlign={"center"}
+                              fontSize={"0.8rem"}
+                            >
+                              {f.name}
+                            </Text>
+                          </Box>
+                        </Flex>
                       </Flex>
                       <MobileFriendList
                         friend={f}
