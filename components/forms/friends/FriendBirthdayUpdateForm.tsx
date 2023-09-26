@@ -95,9 +95,9 @@ export default function FriendBirthdayUpdateForm({
       max: date.getFullYear(),
       min: 1941,
       style: {
-        w: "80px",
+        w: "90px",
         mr: "0.5rem",
-        size: "sm",
+        size: "md",
       },
     },
     {
@@ -109,7 +109,7 @@ export default function FriendBirthdayUpdateForm({
       style: {
         w: "70px",
         mr: "0.3rem",
-        size: "sm",
+        size: "md",
       },
     },
     {
@@ -120,7 +120,7 @@ export default function FriendBirthdayUpdateForm({
       min: 1,
       style: {
         w: "70px",
-        size: "sm",
+        size: "md",
       },
     },
   ];
@@ -140,13 +140,14 @@ export default function FriendBirthdayUpdateForm({
     return (
       <>
         <AbstractForm onSubmit={customOnSubmit}>
-          <Flex w={"100%"} h={'50px'} className="PARENT WRAPPER" mt={"1rem"}>
+          <Flex w={"100%"} h={'70px'} className="PARENT WRAPPER" alignItems={'center'} mt={"1rem"}>
             <CustomSlider
               sliderConfig={sliderConfig}
               onChange={customOnChange}
+              slideLength={10}
             />
             <CustomNumInput config={config} onChange={customOnChange} />
-            <Flex h={'100%'} position={'relative'} top={'1.1rem'} right={'0.5rem'}>
+            <Flex h={'100%'} alignItems={'center'} position={'relative'} top={'0.5rem'}>
               <IconButton
                 size={"xs"}
                 aria-label="submit"

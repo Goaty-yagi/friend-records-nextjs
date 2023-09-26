@@ -8,7 +8,6 @@ import {
   Text,
   Box,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
 
 interface NumInputConfig {
   name: string;
@@ -32,7 +31,7 @@ export default function CustomNumInput({ config, onChange }: NumInputProps) {
       {config.map((e, index) => (
         <Box key={index} position={"relative"}>
           {e.title && (
-            <Text position={"absolute"} top={"-5"} left={0}>
+            <Text position={"absolute"} top={"-6"} left={0}>
               {e.title}
             </Text>
           )}

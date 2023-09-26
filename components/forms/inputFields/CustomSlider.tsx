@@ -14,13 +14,15 @@ export interface SliderConfig {
   max: number;
   min: number;
   style?: any;
+  slideLength?:number
 }
 interface SliderProps {
   sliderConfig: SliderConfig[];
   onChange: (e: any) => void;
+  slideLength?:number
 }
 
-export default function CustomSlider({ sliderConfig, onChange }: SliderProps) {
+export default function CustomSlider({ sliderConfig,slideLength, onChange }: SliderProps) {
   const format = (val: number) => `$ ` + val;
   const [isvVertical, setIsvVertical] = useState(false)
 
@@ -31,7 +33,7 @@ export default function CustomSlider({ sliderConfig, onChange }: SliderProps) {
     }
   },[])
   return (
-    <Flex mt={"1rem"} w={isvVertical?'':{base: "300px", md: "600px" }}>
+    <Flex mt={"1rem"} w={isvVertical?'':{base: "300px", md: "600px" }} h={slideLength?slideLength:''}>
       {sliderConfig.map((e, index) => (
         <Slider
           key={index}
