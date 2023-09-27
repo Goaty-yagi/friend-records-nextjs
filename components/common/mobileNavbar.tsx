@@ -9,6 +9,18 @@ import { RiAccountPinCircleLine } from "react-icons/ri";
 
 export default function MobileNavber() {
   const router = useRouter();
+  const configs = [
+    {
+      text:'Home',
+      icon:AiOutlineHome,
+      path:'/'
+    },
+    {
+      text:'Account',
+      icon:RiAccountPinCircleLine,
+      path:"/dashboard"
+    }
+  ]
   return (
       <>
         <Box
@@ -25,8 +37,10 @@ export default function MobileNavber() {
             justifyContent={"center"}
             fontFamily={"Gill Sans"}
           >
-            <Flex
-              onClick={() => router.push("/")}
+            {configs.map((e, index) => (
+              <Flex
+              key={index}
+              onClick={() => router.push(e.path)}
               flexBasis={"50%"}
               flexDirection={"column"}
               alignItems={"center"}
@@ -37,24 +51,10 @@ export default function MobileNavber() {
                 color: "gray",
               }}
             >
-              <AiOutlineHome fontSize={"1.5rem"} />
-              <Text fontSize={"0.5rem"}>HOME</Text>
+              <e.icon fontSize={"1.5rem"} />
+              <Text fontSize={"0.5rem"}>e.text</Text>
             </Flex>
-            <Flex
-              onClick={() => router.push("/dashboard")}
-              flexBasis={"50%"}
-              flexDirection={"column"}
-              alignItems={"center"}
-              transition={".3s"}
-              borderLeft={'solid #d1f5fd'}
-              _hover={{
-                background: "rgb(240 240 240 / 70%)",
-                color: "gray",
-              }}
-            >
-              <RiAccountPinCircleLine fontSize={"1.5rem"} />
-              <Text fontSize={"0.5rem"}>ACCOUNT</Text>
-            </Flex>
+            ))}
           </Flex>
         </Box>
       </>

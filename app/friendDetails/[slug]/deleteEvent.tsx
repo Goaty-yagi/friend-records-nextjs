@@ -48,6 +48,7 @@ export default function DeleteEvent({ ...event }: EventProps) {
               colorScheme="red"
               border={'solid red'}
               aria-label="delete friend"
+              fontSize={{base:'0.8rem',sm:'1rem'}}
               onClick={handleDeleteFriend}
             >
               Are you sure??
@@ -58,6 +59,7 @@ export default function DeleteEvent({ ...event }: EventProps) {
             <Button
               colorScheme="pink"
               aria-label="delete friend"
+              fontSize={{base:'0.8rem',sm:'1rem'}}
               onClick={() => setIsConfirming(true)}
             >
               Delete this event??

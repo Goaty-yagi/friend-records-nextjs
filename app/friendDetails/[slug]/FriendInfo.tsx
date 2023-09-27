@@ -8,7 +8,7 @@ import {
   Text,
   StackDivider,
 } from "@chakra-ui/react";
-import React, { useRef, useEffect, useState, useContext } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import Header from "./Header";
 import { dateConvert, getYearMonthDate } from "@/utils/dates";
 import { useAppSelector } from "@/redux/hooks";
@@ -17,7 +17,7 @@ import {
   FriendBirthdayUpdatePopover,
 } from "@/components/popovers";
 import FriendNameUpdateForm from "@/components/forms/friends/FriendNameUpdateForm";
-import { BsCheck2Square, BsFileX } from "react-icons/bs";
+import { BsCheck2Square } from "react-icons/bs";
 import { RiEdit2Line } from "react-icons/ri";
 import { GlobalContext } from "@/contexts";
 

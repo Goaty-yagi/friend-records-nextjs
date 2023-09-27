@@ -42,35 +42,14 @@ export default function FriendList() {
   const { H, W, defaH } = globalContext;
   const textRefs = useRef<HTMLElement[]>([]);
 
-  // function refHandler() {
-  //   function textLengthHandler(e: HTMLElement) {
-  //     let init = false;
-  //     while (e.clientHeight > 16) {
-  //       e.innerText =
-  //         e.innerText.slice(0, e.innerText.length - (!init ? 3 : 1)) + "..";
-  //       init = true;
-  //     }
-  //   }
-  //   textRefs.current.forEach((e: HTMLElement) => {
-  //     if (e) {
-  //       textLengthHandler(e);
-  //     }
-  //   });
-  // }
   useEffect(() => {
     initialOrderChange();
     if (typeof window !== "undefined" && textRefs.current.length) {
       // refHandler();
       textLengthHandler({ ref: textRefs.current });
     }
-  }, [friendsArray.length, friendList.length, textRefs.current.length]);
-  // useEffect(() => {
-  //   console.log('effect', textRefs.current.length)
-  //   if (typeof window !== "undefined" && textRefs.current.length) {
-  //     console.log("TEST")
-  //     textLengthHandler({ref:textRefs.current})
-  //   }
-  // },[friendList.length, textRefs.current.length])
+  }, [friendsArray.length]);
+
   const filterAndSort = useMemo(() => {
     return (queryType: string, query?: string) => {
       switch (queryType) {

@@ -3,14 +3,11 @@
 import { SvgSlider } from "../../avatarsAndIcons";
 import { eventIcons } from "../../avatarsAndIcons/icons";
 import { useContext, useState, FormEvent, useEffect } from "react";
-import { PopoverCloseContext } from "@/contexts";
 import useEventUpdate from "@/hooks/events/use-event-update";
 import { Flex, Box, Button } from "@chakra-ui/react";
 import { CustomInput } from "../inputFields";
-import EventMoneyUpdateForm from "./EventMoneyUpdateForm";
 import { AbstractForm } from "../index";
 import { ModalCloseContext } from "@/contexts";
-import EventIconUpdateForm from "./EventIconUpdateForm";
 import { EventProps } from "@/redux/features/eventApiSlice";
 import DeleteEvent from "@/app/friendDetails/[slug]/deleteEvent";
 import { CustomNumInput, CustomSlider, CustomRadio } from "../inputFields";
@@ -128,7 +125,7 @@ export default function EventUpdateForm({ ...event}: EventProps) {
           </Flex>
           <Flex mt={"1rem"} mb={'0.5rem'} justifyContent={"flex-end"}>
             <DeleteEvent {... event} />
-            <Button isDisabled={!isChange} ml={'0.5rem'} fontSize={{base:'0.7rem',sm:'1rem'}} type="submit">
+            <Button isDisabled={!isChange} ml={'0.5rem'} fontSize={{base:'0.8rem',sm:'1rem'}} type="submit">
               Update
             </Button>
           </Flex>

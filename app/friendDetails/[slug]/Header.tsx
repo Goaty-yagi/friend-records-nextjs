@@ -1,6 +1,6 @@
 import { Flex, Box, Skeleton } from "@chakra-ui/react";
 import { Image as ChakraImage } from "@chakra-ui/react";
-import React, { forwardRef } from "react";
+import React from "react";
 import { getAvaterObj } from "@/components/avatarsAndIcons";
 import Image from "next/legacy/image";
 import { AvatarUpdatePopover } from "@/components/popovers";

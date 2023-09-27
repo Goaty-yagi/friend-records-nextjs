@@ -11,6 +11,8 @@ import { EventCreatePopover } from "@/components/popovers";
 import { Flex, Show } from "@chakra-ui/react";
 import { Spinner } from "@/components/common";
 import { EventCreateModal } from "@/components/modals";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 import { PrivateRouterWithoutAuth } from "@/components/common/PrivateRouter";
 import EventList from "./eventList";
 
@@ -34,6 +36,7 @@ export default function Layout({ params }: Props) {
   const [friend, setFriend] = useState({});
   const eventList = useAppSelector((state) => state.event).eventList;
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter()
   const [getFriendDetail, {}] = useGetFriendDetailMutation();
   useEffect(() => {
     setFriend({});
@@ -46,8 +49,9 @@ export default function Layout({ params }: Props) {
         setFriend(res);
         setIsLoading(false);
       })
-      .catch((e) => {
-        // do something
+      .catch(() => {
+				toast.error('Failed to get friend detail');
+        router.push('/')
       });
   }, []);
   return (
