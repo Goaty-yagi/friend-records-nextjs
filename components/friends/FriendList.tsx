@@ -44,12 +44,13 @@ export default function FriendList() {
 
   useEffect(() => {
     initialOrderChange();
+    console.log("EFFECT");
+  }, []);
+  useEffect(() => {
     if (typeof window !== "undefined" && textRefs.current.length) {
-      // refHandler();
       textLengthHandler({ ref: textRefs.current });
     }
   }, [friendsArray.length]);
-
   const filterAndSort = useMemo(() => {
     return (queryType: string, query?: string) => {
       switch (queryType) {
@@ -104,8 +105,9 @@ export default function FriendList() {
             }),
           ]);
       }
+      console.log("SWITCH")
     };
-  }, [friendsArray]);
+  }, [friendsArray.length]);
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     filterAndSort("search", event.target.value);

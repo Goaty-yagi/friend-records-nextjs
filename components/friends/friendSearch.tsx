@@ -15,7 +15,7 @@ export default function FrinedSearch() {
   const [isMounted, setIsMounted] = useState(false)
   useEffect(() => {
     if(friendsArray.length) {
-      setIsMounted(true)
+      return setIsMounted(true)
     }
   },[friendsArray])
 
