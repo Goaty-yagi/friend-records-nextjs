@@ -57,7 +57,7 @@ export default function FriendList() {
         case "search":
           return setFriendsArray([
             ...friendList.filter((f: any) => {
-              return f.name.includes(query);
+              return f.name.toLowerCase().includes(query?query.toLowerCase():'');
             }),
           ]);
         case sortOptionStates.HIGH_AMOUNT:
@@ -105,7 +105,6 @@ export default function FriendList() {
             }),
           ]);
       }
-      console.log("SWITCH")
     };
   }, [friendsArray.length]);
 
