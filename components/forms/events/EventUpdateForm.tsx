@@ -128,7 +128,7 @@ export default function EventUpdateForm({ ...event}: EventProps) {
           </Flex>
           <Flex mt={"1rem"} mb={'0.5rem'} justifyContent={"flex-end"}>
             <DeleteEvent {... event} />
-            <Button isDisabled={!isChange} ml={'0.5rem'} type="submit">
+            <Button isDisabled={!isChange} ml={'0.5rem'} fontSize={{base:'0.7rem',sm:'1rem'}} type="submit">
               Update
             </Button>
           </Flex>

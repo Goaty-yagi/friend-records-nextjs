@@ -1,14 +1,17 @@
 import Link from "next/link";
 import React, {
+  MutableRefObject,
+  useState,
   useEffect,
   useContext,
   ChangeEvent,
   useMemo,
   useRef,
+  createRef,
 } from "react";
-import { Flex, Text, Box, VStack } from "@chakra-ui/react";
+import { Flex, Text, Box, VStack, DarkMode } from "@chakra-ui/react";
 import Image from "next/legacy/image";
-import { Card, CardBody } from "@chakra-ui/react";
+import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { Image as ChakraImage } from "@chakra-ui/react";
 import { dateConvert } from "@/utils/dates";
 import { getAvaterObj } from "../avatarsAndIcons";
@@ -39,13 +42,35 @@ export default function FriendList() {
   const { H, W, defaH } = globalContext;
   const textRefs = useRef<HTMLElement[]>([]);
 
+  // function refHandler() {
+  //   function textLengthHandler(e: HTMLElement) {
+  //     let init = false;
+  //     while (e.clientHeight > 16) {
+  //       e.innerText =
+  //         e.innerText.slice(0, e.innerText.length - (!init ? 3 : 1)) + "..";
+  //       init = true;
+  //     }
+  //   }
+  //   textRefs.current.forEach((e: HTMLElement) => {
+  //     if (e) {
+  //       textLengthHandler(e);
+  //     }
+  //   });
+  // }
   useEffect(() => {
     initialOrderChange();
     if (typeof window !== "undefined" && textRefs.current.length) {
-      textLengthHandler({ref:textRefs.current})
+      // refHandler();
+      textLengthHandler({ ref: textRefs.current });
     }
-  }, [friendsArray.length]);
-
+  }, [friendsArray.length, friendList.length, textRefs.current.length]);
+  // useEffect(() => {
+  //   console.log('effect', textRefs.current.length)
+  //   if (typeof window !== "undefined" && textRefs.current.length) {
+  //     console.log("TEST")
+  //     textLengthHandler({ref:textRefs.current})
+  //   }
+  // },[friendList.length, textRefs.current.length])
   const filterAndSort = useMemo(() => {
     return (queryType: string, query?: string) => {
       switch (queryType) {

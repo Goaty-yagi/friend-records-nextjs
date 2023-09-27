@@ -33,7 +33,8 @@ export default function Throttle() {
             return () => clearInterval(intervalId);
 
         }
-    },[seconds])
+        return;
+    },[seconds,isThrottled])
 
     if(isThrottled) {
         const showMinutes = minutes < 10 ? '0' + minutes : minutes
