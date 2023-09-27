@@ -1,11 +1,12 @@
+import { Container } from "./dateAlert";
 import { Flex, Text, Image } from "@chakra-ui/react";
 
-interface Props{
-    alert:boolean
-    deffDate:number
+interface Props {
+  alert: boolean;
+  deffDate: number;
 }
 
-function birthDateCalculation(date: string):Props | undefined {
+function birthDateCalculation(date: string): Props | undefined {
   if (date) {
     const nowDate = new Date();
     const bDate = new Date(date);
@@ -28,31 +29,24 @@ export default function BirthdayAlert({ date }: { date: string }) {
   const dateDisplay =
     typeof dateResultObj !== "undefined" ? dateResultObj.alert : "";
   return (
-    <Flex w={"100%"} color={"red.500"} justifyContent={"flex-end"}>
-      {dateDisplay ? (
-        <Flex
-          alignItems={"center"}
-          mr={"0.5rem"}
-          borderRadius={"4px"}
-          bg={"#c05e5e4d"}
-          mt={"0.5rem"}
-          pr={"0.5rem"}
-          border={"solid #fa95f6"}
+    <Container isDisplayed={dateDisplay === true}>
+      <>
+        <Image
+          src={`/svgs/events/gift.svg`}
+          width={{ base: "20px", sm: "30px" }}
+          height={"30px"}
+        />
+        <Text
+          fontWeight={"bold"}
+          display={{ base: "none", sm: "inline-block" }}
         >
-          <Image
-            src={`/svgs/events/gift.svg`}
-            width={{ base: "20px", sm: "30px" }}
-            height={"30px"}
-          />
-          <Text fontWeight={"bold"}>
-            {dateResultObj?(dateResultObj.deffDate === 0
+          {dateResultObj
+            ? dateResultObj.deffDate === 0
               ? "Birthday Today!!"
-              : "Birthday coming up!"):''}
-          </Text>
-        </Flex>
-      ) : (
-        <></>
-      )}
-    </Flex>
+              : "Birthday coming up!"
+            : ""}
+        </Text>
+      </>
+    </Container>
   );
 }

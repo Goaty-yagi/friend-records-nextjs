@@ -44,13 +44,14 @@ export default function FriendList() {
 
   useEffect(() => {
     initialOrderChange();
-    console.log("EFFECT");
   }, []);
+
   useEffect(() => {
     if (typeof window !== "undefined" && textRefs.current.length) {
       textLengthHandler({ ref: textRefs.current });
     }
   }, [friendsArray.length]);
+
   const filterAndSort = useMemo(() => {
     return (queryType: string, query?: string) => {
       switch (queryType) {
