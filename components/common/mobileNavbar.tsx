@@ -52,7 +52,7 @@ export default function MobileNavber() {
               }}
             >
               <e.icon fontSize={"1.5rem"} />
-              <Text fontSize={"0.5rem"}>e.text</Text>
+              <Text fontSize={"0.5rem"}>{e.text}</Text>
             </Flex>
             ))}
           </Flex>
